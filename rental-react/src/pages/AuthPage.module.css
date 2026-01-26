@@ -263,6 +263,43 @@
     color: var(--gray-400);
 }
 
+/* Password Wrapper with Eye Icon */
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.passwordWrapper input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.eyeBtn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.eyeBtn:hover {
+    color: var(--gray-600);
+}
+
+.eyeBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
 /* Remember & Forgot */
 .authRemember {
     display: flex;
@@ -586,14 +623,100 @@
     .mobileLogoText {
         font-size: var(--font-size-lg);
     }
+    
+    /* Fix auth tabs on mobile */
+    .authTabs {
+        padding: 3px;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .tabIndicator {
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+    }
+    
+    .authTab {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-size-xs);
+    }
+    
+    .authCard {
+        padding: var(--spacing-xl);
+    }
+    
+    .authHeader h2 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .authHeader p {
+        font-size: var(--font-size-xs);
+    }
 }
 
 @media (max-width: 480px) {
+    .authRight {
+        padding: var(--spacing-md);
+    }
+    
     .authCard {
         padding: var(--spacing-lg);
     }
     
     .authSocial {
         grid-template-columns: 1fr;
+    }
+    
+    /* Ensure tabs fit on smallest screens */
+    .authTabs {
+        padding: 2px;
+        border-radius: var(--radius-lg);
+    }
+    
+    .tabIndicator {
+        top: 2px;
+        left: 2px;
+        width: calc(50% - 2px);
+        height: calc(100% - 4px);
+        border-radius: var(--radius-md);
+    }
+    
+    .authTab {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+        border-radius: var(--radius-md);
+    }
+    
+    .mobileLogo {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .mobileLogoIcon {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-size-sm);
+    }
+    
+    .mobileLogoText {
+        font-size: var(--font-size-md);
+    }
+    
+    .authHeader {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .authHeader h2 {
+        font-size: var(--font-size-lg);
+    }
+    
+    .authFormGroup input {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    .authBtn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-size-sm);
     }
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import AuthPage from './pages/AuthPage'
 import Dashboard from './pages/Dashboard'
+import WorkInProgress from './pages/WorkInProgress'
 import { AuthProvider, useAuth } from './context/AuthContext'
 
 function ProtectedRoute({ children }) {
@@ -30,6 +31,7 @@ function AppRoutes() {
           </ProtectedRoute>
         } 
       />
+      <Route path="/wip" element={<WorkInProgress />} />
       <Route path="/" element={<Navigate to="/auth" replace />} />
     </Routes>
   )
