@@ -2,139 +2,230 @@
 
 ## Repository Links
 
-| Repository | URL | Purpose |
-|------------|-----|---------|
-| **Personal (Vercel)** | https://github.com/Aki1104/ccintern_rentalsystem | Connected to Vercel deployment |
-| **Organization** | https://github.com/CertiCodeIntern/rental_Sample.git | Team collaboration repo |
+| Remote Name | Repository URL | Purpose |
+|-------------|----------------|---------|
+| **origin** | https://github.com/CertiCodeIntern/rental_Sample.git | Organization repo (team collaboration & main work) |
+| **vercel** | https://github.com/Aki1104/ccintern_rentalsystem.git | Personal repo (connected to Vercel deployment) |
 
 ---
 
-## The Repository Sync Challenge
+## Current Setup (Corrected)
 
-When Vercel creates a deployment, it often duplicates (clones) your project into your personal GitHub account. This creates **two separate repositories**:
+**Important:** The original setup was inverted. Here's the correct configuration:
 
-- **Personal Repo** (Connected to Vercel) - Your deployment source
-- **Organization Repo** (CertiCodeIntern) - Where the team collaborates
+- **`origin`** = Organization repo (CertiCodeIntern) - Where you do your main work with the team
+- **`vercel`** = Personal repo (Aki1104) - Connected to Vercel for deployment
 
-Moving code between these repositories requires manual synchronization - you become the "bridge" between them.
+This makes sense because:
+1. You primarily work with the organization repository
+2. You only push to your personal repo when you want to deploy to Vercel
 
 ---
 
-## The "Bridge" Workflow
+## One-Time Setup (Already Done)
 
-### Understanding the Remote Connections
-
-Your local project needs to know about both repositories:
-
-- **`origin`** - Your personal repository (Connected to Vercel)
-- **`upstream`** - The Organization's repository (Where the team works)
-
-### Step 1: Add the Organization as "Upstream"
-
-Open your terminal in your project folder and connect to the organization's repo:
+If you ever need to set this up again on a new machine:
 
 ```bash
-# Syntax: git remote add upstream [URL_OF_CERTICODE_REPO]
-git remote add upstream https://github.com/CertiCodeIntern/rental_Sample.git
+# Remove any existing remotes (if needed)
+git remote remove origin
+git remote remove upstream
+git remote remove vercel
+
+# Add the organization repo as origin (your main work repo)
+git remote add origin https://github.com/CertiCodeIntern/rental_Sample.git
+
+# Add your personal repo as vercel (for deployment)
+git remote add vercel https://github.com/Aki1104/ccintern_rentalsystem.git
+
+# Set up branch tracking
+git fetch origin
+git branch --set-upstream-to=origin/main main
+
+# Verify setup
+git remote -v
 ```
 
-### Step 2: The Sync Routine
-
-**Do this whenever you want to update your Vercel site with team changes:**
-
-Run these three commands in order:
-
-1. **Download the latest team code:**
-   ```bash
-   git pull upstream main
-   ```
-   *(Note: Use `master` instead of `main` if that's the organization's branch name)*
-
-2. **Upload it to YOUR personal repo:**
-   ```bash
-   git push origin main
-   ```
-
-### What Just Happened?
-
-1. `git pull upstream` grabbed the new commits from the CertiCode organization
-2. `git push origin` sent those commits to your personal GitHub
-3. Vercel sees the update on your personal GitHub and **automatically redeploys**
+Expected output:
+```
+origin  https://github.com/CertiCodeIntern/rental_Sample.git (fetch)
+origin  https://github.com/CertiCodeIntern/rental_Sample.git (push)
+vercel  https://github.com/Aki1104/ccintern_rentalsystem.git (fetch)
+vercel  https://github.com/Aki1104/ccintern_rentalsystem.git (push)
+```
 
 ---
 
-## Alternative: The "Sync Fork" Button (Easier Method)
+## Daily Developer Workflow
 
-### If Your Repo is a Proper Fork:
+### 1. Start Your Day - Pull Latest Team Changes
+```bash
+git pull origin main
+```
 
-1. Go to your **Personal Repository** on the GitHub website (the one Vercel created)
-2. Look at the top of the page
-3. If you see: **"Forked from CertiCodeIntern/rental_Sample"**
-   - You will see a **"Sync fork"** button
-   - Click that button, then click **"Update branch"**
-   - This does the work instantly without commands!
+### 2. Make Your Changes
+- Edit files, add features, fix bugs
+- Test locally with `npm run dev`
 
-### If Your Repo is NOT a Fork:
+### 3. Save Your Work (Commit)
+```bash
+git add .
+git commit -m "Your descriptive commit message"
+```
 
-- If you **DO NOT** see "Forked from..." text
-- Then Vercel created a "detached" copy
-- You **MUST** use the Command Line method (Steps 1 & 2 above)
+### 4. Push to Organization Repo
+```bash
+git push origin main
+```
+
+### 5. Deploy to Vercel (When Ready)
+```bash
+git push vercel main
+```
 
 ---
 
 ## Quick Reference Commands
 
 ```bash
-# One-time setup
-git remote add upstream https://github.com/CertiCodeIntern/rental_Sample.git
+# ===== DAILY COMMANDS =====
 
-# Regular sync routine (run whenever team updates code)
-git pull upstream main
+# Pull latest from organization
+git pull origin main
+
+# Stage all changes
+git add .
+
+# Commit with message
+git commit -m "feat: add login functionality"
+
+# Push to organization (team repo)
 git push origin main
+
+# Deploy to Vercel (personal repo)
+git push vercel main
+
+
+# ===== USEFUL COMMANDS =====
+
+# Check current status
+git status
 
 # Check your remotes
 git remote -v
+
+# See commit history
+git log --oneline -10
+
+# See all branches
+git branch -a
+
+# Discard all local changes (careful!)
+git checkout -- .
 ```
 
 ---
 
-## Workflow Summary
+## Workflow Diagram
 
-1. **Team pushes to CertiCodeIntern** → Organization repo gets updated
-2. **You run sync commands** → Your local gets team changes  
-3. **You push to your personal repo** → Vercel sees changes
-4. **Vercel auto-deploys** → Your site updates with team's code
+```
+┌─────────────────┐     git push origin main     ┌─────────────────────────┐
+│   Your Local    │ ──────────────────────────►  │   CertiCodeIntern       │
+│   Computer      │                              │   (Organization Repo)   │
+│                 │ ◄──────────────────────────  │   Team Collaboration    │
+└─────────────────┘     git pull origin main     └─────────────────────────┘
+        │
+        │ git push vercel main
+        ▼
+┌─────────────────────────┐         Auto Deploy        ┌─────────────────┐
+│   Aki1104               │ ─────────────────────────► │   Vercel        │
+│   (Personal Repo)       │                            │   Live Website  │
+└─────────────────────────┘                            └─────────────────┘
+```
 
-This way, your deployed site stays in sync with the team's latest work!
+---
+
+## Common Scenarios
+
+### Scenario 1: Just finished a feature, want to deploy
+```bash
+git add .
+git commit -m "feat: complete login page"
+git push origin main      # Push to team repo
+git push vercel main      # Deploy to Vercel
+```
+
+### Scenario 2: Teammate pushed changes, need to get them
+```bash
+git pull origin main
+```
+
+### Scenario 3: Want to deploy but have uncommitted changes
+```bash
+git stash                  # Save changes temporarily
+git pull origin main       # Get latest
+git stash pop              # Restore your changes
+git add .
+git commit -m "your message"
+git push origin main
+git push vercel main
+```
+
+### Scenario 4: Force sync Vercel repo with organization (if they get out of sync)
+```bash
+git push vercel main --force
+```
 
 ---
 
 ## Troubleshooting
 
-### Check Your Remotes
+### "Updates were rejected" Error
+Your local is behind the remote. Pull first:
+```bash
+git pull origin main
+# Then try pushing again
+```
+
+### "Merge conflicts" Error
+1. Open the conflicting files
+2. Look for `<<<<<<< HEAD` markers
+3. Edit to keep the code you want
+4. Remove the conflict markers
+5. `git add .` and `git commit -m "resolve conflicts"`
+
+### Check Which Remote You're Pushing To
 ```bash
 git remote -v
 ```
 
-Should show:
+### See What Branch You're On
+```bash
+git branch
 ```
-origin    https://github.com/YourUsername/rental_Sample.git (fetch)
-origin    https://github.com/YourUsername/rental_Sample.git (push)
-upstream  https://github.com/CertiCodeIntern/rental_Sample.git (fetch)
-upstream  https://github.com/CertiCodeIntern/rental_Sample.git (push)
-```
-
-### If Branch Names Don't Match
-- Organization uses `master`: `git pull upstream master`
-- Organization uses `main`: `git pull upstream main`
-- Check with: `git branch -r` to see remote branches
-
-### Common Issues
-- **Permission denied**: Make sure you have access to both repositories
-- **Merge conflicts**: Resolve conflicts before pushing to origin
-- **Branch mismatch**: Ensure you're on the correct branch locally
 
 ---
 
-*Created: January 26, 2026*  
-*Project: Rental Sample - CertiCode Internship*
+## Commit Message Best Practices
+
+Use prefixes for clarity:
+- `feat:` - New feature
+- `fix:` - Bug fix  
+- `style:` - CSS/styling changes
+- `docs:` - Documentation
+- `refactor:` - Code restructuring
+- `test:` - Adding tests
+
+Examples:
+```bash
+git commit -m "feat: add password visibility toggle"
+git commit -m "fix: mobile responsive tabs overlap"
+git commit -m "style: update button hover effects"
+git commit -m "docs: update README with setup instructions"
+```
+
+---
+
+*Updated: January 26, 2026*  
+*Project: Rental Sample - CertiCode Internship*  
+*Developer: Mac (Aki1104)*
