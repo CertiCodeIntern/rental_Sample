@@ -72,12 +72,220 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     --shadow-island: 0 4px 12px rgba(0, 0, 0, 0.15);
     
-    /* Typography */
+    /* =========================================================
+       TYPOGRAPHY SYSTEM - Modular Scale (1.250 - Major Third)
+       Base: 16px | Scale: 1.250 ratio for harmonious hierarchy
+       ========================================================= */
+    
+    /* Font Families */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+    
+    /* Base Font Size (for rem calculations) */
+    --font-size-base: 1rem;              /* 16px */
+    
+    /* Type Scale - Major Third (1.250) */
+    --font-size-xs: 0.75rem;             /* 12px - Fine print, captions */
+    --font-size-sm: 0.875rem;            /* 14px - Secondary text, labels */
+    --font-size-md: 1rem;                /* 16px - Body text */
+    --font-size-lg: 1.125rem;            /* 18px - Lead text, emphasis */
+    --font-size-xl: 1.25rem;             /* 20px - H6, section titles */
+    --font-size-2xl: 1.5rem;             /* 24px - H5, card titles */
+    --font-size-3xl: 1.875rem;           /* 30px - H4, page sections */
+    --font-size-4xl: 2.25rem;            /* 36px - H3, major headings */
+    --font-size-5xl: 3rem;               /* 48px - H2, hero sections */
+    --font-size-6xl: 3.75rem;            /* 60px - H1, display text */
+    --font-size-7xl: 4.5rem;             /* 72px - Oversized display */
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Line Heights (Leading) - Optimized for readability */
+    --line-height-none: 1;               /* Display text, single line */
+    --line-height-tight: 1.2;            /* Headings - compact */
+    --line-height-snug: 1.35;            /* Subheadings, short text */
+    --line-height-normal: 1.5;           /* UI elements, buttons */
+    --line-height-relaxed: 1.625;        /* Body text - comfortable */
+    --line-height-loose: 1.75;           /* Long-form reading */
+    
+    /* Letter Spacing (Tracking) */
+    --letter-spacing-tighter: -0.05em;   /* Large display text */
+    --letter-spacing-tight: -0.025em;    /* Headings */
+    --letter-spacing-normal: 0;          /* Body text */
+    --letter-spacing-wide: 0.025em;      /* Small text */
+    --letter-spacing-wider: 0.05em;      /* Labels, overlines */
+    --letter-spacing-widest: 0.1em;      /* All caps, section titles */
+    
+    /* Paragraph Spacing */
+    --paragraph-spacing: 1.5em;          /* Space between paragraphs */
+    --heading-margin-top: 1.5em;         /* Space above headings */
+    --heading-margin-bottom: 0.5em;      /* Space below headings */
+    
+    /* Text Max Width (Measure) - Optimal line length */
+    --text-measure-narrow: 45ch;         /* Sidebars, cards */
+    --text-measure-normal: 65ch;         /* Body content */
+    --text-measure-wide: 75ch;           /* Wide content areas */
     
     /* Layout */
     --sidebar-width: 280px;
     --topbar-height: 70px;
+}
+
+/* =====================================================
+   RESPONSIVE TYPOGRAPHY - Mobile Adjustments
+   Sizes tighten on smaller screens for better fit
+   ===================================================== */
+@media (max-width: 768px) {
+    :root {
+        /* Scale down headings for mobile */
+        --font-size-6xl: 2.5rem;         /* 40px on mobile */
+        --font-size-5xl: 2rem;           /* 32px on mobile */
+        --font-size-4xl: 1.75rem;        /* 28px on mobile */
+        --font-size-3xl: 1.5rem;         /* 24px on mobile */
+        --font-size-2xl: 1.25rem;        /* 20px on mobile */
+        --font-size-xl: 1.125rem;        /* 18px on mobile */
+        
+        /* Slightly looser line-height for mobile readability */
+        --line-height-relaxed: 1.7;
+        
+        /* Reduce paragraph spacing on mobile */
+        --paragraph-spacing: 1.25em;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        /* Further scale down for small phones */
+        --font-size-6xl: 2rem;           /* 32px */
+        --font-size-5xl: 1.75rem;        /* 28px */
+        --font-size-4xl: 1.5rem;         /* 24px */
+        --font-size-3xl: 1.375rem;       /* 22px */
+    }
+}
+
+/* =====================================================
+   TYPOGRAPHY BASE CLASSES
+   Reusable utility classes for consistent styling
+   ===================================================== */
+
+/* Heading Styles */
+.text-display {
+    font-family: var(--font-display);
+    font-size: var(--font-size-6xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tighter);
+}
+
+.text-h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+.text-h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+.text-h3 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+.text-h4 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+.text-h5 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+.text-h6 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+    margin-bottom: var(--heading-margin-bottom);
+}
+
+/* Body Text Styles */
+.text-body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.text-body-lg {
+    font-family: var(--font-family);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+.text-body-sm {
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+/* Label & Caption Styles */
+.text-label {
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-overline {
+    font-family: var(--font-family);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-widest);
+    text-transform: uppercase;
+}
+
+.text-caption {
+    font-family: var(--font-family);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--gray-500);
 }
 
 /* =====================================================
@@ -92,14 +300,96 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 100%; /* 16px base - honors user preferences */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
     background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
     color: var(--gray-800);
-    line-height: 1.6;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-normal);
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Native Element Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-top: 0;
+    margin-bottom: var(--heading-margin-bottom);
+    color: var(--gray-900);
+}
+
+h1 {
+    font-size: var(--font-size-5xl);
+}
+
+h2 {
+    font-size: var(--font-size-4xl);
+}
+
+h3 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+h4 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+}
+
+h5 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+h6 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+}
+
+p {
+    margin-bottom: var(--paragraph-spacing);
+    max-width: var(--text-measure-normal);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+small {
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+strong, b {
+    font-weight: var(--font-weight-semibold);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
 }
 
 /* =====================================================
@@ -165,30 +455,32 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: var(--font-size-lg);
     color: var(--white);
 }
 
 .auth-logo-text {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .auth-left h1 {
-    font-size: 2.75rem;
-    font-weight: 700;
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
     margin-bottom: var(--spacing-lg);
-    line-height: 1.15;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
     color: var(--white);
 }
 
 .auth-left p {
-    font-size: 0.95rem;
+    font-size: var(--font-size-md);
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.7;
+    line-height: var(--line-height-loose);
+    letter-spacing: var(--letter-spacing-normal);
     margin-bottom: var(--spacing-2xl);
-    max-width: 420px;
+    max-width: var(--text-measure-narrow);
 }
 
 /* Features - Horizontal badges at bottom */
@@ -217,14 +509,15 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 10px;
+    font-size: var(--font-size-xs);
     color: var(--white);
 }
 
 .auth-feature span:last-child {
     color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    font-size: 0.9rem;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* =====================================================
@@ -265,15 +558,19 @@ body {
 }
 
 .auth-header h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
     color: var(--gray-800);
     margin-bottom: var(--spacing-xs);
 }
 
 .auth-header p {
     color: var(--gray-500);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* =====================================================
@@ -297,11 +594,12 @@ body {
     border: none;
     background: transparent;
     color: var(--gray-500);
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     border-radius: calc(var(--radius-pill) - 4px);
     cursor: pointer;
     transition: all 0.25s ease;
-    font-size: 0.95rem;
+    font-size: var(--font-size-md);
+    letter-spacing: var(--letter-spacing-normal);
     position: relative;
     z-index: 1;
 }
@@ -314,7 +612,7 @@ body {
 .auth-tab.active {
     background: var(--auth-switcher-active);
     color: var(--gray-800);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     box-shadow: var(--shadow-island);
 }
 
@@ -325,9 +623,10 @@ body {
 .auth-form-group label {
     display: block;
     margin-bottom: var(--spacing-sm);
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     color: var(--gray-700);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Pill-shaped inputs with ample padding */
@@ -336,7 +635,9 @@ body {
     padding: 16px 20px;
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-pill);
-    font-size: 0.95rem;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
     transition: all 0.2s ease;
     background: var(--white);
     color: var(--gray-800);
@@ -357,7 +658,8 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--spacing-lg);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .auth-remember label {
@@ -378,7 +680,7 @@ body {
 .auth-remember a {
     color: var(--primary-color);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     transition: color 0.2s ease;
 }
 
@@ -394,8 +696,10 @@ body {
     color: var(--white);
     border: none;
     border-radius: var(--radius-pill);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-normal);
+    line-height: var(--line-height-normal);
     cursor: pointer;
     transition: all 0.25s ease;
     margin-bottom: var(--spacing-md);
@@ -436,10 +740,11 @@ body {
     background: var(--auth-bg-cream);
     padding: 0 var(--spacing-md);
     color: var(--gray-400);
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: var(--letter-spacing-widest);
 }
 
 .auth-social {
@@ -461,8 +766,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-    font-weight: 500;
-    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
     color: var(--gray-700);
 }
 
@@ -505,7 +811,9 @@ body {
     border-radius: var(--radius-md);
     margin-top: var(--spacing-md);
     text-align: center;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
 }
 
 .auth-message.success {
@@ -519,17 +827,50 @@ body {
 }
 
 .auth-footer {
-    text-align: center;
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px dashed var(--gray-200);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
     color: var(--gray-500);
-    font-size: 0.75rem;
-    line-height: 1.6;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-relaxed);
+    letter-spacing: var(--letter-spacing-wide);
+    max-width: var(--text-measure-narrow);
+    margin-inline: auto;
+}
+
+.auth-footer-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+}
+
+.auth-footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.auth-footer-label {
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-600);
+}
+
+.auth-footer-links {
+    color: var(--gray-500);
 }
 
 .auth-footer a {
     color: var(--secondary-color);
     text-decoration: underline;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
 }
 
 .auth-footer a:hover {
@@ -578,12 +919,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: var(--font-size-xl);
 }
 
 .sidebar-logo-text {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
     color: var(--gray-800);
 }
 
@@ -599,11 +941,11 @@ body {
 
 .sidebar-section-title {
     padding: 0 var(--spacing-lg);
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
     color: var(--gray-500);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-widest);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -618,12 +960,14 @@ body {
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.2s ease;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     border: none;
     background: transparent;
     width: calc(100% - var(--spacing-md) * 2);
     text-align: left;
-    font-size: 0.9375rem;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
 }
 
 .sidebar-item:hover {
@@ -634,7 +978,7 @@ body {
 .sidebar-item.active {
     background: linear-gradient(135deg, rgba(255, 107, 44, 0.1) 0%, rgba(255, 107, 44, 0.05) 100%);
     color: var(--primary-color);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 .sidebar-item-icon {
@@ -643,7 +987,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: var(--font-size-lg);
 }
 
 .sidebar-footer {
@@ -670,8 +1014,8 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
 }
 
 .sidebar-user-info {
@@ -680,17 +1024,19 @@ body {
 }
 
 .sidebar-user-name {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--gray-800);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .sidebar-user-role {
-    font-size: 0.75rem;
+    font-size: var(--font-size-xs);
     color: var(--gray-500);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Main Content */
@@ -721,8 +1067,10 @@ body {
 }
 
 .topbar-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-snug);
     color: var(--gray-800);
 }
 
@@ -736,7 +1084,7 @@ body {
     display: none;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: var(--font-size-2xl);
     cursor: pointer;
     padding: var(--spacing-sm);
     color: var(--gray-600);
@@ -777,8 +1125,10 @@ body {
 }
 
 .card-title {
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-normal);
     color: var(--gray-800);
 }
 
@@ -806,9 +1156,10 @@ body {
 .form-group label {
     display: block;
     margin-bottom: var(--spacing-sm);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--gray-700);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .form-group input,
@@ -818,7 +1169,9 @@ body {
     padding: var(--spacing-md);
     border: 2px solid var(--gray-200);
     border-radius: var(--radius-md);
-    font-size: 0.9375rem;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
     transition: all 0.2s ease;
     background: var(--white);
 }
@@ -849,8 +1202,10 @@ body {
     padding: var(--spacing-md) var(--spacing-lg);
     border: none;
     border-radius: var(--radius-md);
-    font-size: 0.9375rem;
-    font-weight: 600;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
@@ -910,14 +1265,14 @@ body {
 
 .btn-sm {
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.8125rem;
+    font-size: var(--font-size-sm);
 }
 
 .btn-logout {
     background: var(--gray-100);
     color: var(--gray-600);
     padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
 }
 
 .btn-logout:hover {
@@ -948,11 +1303,11 @@ body {
 
 .data-table th {
     background: var(--gray-50);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--gray-700);
-    font-size: 0.8125rem;
+    font-size: var(--font-size-xs);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-widest);
 }
 
 .data-table tbody tr {
@@ -964,7 +1319,8 @@ body {
 }
 
 .data-table td {
-    font-size: 0.9375rem;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
     color: var(--gray-700);
 }
 
@@ -979,8 +1335,8 @@ body {
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
     transition: all 0.2s ease;
 }
 
@@ -1010,8 +1366,9 @@ body {
 .status-badge {
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-wide);
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
@@ -1157,7 +1514,7 @@ body {
     }
     
     .auth-header h2 {
-        font-size: 1.5rem;
+        font-size: var(--font-size-2xl);
     }
     
     .auth-social {
@@ -1187,7 +1544,7 @@ body {
     }
     
     .topbar-title {
-        font-size: 1.125rem;
+        font-size: var(--font-size-xl);
     }
     
     .content-area {
@@ -1217,7 +1574,7 @@ body {
     
     /* Tables Mobile */
     .data-table {
-        font-size: 0.875rem;
+        font-size: var(--font-size-sm);
     }
     
     .data-table th,
@@ -1248,17 +1605,17 @@ body {
     
     .auth-form-group input {
         padding: 12px 16px;
-        font-size: 0.9rem;
+        font-size: var(--font-size-md);
     }
     
     .auth-btn {
         padding: 12px var(--spacing-lg);
-        font-size: 0.9rem;
+        font-size: var(--font-size-md);
     }
     
     .auth-tab {
         padding: 12px var(--spacing-md);
-        font-size: 0.85rem;
+        font-size: var(--font-size-sm);
     }
     
     .sidebar-user {
