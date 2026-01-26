@@ -1,5 +1,3 @@
 {
-  "installCommand": "npm install --prefix rental-react",
-  "buildCommand": "npm run build --prefix rental-react",
-  "outputDirectory": "rental-react/dist"
+  "framework": "vite"
 }
