@@ -250,7 +250,7 @@
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-relaxed);
-    letter-spacing: var(--letter-spacing-normal);
+    
 }
 
 .text-body-sm {
@@ -259,6 +259,95 @@
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-wide);
+}
+
+/* =====================================================
+   ANIMATION TOKENS & UTILITIES
+   Minimal, accessible motion (staggered entrance, shimmer, loading)
+   Slowed down for appreciable, polished feel
+   ===================================================== */
+
+:root {
+    --anim-ease: cubic-bezier(.2,.8,.2,1);
+    --anim-base: 400ms;              /* Was 240ms - now slower for appreciation */
+    --anim-stagger: 100ms;           /* Was 60ms - more noticeable stagger */
+    --anim-entrance-transform: translateY(12px);
+    --loading-duration: 1400ms;      /* Slightly slower shimmer */
+    --loading-ease: linear;
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+    from { opacity: 0; transform: var(--anim-entrance-transform); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Staggered children: JS sets --index on each child */
+.motion-enabled .stagger-child {
+    animation-name: fadeUp;
+    animation-duration: var(--anim-base);
+    animation-timing-function: var(--anim-ease);
+    animation-fill-mode: both;
+    animation-delay: calc(var(--anim-stagger) * var(--index));
+}
+
+/* Hover micro-interactions (use transform & shadow only) */
+.motion-enabled .btn:hover,
+.motion-enabled .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
+    background-size: 200% 100%;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.is-loading .skeleton {
+    animation: shimmer var(--loading-duration) var(--loading-ease) infinite;
+}
+
+.loading-shadow {
+    box-shadow: 0 8px 24px rgba(16,24,40,0.06) inset;
+}
+
+/* Error / failed state for containers */
+.is-failed {
+    position: relative;
+    border-color: var(--error) !important;
+    background: var(--error-light);
+}
+.is-failed::after {
+    content: '⚠ Failed to load data';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    color: var(--error);
+    pointer-events: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .motion-enabled .stagger-child,
+    .is-loading .skeleton,
+    .motion-enabled .btn:hover,
+    .motion-enabled .card:hover {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
 }
 
 /* Label & Caption Styles */
@@ -1323,6 +1412,11 @@ a:hover {
     line-height: var(--line-height-normal);
     color: var(--gray-700);
 }
+
+/* Skeleton visibility rules */
+.table-container tbody tr.skeleton-row { display: none; }
+.table-container.is-loading tbody tr.skeleton-row { display: table-row; }
+.table-container.is-loading tbody tr:not(.skeleton-row) { display: none; }
 
 /* Action buttons in tables */
 .table-actions {

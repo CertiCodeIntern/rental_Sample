@@ -1,0 +1,122 @@
+/* Card */
+.card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.cardHeader h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+}
+
+.cardBody {
+    padding: var(--spacing-lg);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btnPrimary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btnPrimary:hover {
+    background: var(--primary-hover);
+}
+
+.btnSm {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-xs);
+}
+
+.btnSecondary {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.btnSecondary:hover {
+    background: var(--gray-200);
+}
+
+/* Status Badges */
+.status {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.statusActive,
+.statusCompleted,
+.statusPaid {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.statusPending,
+.statusPartial {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.statusInactive,
+.statusFailed {
+    background: var(--error-light);
+    color: var(--error);
+}
+
+.statusAvailable {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+.statusRented {
+    background: var(--gray-100);
+    color: var(--gray-600);
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.badgeAdmin {
+    background: var(--primary-light);
+    color: var(--white);
+}
+
+.badgeCustomer {
+    background: var(--info-light);
+    color: var(--info);
+}

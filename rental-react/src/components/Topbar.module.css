@@ -1,0 +1,88 @@
+/* Topbar */
+.topbar {
+    height: var(--topbar-height);
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-xl);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menuBtn {
+    display: none;
+    padding: var(--spacing-sm);
+    background: transparent;
+    border: none;
+    font-size: var(--font-size-xl);
+    color: var(--gray-700);
+}
+
+.title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-900);
+}
+
+.userRole {
+    font-size: var(--font-size-xs);
+    color: var(--gray-500);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .menuBtn {
+        display: block;
+    }
+    
+    .topbar {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .title {
+        font-size: var(--font-size-lg);
+    }
+    
+    .userInfo {
+        display: none;
+    }
+}

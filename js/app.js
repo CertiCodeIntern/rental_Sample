@@ -277,10 +277,200 @@ function initApp() {
 document.addEventListener('DOMContentLoaded', initApp);
 
 // Export for use in Firebase module
+// Minimal animation/loading helpers
+/**
+ * showLoader / loadWithLoader
+ * - el: container element to toggle `.is-loading`
+ * - fetchPromise: promise resolving when content/data is ready
+ * - options: { minVisible (ms), fallback (ms) }
+ */
+function loadWithLoader(el, fetchPromise, { minVisible = 120, fallback = 30000 } = {}){
+    if (!el) return fetchPromise;
+    el.classList.add('is-loading');
+    const start = Date.now();
+
+    let fallbackTimer = setTimeout(() => {
+        el.classList.remove('is-loading');
+        el.classList.add('is-failed');
+    }, fallback);
+
+    return Promise.resolve(fetchPromise)
+        .then(res => {
+            const elapsed = Date.now() - start;
+            const wait = Math.max(0, minVisible - elapsed);
+            return new Promise(resolve => setTimeout(() => resolve(res), wait));
+        })
+        .then(res => {
+            clearTimeout(fallbackTimer);
+            el.classList.remove('is-loading');
+            el.classList.add('is-loaded');
+            return res;
+        })
+        .catch(err => {
+            clearTimeout(fallbackTimer);
+            el.classList.remove('is-loading');
+            el.classList.add('is-failed');
+            throw err;
+        });
+}
+
+/**
+ * Apply staggered entrance to a container's direct children.
+ * JS sets `--index` on each child; CSS uses that for delay.
+ */
+function staggerEntrance(container, options = {}){
+    if (!container) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const children = Array.from(container.children || []);
+    const max = options.max || 50;
+    children.slice(0, max).forEach((child, i) => {
+        child.style.setProperty('--index', i);
+        child.classList.add('stagger-child');
+    });
+}
+
+// Try to enable motion by default if not reduced
+if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    document.documentElement.classList.add('motion-enabled');
+}
+
+// Small example: stagger auth-card children on auth page
+document.addEventListener('DOMContentLoaded', () => {
+    const authCard = document.querySelector('.auth-card');
+    if (authCard) staggerEntrance(authCard);
+});
+
+// =====================================================
+// Data fetching + render helpers (wired to loader)
+// =====================================================
+function safeFetchJSON(url, simulateDataFn = null) {
+    return fetch(url)
+        .then(res => res.ok ? res.json() : Promise.reject())
+        .catch(() => {
+            // Fallback to simulated data if provided, otherwise empty array
+            if (typeof simulateDataFn === 'function') {
+                return new Promise(resolve => setTimeout(() => resolve(simulateDataFn()), 800));
+            }
+            return [];
+        });
+}
+
+function renderUsers(rows = []){
+    const tbody = document.getElementById('users-list');
+    if (!tbody) return;
+    // remove any existing non-skeleton rows
+    tbody.querySelectorAll('tr.data-row').forEach(n => n.remove());
+    rows.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.classList.add('data-row');
+        tr.innerHTML = `
+            <td>${u.id}</td>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.role}</td>
+            <td>${u.status}</td>
+            <td>${u.created}</td>
+            <td><button class="btn btn-sm">Edit</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderRentals(rows = []){
+    const tbody = document.getElementById('rentals-list');
+    if (!tbody) return;
+    tbody.querySelectorAll('tr.data-row').forEach(n => n.remove());
+    rows.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.classList.add('data-row');
+        tr.innerHTML = `
+            <td>${r.id}</td>
+            <td>${r.user}</td>
+            <td>${r.date}</td>
+            <td>${r.hours}</td>
+            <td>${r.total}</td>
+            <td>${r.status}</td>
+            <td>${r.created}</td>
+            <td><button class="btn btn-sm">View</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function renderItems(rows = []){
+    const tbody = document.getElementById('items-list');
+    if (!tbody) return;
+    tbody.querySelectorAll('tr.data-row').forEach(n => n.remove());
+    rows.forEach(it => {
+        const tr = document.createElement('tr');
+        tr.classList.add('data-row');
+        tr.innerHTML = `
+            <td>${it.id}</td>
+            <td>${it.name}</td>
+            <td>${it.category}</td>
+            <td>${it.rate}</td>
+            <td>${it.status}</td>
+            <td>${it.created}</td>
+            <td><button class="btn btn-sm">Edit</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// sample data generators (used as fallback)
+function sampleUsers(){
+    return [
+        {id: 'U1', name: 'Alice', email: 'alice@example.com', role: 'Admin', status: 'Active', created: '2025-11-01'},
+        {id: 'U2', name: 'Bob', email: 'bob@example.com', role: 'Customer', status: 'Active', created: '2025-12-10'}
+    ];
+}
+
+function sampleRentals(){
+    return [
+        {id: 'R1', user: 'Alice', date: '2026-01-20', hours: 4, total: '₱1200', status: 'Pending', created: '2026-01-20'},
+    ];
+}
+
+function sampleItems(){
+    return [
+        {id: 'I1', name: 'Videoke Pro', category: 'Audio', rate: '₱500/hr', status: 'Available', created: '2025-10-01'}
+    ];
+}
+
+function fetchAndRenderUsers(){
+    const container = document.querySelector('.table-container');
+    const table = document.querySelector('#users-list')?.closest('.table-container');
+    const promise = safeFetchJSON('/api/users', sampleUsers);
+    return loadWithLoader(table || container, promise).then(data => renderUsers(Array.isArray(data) ? data : sampleUsers()));
+}
+
+function fetchAndRenderRentals(){
+    const table = document.querySelector('#rentals-list')?.closest('.table-container');
+    const promise = safeFetchJSON('/api/rentals', sampleRentals);
+    return loadWithLoader(table, promise).then(data => renderRentals(Array.isArray(data) ? data : sampleRentals()));
+}
+
+function fetchAndRenderItems(){
+    const table = document.querySelector('#items-list')?.closest('.table-container');
+    const promise = safeFetchJSON('/api/items', sampleItems);
+    return loadWithLoader(table, promise).then(data => renderItems(Array.isArray(data) ? data : sampleItems()));
+}
+
+// Trigger initial loads after app init
+document.addEventListener('DOMContentLoaded', () => {
+    // Slightly stagger which tables load first to show UX
+    fetchAndRenderUsers();
+    setTimeout(fetchAndRenderRentals, 250);
+    setTimeout(fetchAndRenderItems, 400);
+});
+
+// Export helpers
 window.AppUtils = {
     showAuthMessage,
     updateUserDisplay,
     calculateSubtotal,
     setDefaultDates,
-    closeSidebar
+    closeSidebar,
+    loadWithLoader,
+    staggerEntrance
 };
