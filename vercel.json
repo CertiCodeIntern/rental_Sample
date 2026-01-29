@@ -1,9 +1,12 @@
 {
   "rewrites": [
-    { "source": "/login", "destination": "/index.html" },
-    { "source": "/signup", "destination": "/index.html" },
-    { "source": "/register", "destination": "/index.html" },
-    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/login", "destination": "/client/auth/login.html" },
+    { "source": "/signup", "destination": "/client/auth/login.html" },
+    { "source": "/register", "destination": "/client/auth/login.html" },
+    { "source": "/dashboard", "destination": "/client/dashboard/index.html" },
+    { "source": "/client/dashboard", "destination": "/client/dashboard/index.html" },
+    { "source": "/admin/login", "destination": "/admin/auth/login.html" },
+    { "source": "/admin/dashboard", "destination": "/admin/dashboard/index.html" },
     { "source": "/wip", "destination": "/wip.html" }
   ],
   "headers": [
@@ -25,7 +28,7 @@
       ]
     },
     {
-      "source": "/css/(.*)",
+      "source": "/shared/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -34,7 +37,7 @@
       ]
     },
     {
-      "source": "/js/(.*)",
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

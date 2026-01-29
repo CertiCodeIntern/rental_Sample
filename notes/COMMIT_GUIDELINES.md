@@ -1,21 +1,251 @@
-# Commit Guidelines & Templates
+# 📋 Commit Guidelines & Professional Message Format
 
-Purpose: provide short, editable, corporate-style commit messages and a small guideline so you (or Claude) can quickly review, edit, and apply commits with consistent wording.
+> Professional, corporate-style commit messages for the CertiCode project.
+
+**Purpose:** Ensure clear, consistent, and traceable commit history across all developers.
 
 ---
 
-## Recommendation (two options — pick one)
+## 🎯 Commit Format Standard
 
-Option A — Manual, short & detailed (recommended now)
-- Use the templates below to write a single, focused commit per logical change.
-- Keep title ≤ 72 chars, 50 chars ideal; include a 1–3 line body with `What / Why / Impact / Tests`.
-- Fast, low setup cost — ideal when iterating with LLMs.
+Every commit message must follow this structure:
 
-Option B — Light automation (optional)
-- Add a commit template file in repo and use `git commit -F COMMIT_MSG.txt` or a tiny Node script to prefill messages.
-- Good for teams or CI; slightly more setup but reduces copy/paste errors.
+```
+<type>(<scope>): <subject>
 
-Advice: start with Option A to keep token usage minimal, then add Option B if you want consistent enforcement across contributors.
+<body>
+
+<footer>
+```
+
+### Format Breakdown
+
+| Part | Rules | Example |
+|------|-------|---------|
+| **type** | One word, lowercase | `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore` |
+| **scope** | What part of app | `client`, `auth`, `dashboard`, `api`, `styles`, `docs` |
+| **subject** | Imperative, ≤50 chars | `add user profile page` |
+| **body** | Details (optional) | `- What: ...` `- Why: ...` |
+| **footer** | Issue/breaking notes | `Closes #123` `BREAKING CHANGE: ...` |
+
+---
+
+## 📝 Commit Types
+
+| Type | Use When | Example |
+|------|----------|---------|
+| `feat` | Adding new feature | `feat(client): add user profile page` |
+| `fix` | Bug fix | `fix(auth): resolve login redirect issue` |
+| `docs` | Documentation changes | `docs: update CHANGELOG for v0.2.0` |
+| `style` | CSS, formatting (no logic) | `style(landing): update hero section colors` |
+| `refactor` | Code restructuring | `refactor(auth): consolidate form validation` |
+| `perf` | Performance improvement | `perf(dashboard): optimize tab switching` |
+| `test` | Test additions/updates | `test(auth): add login form validation tests` |
+| `chore` | Build, dependencies, setup | `chore: update vercel.json routes` |
+
+---
+
+## ✍️ How to Write Good Commits
+
+### ✅ DO
+
+- Use **imperative mood** ("add feature" not "added feature")
+- Keep **subject line ≤ 50 characters** (≤ 72 absolute max)
+- **Capitalize first letter** of subject
+- **One logical change** per commit
+- Include **Why** and **What** in body if needed
+
+### ❌ DON'T
+
+- Don't use periods at the end of subject
+- Don't capitalize type name: `feat` not `Feat`
+- Don't mix multiple features in one commit
+- Don't write vague messages like "update code" or "fix stuff"
+
+---
+
+## 📚 Real-World Examples
+
+### Example 1: Adding a Feature
+
+```
+feat(client-dashboard): add user settings page
+
+- What: Created new settings page accessible from dashboard sidebar
+- Why: Users need ability to manage preferences and account settings
+- Impact: Added /client/dashboard/settings.html, updated components.js
+- Tests: Verified page loads for authenticated users, redirect works for non-auth
+```
+
+### Example 2: Bug Fix
+
+```
+fix(auth): prevent form submission on empty fields
+
+- What: Added client-side validation to prevent sending empty data
+- Why: Backend was receiving malformed requests causing 500 errors
+- Impact: Modified /client/auth/js/auth.js validation logic
+- Tests: Manual testing with empty inputs confirmed validation triggers
+```
+
+### Example 3: Documentation Update
+
+```
+docs: add environment setup instructions to README
+
+- What: Added section covering Python server setup and Live Server extension
+- Why: New developers were confused about how to run project locally
+- Impact: Updated main README.md with detailed quick-start steps
+- Tests: Followed instructions on fresh clone, all links work
+```
+
+### Example 4: Styling Change
+
+```
+style(landing): update hero section background gradient
+
+- What: Changed hero gradient from blue-green to green-teal using CSS tokens
+- Why: Updated design aligns with new brand color scheme
+- Impact: Modified /shared/css/landing.css color variables
+- Tests: Verified gradient on desktop (1920px) and mobile (375px) views
+```
+
+### Example 5: Refactoring
+
+```
+refactor(auth): extract form validation into reusable function
+
+- What: Moved validation logic from auth.js into shared utils
+- Why: Both client and admin auth pages need same validation rules
+- Impact: Created /shared/js/validators.js, updated auth.js imports
+- Tests: Tested login/register forms on both client and admin sides
+```
+
+### Example 6: Performance Improvement
+
+```
+perf(dashboard): lazy load tab content instead of pre-loading
+
+- What: Modified dashboard.js to load tab content only when clicked
+- Why: Initial page load was slow due to loading all tabs upfront
+- Impact: Updated Components.loadTabContent() to use dynamic loading
+- Tests: Measured page load time reduction (from 3.2s to 1.8s)
+```
+
+---
+
+## 🚀 Implementation Approach
+
+### Option A — Manual (Recommended for this project)
+
+Use the templates below to write focused commits with full context.
+
+```bash
+git add .
+git commit -m "feat(client): add user profile page
+
+- What: Created new settings page in dashboard
+- Why: Users need to manage their profile
+- Impact: Added settings.html and updated sidebar
+- Tests: Tested on all major browsers"
+```
+
+### Option B — Using a Template File
+
+Create a file `COMMIT_MSG.txt` with your message:
+
+```bash
+git commit -F COMMIT_MSG.txt
+```
+
+Then delete the file:
+
+```bash
+rm COMMIT_MSG.txt
+```
+
+---
+
+## 📋 Quick Copy-Paste Templates
+
+### For New Features
+```
+feat(<scope>): <short description>
+
+- What: 
+- Why: 
+- Impact: 
+- Tests:
+```
+
+### For Bug Fixes
+```
+fix(<scope>): <short description>
+
+- What: 
+- Why: 
+- Impact: 
+- Tests:
+```
+
+### For Documentation
+```
+docs: <short description>
+
+- What: 
+- Why: 
+- Impact: 
+- Tests:
+```
+
+### For Style Changes
+```
+style(<scope>): <short description>
+
+- What: 
+- Why: 
+- Impact: 
+- Tests:
+```
+
+---
+
+## 👥 For Your Dev Team
+
+### Things to Emphasize
+
+1. **Every commit must have a reason** — not just "what changed" but "why it changed"
+2. **Keep commits atomic** — one feature per commit, one fix per commit
+3. **Be specific with scope** — `client`, `auth`, `dashboard`, etc.
+4. **The body matters** — it's your documentation 6 months later
+5. **Search by type** — makes it easy to find all `fix:` or `feat:` commits
+
+### Example Scenario
+
+❌ Bad:
+```
+git commit -m "update code"
+```
+
+✅ Good:
+```
+git commit -m "feat(client-auth): add password strength indicator
+
+- What: Added visual feedback showing password complexity
+- Why: Users weren't aware of password requirements
+- Impact: Updated auth.css and auth.js
+- Tests: Tested with various passwords"
+```
+
+---
+
+## 🔄 Merging Back to Main README
+
+The main [README.md](/README.md) now references this document. Developers should:
+
+1. **Read this file** for detailed guidelines
+2. **Use the format** in all their commits
+3. **Ask if unsure** — this file is the source of truth
 
 ---
 

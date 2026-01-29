@@ -1,171 +1,160 @@
-# CertiCode - Vanilla HTML/CSS/JS Dashboard
+# 🎤 CertiCode - Videoke Rental Management System
 
-A clean, modern Videoke Rental Management System built with pure HTML5, CSS3, and Vanilla JavaScript. No frameworks, no bundlers.
+A modern rental management platform built with pure HTML5, CSS3, and Vanilla JavaScript.
 
-## 📁 File Structure
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](docs/CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+---
+
+## ✨ Features
+
+- **Zero Dependencies** - No npm, no bundlers, no frameworks
+- **Instant Deploy** - Just push to Vercel
+- **Client & Admin** - Separate sections for customers and staff
+- **Responsive Design** - Works on all devices
+- **Reusable Components** - JS-injected UI elements
+- **Well Documented** - Comprehensive docs for developers
+
+---
+
+## 📁 Project Structure
 
 ```
-rental-vanilla/
-├── index.html              # Entry point (Login/Signup page)
-├── dashboard.html          # Dashboard page
-├── wip.html                # Work in Progress page
-├── vercel.json             # Vercel deployment config
-├── README.md               # This file
-├── css/
-│   ├── globals.css         # CSS variables, reset, base styles
-│   ├── auth.css            # Login/Signup page styles
-│   └── dashboard.css       # Dashboard & component styles
-└── js/
-    ├── components.js       # Reusable UI components (Sidebar, Topbar, etc.)
-    ├── auth.js             # Authentication logic
-    └── dashboard.js        # Dashboard page logic
+rental_Sample/
+├── 📄 index.html           # Landing page (entry point)
+├── 📄 wip.html             # Work in Progress page
+├── 📄 vercel.json          # Vercel configuration
+│
+├── 📁 client/              # Customer-facing app
+│   ├── 📁 auth/            # Login/Register
+│   └── 📁 dashboard/       # Client dashboard
+│
+├── 📁 admin/               # Staff/Admin app
+│   ├── 📁 auth/            # Admin login
+│   └── 📁 dashboard/       # Admin dashboard
+│
+├── 📁 shared/              # Shared resources
+│   ├── 📁 css/             # Global styles
+│   └── 📁 js/              # Shared components
+│
+├── 📁 assets/              # Static files
+│   ├── 📁 images/
+│   └── 📁 icons/
+│
+├── 📁 docs/                # Documentation
+│   ├── CHANGELOG.md        # Version history
+│   ├── ARCHITECTURE.md     # Folder guide
+│   └── 📁 logs/            # Dev logs
+│
+├── 📁 notes/               # Dev notes
+└── 📁 reference/           # Reference materials
 ```
 
-## 🚀 Features
+> 📖 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed structure
 
-- **Pure Vanilla Stack**: HTML5, CSS3, JavaScript (ES6+)
-- **No Build Step**: Just open in browser or deploy directly
-- **Responsive Design**: Mobile-first approach with breakpoints for all screen sizes
-- **Reusable Components**: JavaScript-injected Sidebar and Topbar
-- **CSS Custom Properties**: Centralized design tokens for easy theming
-- **Smooth Animations**: CSS transitions and stagger animations
-- **Authentication Flow**: Login/Register with localStorage persistence
-- **Tab-based Dashboard**: Dynamic content switching without page reloads
+---
 
-## 🎨 CSS Architecture
+## 🚀 Quick Start
 
-### globals.css
-- CSS Custom Properties (design tokens)
-- CSS Reset
-- Typography system
-- Spacing scale
-- Color palette
-- Utility classes
-- Animation keyframes
-
-### auth.css
-- Login/Signup page layout
-- Form styles
-- Tab switching animation
-- Responsive breakpoints
-
-### dashboard.css
-- Sidebar component
-- Topbar component
-- Main content area
-- Data table styles
-- Status badges
-- Mobile overlay
-
-## 🧩 JavaScript Components
-
-### components.js
-
-The `Components` object provides reusable UI injection:
-
-```javascript
-// Inject sidebar into a container
-Components.injectSidebar('sidebarContainer', 'users');
-
-// Inject topbar
-Components.injectTopbar('topbarContainer', 'Dashboard');
-
-// Check authentication
-if (Components.isAuthenticated()) {
-  // User is logged in
-}
-
-// Require auth (redirects if not authenticated)
-Components.requireAuth();
-```
-
-### auth.js
-
-Handles:
-- Tab switching (Login ↔ Register)
-- Form validation
-- Password visibility toggle
-- URL hash routing (#login, #register)
-- localStorage session management
-
-### dashboard.js
-
-Handles:
-- Authentication check
-- Component initialization
-- Tab state persistence
-
-## 🌐 Deployment (Vercel)
-
-1. Push to GitHub
-2. Import project in Vercel
-3. Deploy (auto-detects static site via index.html)
-
-The `vercel.json` provides:
-- Clean URL rewrites (/login → /index.html)
-- Security headers
-- Asset caching
-
-## 🛠️ Local Development
-
-Simply open `index.html` in a browser, or use a local server:
+### Local Development
 
 ```bash
-# Using Python
+# Clone the repository
+git clone [your-repo-url]
+cd rental_Sample
+
+# Start a local server (Python)
 python -m http.server 3000
 
-# Using Node.js (npx)
-npx serve
-
-# Using VS Code Live Server extension
-# Right-click index.html → "Open with Live Server"
+# Or use VS Code Live Server extension
 ```
 
-## 📱 Responsive Breakpoints
+Visit `http://localhost:3000`
 
-| Breakpoint | Target |
-|------------|--------|
-| 2560px+ | Large monitors (4K) |
-| 1024px | Tablet landscape |
-| 768px | Tablet portrait |
-| 480px | Mobile |
+### Deployment (Vercel)
 
-## 🔐 Authentication Flow
+1. Push to GitHub
+2. Import in Vercel Dashboard
+3. Deploy (auto-detects `index.html`)
 
-1. User visits `/` or `/login`
-2. If already logged in → redirect to `/dashboard`
-3. User submits login/register form
-4. On success → store user in localStorage → redirect to dashboard
-5. Dashboard checks auth → if not logged in → redirect to `/`
-6. Logout clears localStorage → redirect to `/`
+---
 
-## 🎯 Design Tokens
+## 🔗 Routes
 
-All design values are centralized in CSS custom properties:
+| URL | Description |
+|-----|-------------|
+| `/` | Landing page |
+| `/login` | Client login |
+| `/signup` | Client registration |
+| `/dashboard` | Client dashboard |
+| `/admin/login` | Admin login |
+| `/admin/dashboard` | Admin dashboard |
 
-```css
-:root {
-  /* Colors */
-  --primary-color: #FF6B00;
-  --secondary-color: #1E3A5F;
-  
-  /* Spacing */
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  
-  /* Typography */
-  --font-size-md: 1rem;
-  --font-weight-semibold: 600;
-  
-  /* Shadows */
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  
-  /* Layout */
-  --sidebar-width: 280px;
-  --topbar-height: 70px;
-}
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5** - Semantic markup
+- **CSS3** - Custom properties, Flexbox, Grid
+- **JavaScript** - ES6+, no frameworks
+- **Vercel** - Hosting and deployment
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [CHANGELOG](docs/CHANGELOG.md) | Version history |
+| [ARCHITECTURE](docs/ARCHITECTURE.md) | Folder structure |
+| [Development Logs](docs/logs/) | Problem/solution logs |
+
+---
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Update documentation
+4. Submit a pull request
+
+### Commit Convention
+
+We follow **professional, corporate-style commit messages**:
+
+```
+<type>(<scope>): <subject>
+
+- What: Brief description
+- Why: Reason for change
+- Impact: Files/systems affected
+- Tests: What was tested
 ```
 
-## 📄 License
+**Examples:**
+```
+feat(client): add user profile page
+fix(auth): resolve login redirect issue
+docs: update CHANGELOG for v0.2.0
+perf(dashboard): optimize tab loading
+style(landing): update hero gradient colors
+```
 
-MIT License - feel free to use for your projects!
+📖 **[Read Full Commit Guidelines →](notes/COMMIT_GUIDELINES.md)** for detailed format and examples
+
+---
+
+## 📝 License
+
+MIT License - see LICENSE file
+
+---
+
+## 👥 Contributors
+
+- **Marc | FrontEnd** - Initial development
+
+---
+
+*Last Updated: January 29, 2026 | Version 0.2.0*
