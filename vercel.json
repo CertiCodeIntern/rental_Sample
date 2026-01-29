@@ -7,7 +7,11 @@
     { "source": "/client/dashboard", "destination": "/client/dashboard/index.html" },
     { "source": "/admin/login", "destination": "/admin/auth/login.html" },
     { "source": "/admin/dashboard", "destination": "/admin/dashboard/index.html" },
-    { "source": "/wip", "destination": "/wip.html" }
+    { "source": "/wip", "destination": "/wip.html" },
+    { "source": "/about", "destination": "/pages/about.html" },
+    { "source": "/contact", "destination": "/pages/contact.html" },
+    { "source": "/privacy", "destination": "/pages/privacy.html" },
+    { "source": "/terms", "destination": "/pages/terms.html" }
   ],
   "headers": [
     {

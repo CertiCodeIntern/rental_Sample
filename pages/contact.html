@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact CertiCode - Get in touch with our support team.">
+    <title>Contact Us - CertiCode</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/shared/css/globals.css">
+    <link rel="stylesheet" href="/shared/css/landing.css">
+    <link rel="stylesheet" href="pages.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❝</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span class="nav-logo-icon">❝</span>
+                <span class="nav-logo-text">CertiCode</span>
+            </a>
+            <div class="nav-links">
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/#pricing" class="nav-link">Pricing</a>
+                <a href="/pages/about.html" class="nav-link">About</a>
+            </div>
+            <div class="nav-actions">
+                <a href="/client/auth/login.html" class="btn btn-ghost">Login</a>
+                <a href="/client/auth/login.html#register" class="btn btn-primary">Get Started</a>
+            </div>
+            <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/#features" class="mobile-link">Features</a>
+        <a href="/#pricing" class="mobile-link">Pricing</a>
+        <a href="/pages/about.html" class="mobile-link">About</a>
+        <div class="mobile-actions">
+            <a href="/client/auth/login.html" class="btn btn-ghost btn-block">Login</a>
+            <a href="/client/auth/login.html#register" class="btn btn-primary btn-block">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="billing">Billing Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            Send Message
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Email Us</h3>
+                        <p>For general inquiries and support</p>
+                        <a href="mailto:support@certicode.com">support@certicode.com</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>Call Us</h3>
+                        <p>Mon-Fri from 8am to 5pm</p>
+                        <a href="tel:+639123456789">+63 912 345 6789</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">📍</div>
+                        <h3>Visit Us</h3>
+                        <p>Come say hello at our office</p>
+                        <address>
+                            123 Business Center<br>
+                            Manila, Philippines
+                        </address>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">💬</div>
+                        <h3>Live Chat</h3>
+                        <p>Available 24/7 for premium users</p>
+                        <a href="/wip.html" class="btn btn-outline">Start Chat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Quick answers to common questions.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How do I get started?</h4>
+                    <p>Simply create a free account and you can start managing your rentals right away. No credit card required.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is there a free trial?</h4>
+                    <p>Yes! We offer a 14-day free trial with full access to all features. No commitment required.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What payment methods do you accept?</h4>
+                    <p>We accept all major credit cards, GCash, Maya, and bank transfers.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I cancel anytime?</h4>
+                    <p>Absolutely. You can cancel your subscription at any time with no penalties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="footer-logo-icon">❝</span>
+                        <span class="footer-logo-text">CertiCode</span>
+                    </div>
+                    <p class="footer-tagline">Making videoke rental management simple.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="/#features">Features</a>
+                        <a href="/#pricing">Pricing</a>
+                        <a href="/wip.html">Documentation</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="/pages/about.html">About</a>
+                        <a href="/pages/contact.html">Contact</a>
+                        <a href="/wip.html">Careers</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="/pages/privacy.html">Privacy</a>
+                        <a href="/pages/terms.html">Terms</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CertiCode. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/shared/js/landing.js"></script>
+    <script>
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
