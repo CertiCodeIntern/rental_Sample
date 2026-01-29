@@ -119,29 +119,79 @@ Visit `http://localhost:3000`
 3. Update documentation
 4. Submit a pull request
 
-### Commit Convention
+### 📋 Commit Convention
 
-We follow **professional, corporate-style commit messages**:
+We follow **Conventional Commits** with semantic versioning for clear, trackable development.
 
+#### Format
 ```
-<type>(<scope>): <subject>
+<type>(<scope>): <subject> [ticket-id]
 
-- What: Brief description
-- Why: Reason for change
-- Impact: Files/systems affected
-- Tests: What was tested
-```
+<body>
 
-**Examples:**
-```
-feat(client): add user profile page
-fix(auth): resolve login redirect issue
-docs: update CHANGELOG for v0.2.0
-perf(dashboard): optimize tab loading
-style(landing): update hero gradient colors
+<footer>
 ```
 
-📖 **[Read Full Commit Guidelines →](notes/COMMIT_GUIDELINES.md)** for detailed format and examples
+#### Type
+- **feat** - New feature
+- **fix** - Bug fix
+- **docs** - Documentation changes
+- **style** - CSS/formatting changes (no logic)
+- **refactor** - Code restructure (no feature/fix)
+- **perf** - Performance improvements
+- **test** - Test additions/updates
+- **chore** - Build scripts, deps, config
+
+#### Scope
+Specify the area affected: `client`, `admin`, `auth`, `dashboard`, `shared`, `api`, `docs`
+
+#### Subject
+- Use **imperative mood** ("add" not "added")
+- Start with **lowercase**
+- No period at end
+- Keep under **50 characters**
+
+#### Body (Optional)
+- Explain **what** and **why**, not how
+- Wrap at 72 characters
+- Separate multiple points with blank lines
+
+#### Footer (Optional)
+- Reference issues: `Closes #123`
+- Breaking changes: `BREAKING CHANGE: ...`
+
+#### Examples
+```
+feat(admin-auth): add session-based authentication [ADMIN-001]
+
+Implement 8-hour session duration with localStorage/sessionStorage.
+Added demo accounts (admin1/admin1, manager/manager123) for testing.
+Session automatically expires and redirects to login.
+
+Closes #45
+```
+
+```
+fix(client-auth): prevent auto-login on admin page redirect
+
+User was being automatically logged in when navigating to admin login.
+Removed redirectIfAuthenticated check from LoginUI.init().
+
+Closes #52
+```
+
+```
+docs: add commit convention guidelines to README
+```
+
+```
+perf(dashboard): optimize theme toggle performance
+
+Reduced theme switch latency by caching theme value.
+Impact: Instant visual feedback on light/dark toggle.
+```
+
+📖 **[Full Guidelines →](notes/COMMIT_GUIDELINES.md)** for extended examples and best practices
 
 ---
 
