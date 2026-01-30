@@ -1,39 +1,78 @@
 /**
  * =====================================================
  * DASHBOARD PAGE JAVASCRIPT
- * Handles Dashboard functionality
+ * Handles Dashboard functionality with mobile drawer
  * =====================================================
  */
 
-const Dashboard = {
-    activeTab: 'users',
+(function() {
+    // DOM Elements
+    const body = document.body;
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
 
     /**
-     * Initialize the dashboard
+     * Open the mobile drawer
      */
-    init() {
-        // Check authentication
-        if (!Components.requireAuth()) {
-            return;
-        }
-
-        // Get saved active tab or default to 'users'
-        this.activeTab = localStorage.getItem('activeTab') || 'users';
-
-        // Find the tab label for the topbar title
-        const tab = Components.navTabs.find(t => t.id === this.activeTab);
-        const title = tab?.label || 'Users';
-
-        // Inject reusable components
-        Components.injectSidebar('sidebarContainer', this.activeTab);
-        Components.injectTopbar('topbarContainer', title);
-
-        // Load initial content
-        Components.loadTabContent(this.activeTab);
+    function openDrawer() {
+        body.classList.add('drawer-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        hamburger.setAttribute('aria-expanded', 'true');
+        backdrop.setAttribute('aria-hidden', 'false');
+        
+        // Focus first link in drawer for accessibility
+        const firstLink = drawer.querySelector('a');
+        if (firstLink) firstLink.focus();
     }
-};
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    Dashboard.init();
-});
+    /**
+     * Close the mobile drawer
+     */
+    function closeDrawer() {
+        body.classList.remove('drawer-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        backdrop.setAttribute('aria-hidden', 'true');
+        hamburger.focus();
+    }
+
+    // Event Listeners
+    if (hamburger) {
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (body.classList.contains('drawer-open')) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
+        });
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closeDrawer);
+    }
+
+    // Close drawer on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && body.classList.contains('drawer-open')) {
+            closeDrawer();
+        }
+    });
+
+    // Close drawer when a link is clicked
+    if (drawer) {
+        drawer.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (target) {
+                closeDrawer();
+            }
+        });
+    }
+
+    // Expose Dashboard object for potential future use
+    window.Dashboard = {
+        openDrawer,
+        closeDrawer
+    };
+})();

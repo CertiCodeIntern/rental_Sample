@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/shared/css/globals.css">
@@ -17,20 +17,22 @@
     <link rel="stylesheet" href="pages.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❝</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <span class="nav-logo-icon">❝</span>
+                <span class="nav-logo-icon">🎤</span>
                 <span class="nav-logo-text">CertiCode</span>
             </a>
             <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
                 <a href="/#features" class="nav-link">Features</a>
                 <a href="/#pricing" class="nav-link">Pricing</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
+                <a href="/pages/about.html" class="nav-link active">About</a>
+                <a href="/pages/contact.html" class="nav-link">Contact</a>
             </div>
             <div class="nav-actions">
                 <a href="/client/auth/login.html" class="btn btn-ghost">Login</a>
@@ -46,58 +48,206 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
+        <a href="/" class="mobile-link">Home</a>
         <a href="/#features" class="mobile-link">Features</a>
         <a href="/#pricing" class="mobile-link">Pricing</a>
         <a href="/pages/about.html" class="mobile-link">About</a>
+        <a href="/pages/contact.html" class="mobile-link">Contact</a>
         <div class="mobile-actions">
             <a href="/client/auth/login.html" class="btn btn-ghost btn-block">Login</a>
             <a href="/client/auth/login.html#register" class="btn btn-primary btn-block">Get Started</a>
         </div>
     </div>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">About Us</h1>
-            <p class="page-subtitle">Learn more about CertiCode and our mission to simplify videoke rental management.</p>
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container about-hero-inner">
+            <span class="pill">Since 2010</span>
+            <h1 class="about-hero-title">Elevating Events with Professional Sound</h1>
+            <p class="about-hero-sub">
+                What started as a small garage project in 2010 has grown into the city's premier videoke rental service. 
+                We provide high-quality equipment and professional setup for parties, corporate events, and gatherings of every size.
+            </p>
+            <div class="about-hero-cta">
+                <a href="/#pricing" class="btn btn-primary btn-lg">Browse Machines</a>
+                <a href="#values" class="btn btn-ghost btn-lg">Our Values</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Content -->
-    <section class="page-content">
+    <!-- Core Values Section -->
+    <section id="values" class="values-section">
         <div class="container">
-            <div class="content-grid">
-                <div class="content-main">
-                    <h2>Our Story</h2>
-                    <p>CertiCode was founded with a simple mission: to make videoke rental management effortless for businesses of all sizes. We understand the challenges that rental businesses face daily - from tracking equipment to managing bookings and handling payments.</p>
-                    
-                    <p>Our team of passionate developers and business experts came together to create a platform that addresses these pain points head-on. The result is CertiCode - a comprehensive, easy-to-use rental management system that helps you focus on what matters most: growing your business.</p>
+            <h2 class="section-title">Our Core Values</h2>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🔊</div>
+                    <h3>Quality Sound</h3>
+                    <p>We use pro-grade audio equipment and perform sound checks for every event to ensure sonic clarity.</p>
+                </div>
 
-                    <h2>Our Mission</h2>
-                    <p>To empower videoke rental businesses with technology that simplifies operations, enhances customer experiences, and drives growth. We believe that every rental business deserves access to professional-grade management tools without the complexity.</p>
+                <div class="value-card">
+                    <div class="value-icon">🚚</div>
+                    <h3>Reliable Service</h3>
+                    <p>On-time delivery, professional setup, and fast support — we make sure your event runs smoothly from start to finish.</p>
+                </div>
 
-                    <h2>What We Offer</h2>
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <span class="feature-icon">📊</span>
-                            <div>
-                                <h4>Real-time Dashboard</h4>
-                                <p>Monitor your business metrics and performance at a glance.</p>
-                            </div>
+                <div class="value-card">
+                    <div class="value-icon">🎉</div>
+                    <h3>Customer Joy</h3>
+                    <p>We design experiences, not just rentals. Customer satisfaction is our top priority at every step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms / Accordion Section -->
+    <section class="terms-section">
+        <div class="container">
+            <h2 class="section-title">Terms of Service</h2>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-toggle" aria-expanded="false">
+                        1. Rental Duration & Logistics
+                        <span class="accordion-indicator">▾</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Standard rental periods are 24 hours starting from the time of setup. Overtime rates apply at ₱25 per additional hour (unless pre-arranged).</p>
+                        <ul>
+                            <li>Delivery window: 8:00 AM – 12:00 PM</li>
+                            <li>Pick-up window: Next day, 9:00 AM – 1:00 PM</li>
+                            <li>The renter must be present at the time of delivery to sign the inspection report.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-toggle" aria-expanded="false">
+                        2. Liability & Equipment Care
+                        <span class="accordion-indicator">▾</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>The renter assumes full responsibility for the equipment upon delivery. CertiCode Rentals is not liable for damage due to negligence.</p>
+                        <ul>
+                            <li>Keep equipment dry and protected from weather elements.</li>
+                            <li>Only authorized personnel may move the main console once installed.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-toggle" aria-expanded="false">
+                        3. Cancellation Policy
+                        <span class="accordion-indicator">▾</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>We understand plans change. Our refund structure is as follows:</p>
+                        <div class="policy-cards">
+                            <div class="policy-card"><strong>7+ Days Notice</strong><p>Full refund of deposit.</p></div>
+                            <div class="policy-card"><strong>3-6 Days Notice</strong><p>50% refund of deposit.</p></div>
+                            <div class="policy-card"><strong>Less than 48 Hours</strong><p>No refund.</p></div>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">📋</span>
-                            <div>
-                                <h4>Booking Management</h4>
-                                <p>Streamlined reservations and scheduling system.</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">💳</span>
-                            <div>
-                                <h4>Payment Tracking</h4>
-                                <p>Comprehensive billing and invoice management.</p>
-                            </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-toggle" aria-expanded="false">
+                        4. Damage Fees
+                        <span class="accordion-indicator">▾</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <ul>
+                            <li>Wireless Microphone: ₱800 per unit (lost / irreparable)</li>
+                            <li>Speaker: ₱3,000</li>
+                            <li>LCD Monitor / Display: ₱4,500</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Get Started?</h2>
+                <p class="cta-subtitle">Join hundreds of videoke rental businesses already using CertiCode.</p>
+                <div class="cta-actions">
+                    <a href="/client/auth/login.html#register" class="btn btn-white btn-lg">
+                        Create Free Account
+                        <span class="btn-icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="footer-logo-icon">🎤</span>
+                        <span class="footer-logo-text">CertiCode</span>
+                    </div>
+                    <p class="footer-tagline">Making celebrations louder and more memorable with premium videoke rentals since 2018.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">📊</a>
+                        <a href="#" class="social-link" aria-label="Share">📤</a>
+                        <a href="mailto:hello@certicode.example" class="social-link" aria-label="Email">📧</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="/pages/about.html">About us</a>
+                        <a href="/pages/contact.html">Contact</a>
+                        <a href="/wip.html">Careers</a>
+                        <a href="/pages/terms.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <a href="/wip.html">How it works</a>
+                        <a href="/#pricing">Pricing Packages</a>
+                        <a href="/wip.html">Safety Guidelines</a>
+                        <a href="/wip.html">Delivery areas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CertiCode Videoke Rentals • v2.4.0</p>
+                <div class="footer-policy-links">
+                    <a href="/pages/privacy.html">Privacy Policy</a>
+                    <span>·</span>
+                    <a href="/pages/terms.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/shared/js/landing.js"></script>
+    <script>
+        // Accordion toggle logic
+        document.querySelectorAll('.accordion-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                const panel = btn.nextElementSibling;
+                if (!expanded) {
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                } else {
+                    panel.style.maxHeight = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">🎤</span>

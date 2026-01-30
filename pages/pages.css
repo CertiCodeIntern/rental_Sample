@@ -447,3 +447,308 @@
         padding: var(--spacing-lg);
     }
 }
+
+/* =====================================================
+   ABOUT PAGE - NEW STYLES
+   ===================================================== */
+
+/* About Hero Section */
+.about-hero {
+    padding: 120px var(--spacing-xl) 60px;
+    background: linear-gradient(180deg, #013A63 0%, #FB7012 100%);
+    text-align: center;
+    color: var(--white);
+}
+
+.about-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 36px 0;
+}
+
+.pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.about-hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    line-height: 1.1;
+}
+
+.about-hero-sub {
+    color: rgba(255,255,255,0.95);
+    max-width: 60ch;
+    margin: 0 auto 18px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.about-hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Values Section */
+.values-section {
+    padding: 48px var(--spacing-xl);
+    background-color: white;
+}
+
+.values-section .section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 32px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: var(--secondary-color);
+    padding: 24px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+.value-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.value-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+.value-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Terms / Accordion Section */
+.terms-section {
+    padding: 48px var(--spacing-xl);
+    background: transparent;
+}
+
+.terms-section .section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 32px;
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    margin-bottom: 12px;
+}
+
+.accordion-toggle {
+    width: 100%;
+    text-align: left;
+    padding: 16px 20px;
+    background: var(--secondary-color);
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    transition: background 0.2s;
+}
+
+.accordion-toggle:hover {
+    background: var(--dark-blue);
+}
+
+.accordion-indicator {
+    font-size: 14px;
+    transition: transform 0.2s;
+}
+
+.accordion-toggle[aria-expanded="true"] .accordion-indicator {
+    transform: rotate(180deg);
+}
+
+.accordion-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border: 1px solid var(--gray-200);
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 260ms ease;
+    border-radius: 0 0 8px 8px;
+    margin-top: -4px;
+}
+
+.accordion-panel p {
+    padding-top: 16px;
+    margin-bottom: 12px;
+    color: var(--gray-700);
+}
+
+.accordion-panel ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.accordion-panel li {
+    color: var(--gray-600);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* Policy Cards inside Accordion */
+.policy-cards {
+    display: flex;
+    gap: 12px;
+    margin: 12px 0 16px;
+    flex-wrap: wrap;
+}
+
+.policy-card {
+    background: var(--gray-100);
+    padding: 16px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.policy-card strong {
+    display: block;
+    color: var(--gray-900);
+    margin-bottom: 4px;
+}
+
+.policy-card p {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    color: var(--gray-600);
+}
+
+/* Social Links in Footer */
+.social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+    text-decoration: none;
+    transition: transform 0.14s ease, background 0.14s ease;
+    font-size: 16px;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.2);
+}
+
+/* Footer Policy Links */
+.footer-policy-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.footer-policy-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer-policy-links a:hover {
+    text-decoration: underline;
+    color: var(--white);
+}
+
+.footer-policy-links span {
+    color: rgba(255,255,255,0.45);
+}
+
+/* Responsive for About Page */
+@media (max-width: 780px) {
+    .about-hero {
+        padding: 100px var(--spacing-md) 40px;
+    }
+    
+    .about-hero-title {
+        font-size: 28px;
+    }
+    
+    .about-hero-sub {
+        font-size: 16px;
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .policy-cards {
+        flex-direction: column;
+    }
+    
+    .about-hero-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .about-hero-cta .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .about-hero-title {
+        font-size: 24px;
+    }
+    
+    .pill {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
