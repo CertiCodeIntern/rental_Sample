@@ -1,210 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CertiCode - The all-in-one platform for your Videoke rental business.">
-    <title>CertiCode - Videoke Rental Management</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="shared/css/globals.css">
-    <link rel="stylesheet" href="shared/css/landing.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❝</text></svg>">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CertiCode – Videoke Rental Management</title>
+  <meta name="description" content="CertiCode - The all-in-one platform for your Videoke rental business.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet (edit variables/colors in landing.css :root) -->
+  <link rel="stylesheet" href="shared/css/landing.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <span class="nav-logo-icon">❝</span>
-                <span class="nav-logo-text">CertiCode</span>
-            </a>
-            <div class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="#about" class="nav-link">About</a>
-            </div>
-            <div class="nav-actions">
-                <a href="/client/auth/login.html" class="btn btn-ghost">Login</a>
-                <a href="/client/auth/login.html#register" class="btn btn-primary">Get Started</a>
-            </div>
-            <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+  <!-- ================================
+       HEADER / NAVBAR
+       - Mobile hamburger is on the LEFT; mobile nav lives below header
+       ================================= -->
+  <header class="site-header">
+    <div class="container header-inner">
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#features" class="mobile-link">Features</a>
-        <a href="#pricing" class="mobile-link">Pricing</a>
-        <a href="#about" class="mobile-link">About</a>
-        <div class="mobile-actions">
-            <a href="/client/auth/login.html" class="btn btn-ghost btn-block">Login</a>
-            <a href="/client/auth/login.html#register" class="btn btn-primary btn-block">Get Started</a>
+      <!-- MOBILE: left hamburger button -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <!-- Brand / Logo -->
+      <div class="brand">
+        <div class="logo-drawer">
+          <img src="assets/images/rIT_logo_tp.png" alt="CertiCode logo" />
         </div>
+        <div class="brand-name">CertiCode</div>
+      </div>
+
+      <!-- Desktop nav (hidden on mobile) -->
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="#machines">Rentals</a>
+        <a class="nav-link" href="#delivery">Pricing</a>
+        <a class="nav-link" href="pages/about.html">About</a>
+        <a class="nav-link" href="pages/contact.html">Contact</a>
+      </nav>
+
+      <!-- Header actions (Login + avatar) -->
+      <div class="header-actions">
+        <a href="client/auth/loginpageclient.html" class="btn btn-outline">Login</a>
+        <div class="avatar">JS</div>
+      </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- ================================
+         MOBILE NAV PANEL
+         - Menu links for mobile view (toggle via hamburger)
+         ================================= -->
+    <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <a class="mobile-link" href="index.html">Home</a>
+      <a class="mobile-link" href="#machines">Rentals</a>
+      <a class="mobile-link" href="#delivery">Pricing</a>
+      <a class="mobile-link" href="pages/about.html">About</a>
+      <a class="mobile-link" href="pages/contact.html">Contact</a>
+      <div class="mobile-actions">
+        <a href="client/auth/loginpageclient.html" class="btn btn-outline">Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================================
+         HERO SECTION
+         - Centered text, gradient background
+         ================================= -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">🎤 #1 Videoke Rental Platform</div>
-            <h1 class="hero-title">Manage Your<br><span class="text-gradient">Videoke Beats</span></h1>
-            <p class="hero-subtitle">The all-in-one platform for your Videoke rental business. Track equipment, manage bookings, and grow your revenue effortlessly.</p>
-            <div class="hero-actions">
-                <a href="/client/auth/login.html#register" class="btn btn-primary btn-lg">
-                    Start Free Trial
-                    <span class="btn-icon">→</span>
-                </a>
-                <a href="#features" class="btn btn-outline btn-lg">
-                    Learn More
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Active Users</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Rentals Managed</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">99%</span>
-                    <span class="stat-label">Uptime</span>
-                </div>
-            </div>
+      <div class="container hero-inner">
+        <span class="pill">🎤 #1 Videoke Rental Platform</span>
+        <h1 class="hero-title">Bring the Party <span class="accent">Home</span></h1>
+        <p class="hero-sub">
+          Premium videoke machines delivered to your doorstep. Perfect for birthdays, reunions, 
+          and any celebration that deserves an epic soundtrack.
+        </p>
+
+        <div class="hero-cta centered">
+          <a class="btn btn-primary" href="client/auth/loginpageclient.html#register">Book a Machine</a>
+          <a class="btn btn-ghost" href="#machines">View Machines</a>
         </div>
-        <div class="hero-visual">
-            <div class="hero-image-wrapper">
-                <div class="hero-mockup">
-                    <div class="mockup-header">
-                        <span class="mockup-dot"></span>
-                        <span class="mockup-dot"></span>
-                        <span class="mockup-dot"></span>
-                    </div>
-                    <div class="mockup-content">
-                        <div class="mockup-sidebar"></div>
-                        <div class="mockup-main">
-                            <div class="mockup-card"></div>
-                            <div class="mockup-card"></div>
-                            <div class="mockup-card small"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Everything You Need</h2>
-                <p class="section-subtitle">Powerful features to manage your videoke rental business efficiently.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Real-time Dashboard</h3>
-                    <p class="feature-desc">Monitor your business metrics, active rentals, and revenue in one place.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3 class="feature-title">Easy Booking</h3>
-                    <p class="feature-desc">Streamlined booking system for quick reservations and scheduling.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💳</div>
-                    <h3 class="feature-title">Payment Tracking</h3>
-                    <p class="feature-desc">Track payments, generate invoices, and manage billing effortlessly.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎤</div>
-                    <h3 class="feature-title">Inventory Management</h3>
-                    <p class="feature-desc">Keep track of all your equipment, availability, and maintenance.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3 class="feature-title">Customer Database</h3>
-                    <p class="feature-desc">Manage customer information, history, and preferences.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">Mobile Friendly</h3>
-                    <p class="feature-desc">Access your dashboard anywhere with our responsive design.</p>
-                </div>
-            </div>
+    <!-- ================================
+         CHOOSE YOUR MACHINE SECTION
+         - 3-card grid for machine options
+         ================================= -->
+    <section id="machines" class="choose">
+      <div class="container">
+        <h2 class="section-title">Choose Your Machine</h2>
+
+        <div class="tabs">
+          <button class="tab active">Popular</button>
+          <button class="tab">Premium</button>
+          <button class="tab">Basic</button>
         </div>
+
+        <!-- Card Grid -->
+        <div class="cards">
+          <!-- Card 1: Mini Star -->
+          <div class="card">
+            <div class="card-media">
+              <img src="assets/images/machine-mini.png" alt="Mini Star videoke machine">
+            </div>
+            <div class="card-body">
+              <div class="card-head">
+                <span>Mini Star</span>
+                <span class="price">₱800/day</span>
+              </div>
+              <ul class="card-specs">
+                <li>✓ 2 Wireless Mics</li>
+                <li>✓ 5,000 Songs</li>
+                <li>✓ Compact & Portable</li>
+              </ul>
+              <div class="card-foot">
+                <a class="btn btn-primary" href="client/auth/loginpageclient.html#register">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Platinum Pro (Featured) -->
+          <div class="card featured">
+            <div class="card-media">
+              <img src="assets/images/machine-platinum.png" alt="Platinum Pro videoke machine">
+            </div>
+            <div class="card-body">
+              <div class="card-head">
+                <span>Platinum Pro</span>
+                <span class="price">₱1,500/day</span>
+              </div>
+              <ul class="card-specs">
+                <li>✓ 4 Wireless Mics</li>
+                <li>✓ 20,000 Songs</li>
+                <li>✓ Premium Sound System</li>
+              </ul>
+              <div class="card-foot">
+                <a class="btn btn-primary" href="client/auth/loginpageclient.html#register">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Party Box X -->
+          <div class="card">
+            <div class="card-media">
+              <img src="assets/images/machine-party.png" alt="Party Box X videoke machine">
+            </div>
+            <div class="card-body">
+              <div class="card-head">
+                <span>Party Box X</span>
+                <span class="price">₱2,500/day</span>
+              </div>
+              <ul class="card-specs">
+                <li>✓ 6 Wireless Mics</li>
+                <li>✓ 50,000 Songs</li>
+                <li>✓ Concert-Level Audio</li>
+              </ul>
+              <div class="card-foot">
+                <a class="btn btn-primary" href="client/auth/loginpageclient.html#register">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Ready to Get Started?</h2>
-                <p class="cta-subtitle">Join hundreds of videoke rental businesses already using CertiCode.</p>
-                <div class="cta-actions">
-                    <a href="/client/auth/login.html#register" class="btn btn-white btn-lg">
-                        Create Free Account
-                        <span class="btn-icon">→</span>
-                    </a>
+    <!-- ================================
+         DELIVERY & ESTIMATOR SECTION
+         - Left: delivery info with feature boxes
+         - Right: delivery fee estimator card
+         ================================= -->
+    <section id="delivery" class="delivery">
+      <div class="container">
+        <div class="delivery-grid">
+          <!-- Left Column -->
+          <div class="delivery-left">
+            <h2 class="delivery-title">Fast & Reliable Delivery</h2>
+            <p class="delivery-sub">
+              We handle everything from doorstep delivery to professional setup. Just pick your machine and enjoy the party.
+            </p>
+
+            <div class="feature-stack">
+              <!-- Feature Box 1 -->
+              <div class="feature-box">
+                <div class="feature-left">
+                  <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#072023" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                  </div>
                 </div>
+                <div class="feature-right">
+                  <div class="feature-label">Average Delivery Time</div>
+                  <div class="feature-value">45 min</div>
+                </div>
+              </div>
+
+              <!-- Feature Box 2 -->
+              <div class="feature-box">
+                <div class="feature-left">
+                  <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#072023" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s-8-4.5-8-11.8a8 8 0 1 1 16 0c0 7.3-8 11.8-8 11.8z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="feature-right">
+                  <div class="feature-label">Coverage Area</div>
+                  <div class="feature-value">Metro Manila</div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Right Column: Estimator Card -->
+          <div class="estimator-card">
+            <div class="estimator-inner">
+              <h3 class="estimator-title">Delivery Estimator</h3>
+
+              <div class="input-with-icon">
+                <span class="input-icon">📍</span>
+                <input type="text" class="est-input" placeholder="Enter your city or barangay" />
+              </div>
+
+              <div class="fee-row">
+                <div class="fee-left">
+                  <span class="fee-label">Estimated Fee</span>
+                  <span class="fee-note">Within Metro Manila</span>
+                </div>
+                <span class="fee-value">₱150 – ₱300</span>
+              </div>
+
+              <!-- Map Placeholder -->
+              <div class="mock-map">
+                <svg viewBox="0 0 400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect fill="#89CFF0" width="400" height="120"/>
+                  <ellipse cx="80" cy="90" rx="60" ry="20" fill="#228B22" opacity="0.7"/>
+                  <ellipse cx="320" cy="70" rx="50" ry="18" fill="#228B22" opacity="0.6"/>
+                  <rect x="170" y="40" width="60" height="50" rx="4" fill="#FFD700" opacity="0.8"/>
+                  <circle cx="200" cy="30" r="8" fill="#FF6347"/>
+                </svg>
+                <span class="map-label">Coverage Map</span>
+              </div>
+
+              <button class="est-cta">Get Exact Quote →</button>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <span class="footer-logo-icon">❝</span>
-                        <span class="footer-logo-text">CertiCode</span>
-                    </div>
-                    <p class="footer-tagline">Making videoke rental management simple.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Product</h4>
-                        <a href="#features">Features</a>
-                        <a href="#pricing">Pricing</a>
-                        <a href="/wip.html">Documentation</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="/pages/about.html">About</a>
-                        <a href="/pages/contact.html">Contact</a>
-                        <a href="/wip.html">Careers</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <a href="/pages/privacy.html">Privacy</a>
-                        <a href="/pages/terms.html">Terms</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Admin</h4>
-                        <a href="/admin/auth/login.html">Admin Login</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CertiCode. All rights reserved.</p>
-            </div>
+    <!-- ================================
+         STATS SECTION
+         ================================= -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <strong>500+</strong>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat">
+            <strong>10K+</strong>
+            <div class="stat-label">Rentals Managed</div>
+          </div>
+          <div class="stat">
+            <strong>99%</strong>
+            <div class="stat-label">Customer Satisfaction</div>
+          </div>
+          <div class="stat">
+            <strong>24/7</strong>
+            <div class="stat-label">Support Available</div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <!-- Scripts -->
-    <script src="shared/js/landing.js"></script>
+  <!-- ================================
+       FOOTER
+       ================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+
+      <!-- LEFT: Brand + description + social icons -->
+      <div class="footer-col footer-brand">
+        <div class="logo-drawer">
+          <img src="assets/images/rIT_logo_tp.png" alt="CertiCode logo">
+        </div>
+
+        <div class="brand-text">
+          <h4 class="brand-title">CertiCode</h4>
+          <p class="brand-sub">
+            Making celebrations louder and more memorable with premium videoke rentals since 2018.
+          </p>
+
+          <div class="social-links" aria-label="Social links">
+            <!-- Facebook icon -->
+            <a href="#" class="social" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden>
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+
+            <!-- Instagram icon -->
+            <a href="#" class="social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+
+            <!-- Email icon -->
+            <a href="mailto:hello@certicode.example" class="social" aria-label="Email">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER: Company links -->
+      <div class="footer-col footer-links">
+        <h5 class="footer-heading">Company</h5>
+        <nav class="footer-nav" aria-label="Company">
+          <a href="pages/about.html" class="footer-link">About us</a>
+          <a href="pages/contact.html" class="footer-link">Contact</a>
+          <a href="wip.html" class="footer-link">Careers</a>
+          <a href="pages/terms.html" class="footer-link">Terms of Service</a>
+        </nav>
+      </div>
+
+      <!-- RIGHT: Support links -->
+      <div class="footer-col footer-support">
+        <h5 class="footer-heading">Support</h5>
+        <nav class="footer-nav" aria-label="Support">
+          <a href="wip.html" class="footer-link">How it works</a>
+          <a href="#delivery" class="footer-link">Pricing Packages</a>
+          <a href="wip.html" class="footer-link">Safety Guidelines</a>
+          <a href="wip.html" class="footer-link">Delivery areas</a>
+        </nav>
+      </div>
+
+      <!-- ADMIN link -->
+      <div class="footer-col">
+        <h5 class="footer-heading">Admin</h5>
+        <nav class="footer-nav" aria-label="Admin">
+          <a href="admin/auth/loginpageadmin.html" class="footer-link">Admin Login</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <!-- Divider line -->
+    <div class="footer-divider" role="separator" aria-hidden="true"></div>
+
+    <!-- Bottom center area: copyright + policy links -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <div class="copyright">© 2026 CertiCode Videoke Rentals • v2.4.0</div>
+
+        <div class="policy-links">
+          <a href="pages/privacy.html" class="policy-link">Privacy Policy</a>
+          <span class="policy-sep">·</span>
+          <a href="pages/terms.html" class="policy-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================
+       SCRIPTS
+       - Mobile nav toggle
+       ================================= -->
+  <script>
+    (function () {
+      const ham = document.getElementById('hamburgerBtn');
+      const mobileNav = document.getElementById('mobileNav');
+
+      function openNav() {
+        ham.setAttribute('aria-expanded', 'true');
+        mobileNav.classList.add('open');
+        mobileNav.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        ham.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      ham && ham.addEventListener('click', function () {
+        const expanded = ham.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeNav();
+        else openNav();
+      });
+
+      // close when a mobile link is clicked
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+      mobileLinks.forEach(function (a) { a.addEventListener('click', closeNav); });
+
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+    })();
+  </script>
 </body>
 </html>
