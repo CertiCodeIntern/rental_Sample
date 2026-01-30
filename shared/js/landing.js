@@ -12,7 +12,8 @@ const Landing = {
     init() {
         this.setupMobileMenu();
         this.setupSmoothScroll();
-        this.setupNavbarScroll();
+        this.setupThemeToggle();
+        this.setupScrollAnimations();
     },
 
     /**
@@ -60,20 +61,49 @@ const Landing = {
     },
 
     /**
-     * Setup navbar background change on scroll
+     * Setup theme toggle functionality
      */
-    setupNavbarScroll() {
-        const navbar = document.querySelector('.navbar');
-        if (!navbar) return;
+    setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Get saved theme or default to dark
+        const savedTheme = localStorage.getItem('rentit_theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('rentit_theme', newTheme);
+            });
+        }
+    },
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = 'none';
-            }
+    /**
+     * Setup scroll-triggered animations
+     */
+    setupScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll, .info-card, .faq-item');
+        
+        if (animatedElements.length === 0) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        animatedElements.forEach(el => {
+            observer.observe(el);
         });
     }
 };

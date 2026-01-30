@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CertiCode – Videoke Rental Management</title>
-  <meta name="description" content="CertiCode - The all-in-one platform for your Videoke rental business.">
+  <title>RentIT – Videoke Rental Management</title>
+  <meta name="description" content="RentIT - The all-in-one platform for your Videoke rental business.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,9 +31,9 @@
       <!-- Brand / Logo -->
       <div class="brand">
         <div class="logo-drawer">
-          <img src="assets/images/rIT_logo_tp.png" alt="CertiCode logo" />
+          <img src="assets/images/rIT_logo_tp.png" alt="RentIT logo" />
         </div>
-        <div class="brand-name">CertiCode</div>
+        <div class="brand-name">RentIT</div>
       </div>
 
       <!-- Desktop nav (hidden on mobile) -->
@@ -108,7 +108,7 @@
           <!-- Card 1: Mini Star -->
           <div class="card">
             <div class="card-media">
-              <img src="assets/images/machine-mini.png" alt="Mini Star videoke machine">
+              <img src="assets/images/ministar.jpg" alt="Mini Star videoke machine">
             </div>
             <div class="card-body">
               <div class="card-head">
@@ -129,7 +129,7 @@
           <!-- Card 2: Platinum Pro (Featured) -->
           <div class="card featured">
             <div class="card-media">
-              <img src="assets/images/machine-platinum.png" alt="Platinum Pro videoke machine">
+              <img src="assets/images/platinumpro.webp" alt="Platinum Pro videoke machine">
             </div>
             <div class="card-body">
               <div class="card-head">
@@ -150,7 +150,7 @@
           <!-- Card 3: Party Box X -->
           <div class="card">
             <div class="card-media">
-              <img src="assets/images/machine-party.png" alt="Party Box X videoke machine">
+              <img src="assets/images/partyboxx.webp" alt="Party Box X videoke machine">
             </div>
             <div class="card-body">
               <div class="card-head">
@@ -294,11 +294,11 @@
       <!-- LEFT: Brand + description + social icons -->
       <div class="footer-col footer-brand">
         <div class="logo-drawer">
-          <img src="assets/images/rIT_logo_tp.png" alt="CertiCode logo">
+          <img src="assets/images/rIT_logo_tp.png" alt="RentIT logo">
         </div>
 
         <div class="brand-text">
-          <h4 class="brand-title">CertiCode</h4>
+          <h4 class="brand-title">RentIT</h4>
           <p class="brand-sub">
             Making celebrations louder and more memorable with premium videoke rentals since 2018.
           </p>
@@ -321,7 +321,7 @@
             </a>
 
             <!-- Email icon -->
-            <a href="mailto:hello@certicode.example" class="social" aria-label="Email">
+            <a href="mailto:hello@rentit.example" class="social" aria-label="Email">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
@@ -338,7 +338,7 @@
           <a href="pages/about.html" class="footer-link">About us</a>
           <a href="pages/contact.html" class="footer-link">Contact</a>
           <a href="wip.html" class="footer-link">Careers</a>
-          <a href="pages/terms.html" class="footer-link">Terms of Service</a>
+          <a href="pages/termsofservice.html" class="footer-link">Terms of Service</a>
         </nav>
       </div>
 
@@ -369,12 +369,12 @@
     <!-- Bottom center area: copyright + policy links -->
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <div class="copyright">© 2026 CertiCode Videoke Rentals • v2.4.0</div>
+        <div class="copyright">© 2026 RentIT Videoke Rentals • v2.4.0</div>
 
         <div class="policy-links">
-          <a href="pages/privacy.html" class="policy-link">Privacy Policy</a>
+          <a href="pages/privacypolicy.html" class="policy-link">Privacy Policy</a>
           <span class="policy-sep">·</span>
-          <a href="pages/terms.html" class="policy-link">Terms of Service</a>
+          <a href="pages/termsofservice.html" class="policy-link">Terms of Service</a>
         </div>
       </div>
     </div>
@@ -383,6 +383,7 @@
   <!-- ================================
        SCRIPTS
        - Mobile nav toggle
+       - Scroll animations
        ================================= -->
   <script>
     (function () {
@@ -413,6 +414,54 @@
       mobileLinks.forEach(function (a) { a.addEventListener('click', closeNav); });
 
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+      
+      // Intersection Observer for scroll-triggered animations
+      const animationObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      );
+      
+      // Observe animated elements
+      const animatedElements = document.querySelectorAll(
+        '.card, .feature-box, .stat, .estimator-card, .delivery-title, .delivery-sub, .section-title'
+      );
+      
+      animatedElements.forEach((el) => {
+        animationObserver.observe(el);
+      });
+      
+      // Add animation to section titles
+      document.querySelectorAll('.section-title').forEach((title) => {
+        title.style.opacity = '0';
+        title.style.transform = 'translateY(20px)';
+        title.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      });
+      
+      // Override visible state for section titles
+      const titleObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      
+      document.querySelectorAll('.section-title').forEach((el) => {
+        titleObserver.observe(el);
+      });
     })();
   </script>
 </body>

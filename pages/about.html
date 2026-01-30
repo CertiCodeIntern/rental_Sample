@@ -1,41 +1,1182 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About – CertiCode</title>
-  <meta name="description" content="Learn about CertiCode - the premier videoke rental service since 2010.">
+  <title>About Us – RentIT</title>
+  <meta name="description" content="Learn about RentIT - the premier videoke rental service since 2018. Quality equipment, reliable service, and customer satisfaction.">
+
+  <!-- 
+    ╔══════════════════════════════════════════════════════════════════════════════╗
+    ║  DESIGN PHILOSOPHY:                                                          ║
+    ║  • High-end, clean aesthetic with professional polish                        ║
+    ║  • Strong visual hierarchy with clear sections                               ║
+    ║  • Consistent with dashboard and login page styling                          ║
+    ║  • Dark/Light theme support                                                  ║
+    ╚══════════════════════════════════════════════════════════════════════════════╝
+  -->
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="pages.css" />
-
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>">
+
+  <style>
+    /* ============================
+       CSS VARIABLES
+       ============================ */
+    :root,
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      
+      --accent: #fb7012;
+      --accent-hover: #ea580c;
+      --accent-soft: rgba(251, 112, 18, 0.15);
+      
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.15);
+      --info: #3b82f6;
+      --info-soft: rgba(59, 130, 246, 0.15);
+      
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.12);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+      
+      --header-bg: rgba(15, 23, 42, 0.95);
+      --hero-gradient: linear-gradient(180deg, #013A63 0%, #0f172a 100%);
+    }
+    
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e2e8f0;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-light: rgba(0, 0, 0, 0.12);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.1);
+      
+      --header-bg: rgba(255, 255, 255, 0.95);
+      --hero-gradient: linear-gradient(180deg, #013A63 0%, #1e40af 100%);
+    }
+    
+    /* ============================
+       BASE RESET
+       ============================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+    
+    /* ============================
+       GLOBAL ANIMATIONS
+       ============================ */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Intersection Observer animation classes */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* ============================
+       HEADER
+       ============================ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+    
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+      min-height: 72px;
+    }
+    
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 24px;
+      color: var(--text-primary);
+      transition: background 0.2s ease;
+    }
+    
+    .hamburger:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-drawer {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .logo-drawer img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .brand-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    
+    .main-nav a {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    
+    .main-nav a:hover {
+      color: var(--text-primary);
+    }
+    
+    .main-nav a.active {
+      color: var(--accent);
+    }
+    
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+    
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      width: 100%;
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+    
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    [data-theme="dark"] .theme-icon-moon { display: none; }
+    [data-theme="light"] .theme-icon-sun { display: none; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 14px rgba(251, 112, 18, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(251, 112, 18, 0.4);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+    
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Mobile Nav */
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 24px;
+      transform: translateY(-10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+    
+    .mobile-nav.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-link {
+      display: block;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+    
+    .mobile-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .mobile-actions {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    /* ============================
+       HERO SECTION
+       ============================ */
+    .hero {
+      background: var(--hero-gradient);
+      padding: 80px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 120%, rgba(251, 112, 18, 0.15) 0%, transparent 60%);
+    }
+    
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pill {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 24px;
+      animation: fadeInDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    
+    .hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+      opacity: 0;
+    }
+    
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 640px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+      animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+      opacity: 0;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+      opacity: 0;
+    }
+    
+    /* ============================
+       VALUES SECTION
+       ============================ */
+    .values {
+      padding: 80px 0;
+      background: var(--bg-primary);
+      transition: background 0.3s ease;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .value-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .value-card:nth-child(1) { transition-delay: 0.1s; }
+    .value-card:nth-child(2) { transition-delay: 0.2s; }
+    .value-card:nth-child(3) { transition-delay: 0.3s; }
+    
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    
+    .value-icon {
+      width: 72px;
+      height: 72px;
+      background: var(--accent-soft);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .value-card:hover .value-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .value-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    
+    .value-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* ============================
+       STATS SECTION
+       ============================ */
+    .stats {
+      padding: 60px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    
+    .stat {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .stat.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .stat:nth-child(1) { transition-delay: 0.1s; }
+    .stat:nth-child(2) { transition-delay: 0.2s; }
+    .stat:nth-child(3) { transition-delay: 0.3s; }
+    .stat:nth-child(4) { transition-delay: 0.4s; }
+    
+    .stat-value {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .stat:hover .stat-value {
+      transform: scale(1.1);
+    }
+    
+    .stat-label {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    
+    /* ============================
+       TEAM SECTION
+       ============================ */
+    .team {
+      padding: 80px 0;
+      background: var(--bg-primary);
+      transition: background 0.3s ease;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .team-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .team-card:nth-child(1) { transition-delay: 0.1s; }
+    .team-card:nth-child(2) { transition-delay: 0.2s; }
+    .team-card:nth-child(3) { transition-delay: 0.3s; }
+    .team-card:nth-child(4) { transition-delay: 0.4s; }
+    
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+    
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #f59e0b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      margin: 0 auto 16px;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .team-card:hover .team-avatar {
+      transform: scale(1.1) rotate(10deg);
+    }
+    
+    .team-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .team-role {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    
+    .team-bio {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    /* ============================
+       TERMS / ACCORDION
+       ============================ */
+    .terms {
+      padding: 80px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+    
+    .accordion {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .accordion-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    
+    .accordion-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .accordion-item:nth-child(1) { transition-delay: 0.1s; }
+    .accordion-item:nth-child(2) { transition-delay: 0.15s; }
+    .accordion-item:nth-child(3) { transition-delay: 0.2s; }
+    .accordion-item:nth-child(4) { transition-delay: 0.25s; }
+    .accordion-item:nth-child(5) { transition-delay: 0.3s; }
+    
+    .accordion-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(251, 112, 18, 0.1);
+    }
+    
+    .accordion-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+    
+    .accordion-toggle:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .accordion-indicator {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+    }
+    
+    .accordion-toggle[aria-expanded="true"] .accordion-indicator {
+      transform: rotate(180deg);
+    }
+    
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .accordion-panel > * {
+      padding: 0 24px 20px;
+    }
+    
+    .accordion-panel p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    
+    .accordion-panel ul {
+      list-style: none;
+      padding-left: 24px;
+    }
+    
+    .accordion-panel li {
+      color: var(--text-secondary);
+      padding: 8px 0;
+      position: relative;
+    }
+    
+    .accordion-panel li::before {
+      content: '•';
+      position: absolute;
+      left: -16px;
+      color: var(--accent);
+    }
+    
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 24px 20px !important;
+    }
+    
+    .policy {
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .policy strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .policy p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* ============================
+       CTA SECTION
+       ============================ */
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--accent), #ea580c);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .cta-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .cta-section.visible .cta-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .cta-text {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    }
+    
+    .cta-section.visible .cta-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .cta-section .btn {
+      background: white;
+      color: var(--accent);
+      padding: 16px 32px;
+      font-size: 16px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    }
+    
+    .cta-section.visible .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .cta-section .btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* ============================
+       FOOTER
+       ============================ */
+    .site-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding-top: 48px;
+      transition: background 0.3s ease;
+    }
+    
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 32px;
+    }
+    
+    .footer-brand {
+      display: flex;
+      gap: 16px;
+    }
+    
+    .footer-brand .logo-drawer {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
+    
+    .brand-text {
+      flex: 1;
+    }
+    
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    
+    .brand-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .social {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .social:hover {
+      background: var(--accent);
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 4px 12px rgba(251, 112, 18, 0.3);
+    }
+    
+    .social svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .footer-heading {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .footer-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+    
+    .footer-link:hover {
+      color: var(--accent);
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    }
+    
+    .footer-bottom {
+      padding: 24px 0;
+    }
+    
+    .footer-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .copyright {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    
+    .policy-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    
+    .policy-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    
+    .policy-link:hover {
+      color: var(--text-primary);
+    }
+    
+    .policy-sep {
+      color: var(--text-muted);
+    }
+    
+    /* ============================
+       RESPONSIVE
+       ============================ */
+    @media (max-width: 1024px) {
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .main-nav {
+        display: none;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      .mobile-nav {
+        display: block;
+      }
+      
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .footer-brand {
+        grid-column: span 2;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .values-grid,
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .policy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 0 80px;
+      }
+      
+      .hero-sub {
+        font-size: 16px;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .stat-value {
+        font-size: 36px;
+      }
+      
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .footer-brand {
+        grid-column: span 1;
+      }
+      
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- ================================
-       HEADER / NAVBAR
+       HEADER
        ================================= -->
   <header class="site-header">
     <div class="container header-inner">
-
-      <!-- MOBILE: left hamburger button -->
       <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">☰</button>
 
-      <!-- Brand / Logo -->
       <div class="brand">
         <div class="logo-drawer">
-          <img src="../assets/images/rIT_logo_tp.png" alt="CertiCode logo" />
+          <img src="../assets/images/rIT_logo_tp.png" alt="RentIT logo" />
         </div>
-        <div class="brand-name">CertiCode</div>
+        <div class="brand-name">RentIT</div>
       </div>
 
-      <!-- Desktop nav (hidden on mobile) -->
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="../index.html">Home</a>
         <a href="../index.html#machines">Rentals</a>
@@ -44,16 +1185,24 @@
         <a href="contact.html">Contact</a>
       </nav>
 
-      <!-- Header actions (Login + avatar) -->
       <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+          <span class="theme-icon-sun">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </span>
+          <span class="theme-icon-moon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </button>
         <a href="../client/auth/loginpageclient.html" class="btn btn-outline">Login</a>
-        <div class="avatar">JS</div>
       </div>
     </div>
 
-    <!-- ================================
-         MOBILE NAV PANEL
-         ================================= -->
     <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
       <a class="mobile-link" href="../index.html">Home</a>
       <a class="mobile-link" href="../index.html#machines">Rentals</a>
@@ -72,19 +1221,16 @@
          ================================= -->
     <section class="hero">
       <div class="container hero-inner">
-        <div class="hero-text center">
-          <span class="pill">Since 2010</span>
-          <h1 class="hero-title">Elevating Events with Professional Sound</h1>
-          <p class="hero-sub">
-            What started as a small garage project in 2010 has grown into the city's premier
-            videoke rental service. We provide high-quality equipment and professional setup for 
-            parties, corporate events, and gatherings of every size.
-          </p>
-
-          <div class="hero-cta centered">
-            <a class="btn btn-primary" href="../index.html#machines">Browse Machines</a>
-            <a class="btn btn-ghost" href="#values">Our Values</a>
-          </div>
+        <span class="pill">🎤 Since 2018</span>
+        <h1 class="hero-title">Elevating Events with Professional Sound</h1>
+        <p class="hero-sub">
+          What started as a small garage project in 2018 has grown into the city's premier
+          videoke rental service. We provide high-quality equipment and professional setup for 
+          parties, corporate events, and gatherings of every size.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="../index.html#machines">Browse Machines</a>
+          <a class="btn btn-ghost" href="#values">Our Values</a>
         </div>
       </div>
     </section>
@@ -94,28 +1240,96 @@
          ================================= -->
     <section id="values" class="values">
       <div class="container">
-        <h2 class="section-title">Our Core Values</h2>
+        <div class="section-header">
+          <h2 class="section-title">Our Core Values</h2>
+          <p class="section-subtitle">The principles that guide everything we do at RentIT.</p>
+        </div>
 
         <div class="values-grid">
           <div class="value-card">
-            <div class="value-icon">📊</div>
+            <div class="value-icon">🎵</div>
             <h3>Quality Sound</h3>
-            <p>We use pro-grade audio equipment and perform sound checks for every event to 
-            ensure sonic clarity.</p>
+            <p>We use professional-grade audio equipment and perform sound checks for every event to 
+            ensure crystal-clear sonic quality that makes your celebrations memorable.</p>
           </div>
 
           <div class="value-card">
             <div class="value-icon">🚚</div>
             <h3>Reliable Service</h3>
             <p>On-time delivery, professional setup, and fast support – we make sure your 
-            event runs smoothly from start to finish.</p>
+            event runs smoothly from start to finish with zero hassle on your part.</p>
           </div>
 
           <div class="value-card">
             <div class="value-icon">🎉</div>
             <h3>Customer Joy</h3>
             <p>We design experiences, not just rentals. Customer satisfaction is our top 
-            priority at every step.</p>
+            priority at every step of the journey from booking to pickup.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         STATS
+         ================================= -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-value">5,000+</div>
+            <div class="stat-label">Events Served</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Customer Satisfaction</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Premium Machines</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Years of Excellence</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         TEAM
+         ================================= -->
+    <section class="team">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Meet Our Team</h2>
+          <p class="section-subtitle">The passionate people behind RentIT's success.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">JR</div>
+            <h4 class="team-name">Juan Reyes</h4>
+            <span class="team-role">Founder & CEO</span>
+            <p class="team-bio">Started RentIT from his garage with a dream to make karaoke accessible to everyone.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">MS</div>
+            <h4 class="team-name">Maria Santos</h4>
+            <span class="team-role">Operations Manager</span>
+            <p class="team-bio">Ensures every delivery and setup runs like clockwork with her meticulous attention to detail.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">AC</div>
+            <h4 class="team-name">Antonio Cruz</h4>
+            <span class="team-role">Lead Technician</span>
+            <p class="team-bio">Audio expert who hand-picks and maintains every piece of equipment in our inventory.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">LP</div>
+            <h4 class="team-name">Lisa Perez</h4>
+            <span class="team-role">Customer Success</span>
+            <p class="team-bio">Dedicated to making every customer's experience exceptional from booking to completion.</p>
           </div>
         </div>
       </div>
@@ -126,7 +1340,10 @@
          ================================= -->
     <section class="terms">
       <div class="container">
-        <h2 class="section-title">Terms of Service</h2>
+        <div class="section-header">
+          <h2 class="section-title">Terms of Service</h2>
+          <p class="section-subtitle">Important information about our rental policies.</p>
+        </div>
 
         <div class="accordion">
           <div class="accordion-item">
@@ -134,7 +1351,6 @@
               1. Rental Duration & Logistics
               <span class="accordion-indicator">▾</span>
             </button>
-
             <div class="accordion-panel">
               <p>Standard rental periods are 24 hours starting from the time of setup. Overtime 
               rates apply at ₱25 per additional hour (unless pre-arranged).</p>
@@ -151,13 +1367,13 @@
               2. Liability & Equipment Care
               <span class="accordion-indicator">▾</span>
             </button>
-
             <div class="accordion-panel">
-              <p>The renter assumes full responsibility for the equipment upon delivery. Videoke 
-              Rentals is not liable for damage due to negligence.</p>
+              <p>The renter assumes full responsibility for the equipment upon delivery. RentIT
+              is not liable for damage due to negligence.</p>
               <ul>
                 <li>Keep equipment dry and protected from weather elements.</li>
                 <li>Only authorized personnel may move the main console once installed.</li>
+                <li>Do not allow children to operate the equipment unsupervised.</li>
               </ul>
             </div>
           </div>
@@ -167,7 +1383,6 @@
               3. Cancellation Policy
               <span class="accordion-indicator">▾</span>
             </button>
-
             <div class="accordion-panel">
               <p>We understand plans change. Our refund structure is as follows:</p>
               <div class="policy-grid">
@@ -183,16 +1398,27 @@
               4. Damage Fees
               <span class="accordion-indicator">▾</span>
             </button>
-
             <div class="accordion-panel">
               <ul>
                 <li>Wireless Microphone: ₱800 per unit (lost / irreparable)</li>
                 <li>Speaker: ₱3,000</li>
                 <li>LCD Monitor / Display: ₱4,500</li>
+                <li>Main Console: ₱8,000 - ₱15,000 depending on model</li>
               </ul>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================================
+         CTA SECTION
+         ================================= -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to Book Your Event?</h2>
+        <p class="cta-text">Browse our premium equipment and reserve your videoke machine today.</p>
+        <a href="../index.html#machines" class="btn">View Equipment</a>
       </div>
     </section>
   </main>
@@ -202,39 +1428,30 @@
        ================================= -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
-
-      <!-- LEFT: Brand + description + social icons -->
       <div class="footer-col footer-brand">
         <div class="logo-drawer">
-          <img src="../assets/images/rIT_logo_tp.png" alt="CertiCode logo">
+          <img src="../assets/images/rIT_logo_tp.png" alt="RentIT logo">
         </div>
-
         <div class="brand-text">
-          <h4 class="brand-title">CertiCode</h4>
+          <h4 class="brand-title">RentIT</h4>
           <p class="brand-sub">
             Making celebrations louder and more memorable with premium videoke rentals since 2018.
           </p>
-
           <div class="social-links" aria-label="Social links">
-            <!-- Facebook icon -->
             <a href="#" class="social" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden>
+              <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
               </svg>
             </a>
-
-            <!-- Instagram icon -->
             <a href="#" class="social" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
               </svg>
             </a>
-
-            <!-- Email icon -->
-            <a href="mailto:hello@certicode.example" class="social" aria-label="Email">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" aria-hidden>
+            <a href="mailto:hello@rentit.example" class="social" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
               </svg>
@@ -243,19 +1460,17 @@
         </div>
       </div>
 
-      <!-- CENTER: Company links -->
-      <div class="footer-col footer-links">
+      <div class="footer-col">
         <h5 class="footer-heading">Company</h5>
         <nav class="footer-nav" aria-label="Company">
           <a href="about.html" class="footer-link">About us</a>
           <a href="contact.html" class="footer-link">Contact</a>
           <a href="../wip.html" class="footer-link">Careers</a>
-          <a href="terms.html" class="footer-link">Terms of Service</a>
+          <a href="termsofservice.html" class="footer-link">Terms of Service</a>
         </nav>
       </div>
 
-      <!-- RIGHT: Support links -->
-      <div class="footer-col footer-support">
+      <div class="footer-col">
         <h5 class="footer-heading">Support</h5>
         <nav class="footer-nav" aria-label="Support">
           <a href="../wip.html" class="footer-link">How it works</a>
@@ -264,21 +1479,17 @@
           <a href="../wip.html" class="footer-link">Delivery areas</a>
         </nav>
       </div>
-
     </div>
 
-    <!-- Divider line -->
-    <div class="footer-divider" role="separator" aria-hidden="true"></div>
+    <div class="footer-divider" role="separator"></div>
 
-    <!-- Bottom center area -->
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <div class="copyright">© 2026 CertiCode Videoke Rentals • v2.4.0</div>
-
+        <div class="copyright">© 2026 RentIT Videoke Rentals • v2.4.0</div>
         <div class="policy-links">
-          <a href="privacy.html" class="policy-link">Privacy Policy</a>
+          <a href="privacypolicy.html" class="policy-link">Privacy Policy</a>
           <span class="policy-sep">·</span>
-          <a href="terms.html" class="policy-link">Cookie Policy</a>
+          <a href="termsofservice.html" class="policy-link">Cookie Policy</a>
         </div>
       </div>
     </div>
@@ -289,6 +1500,22 @@
        ================================= -->
   <script>
     (function () {
+      'use strict';
+      
+      // Theme Toggle
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      html.setAttribute('data-theme', savedTheme);
+      
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+      
       // Mobile nav toggle
       const ham = document.getElementById('hamburgerBtn');
       const mobileNav = document.getElementById('mobileNav');
@@ -297,13 +1524,12 @@
         ham.setAttribute('aria-expanded', 'true');
         mobileNav.classList.add('open');
         mobileNav.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
       }
+      
       function closeNav() {
         ham.setAttribute('aria-expanded', 'false');
         mobileNav.classList.remove('open');
         mobileNav.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
       }
 
       ham && ham.addEventListener('click', function () {
@@ -327,14 +1553,55 @@
           else panel.style.maxHeight = null;
         });
       });
-
-      // ensure any pre-open panels are expanded on load
-      document.querySelectorAll('.accordion-item').forEach(function (item) {
-        const btn = item.querySelector('.accordion-toggle');
-        const panel = item.querySelector('.accordion-panel');
-        if (btn && panel && btn.getAttribute('aria-expanded') === 'true') {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+      
+      // Intersection Observer for scroll-triggered animations
+      const animationObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              // Keep observing for repeat animations or unobserve for one-time
+              // animationObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
         }
+      );
+      
+      // Observe animated elements
+      const animatedElements = document.querySelectorAll(
+        '.value-card, .stat, .team-card, .accordion-item, .cta-section, .section-header'
+      );
+      
+      animatedElements.forEach((el) => {
+        animationObserver.observe(el);
+      });
+      
+      // Add section header animation
+      document.querySelectorAll('.section-header').forEach((header) => {
+        header.style.opacity = '0';
+        header.style.transform = 'translateY(20px)';
+        header.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      });
+      
+      // Override visible state for section headers
+      const headerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      
+      document.querySelectorAll('.section-header').forEach((el) => {
+        headerObserver.observe(el);
       });
     })();
   </script>

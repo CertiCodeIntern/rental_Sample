@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CertiCode - Feature coming soon.">
-    <title>CertiCode - Work in Progress</title>
+    <meta name="description" content="RentIT - Feature coming soon.">
+    <title>RentIT - Work in Progress</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,88 +13,123 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/shared/css/globals.css">
-    <link rel="stylesheet" href="/shared/css/landing.css">
+    <link rel="stylesheet" href="/pages/pages.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❝</text></svg>">
     
     <style>
         .wip-section {
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 180px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: var(--spacing-3xl) var(--spacing-xl);
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+            padding: 64px 24px;
         }
         
         .wip-card {
-            background: var(--white);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-3xl);
-            box-shadow: var(--shadow-lg);
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 48px;
             max-width: 600px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            transition: all 0.3s ease;
+        }
+
+        .wip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        [data-theme="light"] .wip-card {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="light"] .wip-card:hover {
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
         }
         
         .wip-icon {
             font-size: 5rem;
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: 24px;
+            display: inline-block;
             animation: bounce 2s infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .wip-title {
-            font-size: var(--font-size-3xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--gray-900);
-            margin-bottom: var(--spacing-md);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 16px;
         }
         
         .wip-text {
-            font-size: var(--font-size-lg);
-            color: var(--gray-500);
-            margin-bottom: var(--spacing-2xl);
-            line-height: var(--line-height-relaxed);
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 32px;
+            line-height: 1.7;
         }
         
         .wip-progress {
             width: 100%;
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: var(--radius-full);
-            margin-bottom: var(--spacing-md);
+            height: 10px;
+            background: var(--input-bg);
+            border-radius: 999px;
+            margin-bottom: 12px;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
         
         .wip-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: var(--radius-full);
+            background: linear-gradient(90deg, var(--accent), #FFA970);
+            border-radius: 999px;
             width: 65%;
-            animation: progress 2s ease-in-out infinite;
+            animation: progress 2s ease-in-out infinite, shimmer 2s linear infinite;
+            background-size: 200% 100%;
         }
         
         @keyframes progress {
-            0% { opacity: 0.6; }
+            0% { opacity: 0.7; }
             50% { opacity: 1; }
-            100% { opacity: 0.6; }
+            100% { opacity: 0.7; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
         
         .wip-progress-label {
-            font-size: var(--font-size-sm);
-            color: var(--gray-400);
-            margin-bottom: var(--spacing-xl);
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 32px;
+            font-weight: 600;
         }
         
         .wip-actions {
             display: flex;
-            gap: var(--spacing-md);
+            gap: 16px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -105,8 +140,8 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
-                <span class="nav-logo-icon">❝</span>
-                <span class="nav-logo-text">CertiCode</span>
+                <img src="/assets/images/rIT_logo_tp.png" alt="RentIT logo" class="nav-logo-img">
+                <span class="nav-logo-text">RentIT</span>
             </a>
             <div class="nav-links">
                 <a href="/#features" class="nav-link">Features</a>
@@ -114,6 +149,10 @@
                 <a href="/pages/about.html" class="nav-link">About</a>
             </div>
             <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <span class="theme-icon theme-icon-moon">🌙</span>
+                    <span class="theme-icon theme-icon-sun">☀️</span>
+                </button>
                 <a href="/client/auth/login.html" class="btn btn-ghost">Login</a>
                 <a href="/client/auth/login.html#register" class="btn btn-primary">Get Started</a>
             </div>
@@ -160,38 +199,63 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <span class="footer-logo-icon">❝</span>
-                        <span class="footer-logo-text">CertiCode</span>
-                    </div>
-                    <p class="footer-tagline">Making videoke rental management simple.</p>
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-inner">
+            <!-- Brand + social -->
+            <div class="footer-col footer-brand">
+                <div class="logo-drawer">
+                    <img src="/assets/images/rIT_logo_tp.png" alt="RentIT logo">
                 </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Product</h4>
-                        <a href="/#features">Features</a>
-                        <a href="/#pricing">Pricing</a>
-                        <a href="/wip.html">Documentation</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="/pages/about.html">About</a>
-                        <a href="/pages/contact.html">Contact</a>
-                        <a href="/wip.html">Careers</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <a href="/pages/privacy.html">Privacy</a>
-                        <a href="/pages/terms.html">Terms</a>
+                <div class="brand-text">
+                    <h4 class="brand-title">RentIT</h4>
+                    <p class="brand-sub">Making celebrations louder and more memorable with premium videoke rentals since 2018.</p>
+                    <div class="social-links" aria-label="Social links">
+                        <a href="#" class="social" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <a href="mailto:hello@rentit.example" class="social" aria-label="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CertiCode. All rights reserved.</p>
+
+            <!-- Company links -->
+            <div class="footer-col footer-links">
+                <h5 class="footer-heading">Company</h5>
+                <nav class="footer-nav" aria-label="Company">
+                    <a href="/pages/about.html" class="footer-link">About us</a>
+                    <a href="/pages/contact.html" class="footer-link">Contact</a>
+                    <a href="/wip.html" class="footer-link">Careers</a>
+                    <a href="/pages/termsofservice.html" class="footer-link">Terms of Service</a>
+                </nav>
+            </div>
+
+            <!-- Support links -->
+            <div class="footer-col footer-support">
+                <h5 class="footer-heading">Support</h5>
+                <nav class="footer-nav" aria-label="Support">
+                    <a href="/wip.html" class="footer-link">How it works</a>
+                    <a href="/#delivery" class="footer-link">Pricing Packages</a>
+                    <a href="/wip.html" class="footer-link">Safety Guidelines</a>
+                    <a href="/wip.html" class="footer-link">Delivery areas</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="footer-divider" role="separator"></div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <div class="copyright">© 2026 RentIT Videoke Rentals • v2.4.0</div>
+                <div class="policy-links">
+                    <a href="/pages/privacypolicy.html" class="policy-link">Privacy Policy</a>
+                    <span class="policy-sep">·</span>
+                    <a href="/pages/termsofservice.html" class="policy-link">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>

@@ -1,4 +1,4 @@
-# 🎤 CertiCode - Videoke Rental Management System
+# 🎤 RentIT - Videoke Rental Management System
 
 A modern rental management platform built with pure HTML5, CSS3, and Vanilla JavaScript.
 

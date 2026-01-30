@@ -23,7 +23,7 @@ const ADMIN_ACCOUNTS = [
         username: 'admin1',
         password: 'admin1',
         fullName: 'System Administrator',
-        email: 'admin1@certicode.com',
+        email: 'admin1@rentit.example',
         role: 'super_admin',
         avatar: null,
         permissions: ['all'],
@@ -35,7 +35,7 @@ const ADMIN_ACCOUNTS = [
         username: 'manager',
         password: 'manager123',
         fullName: 'Operations Manager',
-        email: 'manager@certicode.com',
+        email: 'manager@rentit.example',
         role: 'manager',
         avatar: null,
         permissions: ['bookings', 'inventory', 'reports'],
@@ -48,7 +48,7 @@ const ADMIN_ACCOUNTS = [
 // SESSION MANAGEMENT
 // =====================================================
 const AdminSession = {
-    STORAGE_KEY: 'certicode_admin_session',
+    STORAGE_KEY: 'rentit_admin_session',
     SESSION_DURATION: 8 * 60 * 60 * 1000, // 8 hours
 
     /**

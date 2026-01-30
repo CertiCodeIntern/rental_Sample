@@ -9,7 +9,7 @@
 // THEME MANAGEMENT
 // =====================================================
 const ThemeManager = {
-    STORAGE_KEY: 'certicode_admin_theme',
+    STORAGE_KEY: 'rentit_admin_theme',
     
     /**
      * Initialize theme from storage or system preference
@@ -192,8 +192,8 @@ const Dashboard = {
         if (typeof AdminAuth !== 'undefined') {
             AdminAuth.logout();
         } else {
-            localStorage.removeItem('certicode_admin_session');
-            sessionStorage.removeItem('certicode_admin_session');
+            localStorage.removeItem('rentit_admin_session');
+            sessionStorage.removeItem('rentit_admin_session');
             window.location.href = '/admin/auth/login.html';
         }
     },
