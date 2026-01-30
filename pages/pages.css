@@ -1247,7 +1247,19 @@ body {
 }
 .footer-link:hover { color: var(--accent, #FB7012); text-decoration: underline; }
 
-.footer-links, .footer-support { max-width: 220px; }
+.footer-col.footer-links,
+.footer-col.footer-support {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  max-width: 220px;
+  gap: 0;
+}
+
+.footer-col.footer-links .footer-heading,
+.footer-col.footer-support .footer-heading {
+  margin-bottom: 12px;
+}
 
 /* Divider line */
 .footer-divider {
