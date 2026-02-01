@@ -698,6 +698,34 @@ ul, ol {
     animation: slideDown 0.3s ease;
 }
 
+/* Backdrop blur when mobile nav is open */
+body:has(.mobile-nav.open) {
+    position: relative;
+}
+
+body:has(.mobile-nav.open)::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 98;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .mobile-link {
     display: block;
     padding: 14px 16px;
@@ -705,11 +733,31 @@ ul, ol {
     font-weight: 600;
     border-radius: 8px;
     transition: var(--transition);
+    position: relative;
 }
 
 .mobile-link:hover {
     background: rgba(255, 255, 255, 0.05);
     padding-left: 24px;
+}
+
+.mobile-link.active {
+    background: rgba(251, 112, 18, 0.15);
+    color: var(--accent);
+    border-left: 3px solid var(--accent);
+    padding-left: 21px;
+}
+
+.mobile-link.active::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
 }
 
 .mobile-actions {
@@ -1161,12 +1209,14 @@ ul, ol {
     position: absolute;
     bottom: 10px;
     left: 14px;
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--section-title);
+    background: var(--bg-card);
+    color: var(--text-primary);
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-theme);
 }
 
 .est-cta {
