@@ -108,7 +108,7 @@
                             </h3>
                             <div class="status-list">
                                 <label class="status-item">
-                                    <input type="checkbox" class="status-checkbox" value="available" checked>
+                                    <input type="checkbox" class="status-checkbox" value="available">
                                     <span class="status-label">
                                         <span class="status-indicator available"></span>
                                         Available Now
@@ -160,15 +160,30 @@
                                 </svg>
                                 Date Availability
                             </h3>
+                            
+                            <!-- Date Input Row -->
+                            <div class="date-input-row">
+                                <div class="date-input-group">
+                                    <label for="startDateInput" class="date-input-label">Start Date</label>
+                                    <input type="text" id="startDateInput" class="date-input" placeholder="Feb 01, 2026" readonly title="Click to select start date">
+                                </div>
+                                <span class="date-input-separator">→</span>
+                                <div class="date-input-group">
+                                    <label for="endDateInput" class="date-input-label">End Date</label>
+                                    <input type="text" id="endDateInput" class="date-input" placeholder="Feb 03, 2026" readonly title="Click to select end date">
+                                </div>
+                            </div>
+                            
+                            <!-- Custom Calendar -->
                             <div class="calendar-header">
                                 <div class="calendar-nav">
-                                    <button class="calendar-nav-btn" id="calendarPrev">
+                                    <button class="calendar-nav-btn" id="calendarPrev" title="Previous month">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <polyline points="15 18 9 12 15 6"/>
                                         </svg>
                                     </button>
                                     <span class="calendar-month" id="calendarMonth">February 2026</span>
-                                    <button class="calendar-nav-btn" id="calendarNext">
+                                    <button class="calendar-nav-btn" id="calendarNext" title="Next month">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <polyline points="9 18 15 12 9 6"/>
                                         </svg>
@@ -184,19 +199,15 @@
                                 <span class="calendar-day-header">F</span>
                                 <span class="calendar-day-header">S</span>
                             </div>
-                            <!-- Date Range Display -->
-                            <div class="date-range-display" id="dateRangeDisplay" style="display: none;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                    <line x1="16" y1="2" x2="16" y2="6"/>
-                                    <line x1="8" y1="2" x2="8" y2="6"/>
-                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                            
+                            <!-- Clear Selection Button -->
+                            <button class="clear-dates-btn" id="clearDatesBtn" title="Clear date selection">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
                                 </svg>
-                                <span class="date-range-label">Selected:</span>
-                                <span class="date-range-value" id="startDateLabel">-</span>
-                                <span class="date-range-connector">→</span>
-                                <span class="date-range-value" id="endDateLabel">-</span>
-                            </div>
+                                Clear Dates
+                            </button>
                         </div>
                     </aside>
 
@@ -226,6 +237,18 @@
                                     <img src="/assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>Karaoke King Pro v2</text></svg>'">
                                     <span class="product-badge available">Available</span>
+                                    <button class="btn-availability" data-id="1" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-1">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">Karaoke King Pro v2</h3>
@@ -249,18 +272,18 @@
                                     </div>
                                     <!-- Action Buttons -->
                                     <div class="product-actions">
-                                        <button class="btn-favorite" data-id="1" aria-label="Add to favorites">
+                                        <button class="btn-favorite" data-id="1" aria-label="Add to favorites" title="Add to favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart" data-id="1" aria-label="Add to cart">
+                                        <button class="btn-cart" data-id="1" aria-label="Add to cart" title="Add to cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="1" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="1" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>
@@ -284,6 +307,18 @@
                                     <img src="/assets/images/products/echostream-portable.jpg" alt="EchoStream Portable" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>EchoStream Portable</text></svg>'">
                                     <span class="product-badge booked">Booked Today</span>
+                                    <button class="btn-availability" data-id="2" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-2">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">EchoStream Portable</h3>
@@ -305,18 +340,18 @@
                                         <span class="product-tag">Bluetooth</span>
                                     </div>
                                     <div class="product-actions">
-                                        <button class="btn-favorite" data-id="2" aria-label="Add to favorites">
+                                        <button class="btn-favorite" data-id="2" aria-label="Add to favorites" title="Add to favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart" data-id="2" aria-label="Add to cart">
+                                        <button class="btn-cart" data-id="2" aria-label="Add to cart" title="Add to cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="2" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="2" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>
@@ -332,6 +367,18 @@
                                     <img src="/assets/images/products/vocalstar-5000.jpg" alt="VocalStar 5000 Stage" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>VocalStar 5000 Stage</text></svg>'">
                                     <span class="product-badge available">Available</span>
+                                    <button class="btn-availability" data-id="3" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-3">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">VocalStar 5000 Stage</h3>
@@ -353,18 +400,18 @@
                                         <span class="product-tag">4-Mic</span>
                                     </div>
                                     <div class="product-actions">
-                                        <button class="btn-favorite" data-id="3" aria-label="Add to favorites">
+                                        <button class="btn-favorite" data-id="3" aria-label="Add to favorites" title="Add to favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart" data-id="3" aria-label="Add to cart">
+                                        <button class="btn-cart" data-id="3" aria-label="Add to cart" title="Add to cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="3" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="3" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>
@@ -388,6 +435,18 @@
                                     <img src="/assets/images/products/homeparty-ultra.jpg" alt="HomeParty Ultra" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>HomeParty Ultra</text></svg>'">
                                     <span class="product-badge available">Available</span>
+                                    <button class="btn-availability" data-id="4" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-4">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">HomeParty Ultra</h3>
@@ -409,18 +468,18 @@
                                         <span class="product-tag">Smart Connect</span>
                                     </div>
                                     <div class="product-actions">
-                                        <button class="btn-favorite active" data-id="4" aria-label="Remove from favorites">
+                                        <button class="btn-favorite active" data-id="4" aria-label="Remove from favorites" title="Remove from favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart" data-id="4" aria-label="Add to cart">
+                                        <button class="btn-cart" data-id="4" aria-label="Add to cart" title="Add to cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="4" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="4" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>
@@ -444,6 +503,18 @@
                                     <img src="/assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>MiniSing Pocket</text></svg>'">
                                     <span class="product-badge available">Available</span>
+                                    <button class="btn-availability" data-id="5" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-5">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">MiniSing Pocket</h3>
@@ -465,17 +536,17 @@
                                         <span class="product-tag">Battery</span>
                                     </div>
                                     <div class="product-actions">
-                                        <button class="btn-favorite" data-id="5" aria-label="Add to favorites">
+                                        <button class="btn-favorite" data-id="5" aria-label="Add to favorites" title="Add to favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart in-cart" data-id="5" aria-label="In cart">
+                                        <button class="btn-cart in-cart" data-id="5" aria-label="In cart" title="In cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="5" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="5" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>
@@ -499,6 +570,18 @@
                                     <img src="/assets/images/products/venuemaster-x1.jpg" alt="VenueMaster X-1" class="product-image"
                                          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>VenueMaster X-1</text></svg>'">
                                     <span class="product-badge booked">Booked Today</span>
+                                    <button class="btn-availability" data-id="6" title="View future availability">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </button>
+                                    <div class="availability-popover" id="availabilityPopover-6">
+                                        <div class="availability-title">Upcoming Bookings</div>
+                                        <ul class="availability-list"></ul>
+                                    </div>
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">VenueMaster X-1</h3>
@@ -520,18 +603,18 @@
                                         <span class="product-tag">High-Fi</span>
                                     </div>
                                     <div class="product-actions">
-                                        <button class="btn-favorite" data-id="6" aria-label="Add to favorites">
+                                        <button class="btn-favorite" data-id="6" aria-label="Add to favorites" title="Add to favorites">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-cart" data-id="6" aria-label="Add to cart">
+                                        <button class="btn-cart" data-id="6" aria-label="Add to cart" title="Add to cart">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                                             </svg>
                                         </button>
-                                        <button class="btn-write-review" data-id="6" aria-label="Write a review">
+                                        <button class="btn-write-review" data-id="6" aria-label="Write a review" title="Write a review">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                             </svg>

@@ -28,7 +28,8 @@
 /* Tabs Navigation */
 .rentals-tabs {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 12px;
     margin-bottom: 28px;
@@ -42,6 +43,8 @@
     text-decoration: none;
     position: relative;
     transition: color 0.2s ease;
+    white-space: normal;
+    text-align: center;
 }
 
 .tab-link:hover {

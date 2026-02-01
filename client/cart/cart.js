@@ -6,9 +6,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Inject shared components
     if (typeof Components !== 'undefined') {
-        Components.injectSidebar('client');
-        Components.injectTopbar('My Cart');
-        Components.injectFooter();
+        Components.injectSidebar('sidebarContainer', 'cart', 'client');
+        Components.injectTopbar('topbarContainer', 'My Cart');
+        Components.injectFooter('footerContainer');
     }
 
     // Initialize cart functionality

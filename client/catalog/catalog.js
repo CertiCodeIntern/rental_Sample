@@ -203,26 +203,74 @@ function updateProductCount() {
 }
 
 /**
- * Calendar Picker
+ * Calendar Picker with Date Range Selection
  */
 function initCalendar() {
     const prevBtn = document.getElementById('calendarPrev');
     const nextBtn = document.getElementById('calendarNext');
     const monthDisplay = document.getElementById('calendarMonth');
     const calendarGrid = document.getElementById('calendarGrid');
+    const startDateInput = document.getElementById('startDateInput');
+    const endDateInput = document.getElementById('endDateInput');
+    const clearDatesBtn = document.getElementById('clearDatesBtn');
     
     if (!calendarGrid) return;
     
     let currentDate = new Date();
-    let selectedDate = null;
+    let startDate = null;
+    let endDate = null;
+    let selectingStart = true; // Toggle between selecting start and end
+    
+    // Month names for formatting
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    const shortMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    // Format date for display
+    function formatDate(date) {
+        if (!date) return '';
+        return `${shortMonthNames[date.getMonth()]} ${String(date.getDate()).padStart(2, '0')}, ${date.getFullYear()}`;
+    }
+    
+    // Update text inputs
+    function updateInputs() {
+        if (startDateInput) {
+            startDateInput.value = formatDate(startDate);
+            startDateInput.classList.toggle('active', selectingStart && !startDate);
+        }
+        if (endDateInput) {
+            endDateInput.value = formatDate(endDate);
+            endDateInput.classList.toggle('active', !selectingStart && startDate && !endDate);
+        }
+    }
+    
+    // Check if date is in range
+    function isInRange(date) {
+        if (!startDate || !endDate) return false;
+        return date > startDate && date < endDate;
+    }
+    
+    // Check if date is booked (mock data)
+    function getBookedDates() {
+        // Mock booked dates - in real app, this would come from API
+        return [
+            { start: new Date(2026, 1, 10), end: new Date(2026, 1, 12) },
+            { start: new Date(2026, 1, 20), end: new Date(2026, 1, 22) },
+            { start: new Date(2026, 2, 5), end: new Date(2026, 2, 7) }
+        ];
+    }
+    
+    function isDateBooked(date) {
+        const bookedRanges = getBookedDates();
+        return bookedRanges.some(range => date >= range.start && date <= range.end);
+    }
     
     function renderCalendar() {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         
         // Update month display
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'];
         if (monthDisplay) {
             monthDisplay.textContent = `${monthNames[month]} ${year}`;
         }
@@ -247,6 +295,7 @@ function initCalendar() {
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const today = new Date();
+        today.setHours(0, 0, 0, 0);
         
         // Add empty cells for days before the first
         for (let i = 0; i < firstDay; i++) {
@@ -262,32 +311,139 @@ function initCalendar() {
             dayEl.textContent = day;
             
             const cellDate = new Date(year, month, day);
+            cellDate.setHours(0, 0, 0, 0);
             
             // Mark today
-            if (cellDate.toDateString() === today.toDateString()) {
+            if (cellDate.getTime() === today.getTime()) {
                 dayEl.classList.add('today');
             }
             
             // Mark past dates as disabled
-            if (cellDate < today && cellDate.toDateString() !== today.toDateString()) {
+            if (cellDate < today) {
                 dayEl.classList.add('disabled');
+            } else if (isDateBooked(cellDate)) {
+                // Mark booked dates
+                dayEl.classList.add('booked');
+                dayEl.setAttribute('data-tooltip', 'Booked');
             } else {
-                dayEl.addEventListener('click', () => {
-                    calendarGrid.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                    dayEl.classList.add('selected');
-                    selectedDate = cellDate;
-                    // You could filter products by availability here
-                });
+                // Clickable date
+                dayEl.addEventListener('click', () => handleDateClick(cellDate));
             }
             
-            // Mark selected date
-            if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
-                dayEl.classList.add('selected');
+            // Apply range styling
+            if (startDate && cellDate.getTime() === startDate.getTime()) {
+                dayEl.classList.add('range-start');
+            }
+            if (endDate && cellDate.getTime() === endDate.getTime()) {
+                dayEl.classList.add('range-end');
+            }
+            if (isInRange(cellDate)) {
+                dayEl.classList.add('in-range');
             }
             
             calendarGrid.appendChild(dayEl);
         }
+        
+        updateInputs();
     }
+    
+    function handleDateClick(date) {
+        if (selectingStart || !startDate) {
+            // Selecting start date
+            startDate = date;
+            endDate = null;
+            selectingStart = false;
+        } else {
+            // Selecting end date
+            if (date < startDate) {
+                // If end date is before start, swap them
+                endDate = startDate;
+                startDate = date;
+            } else {
+                endDate = date;
+            }
+            selectingStart = true;
+            
+            // Check for conflicts in range
+            checkRangeConflicts();
+        }
+        
+        renderCalendar();
+        filterProductsByDateRange();
+    }
+    
+    function checkRangeConflicts() {
+        if (!startDate || !endDate) return;
+        
+        const bookedRanges = getBookedDates();
+        const hasConflict = bookedRanges.some(range => {
+            return (startDate <= range.end && endDate >= range.start);
+        });
+        
+        if (hasConflict) {
+            // Show warning
+            const warningEl = document.createElement('div');
+            warningEl.className = 'date-conflict-warning';
+            warningEl.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Selected range conflicts with existing bookings
+            `;
+            
+            // Remove existing warning
+            document.querySelector('.date-conflict-warning')?.remove();
+            calendarGrid.parentElement.appendChild(warningEl);
+            
+            setTimeout(() => warningEl.remove(), 3000);
+        }
+    }
+    
+    function filterProductsByDateRange() {
+        if (!startDate || !endDate) return;
+        
+        // Mark products with conflicts
+        document.querySelectorAll('.product-card').forEach(card => {
+            const productId = card.dataset.id;
+            const bookings = getProductBookings(productId);
+            
+            const hasConflict = bookings.some(booking => {
+                const bookStart = new Date(booking.start);
+                const bookEnd = new Date(booking.end);
+                return (startDate <= bookEnd && endDate >= bookStart);
+            });
+            
+            card.classList.toggle('date-conflict', hasConflict);
+        });
+    }
+    
+    function clearDates() {
+        startDate = null;
+        endDate = null;
+        selectingStart = true;
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.classList.remove('date-conflict');
+        });
+        document.querySelector('.date-conflict-warning')?.remove();
+        renderCalendar();
+    }
+    
+    // Input click handlers
+    startDateInput?.addEventListener('click', () => {
+        selectingStart = true;
+        updateInputs();
+    });
+    
+    endDateInput?.addEventListener('click', () => {
+        if (startDate) {
+            selectingStart = false;
+            updateInputs();
+        }
+    });
+    
+    // Clear button
+    clearDatesBtn?.addEventListener('click', clearDates);
     
     // Navigation
     prevBtn?.addEventListener('click', () => {
@@ -386,9 +542,169 @@ function initProductCards() {
     // Initialize review buttons
     initReviewButtons();
     
+    // Initialize availability popovers
+    initAvailabilityPopovers();
+    
     // Initialize mock rental history for testing
     if (typeof Components !== 'undefined') {
         Components.initMockRentalHistory();
+    }
+}
+
+/**
+ * Initialize Availability Popover Buttons on Product Cards
+ */
+function initAvailabilityPopovers() {
+    const availabilityBtns = document.querySelectorAll('.btn-availability');
+    
+    availabilityBtns.forEach(btn => {
+        // Click to toggle and stay open
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleAvailabilityPopover(e.target.closest('.btn-availability'));
+        });
+    });
+    
+    // Close popover when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.btn-availability') && !e.target.closest('.availability-popover')) {
+            document.querySelectorAll('.availability-popover.visible').forEach(p => {
+                p.classList.remove('visible');
+            });
+            document.querySelectorAll('.btn-availability.active').forEach(b => {
+                b.classList.remove('active');
+            });
+        }
+    });
+}
+
+/**
+ * Get mock booking data for a product
+ */
+function getProductBookings(productId) {
+    // Mock data - in production, this would come from an API
+    const mockBookings = {
+        '1': [
+            { start: 'Feb 10, 2026', end: 'Feb 12, 2026' },
+            { start: 'Feb 25, 2026', end: 'Feb 27, 2026' }
+        ],
+        '2': [
+            { start: 'Feb 01, 2026', end: 'Feb 03, 2026' },
+            { start: 'Feb 15, 2026', end: 'Feb 18, 2026' },
+            { start: 'Mar 05, 2026', end: 'Mar 07, 2026' }
+        ],
+        '3': [
+            { start: 'Feb 20, 2026', end: 'Feb 22, 2026' }
+        ],
+        '4': [],
+        '5': [
+            { start: 'Feb 08, 2026', end: 'Feb 10, 2026' }
+        ],
+        '6': [
+            { start: 'Feb 01, 2026', end: 'Feb 05, 2026' },
+            { start: 'Feb 14, 2026', end: 'Feb 16, 2026' }
+        ]
+    };
+    
+    return mockBookings[productId] || [];
+}
+
+/**
+ * Show availability popover
+ */
+function showAvailabilityPopover(btn) {
+    const card = btn.closest('.product-card');
+    const productId = card.dataset.id;
+    const popover = card.querySelector('.availability-popover');
+    
+    if (!popover) return;
+    
+    const bookings = getProductBookings(productId);
+    const list = popover.querySelector('.availability-list');
+    const maxVisibleBookings = 8; // Show max 8 bookings before "See More"
+    
+    if (bookings.length === 0) {
+        list.innerHTML = '<li class="availability-empty">No upcoming bookings</li>';
+        // Remove any existing "See More" link
+        const existingSeeMore = popover.querySelector('.availability-see-more');
+        if (existingSeeMore) existingSeeMore.remove();
+    } else {
+        // Show only first N bookings if there are too many
+        const visibleBookings = bookings.slice(0, maxVisibleBookings);
+        const hasMore = bookings.length > maxVisibleBookings;
+        
+        list.innerHTML = visibleBookings.map(booking => `
+            <li class="availability-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                ${booking.start} - ${booking.end}
+            </li>
+        `).join('');
+        
+        // Remove existing "See More" link
+        const existingSeeMore = popover.querySelector('.availability-see-more');
+        if (existingSeeMore) existingSeeMore.remove();
+        
+        // Add "See More" link if there are more bookings
+        if (hasMore) {
+            const seeMoreLink = document.createElement('a');
+            seeMoreLink.className = 'availability-see-more';
+            seeMoreLink.textContent = `See all ${bookings.length} bookings...`;
+            seeMoreLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                // Close popover and open product modal
+                popover.classList.remove('visible');
+                btn.classList.remove('active');
+                openProductModal(card);
+            });
+            popover.appendChild(seeMoreLink);
+        }
+    }
+    
+    popover.classList.add('visible');
+}
+
+/**
+ * Hide availability popover
+ */
+function hideAvailabilityPopover(btn) {
+    const card = btn.closest('.product-card');
+    const popover = card.querySelector('.availability-popover');
+    
+    if (popover) {
+        popover.classList.remove('visible');
+    }
+}
+
+/**
+ * Toggle availability popover (click to stay open)
+ */
+function toggleAvailabilityPopover(btn) {
+    const card = btn.closest('.product-card');
+    const popover = card.querySelector('.availability-popover');
+    
+    if (popover) {
+        // Close other popovers and deactivate other buttons first
+        document.querySelectorAll('.availability-popover.visible').forEach(p => {
+            if (p !== popover) p.classList.remove('visible');
+        });
+        document.querySelectorAll('.btn-availability.active').forEach(b => {
+            if (b !== btn) b.classList.remove('active');
+        });
+        
+        if (popover.classList.contains('visible')) {
+            popover.classList.remove('visible');
+            btn.classList.remove('active');
+        } else {
+            showAvailabilityPopover(btn);
+            btn.classList.add('active');
+        }
     }
 }
 

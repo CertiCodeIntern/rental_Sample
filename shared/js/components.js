@@ -37,7 +37,7 @@ const Components = {
         { id: 'cart', icon: '🛒', label: 'My Cart', href: '/client/cart/cart.html' },
         { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/client/myrentals/myrentals.html' },
         { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/client/bookinghistory/bookinghistory.html' },
-        { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contact.html' },
+        { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contactus.html' },
     ],
 
     /**
@@ -200,7 +200,10 @@ const Components = {
         // Logout button
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => this.handleLogout());
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showLogoutModal();
+            });
         }
 
         // Overlay click to close sidebar
@@ -365,9 +368,36 @@ const Components = {
     },
 
     /**
-     * Handle logout
+     * Handle logout - show confirmation modal
      */
     handleLogout() {
+        this.showLogoutModal();
+    },
+    
+    /**
+     * Show logout confirmation modal
+     */
+    showLogoutModal() {
+        const modal = document.getElementById('logoutModal');
+        if (modal) {
+            modal.classList.add('active');
+        }
+    },
+    
+    /**
+     * Hide logout confirmation modal
+     */
+    hideLogoutModal() {
+        const modal = document.getElementById('logoutModal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    },
+    
+    /**
+     * Confirm logout action
+     */
+    confirmLogout() {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.removeItem('activeTab');
@@ -408,12 +438,12 @@ const Components = {
 
         container.innerHTML = `
             <header class="topbar">
-                <button class="menu-btn" id="menuBtn">☰</button>
+                <button class="menu-btn" id="menuBtn" title="Toggle sidebar menu">☰</button>
                 <h1 class="topbar-title" id="pageTitle">${title}</h1>
                 <div class="topbar-actions">
                     <!-- Notification Bell -->
                     <div class="notification-wrapper">
-                        <button class="btn-icon notification-btn" id="notificationBtn" aria-label="Notifications">
+                        <button class="btn-icon notification-btn" id="notificationBtn" aria-label="Notifications" title="View notifications">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -474,7 +504,7 @@ const Components = {
                     </div>
                     
                     <!-- Theme Toggle -->
-                    <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark theme">
                         <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="5"/>
                             <line x1="12" y1="1" x2="12" y2="3"/>
@@ -493,7 +523,7 @@ const Components = {
                     
                     <!-- User Profile -->
                     <div class="topbar-user profile-wrapper">
-                        <button class="btn-icon profile-btn" id="profileBtn" aria-label="User menu">
+                        <button class="btn-icon profile-btn" id="profileBtn" aria-label="User menu" title="Profile & settings">
                             <div class="topbar-user-avatar">${initial}</div>
                         </button>
                         
@@ -530,19 +560,38 @@ const Components = {
                                     Settings
                                 </a>
                                 <div class="profile-divider"></div>
-                                <a href="/client/auth/login.html" class="profile-menu-item danger">
+                                <button class="profile-menu-item danger" id="profileLogoutBtn">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                                         <polyline points="16 17 21 12 16 7"/>
                                         <line x1="21" y1="12" x2="9" y2="12"/>
                                     </svg>
                                     Sign Out
-                                </a>
+                                </button>
                             </nav>
                         </div>
                     </div>
                 </div>
             </header>
+            
+            <!-- Logout Confirmation Modal -->
+            <div class="logout-modal-overlay" id="logoutModal">
+                <div class="logout-modal">
+                    <div class="logout-modal-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3 class="logout-modal-title">Sign Out</h3>
+                    <p class="logout-modal-text">Are you sure you want to sign out of your account?</p>
+                    <div class="logout-modal-actions">
+                        <button class="logout-modal-btn logout-modal-cancel" id="logoutCancelBtn">Cancel</button>
+                        <button class="logout-modal-btn logout-modal-confirm" id="logoutConfirmBtn">Sign Out</button>
+                    </div>
+                </div>
+            </div>
         `;
 
         // Attach menu button event
@@ -646,7 +695,77 @@ const Components = {
             if (e.key === 'Escape') {
                 notificationDropdown?.classList.remove('open');
                 profileDropdown?.classList.remove('open');
+                this.hideLogoutModal();
             }
+        });
+        
+        // Initialize logout modal events
+        this.initLogoutModal();
+        
+        // Initialize smart header (hide on scroll down, show on scroll up)
+        this.initSmartHeader();
+    },
+    
+    /**
+     * Initialize logout modal events
+     */
+    initLogoutModal() {
+        const profileLogoutBtn = document.getElementById('profileLogoutBtn');
+        const logoutCancelBtn = document.getElementById('logoutCancelBtn');
+        const logoutConfirmBtn = document.getElementById('logoutConfirmBtn');
+        const logoutModal = document.getElementById('logoutModal');
+        
+        // Profile dropdown logout button
+        profileLogoutBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('profileDropdown')?.classList.remove('open');
+            this.showLogoutModal();
+        });
+        
+        // Cancel button
+        logoutCancelBtn?.addEventListener('click', () => {
+            this.hideLogoutModal();
+        });
+        
+        // Confirm button
+        logoutConfirmBtn?.addEventListener('click', () => {
+            this.confirmLogout();
+        });
+        
+        // Close on overlay click
+        logoutModal?.addEventListener('click', (e) => {
+            if (e.target === logoutModal) {
+                this.hideLogoutModal();
+            }
+        });
+    },
+
+    /**
+     * Initialize Smart Header (hide on scroll down, show on scroll up)
+     */
+    initSmartHeader() {
+        const topbar = document.querySelector('.topbar');
+        
+        if (!topbar) return;
+        
+        let lastScrollTop = 0;
+        const scrollThreshold = 10; // Minimum scroll distance to trigger hide/show
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollDelta = scrollTop - lastScrollTop;
+            
+            // Scrolling down - hide header
+            if (scrollDelta > scrollThreshold && scrollTop > 60) {
+                topbar.classList.add('header-hidden');
+            }
+            // Scrolling up - show header
+            else if (scrollDelta < -scrollThreshold) {
+                topbar.classList.remove('header-hidden');
+            }
+            
+            lastScrollTop = scrollTop;
         });
     },
 
@@ -745,7 +864,7 @@ const Components = {
                         <div class="footer-col">
                             <h4 class="footer-heading">Support</h4>
                             <nav class="footer-nav">
-                                <a href="/pages/contact.html">Contact Us</a>
+                                <a href="/pages/contactus.html">Contact Us</a>
                                 <a href="/pages/about.html">About</a>
                                 <a href="#">FAQs</a>
                             </nav>

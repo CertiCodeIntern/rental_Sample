@@ -542,21 +542,30 @@
 .action-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
     background: var(--accent-muted);
     color: var(--accent);
     border: none;
     border-radius: var(--radius-sm);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
+    min-height: 40px;
+}
+
+.action-btn svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 .action-btn:hover {
     background: var(--accent);
     color: #fff;
+    transform: scale(1.02);
 }
 
 .action-btn.action-muted {
@@ -568,6 +577,28 @@
 .action-btn.action-muted:hover {
     background: var(--bg-tertiary);
     color: var(--text-tertiary);
+    transform: none;
+}
+
+/* Action button variants */
+.action-btn.action-download {
+    background: var(--success-muted, rgba(34, 197, 94, 0.15));
+    color: var(--success-color, #22C55E);
+}
+
+.action-btn.action-download:hover {
+    background: var(--success-color, #22C55E);
+    color: #fff;
+}
+
+.action-btn.action-review {
+    background: var(--warning-muted, rgba(251, 191, 36, 0.15));
+    color: var(--warning-color, #F59E0B);
+}
+
+.action-btn.action-review:hover {
+    background: var(--warning-color, #F59E0B);
+    color: #fff;
 }
 
 /* =====================================================
@@ -982,6 +1013,11 @@
     margin-left: var(--sidebar-collapsed-width);
 }
 
+/* Topbar adjustment for collapsed sidebar */
+.app-container.sidebar-collapsed .topbar {
+    left: var(--sidebar-collapsed-width);
+}
+
 /* =====================================================
    TOPBAR
    ===================================================== */
@@ -993,9 +1029,22 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 var(--spacing-xl);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: var(--sidebar-width);
+    right: 0;
     z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+/* Smart header: hide on scroll down */
+.topbar.header-hidden {
+    transform: translateY(-100%);
+}
+
+/* Add padding to content-area to account for fixed topbar */
+.content-area {
+    padding-top: calc(var(--topbar-height) + var(--spacing-xl));
 }
 
 .menu-btn {
@@ -1270,6 +1319,7 @@
     
     .topbar {
         padding: 0 var(--spacing-md);
+        left: 0;
     }
     
     .topbar-user-info {
@@ -1278,6 +1328,7 @@
     
     .content-area {
         padding: var(--spacing-md);
+        padding-top: calc(var(--topbar-height) + var(--spacing-md));
     }
     
     .data-table-header {
@@ -1569,6 +1620,12 @@
     font-size: 14px;
     color: var(--text-primary);
     transition: var(--transition-fast);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
 }
 
 .profile-menu-item:hover {
@@ -1605,6 +1662,114 @@
     height: 1px;
     background: var(--gray-200);
     margin: 8px 0;
+}
+
+/* =====================================================
+   LOGOUT CONFIRMATION MODAL
+   ===================================================== */
+.logout-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+}
+
+.logout-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logout-modal {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.2s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.logout-modal-overlay.active .logout-modal {
+    transform: scale(1) translateY(0);
+}
+
+.logout-modal-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: var(--danger-muted, rgba(239, 68, 68, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-modal-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--danger-color, #ef4444);
+}
+
+.logout-modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--heading-primary);
+    margin: 0 0 8px 0;
+}
+
+.logout-modal-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+.logout-modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.logout-modal-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.logout-modal-cancel {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.logout-modal-cancel:hover {
+    background: var(--bg-tertiary);
+}
+
+.logout-modal-confirm {
+    background: var(--danger-color, #ef4444);
+    color: white;
+}
+
+.logout-modal-confirm:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
 }
 
 /* Pulse animation for notification badge */
@@ -2186,6 +2351,7 @@
     
     .topbar {
         padding: 0 var(--spacing-md);
+        left: 0;
     }
     
     .topbar-user-info {
@@ -2194,6 +2360,7 @@
     
     .content-area {
         padding: 16px;
+        padding-top: calc(var(--topbar-height) + 16px);
     }
 
     .page-header-dashboard {

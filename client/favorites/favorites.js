@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize components
     if (typeof Components !== 'undefined') {
-        Components.injectSidebar('sidebarContainer', 'catalog', 'client');
+        Components.injectSidebar('sidebarContainer', 'favorites', 'client');
         Components.injectTopbar('topbarContainer', 'My Favorites');
         Components.injectFooter();
     }
