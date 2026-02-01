@@ -14,195 +14,13 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/rIT_logo_tp.png">
 
-    <!-- Stylesheets (Order: Theme → Layout) -->
+    <!-- Stylesheets (Order: Theme → Layout → Pages) -->
     <link rel="stylesheet" href="../shared/css/theme.css">
     <link rel="stylesheet" href="../landingpage/css/index.css">
+    <link rel="stylesheet" href="pages-layout.css">
     
     <!-- Theme Script (Prevents flash of wrong theme) -->
     <script src="../shared/js/theme.js"></script>
-    
-    <style>
-        /* Page-specific styles */
-        .page-header {
-            padding: 6rem 0 3rem;
-            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
-            color: white;
-            text-align: center;
-        }
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .page-subtitle {
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .page-content {
-            padding: 4rem 0;
-        }
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 3rem;
-        }
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .contact-form-wrapper {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            color: var(--heading-primary);
-            margin-bottom: 0.5rem;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #FB7012;
-            box-shadow: 0 0 0 3px rgba(251, 112, 18, 0.1);
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .btn-lg {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-        }
-        .btn-block {
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
-        .btn-icon {
-            margin-left: 0.5rem;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .info-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .info-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-        .info-card h3 {
-            color: var(--heading-primary);
-            font-size: 1.1rem;
-            margin: 0 0 0.5rem;
-        }
-        .info-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin: 0 0 0.75rem;
-        }
-        .info-card a {
-            color: #FB7012;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .info-card a:hover {
-            text-decoration: underline;
-        }
-        .info-card address {
-            font-style: normal;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #FB7012;
-            color: #FB7012;
-            padding: 0.5rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s;
-        }
-        .btn-outline:hover {
-            background: #FB7012;
-            color: white;
-        }
-        .faq-section {
-            padding: 4rem 0;
-            background: var(--bg-secondary);
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .section-title {
-            font-size: 2rem;
-            color: var(--heading-primary);
-            margin-bottom: 0.5rem;
-        }
-        .section-subtitle {
-            color: var(--text-secondary);
-        }
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        @media (max-width: 768px) {
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .faq-item {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .faq-item h4 {
-            color: var(--heading-primary);
-            font-size: 1rem;
-            margin: 0 0 0.5rem;
-        }
-        .faq-item p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin: 0;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 <body>
     <!-- ============================
@@ -227,7 +45,7 @@
                 <a href="/#machines" class="nav-link">Rentals</a>
                 <a href="/#pricing" class="nav-link">Pricing</a>
                 <a href="/pages/aboutus.html" class="nav-link">About</a>
-                <a href="/pages/contactus.html" class="nav-link active">Contact</a>
+                <a href="/pages/contactus.html" class="nav-link">Contact</a>
             </nav>
             
             <!-- Header Actions -->

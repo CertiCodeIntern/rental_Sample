@@ -19,11 +19,11 @@
     --brand-primary-dark: #012A4A;      /* Darker blue for depth */
     
     /* === ACCENT COLORS (Split-Complementary to Blue) === */
-    --accent: #FB7012;                  /* Vibrant Orange */
-    --accent-hover: #FF8534;            /* Lighter on hover */
-    --accent-light: #FFAA60;            /* Light orange for dark mode headings */
+    --accent: #E67E22;                  /* Softer burnt orange for Light Mode */
+    --accent-hover: #D35400;            /* Darker on hover */
+    --accent-light: #FFAA60;            /* Light orange for backgrounds */
     --accent-soft: #FFA970;             /* Soft orange for backgrounds */
-    --accent-muted: rgba(251, 112, 18, 0.15);
+    --accent-muted: rgba(230, 126, 34, 0.15);
     
     /* === SEMANTIC BACKGROUND COLORS === */
     /* No pure white - use off-white with subtle blue tint */
@@ -118,6 +118,10 @@
     --heading-primary: #013A63;         /* Primary headings - brand blue in light */
     --heading-secondary: #014F86;       /* Secondary headings */
     
+    /* === PAGE HEADER (Banner gradient for inner pages) === */
+    --page-header-start: #013A63;       /* Gradient start */
+    --page-header-end: #014F86;         /* Gradient end */
+    
     /* === DROPDOWN COLORS === */
     --dropdown-bg: #FFFFFF;
     --dropdown-border: rgba(0, 0, 0, 0.1);
@@ -181,7 +185,9 @@
     --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
     --shadow-elevated: 0 8px 30px rgba(0, 0, 0, 0.4);
     
-    /* Accent adjustments for dark mode */
+    /* Accent colors - Vibrant in dark mode for better visibility */
+    --accent: #FB7012;                  /* Vibrant Orange for Dark Mode */
+    --accent-hover: #FF8534;            /* Lighter on hover */
     --accent-muted: rgba(251, 112, 18, 0.2);
     
     /* Status colors with dark mode adjustments */
@@ -189,6 +195,10 @@
     --warning-bg: rgba(245, 158, 11, 0.15);
     --danger-bg: rgba(239, 68, 68, 0.15);
     --info-bg: rgba(59, 130, 246, 0.15);
+    
+    /* Page header - Slightly lighter gradient in dark mode */
+    --page-header-start: #1E293B;
+    --page-header-end: #334155;
     
     /* Dropdown colors - Dark mode */
     --dropdown-bg: #1E293B;

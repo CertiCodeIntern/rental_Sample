@@ -21,14 +21,11 @@
     <!-- Theme Script (Prevents flash of wrong theme) -->
     <script src="../shared/js/theme.js"></script>
     
+    <!-- Link to external pages styles -->
+    <link rel="stylesheet" href="pages-layout.css">
+    
     <style>
-        /* Cookie Policy Page Specific Styles */
-        .policy-content {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
+        /* Cookie Policy Page Specific Styles (minimal overrides) */
         .policy-section {
             margin-bottom: 2rem;
         }
@@ -54,15 +51,6 @@
         }
         .policy-section li {
             margin-bottom: 0.5rem;
-        }
-        .contact-box {
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            padding: 1.5rem;
-            border-left: 4px solid var(--accent);
-        }
-        .contact-box p {
-            margin: 0 0 0.25rem;
         }
     </style>
 </head>
@@ -245,15 +233,15 @@
 
     <main>
         <!-- Page Header -->
-        <section class="page-header" style="padding: 6rem 0 3rem; background: linear-gradient(135deg, #013A63 0%, #014F86 100%); color: white; text-align: center;">
+        <section class="page-header">
             <div class="container">
-                <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Cookie Policy</h1>
-                <p style="opacity: 0.9;">Last updated: February 1, 2026</p>
+                <h1 class="page-title">Cookie Policy</h1>
+                <p class="page-subtitle">Last updated: February 1, 2026</p>
             </div>
         </section>
 
         <!-- Cookie Policy Content -->
-        <section style="padding: 4rem 0;">
+        <section class="page-content">
             <div class="container" style="max-width: 800px;">
                 <div class="policy-content">
                     

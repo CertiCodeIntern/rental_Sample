@@ -487,10 +487,28 @@
         } else if (isHomePage) {
             setActiveByHref('/');
         } else {
-            // For inner pages, match by pathname
+            // For inner pages, match by pathname more precisely
+            // Extract the filename from the current path (e.g., "aboutus" from "/pages/aboutus.html")
+            const currentFileName = currentPath.split('/').pop().replace('.html', '');
+            
+            removeAllActive();
+            
             navLinks.forEach(link => {
                 const href = link.getAttribute('href');
-                if (currentPath.includes(href.replace('.html', '').replace('/pages/', ''))) {
+                // Extract filename from link href
+                const linkFileName = href.split('/').pop().replace('.html', '');
+                
+                // Match if filenames match (e.g., "aboutus" === "aboutus")
+                if (currentFileName === linkFileName) {
+                    link.classList.add('active');
+                }
+            });
+            
+            mobileLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const linkFileName = href.split('/').pop().replace('.html', '');
+                
+                if (currentFileName === linkFileName) {
                     link.classList.add('active');
                 }
             });

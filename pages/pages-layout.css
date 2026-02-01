@@ -11,7 +11,7 @@
    ===================================================== */
 .page-header {
     padding: 6rem 0 3rem;
-    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
+    background: linear-gradient(135deg, var(--page-header-start) 0%, var(--page-header-end) 100%);
     color: white;
     text-align: center;
 }
@@ -68,15 +68,40 @@
    ===================================================== */
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .content-main {
-    /* Placeholder - styles added as needed */
-    display: block;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-theme);
+}
+
+.content-main h2 {
+    color: var(--heading-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+}
+
+.content-main h2:first-child {
+    margin-top: 0;
+}
+
+.content-main p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
 }
 
 .content-sidebar {
@@ -493,6 +518,16 @@
     color: var(--text-secondary);
 }
 
+/* Policy Content (Cookie Policy) */
+.policy-content {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-theme);
+}
+
 /* =====================================================
    WIP / UNDER CONSTRUCTION PAGE
    ===================================================== */
@@ -579,4 +614,46 @@
     .legal-body {
         padding: 1.5rem;
     }
+}
+/* =====================================================
+   CTA SECTION (Call to Action Banner)
+   ===================================================== */
+.cta-section {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+    padding: 4rem 0;
+    text-align: center;
+    color: white;
+}
+
+.cta-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cta-subtitle {
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.btn-white {
+    background: var(--bg-card);
+    color: var(--heading-primary);
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
