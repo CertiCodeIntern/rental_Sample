@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RentIt Catalog - Browse our selection of videoke and karaoke equipment for rent.">
+    <title>RentIt - Browse Catalog</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/shared/css/theme.css">
+    <link rel="stylesheet" href="/shared/css/globals.css">
+    <link rel="stylesheet" href="/client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="catalog.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/rIT_logo_tp.png">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Container (Injected by JS) -->
+        <div id="sidebarContainer"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar Container (Injected by JS) -->
+            <div id="topbarContainer"></div>
+            
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <!-- Page Header -->
+                <div class="page-header-dashboard">
+                    <div class="page-header-info">
+                        <h1 class="page-title">Browse Catalog</h1>
+                        <p class="page-subtitle">Discover our videoke and karaoke equipment for rent.</p>
+                    </div>
+                    <div class="page-header-actions">
+                        <div class="catalog-search-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <input type="text" id="catalogSearch" class="catalog-search" placeholder="Search machine models...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="rentals-tabs">
+                    <button class="tab-link active" data-tab="all">Catalog</button>
+                    <button class="tab-link" data-tab="promos">Top Promos</button>
+                </div>
+
+                <!-- Catalog Layout -->
+                <div class="catalog-container">
+                    <!-- Filter Sidebar -->
+                    <aside class="filter-sidebar">
+                        <div class="filter-header">
+                            <div>
+                                <h2 class="filter-title">Filters</h2>
+                                <p class="filter-subtitle">Find the perfect machine</p>
+                            </div>
+                            <button class="reset-filters">Reset All</button>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="filter-card">
+                            <h3 class="filter-card-title">
+                                <svg class="filter-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
+                                Category
+                            </h3>
+                            <div class="category-list">
+                                <label class="category-item">
+                                    <input type="checkbox" class="category-checkbox" value="portable">
+                                    <span class="category-color portable"></span>
+                                    <span class="category-label">Portable</span>
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" class="category-checkbox" value="premium">
+                                    <span class="category-color premium"></span>
+                                    <span class="category-label">Premium</span>
+                                </label>
+                                <label class="category-item">
+                                    <input type="checkbox" class="category-checkbox" value="professional">
+                                    <span class="category-color professional"></span>
+                                    <span class="category-label">Professional</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Price Range Filter -->
+                        <div class="filter-card">
+                            <h3 class="filter-card-title">
+                                <svg class="filter-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                                Price Range (₱)
+                            </h3>
+                            <div class="price-range-wrap">
+                                <input type="range" id="priceSlider" class="price-slider" min="50" max="500" value="500" step="10">
+                                <div class="price-labels">
+                                    <span>₱50</span>
+                                    <span class="price-value" id="priceValue">₱500</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Date Availability Filter -->
+                        <div class="filter-card">
+                            <h3 class="filter-card-title">
+                                <svg class="filter-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                Date Availability
+                            </h3>
+                            <div class="calendar-header">
+                                <div class="calendar-nav">
+                                    <button class="calendar-nav-btn" id="calendarPrev">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="15 18 9 12 15 6"/>
+                                        </svg>
+                                    </button>
+                                    <span class="calendar-month" id="calendarMonth">February 2026</span>
+                                    <button class="calendar-nav-btn" id="calendarNext">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="9 18 15 12 9 6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="calendar-grid" id="calendarGrid">
+                                <span class="calendar-day-header">S</span>
+                                <span class="calendar-day-header">M</span>
+                                <span class="calendar-day-header">T</span>
+                                <span class="calendar-day-header">W</span>
+                                <span class="calendar-day-header">T</span>
+                                <span class="calendar-day-header">F</span>
+                                <span class="calendar-day-header">S</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Products Section -->
+                    <section class="products-section">
+                        <div class="products-header">
+                            <h2 class="products-title">
+                                Browsing Machines
+                                <span class="products-count">(12 models found)</span>
+                            </h2>
+                            <div class="products-sort">
+                                <span class="sort-label">Sort by:</span>
+                                <select class="sort-select" id="sortSelect">
+                                    <option value="popular">Most Popular</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="name">Name A-Z</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Products Grid -->
+                        <div class="products-grid">
+                            <!-- Product 1 -->
+                            <article class="product-card" data-id="1" data-category="premium" data-price="120" data-popularity="95">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>Karaoke King Pro v2</text></svg>'">
+                                    <span class="product-badge available">Available</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">Karaoke King Pro v2</h3>
+                                    <div class="product-price">₱120 <span>/ day</span></div>
+                                    <p class="product-description">Professional dual-mic setup with 10k+ songs and built-in studio effects.</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Premium</span>
+                                        <span class="product-tag">Dual Screen</span>
+                                    </div>
+                                    <button class="product-cta">Rent Now</button>
+                                </div>
+                            </article>
+
+                            <!-- Product 2 -->
+                            <article class="product-card" data-id="2" data-category="portable" data-price="65" data-popularity="88">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/echostream-portable.jpg" alt="EchoStream Portable" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>EchoStream Portable</text></svg>'">
+                                    <span class="product-badge booked">Booked Today</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">EchoStream Portable</h3>
+                                    <div class="product-price">₱65 <span>/ day</span></div>
+                                    <p class="product-description">Battery powered, Bluetooth ready. Perfect for small gatherings and picnics.</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Portable</span>
+                                        <span class="product-tag">Bluetooth</span>
+                                    </div>
+                                    <button class="product-cta notify">Notify When Ready</button>
+                                </div>
+                            </article>
+
+                            <!-- Product 3 -->
+                            <article class="product-card" data-id="3" data-category="professional" data-price="250" data-popularity="92">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/vocalstar-5000.jpg" alt="VocalStar 5000 Stage" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>VocalStar 5000 Stage</text></svg>'">
+                                    <span class="product-badge available">Available</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">VocalStar 5000 Stage</h3>
+                                    <div class="product-price">₱250 <span>/ day</span></div>
+                                    <p class="product-description">Event-grade system with 4 microphones and integrated subwoofer.</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Professional</span>
+                                        <span class="product-tag">4-Mic</span>
+                                    </div>
+                                    <button class="product-cta">Rent Now</button>
+                                </div>
+                            </article>
+
+                            <!-- Product 4 -->
+                            <article class="product-card" data-id="4" data-category="premium" data-price="120" data-popularity="90" data-promo="true">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/homeparty-ultra.jpg" alt="HomeParty Ultra" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>HomeParty Ultra</text></svg>'">
+                                    <span class="product-badge available">Available</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">HomeParty Ultra</h3>
+                                    <div class="product-price">₱120 <span>/ day</span></div>
+                                    <p class="product-description">Best seller. Features YouTube integration and scoring system.</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Premium</span>
+                                        <span class="product-tag">Smart Connect</span>
+                                    </div>
+                                    <button class="product-cta">Rent Now</button>
+                                </div>
+                            </article>
+
+                            <!-- Product 5 -->
+                            <article class="product-card" data-id="5" data-category="portable" data-price="120" data-popularity="85">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>MiniSing Pocket</text></svg>'">
+                                    <span class="product-badge available">Available</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">MiniSing Pocket</h3>
+                                    <div class="product-price">₱120 <span>/ day</span></div>
+                                    <p class="product-description">Ultra-portable. Fits in a backpack. Surprise your friends anywhere!</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Portable</span>
+                                        <span class="product-tag">Battery</span>
+                                    </div>
+                                    <button class="product-cta">Rent Now</button>
+                                </div>
+                            </article>
+
+                            <!-- Product 6 -->
+                            <article class="product-card" data-id="6" data-category="professional" data-price="120" data-popularity="78" data-promo="true">
+                                <div class="product-image-wrap">
+                                    <img src="/assets/images/products/venuemaster-x1.jpg" alt="VenueMaster X-1" class="product-image"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2214%22>VenueMaster X-1</text></svg>'">
+                                    <span class="product-badge booked">Booked Today</span>
+                                </div>
+                                <div class="product-content">
+                                    <h3 class="product-name">VenueMaster X-1</h3>
+                                    <div class="product-price">₱120 <span>/ day</span></div>
+                                    <p class="product-description">Industrial build. High-fidelity audio for large banquet halls.</p>
+                                    <div class="product-tags">
+                                        <span class="product-tag">Professional</span>
+                                        <span class="product-tag">High-Fi</span>
+                                    </div>
+                                    <button class="product-cta notify">Notify When Ready</button>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav class="pagination" aria-label="Catalog pagination">
+                            <button class="page-btn" data-page="prev" aria-label="Previous page">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"/>
+                                </svg>
+                            </button>
+                            <button class="page-btn active" data-page="1">1</button>
+                            <button class="page-btn" data-page="2">2</button>
+                            <button class="page-btn" data-page="3">3</button>
+                            <span class="page-ellipsis">...</span>
+                            <button class="page-btn" data-page="8">8</button>
+                            <button class="page-btn" data-page="next" aria-label="Next page">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                            </button>
+                        </nav>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/shared/js/components.js"></script>
+    <script src="catalog.js"></script>
+</body>
+</html>

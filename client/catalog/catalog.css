@@ -1,0 +1,630 @@
+/* =====================================================
+   CATALOG PAGE STYLES
+   Browse Catalog with Filters, Product Grid & Pagination
+   ===================================================== */
+
+/* =====================================================
+   CATALOG LAYOUT
+   ===================================================== */
+.catalog-container {
+    display: flex;
+    gap: 24px;
+    padding: 0;
+    margin-top: 24px;
+}
+
+/* =====================================================
+   SEARCH IN HEADER
+   ===================================================== */
+.page-header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.catalog-search-wrap {
+    position: relative;
+    width: 320px;
+}
+
+.catalog-search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    stroke: var(--text-tertiary);
+    pointer-events: none;
+}
+
+.catalog-search {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+}
+
+.catalog-search::placeholder {
+    color: var(--text-tertiary);
+}
+
+.catalog-search:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+/* =====================================================
+   FILTER SIDEBAR
+   ===================================================== */
+.filter-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--heading-primary);
+}
+
+.filter-subtitle {
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+.reset-filters {
+    font-size: 13px;
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.reset-filters:hover {
+    text-decoration: underline;
+}
+
+/* Filter Card */
+.filter-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-primary);
+    margin-bottom: 16px;
+}
+
+.filter-card-icon {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+}
+
+/* Category Checkboxes */
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.category-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-medium);
+    border-radius: 4px;
+    appearance: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.category-checkbox:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.category-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.category-label {
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+/* Color Legend */
+.category-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.category-color.portable { background: #FB7012; }
+.category-color.premium { background: #3B82F6; }
+.category-color.professional { background: #8B5CF6; }
+
+/* Price Range Slider */
+.price-range-wrap {
+    margin-top: 8px;
+}
+
+.price-slider {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    appearance: none;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.price-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.price-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.price-value {
+    font-weight: 600;
+    color: var(--heading-primary);
+}
+
+/* Date Availability Calendar */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calendar-nav-btn {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+}
+
+.calendar-nav-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.calendar-month {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--heading-primary);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+}
+
+.calendar-day-header {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    padding: 4px 0;
+}
+
+.calendar-day {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--text-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    margin: 0 auto;
+}
+
+.calendar-day:hover {
+    background: var(--accent-muted);
+}
+
+.calendar-day.selected {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+}
+
+.calendar-day.disabled {
+    color: var(--text-tertiary);
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.calendar-day.today {
+    border: 2px solid var(--accent);
+}
+
+/* =====================================================
+   PRODUCTS GRID
+   ===================================================== */
+.products-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.products-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--heading-primary);
+}
+
+.products-count {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+.products-sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sort-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.sort-select {
+    padding: 8px 32px 8px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+/* Product Card */
+.product-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image-wrap {
+    position: relative;
+    height: 180px;
+    background: var(--bg-tertiary);
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.product-badge.available {
+    background: rgba(16, 185, 129, 0.9);
+    color: white;
+}
+
+.product-badge.booked {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+}
+
+.product-content {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--heading-primary);
+    margin-bottom: 4px;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.product-price span {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-tertiary);
+}
+
+.product-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.product-tag {
+    padding: 4px 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.product-cta {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.product-cta:hover {
+    background: var(--accent-hover);
+}
+
+.product-cta.notify {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.product-cta.notify:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-muted);
+}
+
+/* =====================================================
+   PAGINATION
+   ===================================================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.page-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.page-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+}
+
+.page-ellipsis {
+    color: var(--text-tertiary);
+    font-size: 14px;
+    padding: 0 4px;
+}
+
+/* =====================================================
+   RESPONSIVE ADJUSTMENTS
+   ===================================================== */
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .catalog-container {
+        flex-direction: column;
+    }
+    
+    .filter-sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .filter-card {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-search-wrap {
+        width: 100%;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-sidebar {
+        flex-direction: column;
+    }
+    
+    .filter-card {
+        min-width: unset;
+    }
+    
+    .products-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}

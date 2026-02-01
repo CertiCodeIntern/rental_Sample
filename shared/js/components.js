@@ -21,8 +21,10 @@ const Components = {
      */
     clientNavTabs: [
         { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard.html' },
-        { id: 'rentals', icon: '🎤', label: 'Browse Catalog', href: '/client/rentals.html' },
-        { id: 'booking', icon: '📅', label: 'Booking History', href: '/client/booking.html' },
+        { id: 'catalog', icon: '📦', label: 'Browse Catalog', href: '/client/catalog/catalog.html' },
+        { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/client/myrentals/myrentals.html' },
+        { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/client/bookinghistory/bookinghistory.html' },
+        { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contact.html' },
     ],
 
     /**
@@ -70,31 +72,40 @@ const Components = {
         const navItems = tabs.map(tab => {
             const isActive = activeTab === tab.id;
             if (tab.href) {
-                // Client nav uses links
+                // Client nav uses links with tooltip data attribute
                 return `
-                    <a class="nav-item ${isActive ? 'active' : ''}" href="${tab.href}">
+                    <a class="nav-item ${isActive ? 'active' : ''}" href="${tab.href}" data-tooltip="${tab.label}">
                         <span class="nav-icon">${tab.icon}</span>
-                        <span>${tab.label}</span>
+                        <span class="nav-label">${tab.label}</span>
                     </a>
                 `;
             } else {
                 // Admin nav uses buttons for SPA-style navigation
                 return `
-                    <button class="nav-item ${isActive ? 'active' : ''}" data-tab="${tab.id}">
+                    <button class="nav-item ${isActive ? 'active' : ''}" data-tab="${tab.id}" data-tooltip="${tab.label}">
                         <span class="nav-icon">${tab.icon}</span>
-                        <span>${tab.label}</span>
+                        <span class="nav-label">${tab.label}</span>
                     </button>
                 `;
             }
         }).join('');
 
+        // Check localStorage for collapsed state
+        const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+
         container.innerHTML = `
-            <aside class="sidebar" id="sidebar">
+            <aside class="sidebar${isCollapsed ? ' collapsed' : ''}" id="sidebar">
                 <div class="sidebar-header">
                     <div class="sidebar-logo">
-                        <div class="sidebar-logo-icon">❝</div>
+                        <img src="/assets/images/rIT_logo_tp.png" alt="RentIt Logo" class="sidebar-logo-icon">
                         <span class="sidebar-logo-text">RentIt</span>
                     </div>
+                    <!-- Collapse Toggle Button -->
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Toggle sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </button>
                 </div>
                 
                 <nav class="sidebar-nav">
@@ -109,11 +120,23 @@ const Components = {
                             <span class="sidebar-user-role">${user.role || 'Customer'}</span>
                         </div>
                     </div>
-                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                    <button class="logout-btn" id="logoutBtn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        <span class="logout-text">Logout</span>
+                    </button>
                 </div>
             </aside>
             <div class="sidebar-overlay" id="sidebarOverlay"></div>
         `;
+
+        // Apply collapsed state to app container
+        if (isCollapsed) {
+            document.querySelector('.app-container')?.classList.add('sidebar-collapsed');
+        }
 
         // Attach event listeners
         this.attachSidebarEvents();
@@ -141,6 +164,28 @@ const Components = {
         const overlay = document.getElementById('sidebarOverlay');
         if (overlay) {
             overlay.addEventListener('click', () => this.closeSidebar());
+        }
+
+        // Sidebar collapse toggle
+        const collapseBtn = document.getElementById('sidebarCollapseBtn');
+        if (collapseBtn) {
+            collapseBtn.addEventListener('click', () => this.toggleSidebarCollapse());
+        }
+    },
+
+    /**
+     * Toggle sidebar collapsed state
+     */
+    toggleSidebarCollapse() {
+        const sidebar = document.getElementById('sidebar');
+        const appContainer = document.querySelector('.app-container');
+        
+        if (sidebar) {
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            appContainer?.classList.toggle('sidebar-collapsed', isCollapsed);
+            
+            // Persist to localStorage
+            localStorage.setItem('sidebarCollapsed', isCollapsed.toString());
         }
     },
 
@@ -385,6 +430,24 @@ const Components = {
                         </div>
                     </div>
                     
+                    <!-- Theme Toggle -->
+                    <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    
                     <!-- User Profile -->
                     <div class="topbar-user profile-wrapper">
                         <button class="btn-icon profile-btn" id="profileBtn" aria-label="User menu">
@@ -448,6 +511,38 @@ const Components = {
 
         // Initialize dropdown functionality
         this.initDropdowns();
+        
+        // Initialize theme toggle
+        this.initThemeToggle();
+    },
+
+    /**
+     * Initialize theme toggle functionality
+     */
+    initThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        
+        if (themeToggle) {
+            // Update button visibility based on current theme
+            const updateToggleIcon = () => {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                themeToggle.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            };
+            
+            // Initial update
+            updateToggleIcon();
+            
+            // Toggle theme on click
+            themeToggle.addEventListener('click', () => {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleIcon();
+            });
+        }
     },
 
     /**
