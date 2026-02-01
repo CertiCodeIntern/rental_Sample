@@ -14,11 +14,6 @@
     // ============================
     const hamburger = document.getElementById('hamburgerBtn');
     const mobileNav = document.getElementById('mobileNav');
-    const notificationBtn = document.getElementById('notificationBtn');
-    const notificationDropdown = document.getElementById('notificationDropdown');
-    const profileBtn = document.getElementById('profileBtn');
-    const profileDropdown = document.getElementById('profileDropdown');
-    const markReadBtn = document.querySelector('.mark-read');
 
     // ============================
     // MOBILE NAVIGATION
@@ -65,118 +60,6 @@
             const isInside = mobileNav.contains(e.target) || hamburger.contains(e.target);
             if (!isInside) closeNav();
         });
-    }
-
-    // ============================
-    // NOTIFICATION DROPDOWN (Mock)
-    // ============================
-    function initNotificationDropdown() {
-        if (!notificationBtn || !notificationDropdown) return;
-
-        notificationBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            // Close profile dropdown if open
-            if (profileDropdown) {
-                profileDropdown.classList.remove('open');
-            }
-            
-            // Toggle notification dropdown
-            notificationDropdown.classList.toggle('open');
-        });
-
-        // Mark all as read
-        if (markReadBtn) {
-            markReadBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                
-                // Remove unread class from all items
-                document.querySelectorAll('.notification-item.unread').forEach(item => {
-                    item.classList.remove('unread');
-                });
-                
-                // Update badge
-                const badge = document.querySelector('.notification-badge');
-                if (badge) {
-                    badge.style.display = 'none';
-                }
-                
-                // Show feedback
-                showToast('All notifications marked as read');
-            });
-        }
-
-        // Notification item click
-        document.querySelectorAll('.notification-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.classList.remove('unread');
-                // Update badge count
-                updateNotificationBadge();
-            });
-        });
-    }
-
-    // ============================
-    // PROFILE DROPDOWN (Mock)
-    // ============================
-    function initProfileDropdown() {
-        if (!profileBtn || !profileDropdown) return;
-
-        profileBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            // Close notification dropdown if open
-            if (notificationDropdown) {
-                notificationDropdown.classList.remove('open');
-            }
-            
-            // Toggle profile dropdown
-            profileDropdown.classList.toggle('open');
-        });
-    }
-
-    // ============================
-    // CLOSE DROPDOWNS ON OUTSIDE CLICK
-    // ============================
-    function initDropdownClose() {
-        document.addEventListener('click', function(e) {
-            // Close notification dropdown
-            if (notificationDropdown && !notificationDropdown.contains(e.target) && 
-                notificationBtn && !notificationBtn.contains(e.target)) {
-                notificationDropdown.classList.remove('open');
-            }
-            
-            // Close profile dropdown
-            if (profileDropdown && !profileDropdown.contains(e.target) && 
-                profileBtn && !profileBtn.contains(e.target)) {
-                profileDropdown.classList.remove('open');
-            }
-        });
-
-        // Close on Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (notificationDropdown) notificationDropdown.classList.remove('open');
-                if (profileDropdown) profileDropdown.classList.remove('open');
-            }
-        });
-    }
-
-    // ============================
-    // UPDATE NOTIFICATION BADGE
-    // ============================
-    function updateNotificationBadge() {
-        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
-        const badge = document.querySelector('.notification-badge');
-        
-        if (badge) {
-            if (unreadCount > 0) {
-                badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
-                badge.style.display = 'flex';
-            } else {
-                badge.style.display = 'none';
-            }
-        }
     }
 
     // ============================
@@ -602,9 +485,6 @@
     // ============================
     function init() {
         initMobileNav();
-        initNotificationDropdown();
-        initProfileDropdown();
-        initDropdownClose();
         initTabs();
         initSmoothScroll();
         initScrollAnimations();
@@ -612,9 +492,6 @@
         initActiveNavHighlight();
         initHeaderScroll();
         initStatCounters();
-
-        // Update notification badge on load
-        updateNotificationBadge();
 
         console.log('🎤 RentIt Landing Page Initialized');
     }

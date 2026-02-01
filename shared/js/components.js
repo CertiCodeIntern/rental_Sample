@@ -295,11 +295,117 @@ const Components = {
                 <button class="menu-btn" id="menuBtn">☰</button>
                 <h1 class="topbar-title" id="pageTitle">${title}</h1>
                 <div class="topbar-actions">
-                    <div class="topbar-user">
-                        <div class="topbar-user-avatar">${initial}</div>
-                        <div class="topbar-user-info">
-                            <span class="topbar-user-name">${user.name || 'User'}</span>
-                            <span class="topbar-user-role">${user.role || 'Customer'}</span>
+                    <!-- Notification Bell -->
+                    <div class="notification-wrapper">
+                        <button class="btn-icon notification-btn" id="notificationBtn" aria-label="Notifications">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <span class="mark-read" id="markReadBtn">Mark all read</span>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                            <polyline points="22 4 12 14.01 9 11.01"/>
+                                        </svg>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Booking Confirmed!</div>
+                                        <div class="notification-text">Your Platinum Pro rental is confirmed for Feb 14.</div>
+                                        <div class="notification-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Delivery Scheduled</div>
+                                        <div class="notification-text">Driver assigned. ETA: 2:30 PM tomorrow.</div>
+                                        <div class="notification-time">5 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">Rate Your Experience</div>
+                                        <div class="notification-text">How was your last rental? Leave a review!</div>
+                                        <div class="notification-time">1 day ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">View All Notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile -->
+                    <div class="topbar-user profile-wrapper">
+                        <button class="btn-icon profile-btn" id="profileBtn" aria-label="User menu">
+                            <div class="topbar-user-avatar">${initial}</div>
+                        </button>
+                        
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <div class="profile-header">
+                                <div class="avatar avatar-lg">${initial}</div>
+                                <div class="profile-info">
+                                    <div class="name">${user.name || 'User'}</div>
+                                    <div class="role">${user.role || 'Customer'}</div>
+                                </div>
+                            </div>
+                            <nav class="profile-menu">
+                                <a href="/client/dashboard.html" class="profile-menu-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="7" height="9"/>
+                                        <rect x="14" y="3" width="7" height="5"/>
+                                        <rect x="14" y="12" width="7" height="9"/>
+                                        <rect x="3" y="16" width="7" height="5"/>
+                                    </svg>
+                                    Dashboard
+                                </a>
+                                <a href="#" class="profile-menu-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                    My Profile
+                                </a>
+                                <a href="#" class="profile-menu-item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                    </svg>
+                                    Settings
+                                </a>
+                                <div class="profile-divider"></div>
+                                <a href="/client/auth/login.html" class="profile-menu-item danger">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                        <polyline points="16 17 21 12 16 7"/>
+                                        <line x1="21" y1="12" x2="9" y2="12"/>
+                                    </svg>
+                                    Sign Out
+                                </a>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -311,6 +417,62 @@ const Components = {
         if (menuBtn) {
             menuBtn.addEventListener('click', () => this.openSidebar());
         }
+
+        // Initialize dropdown functionality
+        this.initDropdowns();
+    },
+
+    /**
+     * Initialize notification and profile dropdowns
+     */
+    initDropdowns() {
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const markReadBtn = document.getElementById('markReadBtn');
+
+        // Notification toggle
+        notificationBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown?.classList.remove('open');
+            notificationDropdown?.classList.toggle('open');
+        });
+
+        // Profile toggle
+        profileBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationDropdown?.classList.remove('open');
+            profileDropdown?.classList.toggle('open');
+        });
+
+        // Mark all as read
+        markReadBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                item.classList.remove('unread');
+            });
+            const badge = document.querySelector('.notification-badge');
+            if (badge) badge.style.display = 'none';
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!notificationDropdown?.contains(e.target) && !notificationBtn?.contains(e.target)) {
+                notificationDropdown?.classList.remove('open');
+            }
+            if (!profileDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
+                profileDropdown?.classList.remove('open');
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                notificationDropdown?.classList.remove('open');
+                profileDropdown?.classList.remove('open');
+            }
+        });
     },
 
     /**
