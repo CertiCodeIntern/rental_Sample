@@ -146,17 +146,16 @@
                                     <td><span class="status-pill status-completed">Completed</span></td>
                                     <td>
                                         <div class="actions-cell">
-                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt">
+                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt" title="Download receipt">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 3v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                 </svg>
                                             </a>
-                                            <button class="action-btn action-edit" aria-label="Edit rental">
+                                            <button class="action-btn action-review" aria-label="Rate & Review" title="Rate & Review" data-product-id="1" data-product-name="Karaoke Pro System X-100">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M3 21v-3.75L14.06 6.19l3.75 3.75L6.75 21H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M18.37 5.63l-1.75 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </button>
                                         </div>
@@ -185,24 +184,23 @@
                                     <td><span class="status-pill status-completed">Completed</span></td>
                                     <td>
                                         <div class="actions-cell">
-                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt">
+                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt" title="Download receipt">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 3v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                 </svg>
                                             </a>
-                                            <button class="action-btn action-edit" aria-label="Edit rental">
+                                            <button class="action-btn action-review" aria-label="Rate & Review" title="Rate & Review" data-product-id="2" data-product-name="Party Box Master V2">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M3 21v-3.75L14.06 6.19l3.75 3.75L6.75 21H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M18.37 5.63l-1.75 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
 
-                                <!-- Row 3 - Cancelled -->
+                                <!-- Row 3 - Cancelled (NO review button) -->
                                 <tr>
                                     <td>
                                         <div class="item-cell">
@@ -224,24 +222,12 @@
                                     <td><span class="status-pill status-cancelled">Cancelled</span></td>
                                     <td>
                                         <div class="actions-cell">
-                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M12 3v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                                    <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                                    <path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                                </svg>
-                                            </a>
-                                            <button class="action-btn action-edit" aria-label="Edit rental">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M3 21v-3.75L14.06 6.19l3.75 3.75L6.75 21H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M18.37 5.63l-1.75 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                                </svg>
-                                            </button>
+                                            <span class="action-disabled" title="Reviews only available for completed rentals">—</span>
                                         </div>
                                     </td>
                                 </tr>
 
-                                <!-- Row 4 - Refunded -->
+                                <!-- Row 4 - Refunded (NO review button) -->
                                 <tr>
                                     <td>
                                         <div class="item-cell">
@@ -263,19 +249,14 @@
                                     <td><span class="status-pill status-refunded">Refunded</span></td>
                                     <td>
                                         <div class="actions-cell">
-                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt">
+                                            <a class="action-btn action-download" href="#" download aria-label="Download receipt" title="Download receipt">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 3v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M8 11l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                     <path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                                                 </svg>
                                             </a>
-                                            <button class="action-btn action-edit" aria-label="Edit rental">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M3 21v-3.75L14.06 6.19l3.75 3.75L6.75 21H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M18.37 5.63l-1.75 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                                </svg>
-                                            </button>
+                                            <span class="action-disabled" title="Reviews only available for completed rentals">—</span>
                                         </div>
                                     </td>
                                 </tr>

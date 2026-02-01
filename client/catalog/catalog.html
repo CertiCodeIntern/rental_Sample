@@ -60,7 +60,7 @@
                     <!-- Filter Sidebar -->
                     <aside class="filter-sidebar">
                         <div class="filter-header">
-                            <div>
+                            <div class="filter-header-info">
                                 <h2 class="filter-title">Filters</h2>
                                 <p class="filter-subtitle">Find the perfect machine</p>
                             </div>
@@ -97,6 +97,40 @@
                             </div>
                         </div>
 
+                        <!-- Status Filter -->
+                        <div class="filter-card">
+                            <h3 class="filter-card-title">
+                                <svg class="filter-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                                Availability Status
+                            </h3>
+                            <div class="status-list">
+                                <label class="status-item">
+                                    <input type="checkbox" class="status-checkbox" value="available" checked>
+                                    <span class="status-label">
+                                        <span class="status-indicator available"></span>
+                                        Available Now
+                                    </span>
+                                </label>
+                                <label class="status-item">
+                                    <input type="checkbox" class="status-checkbox" value="booked">
+                                    <span class="status-label">
+                                        <span class="status-indicator booked"></span>
+                                        Booked
+                                    </span>
+                                </label>
+                                <label class="status-item">
+                                    <input type="checkbox" class="status-checkbox" value="maintenance">
+                                    <span class="status-label">
+                                        <span class="status-indicator maintenance"></span>
+                                        Under Maintenance
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
                         <!-- Price Range Filter -->
                         <div class="filter-card">
                             <h3 class="filter-card-title">
@@ -107,10 +141,10 @@
                                 Price Range (₱)
                             </h3>
                             <div class="price-range-wrap">
-                                <input type="range" id="priceSlider" class="price-slider" min="50" max="500" value="500" step="10">
+                                <input type="range" id="priceSlider" class="price-slider" min="50" max="10000" value="10000" step="50">
                                 <div class="price-labels">
                                     <span>₱50</span>
-                                    <span class="price-value" id="priceValue">₱500</span>
+                                    <span class="price-value" id="priceValue">₱10,000</span>
                                 </div>
                             </div>
                         </div>
@@ -150,6 +184,19 @@
                                 <span class="calendar-day-header">F</span>
                                 <span class="calendar-day-header">S</span>
                             </div>
+                            <!-- Date Range Display -->
+                            <div class="date-range-display" id="dateRangeDisplay" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span class="date-range-label">Selected:</span>
+                                <span class="date-range-value" id="startDateLabel">-</span>
+                                <span class="date-range-connector">→</span>
+                                <span class="date-range-value" id="endDateLabel">-</span>
+                            </div>
                         </div>
                     </aside>
 
@@ -182,13 +229,52 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">Karaoke King Pro v2</h3>
+                                    <!-- Rating & Reviews -->
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">4.5</span>
+                                        <span class="rating-count">(24 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱120 <span>/ day</span></div>
                                     <p class="product-description">Professional dual-mic setup with 10k+ songs and built-in studio effects.</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Premium</span>
                                         <span class="product-tag">Dual Screen</span>
                                     </div>
-                                    <button class="product-cta">Rent Now</button>
+                                    <!-- Action Buttons -->
+                                    <div class="product-actions">
+                                        <button class="btn-favorite" data-id="1" aria-label="Add to favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart" data-id="1" aria-label="Add to cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="1" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            Rent Now
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
 
@@ -201,13 +287,42 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">EchoStream Portable</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">5.0</span>
+                                        <span class="rating-count">(18 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱65 <span>/ day</span></div>
                                     <p class="product-description">Battery powered, Bluetooth ready. Perfect for small gatherings and picnics.</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Portable</span>
                                         <span class="product-tag">Bluetooth</span>
                                     </div>
-                                    <button class="product-cta notify">Notify When Ready</button>
+                                    <div class="product-actions">
+                                        <button class="btn-favorite" data-id="2" aria-label="Add to favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart" data-id="2" aria-label="Add to cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="2" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main notify">Notify When Ready</button>
+                                    </div>
                                 </div>
                             </article>
 
@@ -220,13 +335,50 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">VocalStar 5000 Stage</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">4.2</span>
+                                        <span class="rating-count">(31 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱250 <span>/ day</span></div>
                                     <p class="product-description">Event-grade system with 4 microphones and integrated subwoofer.</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Professional</span>
                                         <span class="product-tag">4-Mic</span>
                                     </div>
-                                    <button class="product-cta">Rent Now</button>
+                                    <div class="product-actions">
+                                        <button class="btn-favorite" data-id="3" aria-label="Add to favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart" data-id="3" aria-label="Add to cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="3" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            Rent Now
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
 
@@ -239,13 +391,50 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">HomeParty Ultra</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">4.8</span>
+                                        <span class="rating-count">(56 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱120 <span>/ day</span></div>
                                     <p class="product-description">Best seller. Features YouTube integration and scoring system.</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Premium</span>
                                         <span class="product-tag">Smart Connect</span>
                                     </div>
-                                    <button class="product-cta">Rent Now</button>
+                                    <div class="product-actions">
+                                        <button class="btn-favorite active" data-id="4" aria-label="Remove from favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart" data-id="4" aria-label="Add to cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="4" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            Rent Now
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
 
@@ -258,13 +447,49 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">MiniSing Pocket</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">3.5</span>
+                                        <span class="rating-count">(12 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱120 <span>/ day</span></div>
                                     <p class="product-description">Ultra-portable. Fits in a backpack. Surprise your friends anywhere!</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Portable</span>
                                         <span class="product-tag">Battery</span>
                                     </div>
-                                    <button class="product-cta">Rent Now</button>
+                                    <div class="product-actions">
+                                        <button class="btn-favorite" data-id="5" aria-label="Add to favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart in-cart" data-id="5" aria-label="In cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="5" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            Rent Now
+                                        </button>
+                                    </div>
                                 </div>
                             </article>
 
@@ -277,13 +502,42 @@
                                 </div>
                                 <div class="product-content">
                                     <h3 class="product-name">VenueMaster X-1</h3>
+                                    <div class="product-rating">
+                                        <div class="rating-stars">
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        </div>
+                                        <span class="rating-score">4.0</span>
+                                        <span class="rating-count">(8 reviews)</span>
+                                    </div>
                                     <div class="product-price">₱120 <span>/ day</span></div>
                                     <p class="product-description">Industrial build. High-fidelity audio for large banquet halls.</p>
                                     <div class="product-tags">
                                         <span class="product-tag">Professional</span>
                                         <span class="product-tag">High-Fi</span>
                                     </div>
-                                    <button class="product-cta notify">Notify When Ready</button>
+                                    <div class="product-actions">
+                                        <button class="btn-favorite" data-id="6" aria-label="Add to favorites">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-cart" data-id="6" aria-label="Add to cart">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                            </svg>
+                                        </button>
+                                        <button class="btn-write-review" data-id="6" aria-label="Write a review">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="product-cta-main notify">Notify When Ready</button>
+                                    </div>
                                 </div>
                             </article>
                         </div>
@@ -309,7 +563,113 @@
                     </section>
                 </div>
             </div>
+            
+            <!-- Footer Container (Injected by JS) -->
+            <div id="footerContainer"></div>
         </main>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container product-modal">
+            <button class="modal-close" id="closeProductModal" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+
+            <div class="modal-body product-modal-body">
+                <!-- Product Image Section -->
+                <div class="modal-product-image-section">
+                    <img src="" alt="" class="modal-product-image" id="modalProductImage">
+                    <span class="modal-product-badge" id="modalProductBadge">Available</span>
+                </div>
+
+                <!-- Product Info Section -->
+                <div class="modal-product-info">
+                    <div class="modal-product-header">
+                        <h2 class="modal-product-name" id="modalProductName">Product Name</h2>
+                        <div class="modal-product-price" id="modalProductPrice">₱0 <span>/ day</span></div>
+                    </div>
+
+                    <!-- Rating Summary -->
+                    <div class="modal-rating-summary">
+                        <div class="modal-rating-stars" id="modalRatingStars">
+                            <!-- Stars injected by JS -->
+                        </div>
+                        <span class="modal-rating-score" id="modalRatingScore">0.0</span>
+                        <span class="modal-rating-count" id="modalRatingCount">(0 reviews)</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="modal-product-description" id="modalProductDescription">
+                        Product description goes here.
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="modal-product-tags" id="modalProductTags">
+                        <!-- Tags injected by JS -->
+                    </div>
+
+                    <!-- Future Availability Summary -->
+                    <div class="modal-availability-section">
+                        <h4 class="modal-section-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            Upcoming Schedule
+                        </h4>
+                        <div class="modal-availability-list" id="modalAvailabilityList">
+                            <!-- Availability dates injected by JS -->
+                            <p class="availability-empty">No upcoming bookings. Available anytime!</p>
+                        </div>
+                    </div>
+
+                    <!-- Modal Actions -->
+                    <div class="modal-actions">
+                        <button class="btn-modal-favorite" id="modalFavoriteBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            Add to Favorites
+                        </button>
+                        <button class="btn-modal-cart" id="modalCartBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="modal-reviews-section">
+                <h3 class="modal-reviews-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Customer Reviews
+                    <span class="modal-reviews-count" id="modalReviewsCount">(0)</span>
+                </h3>
+
+                <!-- Reviews List -->
+                <div class="modal-reviews-list" id="modalReviewsList">
+                    <!-- Reviews injected by JS -->
+                    <div class="review-empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <p>No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Scripts -->

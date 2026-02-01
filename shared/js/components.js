@@ -5,6 +5,17 @@
  * =====================================================
  */
 
+// ========== THEME PERSISTENCE (Runs Immediately) ==========
+// Apply saved theme BEFORE DOM loads to prevent flash
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+})();
+
 const Components = {
     /**
      * Navigation tabs configuration for the sidebar (Admin)
@@ -22,6 +33,8 @@ const Components = {
     clientNavTabs: [
         { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard.html' },
         { id: 'catalog', icon: '📦', label: 'Browse Catalog', href: '/client/catalog/catalog.html' },
+        { id: 'favorites', icon: '❤️', label: 'Favorites', href: '/client/favorites/favorites.html' },
+        { id: 'cart', icon: '🛒', label: 'My Cart', href: '/client/cart/cart.html' },
         { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/client/myrentals/myrentals.html' },
         { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/client/bookinghistory/bookinghistory.html' },
         { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contact.html' },
@@ -120,6 +133,36 @@ const Components = {
                             <span class="sidebar-user-role">${user.role || 'Customer'}</span>
                         </div>
                     </div>
+                    
+                    <!-- Mobile-only actions (shown on ultra-small screens) -->
+                    <div class="mobile-only-actions">
+                        <a href="#" class="mobile-action-item" id="sidebarNotifications">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span>Notifications</span>
+                            <span class="mobile-badge">3</span>
+                        </a>
+                        <button class="mobile-action-item" id="sidebarThemeToggle">
+                            <svg class="theme-icon-light" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                            <svg class="theme-icon-dark" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                            </svg>
+                            <span class="theme-label">Dark Mode</span>
+                        </button>
+                    </div>
+                    
                     <button class="logout-btn" id="logoutBtn">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -520,28 +563,38 @@ const Components = {
      */
     initThemeToggle() {
         const themeToggle = document.getElementById('themeToggle');
+        const sidebarThemeToggle = document.getElementById('sidebarThemeToggle');
+        const themeLabel = document.querySelector('.theme-label');
         
-        if (themeToggle) {
-            // Update button visibility based on current theme
-            const updateToggleIcon = () => {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                themeToggle.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            };
+        // Update button visibility and label based on current theme
+        const updateToggleIcon = () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeToggle?.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            sidebarThemeToggle?.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            if (themeLabel) {
+                themeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+            }
+        };
+        
+        // Initial update
+        updateToggleIcon();
+        
+        // Toggle theme function
+        const toggleTheme = () => {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
-            // Initial update
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
             updateToggleIcon();
-            
-            // Toggle theme on click
-            themeToggle.addEventListener('click', () => {
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                html.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateToggleIcon();
-            });
-        }
+        };
+        
+        // Toggle theme on topbar button click
+        themeToggle?.addEventListener('click', toggleTheme);
+        
+        // Toggle theme on sidebar button click
+        sidebarThemeToggle?.addEventListener('click', toggleTheme);
     },
 
     /**
@@ -657,6 +710,412 @@ const Components = {
         input.type = isPassword ? 'text' : 'password';
         button.innerHTML = isPassword ? this.eyeClosedSvg : this.eyeOpenSvg;
         button.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+    },
+
+    /**
+     * Inject Footer into the DOM
+     * @param {string} containerId - ID of the container element (default: 'footerContainer')
+     */
+    injectFooter(containerId = 'footerContainer') {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const currentYear = new Date().getFullYear();
+
+        container.innerHTML = `
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <div class="footer-main">
+                        <div class="footer-brand">
+                            <img src="/assets/images/rIT_logo_tp.png" alt="RentIt Logo" class="footer-logo">
+                            <span class="footer-brand-name">RentIt</span>
+                        </div>
+                        <p class="footer-tagline">Premium karaoke equipment rentals for your perfect event.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-col">
+                            <h4 class="footer-heading">Quick Links</h4>
+                            <nav class="footer-nav">
+                                <a href="/client/catalog/catalog.html">Browse Catalog</a>
+                                <a href="/client/myrentals/myrentals.html">My Rentals</a>
+                                <a href="/client/bookinghistory/bookinghistory.html">Booking History</a>
+                            </nav>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="footer-heading">Support</h4>
+                            <nav class="footer-nav">
+                                <a href="/pages/contact.html">Contact Us</a>
+                                <a href="/pages/about.html">About</a>
+                                <a href="#">FAQs</a>
+                            </nav>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="footer-heading">Legal</h4>
+                            <nav class="footer-nav">
+                                <a href="/pages/terms.html">Terms of Service</a>
+                                <a href="/pages/privacy.html">Privacy Policy</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p class="footer-copyright">&copy; ${currentYear} RentIt. All rights reserved.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        `;
+    },
+
+    /**
+     * Review System - Check eligibility to write a review
+     * @param {string} userId - User ID
+     * @param {string} itemId - Item/Product ID
+     * @returns {Object} { canReview: boolean, reason: string, existingReview: object|null }
+     */
+    checkReviewEligibility(userId, itemId) {
+        // Mock rental history and reviews (in real app, would be API calls)
+        const mockRentalHistory = JSON.parse(localStorage.getItem('rentit_rental_history') || '[]');
+        const mockReviews = JSON.parse(localStorage.getItem('rentit_reviews') || '[]');
+
+        // Check if user has rented this item
+        const hasRented = mockRentalHistory.some(
+            rental => rental.userId === userId && rental.itemId === itemId && rental.status === 'completed'
+        );
+
+        // Check if user already reviewed this item
+        const existingReview = mockReviews.find(
+            review => review.userId === userId && review.itemId === itemId
+        );
+
+        if (!hasRented) {
+            return {
+                canReview: false,
+                reason: 'no_transaction',
+                message: 'You can only review items you have rented. Rent this item to leave a review!',
+                existingReview: null
+            };
+        }
+
+        if (existingReview) {
+            return {
+                canReview: true,
+                reason: 'already_reviewed',
+                message: 'You have already reviewed this item. You can edit your review below.',
+                existingReview: existingReview
+            };
+        }
+
+        return {
+            canReview: true,
+            reason: 'eligible',
+            message: 'Thank you for renting! Share your experience with this equipment.',
+            existingReview: null
+        };
+    },
+
+    /**
+     * Open Review Modal
+     * @param {Object} product - Product details { id, name, image, category }
+     * @param {string} userId - Current user ID
+     */
+    openReviewModal(product, userId = 'user_1') {
+        // Check eligibility first
+        const eligibility = this.checkReviewEligibility(userId, product.id);
+        
+        // Create modal HTML
+        const modalHtml = this.generateReviewModalHtml(product, eligibility);
+        
+        // Inject modal into body
+        const modalContainer = document.createElement('div');
+        modalContainer.innerHTML = modalHtml;
+        document.body.appendChild(modalContainer.firstElementChild);
+        
+        // Open modal with animation
+        requestAnimationFrame(() => {
+            document.getElementById('reviewModalOverlay').classList.add('open');
+        });
+        
+        // Attach modal event listeners
+        this.attachReviewModalEvents(product.id, userId, eligibility);
+    },
+
+    /**
+     * Generate Review Modal HTML
+     */
+    generateReviewModalHtml(product, eligibility) {
+        const starSvg = `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        
+        // Generate stars based on existing review or empty
+        const existingRating = eligibility.existingReview?.rating || 0;
+        const existingText = eligibility.existingReview?.text || '';
+        
+        // Eligibility message type
+        let msgType = 'success';
+        let msgIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+        
+        if (eligibility.reason === 'no_transaction') {
+            msgType = 'error';
+            msgIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+        } else if (eligibility.reason === 'already_reviewed') {
+            msgType = 'warning';
+            msgIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+        }
+        
+        // Existing review display
+        let existingReviewHtml = '';
+        if (eligibility.existingReview) {
+            const reviewDate = new Date(eligibility.existingReview.date).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric'
+            });
+            const starsHtml = Array(5).fill('').map((_, i) => 
+                `<svg viewBox="0 0 24 24" style="fill: ${i < eligibility.existingReview.rating ? '#FACC15' : '#CBD5E1'}"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+            ).join('');
+            
+            existingReviewHtml = `
+                <div class="existing-review">
+                    <div class="existing-review-header">
+                        <div class="existing-review-stars">${starsHtml}</div>
+                        <span class="existing-review-date">${reviewDate}</span>
+                    </div>
+                    <p class="existing-review-text">${eligibility.existingReview.text}</p>
+                    <button class="btn-edit-review" id="btnEditReview">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Edit Review
+                    </button>
+                </div>
+            `;
+        }
+        
+        // Form (hidden if already reviewed, shown when editing)
+        const formDisplayStyle = eligibility.existingReview ? 'display: none;' : '';
+        
+        return `
+            <div class="review-modal-overlay" id="reviewModalOverlay">
+                <div class="review-modal">
+                    <div class="review-modal-header">
+                        <h2 class="review-modal-title">${eligibility.existingReview ? 'Your Review' : 'Write a Review'}</h2>
+                        <button class="review-modal-close" id="reviewModalClose">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="review-modal-body">
+                        <!-- Product Info -->
+                        <div class="review-product-info">
+                            <div class="review-product-image">
+                                <img src="${product.image}" alt="${product.name}" 
+                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect fill=%22%231E293B%22 width=%2280%22 height=%2280%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter%22 font-size=%228%22>🎤</text></svg>'">
+                            </div>
+                            <div class="review-product-details">
+                                <div class="review-product-name">${product.name}</div>
+                                <div class="review-product-meta">${product.category || 'Equipment'}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Eligibility Message -->
+                        <div class="review-eligibility-message ${msgType}">
+                            <span class="review-eligibility-icon">${msgIcon}</span>
+                            <span class="review-eligibility-text">${eligibility.message}</span>
+                        </div>
+                        
+                        ${existingReviewHtml}
+                        
+                        <!-- Review Form (hidden if not eligible or already reviewed) -->
+                        <div id="reviewFormContainer" style="${eligibility.reason === 'no_transaction' ? 'display: none;' : ''} ${formDisplayStyle}">
+                            <!-- Star Rating -->
+                            <div class="star-rating-input">
+                                <label class="star-rating-label">How would you rate this equipment?</label>
+                                <div class="star-rating-stars">
+                                    <input type="radio" name="rating" id="star5" value="5" ${existingRating === 5 ? 'checked' : ''}>
+                                    <label for="star5">${starSvg}</label>
+                                    <input type="radio" name="rating" id="star4" value="4" ${existingRating === 4 ? 'checked' : ''}>
+                                    <label for="star4">${starSvg}</label>
+                                    <input type="radio" name="rating" id="star3" value="3" ${existingRating === 3 ? 'checked' : ''}>
+                                    <label for="star3">${starSvg}</label>
+                                    <input type="radio" name="rating" id="star2" value="2" ${existingRating === 2 ? 'checked' : ''}>
+                                    <label for="star2">${starSvg}</label>
+                                    <input type="radio" name="rating" id="star1" value="1" ${existingRating === 1 ? 'checked' : ''}>
+                                    <label for="star1">${starSvg}</label>
+                                </div>
+                                <div class="star-rating-value" id="ratingValue">${existingRating > 0 ? existingRating + ' star' + (existingRating > 1 ? 's' : '') : 'Select a rating'}</div>
+                            </div>
+                            
+                            <!-- Review Text -->
+                            <textarea class="review-textarea" id="reviewText" placeholder="Share your experience with this equipment. What did you like? Was it easy to use?" maxlength="500">${existingText}</textarea>
+                            <div class="review-char-count"><span id="charCount">${existingText.length}</span>/500</div>
+                        </div>
+                    </div>
+                    
+                    <div class="review-modal-footer" id="reviewModalFooter" style="${eligibility.reason === 'no_transaction' ? 'display: none;' : ''} ${formDisplayStyle}">
+                        <button class="btn-review-cancel" id="btnReviewCancel">Cancel</button>
+                        <button class="btn-review-submit" id="btnReviewSubmit" ${!eligibility.canReview ? 'disabled' : ''}>
+                            ${eligibility.existingReview ? 'Update Review' : 'Submit Review'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Attach Review Modal Event Listeners
+     */
+    attachReviewModalEvents(itemId, userId, eligibility) {
+        const overlay = document.getElementById('reviewModalOverlay');
+        const closeBtn = document.getElementById('reviewModalClose');
+        const cancelBtn = document.getElementById('btnReviewCancel');
+        const submitBtn = document.getElementById('btnReviewSubmit');
+        const reviewText = document.getElementById('reviewText');
+        const charCount = document.getElementById('charCount');
+        const ratingValue = document.getElementById('ratingValue');
+        const editBtn = document.getElementById('btnEditReview');
+        const formContainer = document.getElementById('reviewFormContainer');
+        const footer = document.getElementById('reviewModalFooter');
+        const existingReviewEl = document.querySelector('.existing-review');
+
+        // Close modal
+        const closeModal = () => {
+            overlay.classList.remove('open');
+            setTimeout(() => overlay.remove(), 300);
+        };
+
+        closeBtn?.addEventListener('click', closeModal);
+        cancelBtn?.addEventListener('click', closeModal);
+        overlay?.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal();
+        });
+
+        // Edit review button
+        editBtn?.addEventListener('click', () => {
+            if (existingReviewEl) existingReviewEl.style.display = 'none';
+            if (formContainer) formContainer.style.display = 'block';
+            if (footer) footer.style.display = 'flex';
+        });
+
+        // Character count
+        reviewText?.addEventListener('input', () => {
+            charCount.textContent = reviewText.value.length;
+        });
+
+        // Star rating display
+        document.querySelectorAll('input[name="rating"]').forEach(input => {
+            input.addEventListener('change', () => {
+                const val = input.value;
+                ratingValue.textContent = val + ' star' + (val > 1 ? 's' : '');
+            });
+        });
+
+        // Submit review
+        submitBtn?.addEventListener('click', () => {
+            const rating = document.querySelector('input[name="rating"]:checked')?.value;
+            const text = reviewText?.value.trim();
+
+            if (!rating) {
+                this.showReviewToast('Please select a star rating', 'error');
+                return;
+            }
+
+            if (text.length < 10) {
+                this.showReviewToast('Please write at least 10 characters', 'error');
+                return;
+            }
+
+            // Save review to localStorage
+            this.saveReview(userId, itemId, parseInt(rating), text);
+            
+            this.showReviewToast(eligibility.existingReview ? 'Review updated successfully!' : 'Review submitted successfully!', 'success');
+            closeModal();
+        });
+    },
+
+    /**
+     * Save review to localStorage
+     */
+    saveReview(userId, itemId, rating, text) {
+        const reviews = JSON.parse(localStorage.getItem('rentit_reviews') || '[]');
+        
+        // Find existing review
+        const existingIndex = reviews.findIndex(r => r.userId === userId && r.itemId === itemId);
+        
+        const reviewData = {
+            userId,
+            itemId,
+            rating,
+            text,
+            date: new Date().toISOString()
+        };
+
+        if (existingIndex >= 0) {
+            reviews[existingIndex] = reviewData;
+        } else {
+            reviews.push(reviewData);
+        }
+
+        localStorage.setItem('rentit_reviews', JSON.stringify(reviews));
+    },
+
+    /**
+     * Show toast notification for review actions
+     */
+    showReviewToast(message, type = 'success') {
+        // Remove existing toasts
+        document.querySelectorAll('.review-toast').forEach(t => t.remove());
+
+        const toast = document.createElement('div');
+        toast.className = `toast review-toast toast-${type}`;
+        
+        const iconSvg = type === 'success'
+            ? '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
+            : '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+
+        toast.innerHTML = `${iconSvg}<span class="toast-message">${message}</span>`;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    },
+
+    /**
+     * Initialize mock rental history for testing reviews
+     */
+    initMockRentalHistory() {
+        const existing = localStorage.getItem('rentit_rental_history');
+        if (!existing) {
+            const mockHistory = [
+                { userId: 'user_1', itemId: '1', status: 'completed', date: '2026-01-15' },
+                { userId: 'user_1', itemId: '2', status: 'completed', date: '2026-01-20' },
+                { userId: 'user_1', itemId: '5', status: 'active', date: '2026-01-28' }
+            ];
+            localStorage.setItem('rentit_rental_history', JSON.stringify(mockHistory));
+        }
     }
 };
 

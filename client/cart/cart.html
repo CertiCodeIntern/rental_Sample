@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RentIt - Your Shopping Cart">
+    <title>RentIt - My Cart</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/shared/css/theme.css">
+    <link rel="stylesheet" href="/shared/css/globals.css">
+    <link rel="stylesheet" href="/client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="cart.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/rIT_logo_tp.png">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Container (Injected by JS) -->
+        <div id="sidebarContainer"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar Container (Injected by JS) -->
+            <div id="topbarContainer"></div>
+            
+            <!-- Content Area -->
+            <div class="content-area fade-in-up" id="contentArea">
+                <!-- Page Header -->
+                <div class="page-header-dashboard">
+                    <div class="page-header-info">
+                        <h1 class="page-title">My Cart</h1>
+                        <p class="page-subtitle">Review and complete your rental booking.</p>
+                    </div>
+                </div>
+
+                <!-- Cart Layout -->
+                <div class="cart-layout">
+                    <!-- Cart Items -->
+                    <div class="cart-items-section">
+                        <div class="cart-header">
+                            <span class="cart-header-product">Product</span>
+                            <span class="cart-header-dates">Rental Period</span>
+                            <span class="cart-header-price">Price</span>
+                            <span class="cart-header-subtotal">Subtotal</span>
+                            <span class="cart-header-actions"></span>
+                        </div>
+
+                        <!-- Cart Item 1 -->
+                        <div class="cart-item" data-id="1">
+                            <div class="cart-item-product">
+                                <div class="cart-item-image">
+                                    <img src="/assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect fill=%22%231E293B%22 width=%2280%22 height=%2280%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter%22 font-size=%228%22>KK v2</text></svg>'">
+                                </div>
+                                <div class="cart-item-info">
+                                    <h3 class="cart-item-name">Karaoke King Pro v2</h3>
+                                    <span class="cart-item-category">Premium</span>
+                                </div>
+                            </div>
+                            <div class="cart-item-dates">
+                                <div class="date-picker-group">
+                                    <label>Start</label>
+                                    <input type="date" class="cart-date-input" id="startDate1" value="2026-02-05">
+                                </div>
+                                <span class="date-arrow">→</span>
+                                <div class="date-picker-group">
+                                    <label>End</label>
+                                    <input type="date" class="cart-date-input" id="endDate1" value="2026-02-07">
+                                </div>
+                                <span class="days-count" id="daysCount1">3 days</span>
+                            </div>
+                            <div class="cart-item-price">₱120<span>/day</span></div>
+                            <div class="cart-item-subtotal" id="subtotal1">₱360</div>
+                            <div class="cart-item-actions">
+                                <button class="btn-remove-cart" data-id="1" aria-label="Remove item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cart Item 2 -->
+                        <div class="cart-item" data-id="5">
+                            <div class="cart-item-product">
+                                <div class="cart-item-image">
+                                    <img src="/assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket"
+                                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect fill=%22%231E293B%22 width=%2280%22 height=%2280%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter%22 font-size=%228%22>MiniSing</text></svg>'">
+                                </div>
+                                <div class="cart-item-info">
+                                    <h3 class="cart-item-name">MiniSing Pocket</h3>
+                                    <span class="cart-item-category">Portable</span>
+                                </div>
+                            </div>
+                            <div class="cart-item-dates">
+                                <div class="date-picker-group">
+                                    <label>Start</label>
+                                    <input type="date" class="cart-date-input" id="startDate2" value="2026-02-10">
+                                </div>
+                                <span class="date-arrow">→</span>
+                                <div class="date-picker-group">
+                                    <label>End</label>
+                                    <input type="date" class="cart-date-input" id="endDate2" value="2026-02-12">
+                                </div>
+                                <span class="days-count" id="daysCount2">3 days</span>
+                            </div>
+                            <div class="cart-item-price">₱120<span>/day</span></div>
+                            <div class="cart-item-subtotal" id="subtotal2">₱360</div>
+                            <div class="cart-item-actions">
+                                <button class="btn-remove-cart" data-id="5" aria-label="Remove item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <aside class="cart-summary">
+                        <h2 class="summary-title">Order Summary</h2>
+                        
+                        <div class="summary-rows">
+                            <div class="summary-row">
+                                <span>Subtotal (2 items)</span>
+                                <span id="cartSubtotal">₱720</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Delivery Fee</span>
+                                <span>₱150</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Service Fee</span>
+                                <span>₱50</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span id="cartTotal">₱920</span>
+                        </div>
+
+                        <div class="promo-code">
+                            <input type="text" placeholder="Enter promo code" class="promo-input">
+                            <button class="btn-apply-promo">Apply</button>
+                        </div>
+
+                        <button class="btn-checkout" id="btnCheckout">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            Proceed to Checkout
+                        </button>
+
+                        <p class="checkout-note">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Secure checkout with SSL encryption
+                        </p>
+                    </aside>
+                </div>
+
+                <!-- Empty Cart State (Hidden by default) -->
+                <div class="empty-cart" id="emptyCart" style="display: none;">
+                    <div class="empty-icon">🛒</div>
+                    <h2 class="empty-title">Your Cart is Empty</h2>
+                    <p class="empty-text">Looks like you haven't added any equipment to rent yet.</p>
+                    <a href="/client/catalog/catalog.html" class="btn-browse-catalog">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        Browse Catalog
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer (Injected by JS) -->
+            <div id="footerContainer"></div>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/shared/js/components.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

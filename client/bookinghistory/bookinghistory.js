@@ -68,6 +68,26 @@ function initTableActions() {
         });
     });
 
+    // Review buttons (only for completed orders)
+    document.querySelectorAll('.action-review').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const productName = this.dataset.productName;
+            
+            // Open review modal using Components
+            if (typeof Components !== 'undefined' && Components.openReviewModal) {
+                Components.openReviewModal({
+                    id: productId,
+                    name: productName,
+                    image: '',
+                    category: 'Equipment'
+                });
+            } else {
+                alert(`Rate & Review: ${productName}\n\nReview modal would open here.`);
+            }
+        });
+    });
+
     // Edit buttons
     document.querySelectorAll('.action-edit').forEach(btn => {
         btn.addEventListener('click', function() {

@@ -6,10 +6,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize sidebar and topbar
+    // Initialize sidebar, topbar, and footer
     if (typeof Components !== 'undefined') {
         Components.injectSidebar('sidebarContainer', 'catalog', 'client');
         Components.injectTopbar('topbarContainer', 'Browse Catalog');
+        Components.injectFooter();
     }
 
     // Initialize catalog functionality
@@ -22,11 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function initCatalog() {
     initCatalogTabs();
     initCategoryFilters();
+    initStatusFilters();
     initPriceSlider();
     initCalendar();
     initSearch();
     initSortSelect();
     initProductCards();
+    initProductModal();
     initPagination();
 }
 
@@ -82,6 +85,11 @@ function initCategoryFilters() {
         resetBtn.addEventListener('click', () => {
             checkboxes.forEach(cb => cb.checked = false);
             
+            // Reset status filters
+            document.querySelectorAll('.status-checkbox').forEach(cb => {
+                cb.checked = cb.value === 'available';
+            });
+            
             // Reset price slider
             const priceSlider = document.getElementById('priceSlider');
             if (priceSlider) {
@@ -92,6 +100,19 @@ function initCategoryFilters() {
             filterProducts();
         });
     }
+}
+
+/**
+ * Status Filters (Available, Booked, Maintenance)
+ */
+function initStatusFilters() {
+    const checkboxes = document.querySelectorAll('.status-checkbox');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            filterProducts();
+        });
+    });
 }
 
 /**
@@ -123,6 +144,8 @@ function filterProducts() {
     const products = document.querySelectorAll('.product-card');
     const activeCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
         .map(cb => cb.value);
+    const activeStatuses = Array.from(document.querySelectorAll('.status-checkbox:checked'))
+        .map(cb => cb.value);
     const maxPrice = parseInt(document.getElementById('priceSlider')?.value || 9999);
     const searchQuery = document.getElementById('catalogSearch')?.value.toLowerCase() || '';
     
@@ -132,10 +155,26 @@ function filterProducts() {
         const name = product.querySelector('.product-name')?.textContent.toLowerCase() || '';
         const description = product.querySelector('.product-description')?.textContent.toLowerCase() || '';
         
+        // Get product status from badge
+        const badge = product.querySelector('.product-badge');
+        let status = 'available';
+        if (badge) {
+            if (badge.classList.contains('booked') || badge.textContent.toLowerCase().includes('booked')) {
+                status = 'booked';
+            } else if (badge.classList.contains('maintenance') || badge.textContent.toLowerCase().includes('maintenance')) {
+                status = 'maintenance';
+            }
+        }
+        
         let show = true;
         
         // Category filter
         if (activeCategories.length > 0 && !activeCategories.includes(category)) {
+            show = false;
+        }
+        
+        // Status filter
+        if (activeStatuses.length > 0 && !activeStatuses.includes(status)) {
             show = false;
         }
         
@@ -343,6 +382,44 @@ function initProductCards() {
             }
         });
     });
+
+    // Initialize review buttons
+    initReviewButtons();
+    
+    // Initialize mock rental history for testing
+    if (typeof Components !== 'undefined') {
+        Components.initMockRentalHistory();
+    }
+}
+
+/**
+ * Initialize Review Buttons on Product Cards
+ */
+function initReviewButtons() {
+    document.querySelectorAll('.btn-write-review').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = e.target.closest('.product-card');
+            if (!card) return;
+            
+            const productId = card.dataset.id;
+            const productName = card.querySelector('.product-name')?.textContent || 'Product';
+            const productImage = card.querySelector('.product-image img')?.src || '';
+            const productCategory = card.querySelector('.badge')?.textContent || 'Equipment';
+            
+            // Open review modal
+            if (typeof Components !== 'undefined') {
+                Components.openReviewModal({
+                    id: productId,
+                    name: productName,
+                    image: productImage,
+                    category: productCategory
+                });
+            }
+        });
+    });
 }
 
 /**
@@ -386,4 +463,257 @@ function goToPage(pageNum) {
     // In a real app, this would fetch products for that page
     // For now, just scroll to top of products
     document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+/**
+ * Product Details Modal
+ */
+function initProductModal() {
+    const modal = document.getElementById('productModal');
+    const closeBtn = document.getElementById('closeProductModal');
+    
+    if (!modal) return;
+    
+    // Close modal handlers
+    closeBtn?.addEventListener('click', closeProductModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeProductModal();
+    });
+    
+    // Escape key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeProductModal();
+        }
+    });
+    
+    // Add click handlers to product cards (make whole card clickable)
+    document.querySelectorAll('.product-card').forEach(card => {
+        // Make the card clickable for viewing details
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // Don't open modal if clicking on action buttons
+            if (e.target.closest('.product-actions') || e.target.closest('button')) {
+                return;
+            }
+            openProductModal(card);
+        });
+    });
+    
+    // Modal action buttons
+    const favoriteBtn = document.getElementById('modalFavoriteBtn');
+    const cartBtn = document.getElementById('modalCartBtn');
+    
+    favoriteBtn?.addEventListener('click', () => {
+        favoriteBtn.classList.toggle('active');
+        const isActive = favoriteBtn.classList.contains('active');
+        favoriteBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="${isActive ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            ${isActive ? 'In Favorites' : 'Add to Favorites'}
+        `;
+    });
+    
+    cartBtn?.addEventListener('click', () => {
+        cartBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Added to Cart
+        `;
+        setTimeout(() => {
+            cartBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                Add to Cart
+            `;
+        }, 2000);
+    });
+}
+
+/**
+ * Open Product Modal with product data
+ */
+function openProductModal(card) {
+    const modal = document.getElementById('productModal');
+    if (!modal || !card) return;
+    
+    // Get product data from card
+    const productId = card.dataset.id;
+    const productName = card.querySelector('.product-name')?.textContent || 'Product';
+    const productImage = card.querySelector('.product-image')?.src || '';
+    const productPrice = card.querySelector('.product-price')?.textContent || '₱0';
+    const productDescription = card.querySelector('.product-description')?.textContent || '';
+    const badge = card.querySelector('.product-badge');
+    const badgeText = badge?.textContent || 'Available';
+    const badgeClass = badge?.classList.contains('booked') ? 'booked' : 
+                       badge?.classList.contains('maintenance') ? 'maintenance' : '';
+    
+    // Get rating data
+    const ratingScore = card.querySelector('.rating-score')?.textContent || '0.0';
+    const ratingCount = card.querySelector('.rating-count')?.textContent || '(0 reviews)';
+    const filledStars = card.querySelectorAll('.rating-stars .filled').length;
+    
+    // Get tags
+    const tags = Array.from(card.querySelectorAll('.product-tag')).map(t => t.textContent);
+    
+    // Populate modal
+    document.getElementById('modalProductImage').src = productImage;
+    document.getElementById('modalProductImage').alt = productName;
+    document.getElementById('modalProductName').textContent = productName;
+    document.getElementById('modalProductPrice').innerHTML = productPrice;
+    document.getElementById('modalProductDescription').textContent = productDescription;
+    
+    const modalBadge = document.getElementById('modalProductBadge');
+    modalBadge.textContent = badgeText;
+    modalBadge.className = 'modal-product-badge ' + badgeClass;
+    
+    // Populate rating
+    document.getElementById('modalRatingScore').textContent = ratingScore;
+    document.getElementById('modalRatingCount').textContent = ratingCount;
+    
+    const starsContainer = document.getElementById('modalRatingStars');
+    starsContainer.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        const starClass = i <= filledStars ? 'filled' : 'empty';
+        starsContainer.innerHTML += `
+            <svg viewBox="0 0 24 24" class="${starClass}">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        `;
+    }
+    
+    // Populate tags
+    const tagsContainer = document.getElementById('modalProductTags');
+    tagsContainer.innerHTML = tags.map(tag => `<span class="product-tag">${tag}</span>`).join('');
+    
+    // Populate availability (mock data)
+    const availabilityList = document.getElementById('modalAvailabilityList');
+    const mockBookings = getProductBookings(productId);
+    
+    if (mockBookings.length > 0) {
+        availabilityList.innerHTML = mockBookings.map(booking => `
+            <div class="availability-item">
+                <span class="availability-dates">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    ${booking.start} → ${booking.end}
+                </span>
+                <span class="availability-status">Booked</span>
+            </div>
+        `).join('');
+    } else {
+        availabilityList.innerHTML = '<p class="availability-empty">No upcoming bookings. Available anytime!</p>';
+    }
+    
+    // Populate reviews (mock data)
+    const reviewsList = document.getElementById('modalReviewsList');
+    const mockReviews = getProductReviews(productId);
+    const reviewsCount = document.getElementById('modalReviewsCount');
+    reviewsCount.textContent = `(${mockReviews.length})`;
+    
+    if (mockReviews.length > 0) {
+        reviewsList.innerHTML = mockReviews.map(review => `
+            <div class="review-item">
+                <div class="review-avatar">${review.author.charAt(0).toUpperCase()}</div>
+                <div class="review-content">
+                    <div class="review-header">
+                        <span class="review-author">${review.author}</span>
+                        <span class="review-date">${review.date}</span>
+                    </div>
+                    <div class="review-stars">
+                        ${Array(5).fill(0).map((_, i) => 
+                            `<svg viewBox="0 0 24 24" class="${i < review.rating ? 'filled' : 'empty'}">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>`
+                        ).join('')}
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                </div>
+            </div>
+        `).join('');
+    } else {
+        reviewsList.innerHTML = `
+            <div class="review-empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <p>No reviews yet. Be the first to share your experience!</p>
+            </div>
+        `;
+    }
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close Product Modal
+ */
+function closeProductModal() {
+    const modal = document.getElementById('productModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Get mock bookings for a product
+ */
+function getProductBookings(productId) {
+    // Mock booking data - in real app, this would come from an API
+    const bookings = {
+        '1': [
+            { start: 'Feb 15, 2026', end: 'Feb 17, 2026' },
+            { start: 'Mar 5, 2026', end: 'Mar 7, 2026' }
+        ],
+        '2': [],
+        '3': [
+            { start: 'Feb 20, 2026', end: 'Feb 22, 2026' }
+        ],
+        '4': [],
+        '5': [],
+        '6': [
+            { start: 'Feb 12, 2026', end: 'Feb 12, 2026' }
+        ]
+    };
+    return bookings[productId] || [];
+}
+
+/**
+ * Get mock reviews for a product
+ */
+function getProductReviews(productId) {
+    // Mock review data - in real app, this would come from an API
+    const reviews = {
+        '1': [
+            { author: 'Maria Santos', rating: 5, date: 'Jan 28, 2026', text: 'Amazing sound quality! The dual-mic setup was perfect for our family reunion. Highly recommend!' },
+            { author: 'Juan Dela Cruz', rating: 4, date: 'Jan 20, 2026', text: 'Great machine, lots of songs. Only wish it had more OPM classics.' },
+            { author: 'Anna Reyes', rating: 5, date: 'Jan 15, 2026', text: 'Professional quality! Made our birthday party unforgettable.' }
+        ],
+        '2': [
+            { author: 'Pedro Garcia', rating: 5, date: 'Jan 25, 2026', text: 'Perfect for small gatherings. Easy to carry and set up!' }
+        ],
+        '3': [
+            { author: 'Rosa Mendoza', rating: 4, date: 'Jan 22, 2026', text: 'Good value for money. Kids loved it!' }
+        ],
+        '4': [],
+        '5': [
+            { author: 'Carlos Tan', rating: 5, date: 'Jan 18, 2026', text: 'Concert-level sound! Worth every peso.' },
+            { author: 'Liza Aquino', rating: 5, date: 'Jan 10, 2026', text: 'Used for our wedding reception. Absolutely perfect!' }
+        ],
+        '6': [
+            { author: 'Miguel Santos', rating: 4, date: 'Jan 5, 2026', text: 'Industrial quality, great for large venues.' }
+        ]
+    };
+    return reviews[productId] || [];
 }

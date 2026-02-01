@@ -371,6 +371,33 @@
     border-color: var(--info);
 }
 
+/* Review Button */
+.action-review {
+    background: var(--bg-elevated);
+}
+
+.action-review:hover {
+    background: #FBBF24;
+    border-color: #FBBF24;
+}
+
+.action-review:hover svg {
+    stroke: white;
+    fill: white;
+}
+
+/* Disabled Action Placeholder */
+.action-disabled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    cursor: default;
+}
+
 /* Pagination */
 .pagination {
     display: flex;

@@ -15,9 +15,10 @@ const Dashboard = {
             return;
         }
 
-        // Inject reusable components (sidebar and topbar)
+        // Inject reusable components (sidebar, topbar, and footer)
         Components.injectSidebar('sidebarContainer', 'dashboard');
         Components.injectTopbar('topbarContainer', 'Dashboard');
+        Components.injectFooter();
 
         // Initialize dashboard interactions
         this.initCardActions();
