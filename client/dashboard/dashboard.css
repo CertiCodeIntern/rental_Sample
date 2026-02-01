@@ -1052,7 +1052,11 @@
 }
 
 .theme-toggle:hover {
-    background: var(--bg-hover);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle svg {
@@ -1279,27 +1283,35 @@
     align-items: center;
     justify-content: center;
     color: var(--text-secondary);
+    position: relative;
 }
 
 .btn-icon:hover {
-    background: var(--gray-100);
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+/* Dark mode hover fix */
+[data-theme="dark"] .btn-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .notification-badge {
     position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 18px;
+    top: 0;
+    right: 0;
+    min-width: 18px;
     height: 18px;
-    background: var(--danger-color);
+    padding: 0 4px;
+    background: #EF4444;
     border-radius: 50%;
     font-size: 10px;
     font-weight: 700;
-    color: white;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--white);
+    border: 2px solid var(--bg-card);
     animation: pulse 2s infinite;
 }
 
@@ -1468,7 +1480,7 @@
     position: absolute;
     top: calc(100% + 10px);
     right: 0;
-    width: 220px;
+    width: 250px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
@@ -1488,16 +1500,26 @@
 
 .profile-header {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
     padding: 16px;
     border-bottom: 1px solid var(--border-color);
 }
 
 .profile-info .name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
+    margin-bottom: 2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.profile-info .email {
+    font-size: 12px;
+    color: var(--text-secondary);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .profile-info .role {

@@ -457,10 +457,9 @@ const Components = {
                         <!-- Profile Dropdown -->
                         <div class="profile-dropdown" id="profileDropdown">
                             <div class="profile-header">
-                                <div class="avatar avatar-lg">${initial}</div>
                                 <div class="profile-info">
                                     <div class="name">${user.name || 'User'}</div>
-                                    <div class="role">${user.role || 'Customer'}</div>
+                                    <div class="email">${user.email || 'user@example.com'}</div>
                                 </div>
                             </div>
                             <nav class="profile-menu">
