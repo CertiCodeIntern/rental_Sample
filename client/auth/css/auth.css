@@ -24,10 +24,22 @@
     backdrop-filter: blur(10px);
 }
 
+/* Dark background for light theme visibility */
+[data-theme="light"] .back-to-home {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+}
+
 .back-to-home:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateX(-2px);
+}
+
+[data-theme="light"] .back-to-home:hover {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.9);
 }
 
 /* Auth Page Layout */

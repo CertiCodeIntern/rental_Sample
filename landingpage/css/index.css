@@ -997,6 +997,121 @@ body:has(.mobile-nav.open)::before {
 }
 
 /* ============================
+   CTA SECTION - LOGIN/REGISTER
+   ============================ */
+.cta-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.cta-card {
+    background: linear-gradient(135deg, var(--hero-top) 0%, var(--hero-bottom) 100%);
+    border-radius: 24px;
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(251, 112, 18, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text-inverse);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.cta-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 32px;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.cta-actions .btn {
+    min-width: 160px;
+}
+
+.cta-actions .btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-inverse);
+}
+
+.cta-actions .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cta-benefits {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.cta-benefit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.cta-benefit svg {
+    stroke: var(--accent);
+    flex-shrink: 0;
+}
+
+.cta-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-icon {
+    font-size: 120px;
+    opacity: 0.9;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ============================
    FOOTER
    ============================ */
 .site-footer {
@@ -1284,6 +1399,23 @@ body:has(.mobile-nav.open)::before {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .cta-card {
+        grid-template-columns: 1fr;
+        padding: 40px;
+    }
+
+    .cta-title {
+        font-size: 28px;
+    }
+
+    .cta-subtitle {
+        font-size: 15px;
+    }
+
+    .cta-visual {
+        display: none;
+    }
+
     .footer-inner {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -1322,6 +1454,27 @@ body:has(.mobile-nav.open)::before {
 
     .tabs {
         flex-wrap: wrap;
+    }
+
+    .cta-card {
+        padding: 32px 24px;
+    }
+
+    .cta-title {
+        font-size: 24px;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+    }
+
+    .cta-actions .btn {
+        width: 100%;
+    }
+
+    .cta-benefits {
+        flex-direction: column;
+        gap: 12px;
     }
 
     .wip-actions {
