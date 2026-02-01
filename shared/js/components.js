@@ -7,13 +7,22 @@
 
 const Components = {
     /**
-     * Navigation tabs configuration for the sidebar
+     * Navigation tabs configuration for the sidebar (Admin)
      */
     navTabs: [
         { id: 'users', icon: '👥', label: 'Users' },
         { id: 'rentals', icon: '📋', label: 'Rentals' },
         { id: 'items', icon: '🎤', label: 'Items' },
         { id: 'payments', icon: '💳', label: 'Payments' },
+    ],
+
+    /**
+     * Navigation tabs for client dashboard
+     */
+    clientNavTabs: [
+        { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard.html' },
+        { id: 'rentals', icon: '🎤', label: 'Browse Catalog', href: '/client/rentals.html' },
+        { id: 'booking', icon: '📅', label: 'Booking History', href: '/client/booking.html' },
     ],
 
     /**
@@ -45,20 +54,39 @@ const Components = {
      * Inject Sidebar into the DOM
      * @param {string} containerId - ID of the container element
      * @param {string} activeTab - Currently active tab ID
+     * @param {string} context - Context type ('admin' or 'client')
      */
-    injectSidebar(containerId, activeTab = 'users') {
+    injectSidebar(containerId, activeTab = 'users', context = null) {
         const container = document.getElementById(containerId);
         if (!container) return;
 
         const user = this.getCurrentUser();
         const initial = this.getUserInitial(user.name);
+        
+        // Determine context based on URL if not provided
+        const isClient = context === 'client' || window.location.pathname.includes('/client/');
+        const tabs = isClient ? this.clientNavTabs : this.navTabs;
 
-        const navItems = this.navTabs.map(tab => `
-            <button class="nav-item ${activeTab === tab.id ? 'active' : ''}" data-tab="${tab.id}">
-                <span class="nav-icon">${tab.icon}</span>
-                <span>${tab.label}</span>
-            </button>
-        `).join('');
+        const navItems = tabs.map(tab => {
+            const isActive = activeTab === tab.id;
+            if (tab.href) {
+                // Client nav uses links
+                return `
+                    <a class="nav-item ${isActive ? 'active' : ''}" href="${tab.href}">
+                        <span class="nav-icon">${tab.icon}</span>
+                        <span>${tab.label}</span>
+                    </a>
+                `;
+            } else {
+                // Admin nav uses buttons for SPA-style navigation
+                return `
+                    <button class="nav-item ${isActive ? 'active' : ''}" data-tab="${tab.id}">
+                        <span class="nav-icon">${tab.icon}</span>
+                        <span>${tab.label}</span>
+                    </button>
+                `;
+            }
+        }).join('');
 
         container.innerHTML = `
             <aside class="sidebar" id="sidebar">
