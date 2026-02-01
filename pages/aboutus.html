@@ -25,7 +25,7 @@
         /* Page-specific styles */
         .page-header {
             padding: 6rem 0 3rem;
-            background: linear-gradient(135deg, #013A63 0%, #014F86 100%);
+            background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
             color: white;
             text-align: center;
         }
@@ -109,7 +109,7 @@
             gap: 1.5rem;
         }
         .sidebar-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -164,8 +164,8 @@
             margin-bottom: 2rem;
         }
         .btn-white {
-            background: white;
-            color: #013A63;
+            background: var(--bg-card);
+            color: var(--brand-primary);
             padding: 0.875rem 2rem;
             border-radius: 8px;
             font-weight: 600;

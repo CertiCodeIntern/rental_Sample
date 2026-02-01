@@ -749,3 +749,113 @@
         font-size: var(--font-size-sm);
     }
 }
+
+/* =====================================================
+   DARK MODE SUPPORT
+   ===================================================== */
+[data-theme="dark"] .auth-right {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .auth-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .auth-header h2 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-header p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .mobile-logo-text {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-tabs {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .tab-indicator {
+    background: var(--bg-elevated);
+}
+
+[data-theme="dark"] .auth-tab {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .auth-tab:hover {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-tab.active {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-form-group label {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .auth-form-group input {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .auth-form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+}
+
+[data-theme="dark"] .password-toggle {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .password-toggle:hover {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .remember-forgot {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .remember-forgot a {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .auth-divider span {
+    background: var(--bg-card);
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .auth-divider::before,
+[data-theme="dark"] .auth-divider::after {
+    background: var(--border-color);
+}
+
+[data-theme="dark"] .social-btn {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .social-btn:hover {
+    background: var(--bg-elevated);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .auth-footer p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .auth-footer a {
+    color: var(--primary-color);
+}

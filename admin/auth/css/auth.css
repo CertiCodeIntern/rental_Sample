@@ -458,3 +458,75 @@ body {
         align-items: flex-start;
     }
 }
+
+/* =====================================================
+   DARK MODE SUPPORT
+   ===================================================== */
+[data-theme="dark"] body {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] .admin-form-panel {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .form-title {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .form-subtitle {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .form-group label {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .input-wrapper input {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .input-wrapper input:focus {
+    background: var(--bg-elevated);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.2);
+}
+
+[data-theme="dark"] .input-wrapper input::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .input-wrapper .input-icon {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .toggle-password .eye-icon {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .toggle-password:hover .eye-icon {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .form-options label {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .form-footer {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .demo-credentials {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+[data-theme="dark"] .demo-title {
+    color: #38bdf8;
+}
+
+[data-theme="dark"] .credentials-box {
+    color: var(--text-secondary);
+}

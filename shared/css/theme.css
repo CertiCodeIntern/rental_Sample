@@ -74,7 +74,10 @@
     --info-bg: #DBEAFE;
     
     /* === STRUCTURAL === */
-    --container-width: 1140px;
+    /* Hybrid Container System */
+    --container-width: 1440px;          /* Landing pages - constrained for readability */
+    --container-width-fluid: calc(100% - 40px);  /* Dashboard pages - fluid for functionality */
+    --container-width-auth: 500px;      /* Auth pages - focused and narrow */
     --gutter: 20px;
     --radius: 12px;
     --radius-sm: 8px;
@@ -196,25 +199,62 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* Auth Theme Toggle - Positioned in top-right corner */
+.auth-theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+}
+
+.auth-theme-toggle:hover {
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.auth-theme-toggle svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
 /* Light Mode: Show Moon, Hide Sun */
-.theme-toggle .sun-icon {
+.theme-toggle .sun-icon,
+.auth-theme-toggle .sun-icon {
     position: absolute;
     opacity: 0;
     transform: rotate(-90deg) scale(0.5);
 }
 
-.theme-toggle .moon-icon {
+.theme-toggle .moon-icon,
+.auth-theme-toggle .moon-icon {
     opacity: 1;
     transform: rotate(0) scale(1);
 }
 
 /* Dark Mode: Show Sun, Hide Moon */
-[data-theme="dark"] .theme-toggle .sun-icon {
+[data-theme="dark"] .theme-toggle .sun-icon,
+[data-theme="dark"] .auth-theme-toggle .sun-icon {
     opacity: 1;
     transform: rotate(0) scale(1);
 }
 
-[data-theme="dark"] .theme-toggle .moon-icon {
+[data-theme="dark"] .theme-toggle .moon-icon,
+[data-theme="dark"] .auth-theme-toggle .moon-icon {
     opacity: 0;
     transform: rotate(90deg) scale(0.5);
 }
