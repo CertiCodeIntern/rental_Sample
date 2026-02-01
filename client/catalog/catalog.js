@@ -31,6 +31,7 @@ function initCatalog() {
     initProductCards();
     initProductModal();
     initPagination();
+    initCartFavoriteButtons();
 }
 
 /**
@@ -85,9 +86,9 @@ function initCategoryFilters() {
         resetBtn.addEventListener('click', () => {
             checkboxes.forEach(cb => cb.checked = false);
             
-            // Reset status filters
+            // Reset status filters - uncheck ALL including Available Now
             document.querySelectorAll('.status-checkbox').forEach(cb => {
-                cb.checked = cb.value === 'available';
+                cb.checked = false;
             });
             
             // Reset price slider
@@ -321,12 +322,8 @@ function initCalendar() {
             // Mark past dates as disabled
             if (cellDate < today) {
                 dayEl.classList.add('disabled');
-            } else if (isDateBooked(cellDate)) {
-                // Mark booked dates
-                dayEl.classList.add('booked');
-                dayEl.setAttribute('data-tooltip', 'Booked');
             } else {
-                // Clickable date
+                // All future dates are selectable - filter calendar is for user date selection only
                 dayEl.addEventListener('click', () => handleDateClick(cellDate));
             }
             
@@ -1032,4 +1029,118 @@ function getProductReviews(productId) {
         ]
     };
     return reviews[productId] || [];
+}
+
+/**
+ * Initialize Cart and Favorite Buttons with Toast Notifications
+ */
+function initCartFavoriteButtons() {
+    // Favorite buttons on product cards
+    document.querySelectorAll('.product-card .btn-favorite').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = btn.closest('.product-card');
+            const productName = card?.querySelector('.product-name')?.textContent || 'Item';
+            const isActive = btn.classList.toggle('active');
+            
+            // Update button appearance
+            const svg = btn.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('fill', isActive ? 'currentColor' : 'none');
+            }
+            
+            // Show toast notification
+            if (typeof showToast === 'function') {
+                if (isActive) {
+                    showToast(`${productName} added to favorites`, 'success');
+                } else {
+                    showToast(`${productName} removed from favorites`, 'info');
+                }
+            }
+        });
+    });
+    
+    // Cart buttons on product cards
+    document.querySelectorAll('.product-card .btn-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = btn.closest('.product-card');
+            const productName = card?.querySelector('.product-name')?.textContent || 'Item';
+            const isInCart = btn.classList.toggle('active');
+            
+            // Show toast notification
+            if (typeof showToast === 'function') {
+                if (isInCart) {
+                    showToast(`${productName} added to cart`, 'success');
+                } else {
+                    showToast(`${productName} removed from cart`, 'info');
+                }
+            }
+        });
+    });
+    
+    // Modal favorite button
+    const modalFavoriteBtn = document.getElementById('modalFavoriteBtn');
+    if (modalFavoriteBtn) {
+        // Remove old listener by cloning
+        const newBtn = modalFavoriteBtn.cloneNode(true);
+        modalFavoriteBtn.parentNode.replaceChild(newBtn, modalFavoriteBtn);
+        
+        newBtn.addEventListener('click', () => {
+            const isActive = newBtn.classList.toggle('active');
+            const productName = document.getElementById('modalProductName')?.textContent || 'Item';
+            
+            newBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="${isActive ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                ${isActive ? 'In Favorites' : 'Add to Favorites'}
+            `;
+            
+            if (typeof showToast === 'function') {
+                if (isActive) {
+                    showToast(`${productName} added to favorites`, 'success');
+                } else {
+                    showToast(`${productName} removed from favorites`, 'info');
+                }
+            }
+        });
+    }
+    
+    // Modal cart button
+    const modalCartBtn = document.getElementById('modalCartBtn');
+    if (modalCartBtn) {
+        // Remove old listener by cloning
+        const newBtn = modalCartBtn.cloneNode(true);
+        modalCartBtn.parentNode.replaceChild(newBtn, modalCartBtn);
+        
+        newBtn.addEventListener('click', () => {
+            const productName = document.getElementById('modalProductName')?.textContent || 'Item';
+            
+            newBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Added to Cart
+            `;
+            
+            if (typeof showToast === 'function') {
+                showToast(`${productName} added to cart`, 'success');
+            }
+            
+            setTimeout(() => {
+                newBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    Add to Cart
+                `;
+            }, 2000);
+        });
+    }
 }

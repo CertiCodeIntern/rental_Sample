@@ -399,10 +399,65 @@ img {
    Global footer component for all client pages
    ===================================================== */
 .app-footer {
-    background: var(--card-bg, #ffffff);
-    border-top: 1px solid var(--border-color, #e2e8f0);
+    background: linear-gradient(135deg, var(--page-header-start, #013A63) 0%, var(--page-header-end, #014F86) 100%);
+    border-top: none;
     margin-top: 3rem;
     padding: 2rem 1.5rem 1rem;
+    /* Fix: Ensure footer spans full width, compensating for sidebar offset */
+    margin-left: calc(-1 * var(--sidebar-width, 240px));
+    width: calc(100% + var(--sidebar-width, 240px));
+    box-sizing: border-box;
+}
+
+/* Fix footer positioning when sidebar is collapsed */
+.sidebar-collapsed .app-footer {
+    margin-left: calc(-1 * var(--sidebar-collapsed-width, 72px));
+    width: calc(100% + var(--sidebar-collapsed-width, 72px));
+}
+
+/* Fix footer on mobile when sidebar is hidden */
+@media (max-width: 768px) {
+    .app-footer {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Footer text colors for blueish background */
+.app-footer,
+.app-footer .footer-tagline,
+.app-footer .footer-copyright {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.app-footer .footer-brand-name {
+    color: #ffffff;
+}
+
+.app-footer .footer-heading {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.app-footer .footer-nav a {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.app-footer .footer-nav a:hover {
+    color: #ffffff;
+}
+
+.app-footer .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.app-footer .social-link {
+    color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-footer .social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 .footer-content {
@@ -412,7 +467,7 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .footer-main {
@@ -427,8 +482,8 @@ img {
 }
 
 .footer-logo {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
@@ -509,15 +564,28 @@ img {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--bg-secondary, #f1f5f9);
-    color: var(--text-secondary, #64748b);
+    background: transparent;
+    border: 1px solid var(--primary, #014F86);
+    color: var(--primary, #014F86);
     transition: all 0.2s ease;
 }
 
 .social-link:hover {
-    background: var(--primary-color, #E94F37);
+    background: var(--primary, #014F86);
     color: white;
     transform: translateY(-2px);
+}
+
+/* Dark mode social links - white on dark background */
+[data-theme="dark"] .social-link {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] .social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
 }
 
 /* Dark mode footer overrides */
@@ -554,6 +622,85 @@ img {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+}
+
+/* =====================================================
+   TOAST NOTIFICATION SYSTEM
+   Global toast notifications for user feedback
+   ===================================================== */
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: var(--bg-card, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 360px;
+    border-left: 4px solid var(--primary, #014F86);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+}
+
+.toast-message {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary, #1e293b);
+    line-height: 1.4;
+}
+
+/* Toast Type Variants */
+.toast-success {
+    border-left-color: #22C55E;
+}
+
+.toast-error {
+    border-left-color: #EF4444;
+}
+
+.toast-warning {
+    border-left-color: #F59E0B;
+}
+
+.toast-info {
+    border-left-color: var(--primary, #014F86);
+}
+
+/* Dark mode toast */
+[data-theme="dark"] .toast {
+    background: var(--bg-card, #1e293b);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .toast-message {
+    color: var(--text-primary, #f1f5f9);
+}
+
+/* Toast responsive */
+@media (max-width: 480px) {
+    .toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
     }
 }
 

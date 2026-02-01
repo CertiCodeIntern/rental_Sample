@@ -44,15 +44,15 @@
                                 <circle cx="11" cy="11" r="8"/>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
-                            <input type="text" id="catalogSearch" class="catalog-search" placeholder="Search machine models...">
+                            <input type="text" id="catalogSearch" class="catalog-search" placeholder="Search machine models..." title="Search for karaoke machine models">
                         </div>
                     </div>
                 </div>
 
                 <!-- Tabs Navigation -->
                 <div class="rentals-tabs">
-                    <button class="tab-link active" data-tab="all">Catalog</button>
-                    <button class="tab-link" data-tab="promos">Top Promos</button>
+                    <button class="tab-link active" data-tab="all" title="View all catalog items">Catalog</button>
+                    <button class="tab-link" data-tab="promos" title="View promotional items">Top Promos</button>
                 </div>
 
                 <!-- Catalog Layout -->
@@ -64,7 +64,7 @@
                                 <h2 class="filter-title">Filters</h2>
                                 <p class="filter-subtitle">Find the perfect machine</p>
                             </div>
-                            <button class="reset-filters">Reset All</button>
+                            <button class="reset-filters" title="Reset all filters to default">Reset All</button>
                         </div>
 
                         <!-- Category Filter -->
@@ -80,17 +80,17 @@
                             </h3>
                             <div class="category-list">
                                 <label class="category-item">
-                                    <input type="checkbox" class="category-checkbox" value="portable">
+                                    <input type="checkbox" class="category-checkbox" value="portable" title="Filter by portable machines">
                                     <span class="category-color portable"></span>
                                     <span class="category-label">Portable</span>
                                 </label>
                                 <label class="category-item">
-                                    <input type="checkbox" class="category-checkbox" value="premium">
+                                    <input type="checkbox" class="category-checkbox" value="premium" title="Filter by premium machines">
                                     <span class="category-color premium"></span>
                                     <span class="category-label">Premium</span>
                                 </label>
                                 <label class="category-item">
-                                    <input type="checkbox" class="category-checkbox" value="professional">
+                                    <input type="checkbox" class="category-checkbox" value="professional" title="Filter by professional machines">
                                     <span class="category-color professional"></span>
                                     <span class="category-label">Professional</span>
                                 </label>
@@ -108,21 +108,21 @@
                             </h3>
                             <div class="status-list">
                                 <label class="status-item">
-                                    <input type="checkbox" class="status-checkbox" value="available">
+                                    <input type="checkbox" class="status-checkbox" value="available" title="Show only available machines">
                                     <span class="status-label">
                                         <span class="status-indicator available"></span>
                                         Available Now
                                     </span>
                                 </label>
                                 <label class="status-item">
-                                    <input type="checkbox" class="status-checkbox" value="booked">
+                                    <input type="checkbox" class="status-checkbox" value="booked" title="Show only booked machines">
                                     <span class="status-label">
                                         <span class="status-indicator booked"></span>
                                         Booked
                                     </span>
                                 </label>
                                 <label class="status-item">
-                                    <input type="checkbox" class="status-checkbox" value="maintenance">
+                                    <input type="checkbox" class="status-checkbox" value="maintenance" title="Show machines under maintenance">
                                     <span class="status-label">
                                         <span class="status-indicator maintenance"></span>
                                         Under Maintenance
@@ -141,7 +141,7 @@
                                 Price Range (₱)
                             </h3>
                             <div class="price-range-wrap">
-                                <input type="range" id="priceSlider" class="price-slider" min="50" max="10000" value="10000" step="50">
+                                <input type="range" id="priceSlider" class="price-slider" min="50" max="10000" value="10000" step="50" title="Adjust maximum price range">
                                 <div class="price-labels">
                                     <span>₱50</span>
                                     <span class="price-value" id="priceValue">₱10,000</span>
@@ -220,7 +220,7 @@
                             </h2>
                             <div class="products-sort">
                                 <span class="sort-label">Sort by:</span>
-                                <select class="sort-select" id="sortSelect">
+                                <select class="sort-select" id="sortSelect" title="Sort products by criteria">
                                     <option value="popular">Most Popular</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="price-high">Price: High to Low</option>

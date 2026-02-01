@@ -114,7 +114,7 @@ const Components = {
                         <span class="sidebar-logo-text">RentIt</span>
                     </div>
                     <!-- Collapse Toggle Button -->
-                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Toggle sidebar">
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Toggle sidebar" title="Collapse/expand sidebar">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <polyline points="15 18 9 12 15 6"/>
                         </svg>
@@ -163,7 +163,7 @@ const Components = {
                         </button>
                     </div>
                     
-                    <button class="logout-btn" id="logoutBtn">
+                    <button class="logout-btn" id="logoutBtn" title="Sign out of your account">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                             <polyline points="16 17 21 12 16 7"/>
@@ -1223,6 +1223,45 @@ const Components = {
     },
 
     /**
+     * Global Toast Notification System
+     * @param {string} message - The message to display
+     * @param {string} type - Toast type: 'success', 'error', 'warning', 'info'
+     */
+    showToast(message, type = 'success') {
+        // Remove existing toasts
+        document.querySelectorAll('.toast').forEach(t => t.remove());
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+
+        // Icon based on type
+        const icons = {
+            success: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+            error: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+            warning: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+            info: '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#014F86" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+        };
+
+        toast.innerHTML = `
+            ${icons[type] || icons.info}
+            <span class="toast-message">${message}</span>
+        `;
+
+        document.body.appendChild(toast);
+
+        // Trigger slide-in animation
+        requestAnimationFrame(() => {
+            toast.classList.add('show');
+        });
+
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    },
+
+    /**
      * Initialize mock rental history for testing reviews
      */
     initMockRentalHistory() {
@@ -1242,3 +1281,8 @@ const Components = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Components;
 }
+
+// Global showToast function for convenience
+window.showToast = function(message, type = 'success') {
+    Components.showToast(message, type);
+};

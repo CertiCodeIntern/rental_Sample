@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof Components !== 'undefined') {
         Components.injectSidebar('sidebarContainer', 'myrentals', 'client');
         Components.injectTopbar('topbarContainer', 'My Rentals');
+        Components.injectFooter('footerContainer');
     }
     
     initRentalActions();

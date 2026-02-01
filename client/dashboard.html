@@ -38,7 +38,7 @@
                         <p class="page-subtitle">Welcome back! Here's an overview of your rental activity.</p>
                     </div>
                     <div class="page-header-actions">
-                        <a href="/client/catalog/catalog.html" class="btn-new">
+                        <a href="/client/catalog/catalog.html" class="btn-new" title="Browse available rental equipment">
                             Browse Catalog
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -190,6 +190,13 @@
                             </div>
                         </article>
                     </div>
+
+                    <!-- View All Link -->
+                    <div class="section-header-link">
+                        <a href="/client/myrentals/myrentals.html" class="view-all-link">View All</a>
+                    </div>
+                    <!--
+ -->
                 </section>
 
                 <!-- Booking History -->
@@ -282,6 +289,59 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                </section>
+
+                <!-- Returns & Extensions Section -->
+                <section class="returns-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Returns & Extensions</h2>
+                        <span class="units-badge" id="returnsBadge">1 Pending</span>
+                    </div>
+
+                    <div class="returns-panel">
+                        <table class="returns-table" role="table" aria-label="Returns and extensions">
+                            <thead>
+                                <tr>
+                                    <th>Item Details</th>
+                                    <th>Request Type</th>
+                                    <th>Request Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="returnsTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="history-item">
+                                            <div class="history-thumb">🎤</div>
+                                            <div class="history-info">
+                                                <div class="history-name">Karaoke Pro System X-100</div>
+                                                <div class="history-id">#VDK-8921</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="request-type type-extension">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="23 4 23 10 17 10"/>
+                                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                            </svg>
+                                            Extension
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="period-dates">Feb 01, 2026</div>
+                                    </td>
+                                    <td><span class="status-pill status-pending">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- View All Link -->
+                    <div class="section-header-link">
+                        <a href="/client/returns/returns.html" class="view-all-link">View All</a>
                     </div>
                 </section>
 

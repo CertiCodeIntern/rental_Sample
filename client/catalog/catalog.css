@@ -110,7 +110,6 @@
     flex-direction: column;
     gap: 16px;
     max-height: calc(100vh - 180px);
-    overflow-y: auto;
     padding-right: 4px;
 }
 
@@ -603,18 +602,12 @@
     border: 2px solid var(--accent);
 }
 
-/* Booked day styling */
+/* Booked day styling - for visual reference in product availability popovers
+   The filter calendar doesn't use this, but product popover calendars may */
 .calendar-day.booked {
-    background: var(--danger-muted, rgba(239, 68, 68, 0.1));
-    color: var(--danger-color, #ef4444);
+    background: var(--danger-bg, rgba(239, 68, 68, 0.1));
+    color: var(--danger, #EF4444);
     cursor: not-allowed;
-}
-
-.calendar-day.booked::before {
-    content: 'Booked';
-    background: var(--danger-color, #ef4444);
-    color: white;
-    border-color: var(--danger-color, #ef4444);
 }
 
 /* Date Range Selection Styles - Visual Connector */
@@ -1156,6 +1149,7 @@
     top: 48px;
     left: 12px;
     width: 250px;
+    min-height: 250px;
     max-height: 350px;
     padding: 12px;
     background: var(--bg-card);
@@ -1859,6 +1853,26 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+    
+    /* Fix calendar-grid overflow */
+    .calendar-grid {
+        gap: 1px;
+        width: 100%;
+    }
+    
+    .calendar-day {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+    
+    .calendar-nav {
+        gap: 8px;
+    }
+    
+    .calendar-month {
+        font-size: 12px;
     }
 }
 

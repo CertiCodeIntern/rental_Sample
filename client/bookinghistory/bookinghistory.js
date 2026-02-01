@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof Components !== 'undefined') {
         Components.injectSidebar('sidebarContainer', 'bookinghistory', 'client');
         Components.injectTopbar('topbarContainer', 'Booking History');
+        Components.injectFooter('footerContainer');
     }
     
     initFilterDropdown();
