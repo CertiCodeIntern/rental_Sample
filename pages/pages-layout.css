@@ -41,14 +41,14 @@
 .page-content h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--brand-primary);
+    color: var(--heading-primary);
     margin-bottom: 1rem;
     margin-top: 2rem;
     transition: color var(--transition-speed) ease;
 }
 
 [data-theme="dark"] .page-content h2 {
-    color: var(--accent);
+    color: var(--heading-primary);
 }
 
 .page-content h2:first-of-type {
@@ -100,13 +100,13 @@
 .sidebar-card h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--brand-primary);
+    color: var(--heading-primary);
     margin-bottom: 1rem;
     transition: color var(--transition-speed) ease;
 }
 
 [data-theme="dark"] .sidebar-card h3 {
-    color: var(--accent);
+    color: var(--heading-primary);
 }
 
 .sidebar-card p {

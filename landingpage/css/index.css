@@ -2,30 +2,17 @@
    RENTIT LANDING PAGE STYLES
    RentIt - Videoke Rental Management System
    Powered by CertiCode
+   
+   NOTE: All color variables are inherited from theme.css
+   This file only defines structural/layout variables
    ============================================================ */
 
 /* ============================
-   CSS VARIABLES
+   STRUCTURAL VARIABLES ONLY
+   (Colors come from theme.css)
    ============================ */
 :root {
-    /* Color Palette */
-    --nav-primary: #013A63;
-    --hero-top: #0A1628;
-    --hero-bottom: #013A63;
-    --accent: #FB7012;
-    --accent-hover: #FF8534;
-    --accent-soft: #FFA970;
-    --footer-bg: #0F172A;
-    --panel: #1e293b;
-    --text: #FFFFFF;
-    --text-muted: #94a3b8;
-    --card-bg: #FFFFFF;
-    --section-light: #F5F6F8;
-    --success: #22c55e;
-    --warning: #eab308;
-    --danger: #ef4444;
-    
-    /* Structural */
+    /* Structural - these don't change with theme */
     --container-width: 1140px;
     --gutter: 20px;
     --radius: 12px;
@@ -33,7 +20,7 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.15s ease;
     
-    /* Shadows */
+    /* Shadows - these are defined in theme.css but can be overridden */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);

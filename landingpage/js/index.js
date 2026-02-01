@@ -388,21 +388,113 @@
 
     // ============================
     // ACTIVE NAV LINK HIGHLIGHT
+    // With Click-based switching and ScrollSpy
     // ============================
     function initActiveNavHighlight() {
-        const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const sections = document.querySelectorAll('section[id]');
         
+        // Get current page path
+        const currentPath = window.location.pathname;
+        const isHomePage = currentPath === '/' || currentPath === '/index.html' || currentPath === '';
+        
+        // Helper: Remove active class from all nav links
+        function removeAllActive() {
+            navLinks.forEach(link => link.classList.remove('active'));
+            mobileLinks.forEach(link => link.classList.remove('active'));
+        }
+        
+        // Helper: Set active link by href
+        function setActiveByHref(href) {
+            removeAllActive();
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === href) {
+                    link.classList.add('active');
+                }
+            });
+            mobileLinks.forEach(link => {
+                if (link.getAttribute('href') === href) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // 1. Click-based active state switching
         navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPath || 
-                (href === '/' && (currentPath === '/index.html' || currentPath === '')) ||
-                currentPath.includes(href.replace('.html', ''))) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // For anchor links on same page, update active state immediately
+                if (href.startsWith('#') || href.startsWith('/#')) {
+                    removeAllActive();
+                    this.classList.add('active');
+                }
+                // For page links, let the page navigation handle it
+            });
         });
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                if (href.startsWith('#') || href.startsWith('/#')) {
+                    removeAllActive();
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // 2. ScrollSpy - Update active state on scroll (only on home page with sections)
+        if (isHomePage && sections.length > 0) {
+            let ticking = false;
+            
+            function updateActiveOnScroll() {
+                const scrollPos = window.scrollY + 150; // Offset for header height
+                
+                let currentSection = null;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                if (currentSection) {
+                    setActiveByHref('#' + currentSection);
+                } else if (window.scrollY < 100) {
+                    // At top of page, activate Home
+                    setActiveByHref('/');
+                }
+                
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateActiveOnScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+        }
+        
+        // 3. Initial state based on URL path or hash
+        if (window.location.hash) {
+            setActiveByHref(window.location.hash);
+        } else if (isHomePage) {
+            setActiveByHref('/');
+        } else {
+            // For inner pages, match by pathname
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentPath.includes(href.replace('.html', '').replace('/pages/', ''))) {
+                    link.classList.add('active');
+                }
+            });
+        }
     }
 
     // ============================

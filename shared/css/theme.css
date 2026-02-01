@@ -106,13 +106,17 @@
     --panel: var(--panel-bg);
     
     /* === SECTION CONTENT COLORS (Theme-aware) === */
-    --section-title: #0A1628;           /* Section titles - rich dark */
+    --section-title: #0F172A;           /* Section titles - rich dark */
     --section-text: #64748B;            /* Section body text */
-    --card-title: #0A1628;              /* Card titles */
+    --card-title: #0F172A;              /* Card titles */
     --card-text: #64748B;               /* Card body text */
-    --icon-fill: #0A1628;               /* Icon fills in sections */
+    --icon-fill: #0F172A;               /* Icon fills in sections */
     --tab-text: #64748B;                /* Tab inactive text */
     --tab-border: #E2E8F0;              /* Tab borders */
+    
+    /* === HEADING COLORS (Theme-aware - replaces brand-primary for content) === */
+    --heading-primary: #013A63;         /* Primary headings - brand blue in light */
+    --heading-secondary: #014F86;       /* Secondary headings */
     
     /* === DROPDOWN COLORS === */
     --dropdown-bg: #FFFFFF;
@@ -150,6 +154,10 @@
     --section-text: #CBD5E1;            /* Section body text */
     --card-title: #F1F5F9;              /* Card titles */
     --card-text: #94A3B8;               /* Card body text */
+    
+    /* Heading colors - light in dark mode */
+    --heading-primary: #F1F5F9;         /* Primary headings - light in dark mode */
+    --heading-secondary: #CBD5E1;       /* Secondary headings */
     
     /* Borders */
     --border-light: rgba(255, 255, 255, 0.08);
