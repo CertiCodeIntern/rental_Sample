@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RentIt - This feature is currently under development.">
-    <title>RentIt - Work in Progress</title>
+    <meta name="description" content="Contact RentIt - Get in touch with our support team.">
+    <title>Contact Us - RentIt</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +14,193 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/rIT_logo_tp.png">
 
-    <!-- Stylesheet (shared with landing page) -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="../landingpage/css/index.css">
+    
+    <style>
+        /* Page-specific styles */
+        .page-header {
+            padding: 6rem 0 3rem;
+            background: linear-gradient(135deg, #013A63 0%, #014F86 100%);
+            color: white;
+            text-align: center;
+        }
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .page-content {
+            padding: 4rem 0;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+        }
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .contact-form-wrapper {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #013A63;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FB7012;
+            box-shadow: 0 0 0 3px rgba(251, 112, 18, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-icon {
+            margin-left: 0.5rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .info-card h3 {
+            color: #013A63;
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem;
+        }
+        .info-card p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 0 0 0.75rem;
+        }
+        .info-card a {
+            color: #FB7012;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+        .info-card address {
+            font-style: normal;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #FB7012;
+            color: #FB7012;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            background: #FB7012;
+            color: white;
+        }
+        .faq-section {
+            padding: 4rem 0;
+            background: #f8fafc;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            color: #013A63;
+            margin-bottom: 0.5rem;
+        }
+        .section-subtitle {
+            color: #64748b;
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .faq-item h4 {
+            color: #013A63;
+            font-size: 1rem;
+            margin: 0 0 0.5rem;
+        }
+        .faq-item p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
     <!-- ============================
-         SITE HEADER (Consistent)
+         SITE HEADER
          ============================ -->
     <header class="site-header">
         <div class="container header-inner">
@@ -40,7 +221,7 @@
                 <a href="/#machines" class="nav-link">Rentals</a>
                 <a href="/#pricing" class="nav-link">Pricing</a>
                 <a href="/pages/aboutus.html" class="nav-link">About</a>
-                <a href="/pages/contactus.html" class="nav-link">Contact</a>
+                <a href="/pages/contactus.html" class="nav-link active">Contact</a>
             </nav>
             
             <!-- Header Actions -->
@@ -177,40 +358,119 @@
     </header>
 
     <main>
-        <!-- ============================
-             WIP SECTION
-             ============================ -->
-        <section class="wip-section">
-            <div class="wip-content">
-                <div class="wip-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">Contact Us</h1>
+                <p class="page-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="page-content">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a topic</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="billing">Billing Question</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="partnership">Partnership</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                Send Message
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <div class="info-icon">📧</div>
+                            <h3>Email Us</h3>
+                            <p>For general inquiries and support</p>
+                            <a href="mailto:support@rentit.ph">support@rentit.ph</a>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">📞</div>
+                            <h3>Call Us</h3>
+                            <p>Mon-Fri from 8am to 5pm</p>
+                            <a href="tel:+639123456789">+63 912 345 6789</a>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">📍</div>
+                            <h3>Visit Us</h3>
+                            <p>Come say hello at our office</p>
+                            <address>
+                                123 Business Center<br>
+                                Manila, Philippines
+                            </address>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon">💬</div>
+                            <h3>Live Chat</h3>
+                            <p>Available 24/7 for premium users</p>
+                            <a href="/pages/wip.html" class="btn-outline">Start Chat</a>
+                        </div>
+                    </div>
                 </div>
-                
-                <h1 class="wip-title">Work in <span class="accent">Progress</span></h1>
-                
-                <p class="wip-description">
-                    We're working hard to bring you this feature! Our team is crafting something special that will make your videoke rental experience even better.
-                </p>
-                
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Quick answers to common questions.</p>
                 </div>
-                <p class="progress-label">Estimated completion: 35%</p>
-                
-                <div class="wip-actions">
-                    <a href="/" class="btn btn-primary">Back to Home</a>
-                    <a href="/pages/contact.html" class="btn btn-outline">Contact Us</a>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>How do I get started?</h4>
+                        <p>Simply create a free account and you can start managing your rentals right away. No credit card required.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Is there a free trial?</h4>
+                        <p>Yes! We offer a 14-day free trial with full access to all features. No commitment required.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>What payment methods do you accept?</h4>
+                        <p>We accept all major credit cards, GCash, Maya, and bank transfers.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Can I cancel anytime?</h4>
+                        <p>Absolutely. You can cancel your subscription at any time with no penalties.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- ============================
-         SITE FOOTER (Consistent)
+         SITE FOOTER
          ============================ -->
     <footer class="site-footer">
         <div class="container">
@@ -285,7 +545,15 @@
         </div>
     </footer>
 
-    <!-- Scripts (shared with landing page) -->
+    <!-- Scripts -->
     <script src="../landingpage/js/index.js"></script>
+    <script>
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>

@@ -8,9 +8,9 @@
     { "source": "/admin/login", "destination": "/admin/auth/login.html" },
     { "source": "/admin/dashboard", "destination": "/admin/dashboard.html" },
     { "source": "/wip", "destination": "/pages/wip.html" },
-    { "source": "/about", "destination": "/pages/about.html" },
-    { "source": "/contact", "destination": "/pages/contact.html" },
-    { "source": "/privacy", "destination": "/pages/privacy.html" },
+    { "source": "/about", "destination": "/pages/aboutus.html" },
+    { "source": "/contact", "destination": "/pages/contactus.html" },
+    { "source": "/privacy", "destination": "/pages/privacy-policy.html" },
     { "source": "/terms", "destination": "/pages/terms.html" }
   ],
   "headers": [
