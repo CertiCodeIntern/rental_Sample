@@ -304,7 +304,7 @@ ul, ol {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: 10px 20px;
     gap: 20px;
 }
 
@@ -420,8 +420,8 @@ ul, ol {
     top: calc(100% + 10px);
     right: 0;
     width: 320px;
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dropdown-bg);
+    border: 1px solid var(--dropdown-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-xl);
     opacity: 0;
@@ -443,12 +443,13 @@ ul, ol {
     justify-content: space-between;
     align-items: center;
     padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .notification-header h4 {
     font-size: 14px;
     font-weight: 600;
+    color: var(--dropdown-text);
 }
 
 .notification-header .mark-read {
@@ -471,17 +472,17 @@ ul, ol {
     display: flex;
     gap: 12px;
     padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid var(--dropdown-divider);
     transition: var(--transition-fast);
     cursor: pointer;
 }
 
 .notification-item:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--dropdown-hover);
 }
 
 .notification-item.unread {
-    background: rgba(251, 112, 18, 0.05);
+    background: var(--dropdown-unread-bg);
 }
 
 .notification-icon {
@@ -509,13 +510,13 @@ ul, ol {
 .notification-title {
     font-size: 13px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--dropdown-text);
     margin-bottom: 2px;
 }
 
 .notification-text {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--dropdown-text-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -523,13 +524,13 @@ ul, ol {
 
 .notification-time {
     font-size: 11px;
-    color: var(--text-muted);
+    color: var(--dropdown-text-muted);
     margin-top: 4px;
 }
 
 .notification-footer {
     padding: 12px 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid var(--dropdown-divider);
     text-align: center;
 }
 
@@ -575,8 +576,8 @@ ul, ol {
     top: calc(100% + 10px);
     right: 0;
     width: 220px;
-    background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--dropdown-bg);
+    border: 1px solid var(--dropdown-border);
     border-radius: var(--radius);
     box-shadow: var(--shadow-xl);
     opacity: 0;
@@ -598,7 +599,7 @@ ul, ol {
     align-items: center;
     gap: 12px;
     padding: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid var(--dropdown-divider);
 }
 
 .profile-header .avatar-sm {
@@ -610,12 +611,12 @@ ul, ol {
 .profile-info .name {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--dropdown-text);
 }
 
 .profile-info .role {
     font-size: 12px;
-    color: var(--text-muted);
+    color: var(--dropdown-text-muted);
 }
 
 .profile-menu {
@@ -629,13 +630,13 @@ ul, ol {
     padding: 10px 12px;
     border-radius: 8px;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--dropdown-text);
     transition: var(--transition-fast);
 }
 
 .profile-menu-item:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text);
+    background: var(--dropdown-hover);
+    color: var(--dropdown-text);
 }
 
 .profile-menu-item svg {
@@ -651,7 +652,7 @@ ul, ol {
 
 .profile-divider {
     height: 1px;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--dropdown-divider);
     margin: 8px 0;
 }
 
