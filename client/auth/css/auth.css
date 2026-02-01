@@ -758,9 +758,9 @@
 }
 
 [data-theme="dark"] .auth-card {
-    background: var(--bg-card);
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .auth-header h2 {
@@ -832,7 +832,6 @@
 }
 
 [data-theme="dark"] .auth-divider span {
-    background: var(--bg-card);
     color: var(--text-muted);
 }
 

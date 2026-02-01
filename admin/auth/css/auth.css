@@ -463,11 +463,12 @@ body {
    DARK MODE SUPPORT
    ===================================================== */
 [data-theme="dark"] body {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
 }
 
 [data-theme="dark"] .admin-form-panel {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .form-title {
