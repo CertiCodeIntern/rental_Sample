@@ -17,7 +17,7 @@ const Auth = {
     init() {
         // Check if already logged in
         if (Components.isAuthenticated()) {
-            window.location.href = '/client/dashboard/';
+            window.location.href = '/client/dashboard.html';
             return;
         }
 
@@ -120,7 +120,7 @@ const Auth = {
         // Social login buttons (redirect to WIP)
         document.querySelectorAll('.auth-social-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                window.location.href = '/wip.html';
+                window.location.href = '/pages/wip.html';
             });
         });
     },
@@ -176,7 +176,7 @@ const Auth = {
             localStorage.setItem('token', 'mock-jwt-token');
 
             // Redirect to dashboard
-            window.location.href = '/client/dashboard/';
+            window.location.href = '/client/dashboard.html';
         } catch (error) {
             this.showError(error.message || 'Login failed. Please try again.');
         } finally {
@@ -235,7 +235,7 @@ const Auth = {
             localStorage.setItem('token', 'mock-jwt-token');
 
             // Redirect to dashboard
-            window.location.href = '/client/dashboard/';
+            window.location.href = '/client/dashboard.html';
         } catch (error) {
             this.showError(error.message || 'Registration failed. Please try again.');
         } finally {

@@ -65,7 +65,7 @@ const Components = {
                 <div class="sidebar-header">
                     <div class="sidebar-logo">
                         <div class="sidebar-logo-icon">❝</div>
-                        <span class="sidebar-logo-text">CertiCode</span>
+                        <span class="sidebar-logo-text">RentIt</span>
                     </div>
                 </div>
                 

@@ -9,7 +9,8 @@
 ```
 rental_Sample/
 ├── 📄 index.html           # Landing page (entry point for Vercel)
-├── 📄 wip.html             # Work in Progress placeholder page
+├── pages/
+│   ├── 📄 wip.html             # Work in Progress placeholder page
 ├── 📄 vercel.json          # Vercel deployment configuration
 ├── 📄 README.md            # Project overview
 │
@@ -112,10 +113,10 @@ docs/
 | `/` | `index.html` | Landing page |
 | `/login` | `client/auth/login.html` | Client login |
 | `/signup` | `client/auth/login.html#register` | Client signup |
-| `/dashboard` | `client/dashboard/index.html` | Client dashboard |
+| `/dashboard` | `client/dashboard.html` | Client dashboard |
 | `/admin/login` | `admin/auth/login.html` | Admin login |
-| `/admin/dashboard` | `admin/dashboard/index.html` | Admin dashboard |
-| `/wip` | `wip.html` | Work in progress |
+| `/admin/dashboard` | `admin/dashboard.html` | Admin dashboard |
+| `/wip` | `pages/wip.html` | Work in progress |
 
 ---
 
