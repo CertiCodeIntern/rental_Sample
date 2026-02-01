@@ -20,6 +20,51 @@
     
     <!-- Theme Script (Prevents flash of wrong theme) -->
     <script src="../shared/js/theme.js"></script>
+    
+    <style>
+        /* Cookie Policy Page Specific Styles */
+        .policy-content {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .policy-section {
+            margin-bottom: 2rem;
+        }
+        .policy-section h2 {
+            color: var(--brand-primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .policy-section h3 {
+            color: var(--brand-primary-light);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+        .policy-section p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .policy-section ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-left: 1.5rem;
+        }
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+        .contact-box {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+        .contact-box p {
+            margin: 0 0 0.25rem;
+        }
+    </style>
 </head>
 <body>
     <!-- ============================
@@ -210,21 +255,21 @@
         <!-- Cookie Policy Content -->
         <section style="padding: 4rem 0;">
             <div class="container" style="max-width: 800px;">
-                <div style="background: var(--bg-card); border-radius: 12px; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                <div class="policy-content">
                     
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">1. What Are Cookies?</h2>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                    <section class="policy-section">
+                        <h2>1. What Are Cookies?</h2>
+                        <p>
                             Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide a better user experience.
                         </p>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">2. How We Use Cookies</h2>
-                        <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1rem;">
+                    <section class="policy-section">
+                        <h2>2. How We Use Cookies</h2>
+                        <p>
                             RentIt uses cookies to:
                         </p>
-                        <ul style="color: #4a5568; line-height: 1.8; margin-left: 1.5rem;">
+                        <ul>
                             <li>Remember your login information and preferences</li>
                             <li>Understand how you interact with our platform</li>
                             <li>Improve the performance and speed of our website</li>
@@ -234,46 +279,46 @@
                         </ul>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">3. Types of Cookies We Use</h2>
+                    <section class="policy-section">
+                        <h2>3. Types of Cookies We Use</h2>
                         
-                        <h3 style="color: #014F86; font-size: 1.2rem; margin: 1.5rem 0 0.5rem;">Essential Cookies</h3>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                        <h3>Essential Cookies</h3>
+                        <p>
                             These cookies are necessary for the website to function properly. They enable basic functions like page navigation, secure login, and access to secure areas of the website. The website cannot function properly without these cookies.
                         </p>
 
-                        <h3 style="color: #014F86; font-size: 1.2rem; margin: 1.5rem 0 0.5rem;">Performance Cookies</h3>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                        <h3>Performance Cookies</h3>
+                        <p>
                             These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. This helps us improve how our website works.
                         </p>
 
-                        <h3 style="color: #014F86; font-size: 1.2rem; margin: 1.5rem 0 0.5rem;">Functionality Cookies</h3>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                        <h3>Functionality Cookies</h3>
+                        <p>
                             These cookies allow the website to remember choices you make (such as your language preference or the region you are in) and provide enhanced, more personal features.
                         </p>
 
-                        <h3 style="color: #014F86; font-size: 1.2rem; margin: 1.5rem 0 0.5rem;">Targeting/Advertising Cookies</h3>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                        <h3>Targeting/Advertising Cookies</h3>
+                        <p>
                             These cookies are used to deliver advertisements more relevant to you and your interests. They are also used to limit the number of times you see an advertisement and to help measure the effectiveness of advertising campaigns.
                         </p>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">4. Third-Party Cookies</h2>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                    <section class="policy-section">
+                        <h2>4. Third-Party Cookies</h2>
+                        <p>
                             In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the platform and deliver advertisements. These third parties include analytics providers (such as Google Analytics) and advertising networks.
                         </p>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">5. Managing Cookies</h2>
-                        <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1rem;">
+                    <section class="policy-section">
+                        <h2>5. Managing Cookies</h2>
+                        <p>
                             Most web browsers allow you to control cookies through their settings preferences. However, if you limit the ability of websites to set cookies, you may impact your overall user experience.
                         </p>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                        <p>
                             To manage cookies, you can typically:
                         </p>
-                        <ul style="color: #4a5568; line-height: 1.8; margin-left: 1.5rem;">
+                        <ul>
                             <li>Delete all cookies from your browser</li>
                             <li>Block all cookies from being set</li>
                             <li>Allow all cookies to be set</li>
@@ -283,32 +328,32 @@
                         </ul>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">6. Cookie Duration</h2>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                    <section class="policy-section">
+                        <h2>6. Cookie Duration</h2>
+                        <p>
                             <strong>Session cookies:</strong> These are temporary cookies that expire when you close your browser. They are used to maintain your session while you navigate through our website.
                         </p>
-                        <p style="color: #4a5568; line-height: 1.7; margin-top: 1rem;">
+                        <p>
                             <strong>Persistent cookies:</strong> These cookies remain on your device for a set period of time or until you delete them. They are used to remember your preferences and settings for future visits.
                         </p>
                     </section>
 
-                    <section style="margin-bottom: 2rem;">
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">7. Updates to This Policy</h2>
-                        <p style="color: #4a5568; line-height: 1.7;">
+                    <section class="policy-section">
+                        <h2>7. Updates to This Policy</h2>
+                        <p>
                             We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our data practices. When we make changes, we will revise the "Last updated" date at the top of this policy. We encourage you to review this policy periodically.
                         </p>
                     </section>
 
-                    <section>
-                        <h2 style="color: #013A63; font-size: 1.5rem; margin-bottom: 1rem;">8. Contact Us</h2>
-                        <p style="color: #4a5568; line-height: 1.7; margin-bottom: 1rem;">
+                    <section class="policy-section">
+                        <h2>8. Contact Us</h2>
+                        <p>
                             If you have any questions about our use of cookies, please contact us at:
                         </p>
-                        <div style="background: #f8fafc; border-radius: 8px; padding: 1.5rem; border-left: 4px solid #FB7012;">
-                            <p style="color: #013A63; font-weight: 600; margin-bottom: 0.5rem;">RentIt</p>
-                            <p style="color: #4a5568; margin: 0;">Email: privacy@rentit.ph</p>
-                            <p style="color: #4a5568; margin: 0;">Address: 123 Business Center, Manila, Philippines</p>
+                        <div class="contact-box">
+                            <p style="font-weight: 600;">RentIt</p>
+                            <p>Email: privacy@rentit.ph</p>
+                            <p>Address: 123 Business Center, Manila, Philippines</p>
                         </div>
                     </section>
 

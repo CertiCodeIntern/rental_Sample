@@ -105,6 +105,15 @@
     --section-light: var(--bg-secondary);
     --panel: var(--panel-bg);
     
+    /* === SECTION CONTENT COLORS (Theme-aware) === */
+    --section-title: #0A1628;           /* Section titles - rich dark */
+    --section-text: #64748B;            /* Section body text */
+    --card-title: #0A1628;              /* Card titles */
+    --card-text: #64748B;               /* Card body text */
+    --icon-fill: #0A1628;               /* Icon fills in sections */
+    --tab-text: #64748B;                /* Tab inactive text */
+    --tab-border: #E2E8F0;              /* Tab borders */
+    
     /* === DROPDOWN COLORS === */
     --dropdown-bg: #FFFFFF;
     --dropdown-border: rgba(0, 0, 0, 0.1);
@@ -126,16 +135,31 @@
     --bg-card: #1E293B;                 /* Cards in dark mode */
     --bg-elevated: #243447;             /* Elevated surfaces */
     
+    /* Section backgrounds - for light sections in landing page */
+    --section-light: #1E293B;           /* "Light" sections become dark */
+    --card-bg: #1E293B;                 /* Card backgrounds */
+    
     /* Text Colors - Soft off-whites (No pure white) */
     --text-primary: #F1F5F9;            /* Primary text - off-white */
     --text-secondary: #CBD5E1;          /* Secondary text */
     --text-tertiary: #94A3B8;           /* Tertiary text */
     --text-muted: #64748B;              /* Muted text */
     
+    /* Section content colors - replaces hardcoded #0A1628 */
+    --section-title: #F1F5F9;           /* Section titles in dark mode */
+    --section-text: #CBD5E1;            /* Section body text */
+    --card-title: #F1F5F9;              /* Card titles */
+    --card-text: #94A3B8;               /* Card body text */
+    
     /* Borders */
     --border-light: rgba(255, 255, 255, 0.08);
     --border-medium: rgba(255, 255, 255, 0.12);
     --border-color: rgba(255, 255, 255, 0.08);
+    
+    /* Tab styling */
+    --tab-text: #94A3B8;
+    --tab-border: rgba(255, 255, 255, 0.1);
+    --icon-fill: #F1F5F9;
     
     /* Panel adjustments */
     --panel-bg: #1E293B;
