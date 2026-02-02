@@ -6,7 +6,7 @@
     { "source": "/dashboard", "destination": "/client/dashboard.html" },
     { "source": "/client/dashboard", "destination": "/client/dashboard.html" },
     { "source": "/admin/login", "destination": "/admin/auth/login.html" },
-    { "source": "/admin/dashboard", "destination": "/admin/dashboard.html" },
+    { "source": "/admin/dashboard", "destination": "/admin/dashboard/dashboard.html" },
     { "source": "/wip", "destination": "/pages/wip.html" },
     { "source": "/about", "destination": "/pages/aboutus.html" },
     { "source": "/contact", "destination": "/pages/contactus.html" },

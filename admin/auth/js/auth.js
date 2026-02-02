@@ -217,7 +217,7 @@ const AdminAuth = {
      */
     redirectIfAuthenticated() {
         if (AdminSession.isAuthenticated()) {
-            window.location.href = '/admin/dashboard/';
+            window.location.href = '/admin/dashboard/dashboard.html';
             return true;
         }
         return false;
@@ -298,7 +298,7 @@ const LoginUI = {
                 
                 // Redirect to admin dashboard
                 setTimeout(() => {
-                    window.location.href = '/admin/dashboard.html';
+                    window.location.href = '/admin/dashboard/dashboard.html';
                 }, 500);
             } else {
                 this.showError(result.message);
