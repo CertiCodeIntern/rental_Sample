@@ -34,6 +34,15 @@ const AdminComponents = {
             </svg>`
         },
         { 
+            id: 'newitem', 
+            label: 'New Item', 
+            href: '/admin/newitem/newitem.html',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>`
+        },
+        { 
             id: 'orders', 
             label: 'Orders', 
             href: '/admin/orders/orders.html',
