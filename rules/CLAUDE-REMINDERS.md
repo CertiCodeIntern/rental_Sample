@@ -4,6 +4,23 @@
 
 ---
 
+## ⚠️ CRITICAL RULES - READ FIRST
+
+### Reference Folder Policy
+
+> **DO NOT EDIT** anything in the `reference/` folder. This folder is **READ-ONLY** and serves as a design/code reference only.
+
+| Rule | Description |
+|------|-------------|
+| **No Editing** | Never modify, delete, or rename files in `reference/` |
+| **No Moving** | Do not move files in or out of the `reference/` folder |
+| **View Only** | Use files in `reference/albert/` as visual and code inspiration |
+| **Adapt, Don't Copy** | When implementing features, adapt the reference patterns to match our project's styling and structure |
+
+The `reference/albert/` folder contains design mockups and reference implementations. Use them to understand desired functionality and layout, but always implement features fresh in the appropriate `admin/` or `client/` directories.
+
+---
+
 ## 📋 Project Overview
 
 | Aspect | Detail |

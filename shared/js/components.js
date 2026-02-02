@@ -31,11 +31,12 @@ const Components = {
      * Navigation tabs for client dashboard
      */
     clientNavTabs: [
-        { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard.html' },
+        { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard/dashboard.html' },
         { id: 'catalog', icon: '📦', label: 'Browse Catalog', href: '/client/catalog/catalog.html' },
         { id: 'favorites', icon: '❤️', label: 'Favorites', href: '/client/favorites/favorites.html' },
         { id: 'cart', icon: '🛒', label: 'My Cart', href: '/client/cart/cart.html' },
         { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/client/myrentals/myrentals.html' },
+        { id: 'returns', icon: '🔄', label: 'Returns', href: '/client/returns/returns.html' },
         { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/client/bookinghistory/bookinghistory.html' },
         { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contactus.html' },
     ],
@@ -136,7 +137,7 @@ const Components = {
                     
                     <!-- Mobile-only actions (shown on ultra-small screens) -->
                     <div class="mobile-only-actions">
-                        <a href="#" class="mobile-action-item" id="sidebarNotifications">
+                        <a href="/client/notification/notification.html" class="mobile-action-item" id="sidebarNotifications">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -498,7 +499,7 @@ const Components = {
                                 </div>
                             </div>
                             <div class="notification-footer">
-                                <a href="#">View All Notifications</a>
+                                <a href="/client/notification/notification.html">View All Notifications</a>
                             </div>
                         </div>
                     </div>
@@ -536,7 +537,7 @@ const Components = {
                                 </div>
                             </div>
                             <nav class="profile-menu">
-                                <a href="/client/dashboard.html" class="profile-menu-item">
+                                <a href="/client/dashboard/dashboard.html" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="3" y="3" width="7" height="9"/>
                                         <rect x="14" y="3" width="7" height="5"/>
@@ -865,8 +866,8 @@ const Components = {
                             <h4 class="footer-heading">Support</h4>
                             <nav class="footer-nav">
                                 <a href="/pages/contactus.html">Contact Us</a>
-                                <a href="/pages/about.html">About</a>
-                                <a href="#">FAQs</a>
+                                <a href="/pages/aboutus.html">About</a>
+                                <a href="/pages/wip.html">FAQs</a>
                             </nav>
                         </div>
                         <div class="footer-col">
@@ -882,19 +883,19 @@ const Components = {
                 <div class="footer-bottom">
                     <p class="footer-copyright">&copy; ${currentYear} RentIt. All rights reserved.</p>
                     <div class="footer-socials">
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="https://facebook.com" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="https://instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                             </svg>
                         </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
+                        <a href="https://twitter.com" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
                             </svg>

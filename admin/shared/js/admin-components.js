@@ -388,7 +388,7 @@ const AdminComponents = {
                                 </div>
                             </div>
                             <div class="notification-footer">
-                                <a href="/admin/notifications/notifications.html">View all notifications</a>
+                                <a href="/admin/notification/notification.html">View all notifications</a>
                             </div>
                         </div>
                     </div>
