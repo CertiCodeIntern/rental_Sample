@@ -2,6 +2,7 @@
  * =====================================================
  * AUTH PAGE JAVASCRIPT
  * Handles Login and Registration functionality
+ * Connected to PHP Backend API
  * =====================================================
  */
 
@@ -10,6 +11,18 @@ const Auth = {
     activeTab: 'login',
     isTransitioning: false,
     loading: false,
+    
+    // API Configuration
+    // Uses relative path - works with <base href="/rentit/"> in HTML
+    API_BASE_URL: 'backend/client/auth/',
+    
+    // API Endpoints
+    ENDPOINTS: {
+        LOGIN: 'login.php',
+        REGISTER: 'register.php',
+        LOGOUT: 'logout.php',
+        CHECK_SESSION: 'check_session.php'
+    },
 
     /**
      * Initialize the auth page
@@ -17,7 +30,7 @@ const Auth = {
     init() {
         // Check if already logged in
         if (Components.isAuthenticated()) {
-            window.location.href = '/client/dashboard/dashboard.html';
+            window.location.href = 'client/dashboard/dashboard.html';
             return;
         }
 
@@ -120,7 +133,7 @@ const Auth = {
         // Social login buttons (redirect to WIP)
         document.querySelectorAll('.auth-social-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                window.location.href = '/pages/wip.html';
+                window.location.href = 'pages/wip.html';
             });
         });
     },
@@ -146,16 +159,23 @@ const Auth = {
     async handleLogin(e) {
         e.preventDefault();
         
-        const email = document.getElementById('loginEmail')?.value;
+        const email = document.getElementById('loginEmail')?.value.trim();
         const password = document.getElementById('loginPassword')?.value;
         const submitBtn = e.target.querySelector('button[type="submit"]');
 
         // Clear previous errors
         this.hideError();
 
-        // Validate
+        // Validate required fields
         if (!email || !password) {
             this.showError('Please fill in all fields');
+            return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            this.showError('Please enter a valid email address');
             return;
         }
 
@@ -163,22 +183,45 @@ const Auth = {
         this.setLoading(true, submitBtn, 'Signing in...');
 
         try {
-            // Simulate API call (replace with actual API integration)
-            await this.simulateApiCall();
+            // Call PHP API
+            const response = await fetch(this.API_BASE_URL + this.ENDPOINTS.LOGIN, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
 
-            // Mock successful login - store user data
-            const userData = {
-                name: email.split('@')[0],
-                email: email,
-                role: 'Customer'
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            localStorage.setItem('token', 'mock-jwt-token');
+            const data = await response.json();
 
-            // Redirect to dashboard
-            window.location.href = '/client/dashboard/dashboard.html';
+            if (!data.success) {
+                throw new Error(data.message || 'Login failed');
+            }
+
+            // Store user data in localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('token', data.session_id || 'authenticated');
+            localStorage.setItem('user_role', data.user.role);
+            localStorage.setItem('user_name', data.user.full_name || data.user.email.split('@')[0]);
+
+            // Show success message
+            this.showSuccess('Login successful! Redirecting...');
+
+            // Redirect to dashboard after delay
+            setTimeout(() => {
+                window.location.href = 'client/dashboard/dashboard.html';
+            }, 1500);
+
         } catch (error) {
-            this.showError(error.message || 'Login failed. Please try again.');
+            // Check if it's a network error (no backend available)
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                this.showError('Server not available. Please ensure XAMPP is running.');
+            } else {
+                this.showError(error.message || 'Login failed. Please try again.');
+            }
         } finally {
             this.setLoading(false, submitBtn, 'Sign In  →');
         }
@@ -191,9 +234,9 @@ const Auth = {
     async handleRegister(e) {
         e.preventDefault();
 
-        const fullName = document.getElementById('registerFullname')?.value;
-        const phone = document.getElementById('registerPhone')?.value;
-        const email = document.getElementById('registerEmail')?.value;
+        const fullName = document.getElementById('registerFullname')?.value.trim();
+        const phone = document.getElementById('registerPhone')?.value.trim();
+        const email = document.getElementById('registerEmail')?.value.trim();
         const password = document.getElementById('registerPassword')?.value;
         const confirmPassword = document.getElementById('registerConfirmPassword')?.value;
         const submitBtn = e.target.querySelector('button[type="submit"]');
@@ -201,17 +244,26 @@ const Auth = {
         // Clear previous errors
         this.hideError();
 
-        // Validate
+        // Validate required fields
         if (!email || !password || !confirmPassword) {
             this.showError('Please fill in all required fields');
             return;
         }
 
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            this.showError('Please enter a valid email address');
+            return;
+        }
+
+        // Validate passwords match
         if (password !== confirmPassword) {
             this.showError('Passwords do not match');
             return;
         }
 
+        // Validate password length
         if (password.length < 6) {
             this.showError('Password must be at least 6 characters');
             return;
@@ -221,36 +273,51 @@ const Auth = {
         this.setLoading(true, submitBtn, 'Creating account...');
 
         try {
-            // Simulate API call (replace with actual API integration)
-            await this.simulateApiCall();
+            // Call PHP API
+            const response = await fetch(this.API_BASE_URL + this.ENDPOINTS.REGISTER, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    confirm_password: confirmPassword
+                })
+            });
 
-            // Mock successful registration - store user data
-            const userData = {
-                name: fullName || email.split('@')[0],
-                email: email,
-                phone: phone,
-                role: 'Customer'
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            localStorage.setItem('token', 'mock-jwt-token');
+            const data = await response.json();
 
-            // Redirect to dashboard
-            window.location.href = '/client/dashboard/dashboard.html';
+            if (!data.success) {
+                throw new Error(data.message || 'Registration failed');
+            }
+
+            // Store user data in localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('token', 'authenticated');
+            localStorage.setItem('user_role', data.user.role);
+            localStorage.setItem('user_name', data.user.full_name || data.user.email.split('@')[0]);
+
+            // Show success message
+            this.showSuccess('Registration successful! Redirecting...');
+
+            // Redirect to dashboard after delay
+            setTimeout(() => {
+                window.location.href = 'client/dashboard/dashboard.html';
+            }, 1500);
+
         } catch (error) {
-            this.showError(error.message || 'Registration failed. Please try again.');
+            // Check if it's a network error (no backend available)
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                this.showError('Server not available. Please ensure XAMPP is running.');
+            } else {
+                this.showError(error.message || 'Registration failed. Please try again.');
+            }
         } finally {
             this.setLoading(false, submitBtn, 'Get Started  →');
         }
-    },
-
-    /**
-     * Simulate API call with delay
-     * @returns {Promise}
-     */
-    simulateApiCall() {
-        return new Promise((resolve) => {
-            setTimeout(resolve, 1000);
-        });
     },
 
     /**
@@ -268,6 +335,25 @@ const Auth = {
     },
 
     /**
+     * Show success message
+     * @param {string} message - Success message
+     */
+    showSuccess(message) {
+        const errorEl = document.getElementById('authError');
+        if (errorEl) {
+            errorEl.textContent = message;
+            errorEl.classList.remove('error');
+            errorEl.classList.add('success');
+            errorEl.classList.remove('hidden');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorEl.classList.add('hidden');
+            }, 5000);
+        }
+    },
+
+    /**
      * Show error message
      * @param {string} message - Error message
      */
@@ -275,6 +361,8 @@ const Auth = {
         const errorEl = document.getElementById('authError');
         if (errorEl) {
             errorEl.textContent = message;
+            errorEl.classList.remove('success');
+            errorEl.classList.add('error');
             errorEl.classList.remove('hidden');
         }
     },

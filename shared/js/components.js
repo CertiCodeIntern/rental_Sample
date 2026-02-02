@@ -137,7 +137,7 @@ const Components = {
                     
                     <!-- Mobile-only actions (shown on ultra-small screens) -->
                     <div class="mobile-only-actions">
-                        <a href="/client/notification/notification.html" class="mobile-action-item" id="sidebarNotifications">
+                        <a href="client/notification/notification.html" class="mobile-action-item" id="sidebarNotifications">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -402,7 +402,7 @@ const Components = {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.removeItem('activeTab');
-        window.location.href = '/client/auth/login.html';
+        window.location.href = 'client/auth/login.html';
     },
 
     /**
@@ -499,7 +499,7 @@ const Components = {
                                 </div>
                             </div>
                             <div class="notification-footer">
-                                <a href="/client/notification/notification.html">View All Notifications</a>
+                                <a href="client/notification/notification.html">View All Notifications</a>
                             </div>
                         </div>
                     </div>
@@ -537,7 +537,7 @@ const Components = {
                                 </div>
                             </div>
                             <nav class="profile-menu">
-                                <a href="/client/dashboard/dashboard.html" class="profile-menu-item">
+                                <a href="client/dashboard/dashboard.html" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="3" y="3" width="7" height="9"/>
                                         <rect x="14" y="3" width="7" height="5"/>
@@ -546,14 +546,14 @@ const Components = {
                                     </svg>
                                     Dashboard
                                 </a>
-                                <a href="/client/profile/profile.html" class="profile-menu-item">
+                                <a href="client/profile/profile.html" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                         <circle cx="12" cy="7" r="4"/>
                                     </svg>
                                     My Profile
                                 </a>
-                                <a href="/client/profile/profile.html" class="profile-menu-item">
+                                <a href="client/profile/profile.html" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="3"/>
                                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -783,7 +783,7 @@ const Components = {
      */
     requireAuth() {
         if (!this.isAuthenticated()) {
-            window.location.href = '/client/auth/login.html';
+            window.location.href = 'client/auth/login.html';
             return false;
         }
         return true;
@@ -857,24 +857,24 @@ const Components = {
                         <div class="footer-col">
                             <h4 class="footer-heading">Quick Links</h4>
                             <nav class="footer-nav">
-                                <a href="/client/catalog/catalog.html">Browse Catalog</a>
-                                <a href="/client/myrentals/myrentals.html">My Rentals</a>
-                                <a href="/client/bookinghistory/bookinghistory.html">Booking History</a>
+                                <a href="client/catalog/catalog.html">Browse Catalog</a>
+                                <a href="client/myrentals/myrentals.html">My Rentals</a>
+                                <a href="client/bookinghistory/bookinghistory.html">Booking History</a>
                             </nav>
                         </div>
                         <div class="footer-col">
                             <h4 class="footer-heading">Support</h4>
                             <nav class="footer-nav">
-                                <a href="/pages/contactus.html">Contact Us</a>
-                                <a href="/pages/aboutus.html">About</a>
-                                <a href="/pages/wip.html">FAQs</a>
+                                <a href="pages/contactus.html">Contact Us</a>
+                                <a href="pages/aboutus.html">About</a>
+                                <a href="pages/wip.html">FAQs</a>
                             </nav>
                         </div>
                         <div class="footer-col">
                             <h4 class="footer-heading">Legal</h4>
                             <nav class="footer-nav">
-                                <a href="/pages/terms.html">Terms of Service</a>
-                                <a href="/pages/privacy.html">Privacy Policy</a>
+                                <a href="pages/terms.html">Terms of Service</a>
+                                <a href="pages/privacy.html">Privacy Policy</a>
                             </nav>
                         </div>
                     </div>

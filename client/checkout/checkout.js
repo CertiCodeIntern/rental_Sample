@@ -233,7 +233,7 @@ function initConfirmOrder() {
             
             // Redirect to rentals page after delay
             setTimeout(() => {
-                window.location.href = '/client/myrentals/myrentals.html';
+                window.location.href = 'client/myrentals/myrentals.html';
             }, 3000);
         }, 2000);
     });

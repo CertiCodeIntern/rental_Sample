@@ -247,7 +247,7 @@ function renderCustomerRow(customer) {
                 </div>
             </td>
             <td>
-                <a href="/admin/orders/orderdetail.html?id=${booking.id}" class="booking-id">${booking.id}</a>
+                <a href="admin/orders/orderdetail.html?id=${booking.id}" class="booking-id">${booking.id}</a>
             </td>
             <td>
                 <div class="items-cell">

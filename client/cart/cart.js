@@ -267,7 +267,7 @@ function initCheckout() {
             
             // Redirect to checkout page
             setTimeout(() => {
-                window.location.href = '/client/checkout/checkout.html';
+                window.location.href = 'client/checkout/checkout.html';
             }, 500);
         });
     }

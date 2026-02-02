@@ -159,11 +159,11 @@ function handleNotificationAction(button) {
     switch(action) {
         case 'view order':
             // Navigate to order details
-            window.location.href = '/admin/orders/orders.html';
+            window.location.href = 'admin/orders/orders.html';
             break;
         case 'schedule pickup':
             // Navigate to dispatch or returns
-            window.location.href = '/admin/dispatch/dispatch.html';
+            window.location.href = 'admin/dispatch/dispatch.html';
             break;
         case 'view details':
             showToast('Opening details...', 'info');
@@ -173,19 +173,19 @@ function handleNotificationAction(button) {
             showToast('Opening inventory...', 'info');
             break;
         case 'view transaction':
-            window.location.href = '/admin/orders/orders.html';
+            window.location.href = 'admin/orders/orders.html';
             break;
         case 'contact customer':
-            window.location.href = '/admin/customers/customers.html';
+            window.location.href = 'admin/customers/customers.html';
             break;
         case 'schedule repair':
-            window.location.href = '/admin/repairs/repairs.html';
+            window.location.href = 'admin/repairs/repairs.html';
             break;
         case 'view equipment':
             showToast('Opening equipment details...', 'info');
             break;
         case 'view profile':
-            window.location.href = '/admin/customers/customers.html';
+            window.location.href = 'admin/customers/customers.html';
             break;
         case 'view report':
             showToast('Opening report...', 'info');
