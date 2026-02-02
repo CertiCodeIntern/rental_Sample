@@ -51,6 +51,7 @@
     padding: 60px 50px;
     position: relative;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .auth-left-content {
@@ -58,6 +59,7 @@
     color: var(--white);
     z-index: 1;
     text-align: left;
+    
 }
 
 .auth-logo {
@@ -130,6 +132,8 @@
     align-items: center;
     justify-content: center;
     padding: var(--spacing-xl);
+    position: relative;
+    z-index: 5;
 }
 
 /* Mobile Logo */
@@ -205,7 +209,7 @@
     border-radius: var(--radius-pill);
     box-shadow: var(--shadow-sm);
     transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0;
+    z-index: 1;
 }
 
 .tab-indicator.register {
@@ -224,7 +228,7 @@
     cursor: pointer;
     transition: color 300ms ease;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .auth-tab:hover {
@@ -416,6 +420,10 @@
     font-weight: var(--font-weight-medium);
     color: var(--gray-700);
     transition: all 0.2s;
+    pointer-events: auto !important; 
+    cursor: pointer !important;
+    position: relative;
+    z-index: 10;
 }
 
 .auth-social-btn:hover {
@@ -487,6 +495,48 @@
 .auth-footer-links a {
     color: var(--primary-color);
 }
+
+.password-requirements {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa; /* Light gray background */
+    border-radius: 6px;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    transition: all 0.3s ease; /* Para smooth ang pagpalit ng kulay */
+    display: flex;
+    align-items: center;
+}
+
+/* Default state (Hindi pa na-meet) */
+.password-requirements li.invalid {
+    color: #95a5a6; /* Grayish */
+}
+.password-requirements li.invalid::before {
+    content: "○"; /* Empty circle */
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Success state (Na-meet na ang requirement) */
+.password-requirements li.valid {
+    color: #2ecc71; /* Green */
+    font-weight: 600;
+}
+.password-requirements li.valid::before {
+    content: "✓"; /* Checkmark */
+    margin-right: 8px;
+}
+
 
 /* =====================================================
    RESPONSIVE STYLES
@@ -747,5 +797,10 @@
     .auth-btn {
         padding: var(--spacing-sm) var(--spacing-lg);
         font-size: var(--font-size-sm);
+    }
+    .auth-social-btn {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        z-index: 100;
     }
 }

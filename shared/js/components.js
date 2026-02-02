@@ -255,7 +255,7 @@ const Components = {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.removeItem('activeTab');
-        window.location.href = '/client/auth/login.html';
+        window.location.href = '/client/auth/login.php';
     },
 
     /**
@@ -326,7 +326,7 @@ const Components = {
      */
     requireAuth() {
         if (!this.isAuthenticated()) {
-            window.location.href = '/client/auth/login.html';
+            window.location.href = '/client/auth/login.php';
             return false;
         }
         return true;

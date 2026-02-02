@@ -37,7 +37,7 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
             method: 'POST'
         }).finally(() => {
             // Always redirect even if API fails
-            window.location.href = '/RENTAL_SAMPLE/client/auth/login.html';
+            window.location.href = '/RENTAL_SAMPLE/client/auth/login.php';
         });
     }
 });

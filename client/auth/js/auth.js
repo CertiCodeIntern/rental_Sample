@@ -23,7 +23,7 @@ const Auth = {
     init() {
         // Check if already logged in
         if (Components.isAuthenticated()) {
-            window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.html';
+            window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
             return;
         }
 
@@ -119,15 +119,16 @@ const Auth = {
     setupFormListeners() {
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
-
-        loginForm?.addEventListener('submit', (e) => this.handleLogin(e));
-        registerForm?.addEventListener('submit', (e) => this.handleRegister(e));
-
-        // Social login buttons (redirect to WIP)
-        document.querySelectorAll('.auth-social-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                window.location.href = '/wip.html';
-            });
+    
+        // Iwasan ang default redirect sa login.php kapag social button ang pinindot
+        loginForm?.addEventListener('submit', (e) => {
+            if (e.submitter && e.submitter.classList.contains('auth-social-btn')) return;
+            this.handleLogin(e);
+        });
+    
+        registerForm?.addEventListener('submit', (e) => {
+            if (e.submitter && e.submitter.classList.contains('auth-social-btn')) return;
+            this.handleRegister(e);
         });
     },
 
@@ -205,7 +206,7 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.html';
+                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
             }, 1500);
 
         } catch (error) {
@@ -291,7 +292,7 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.html';
+                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
             }, 1500);
 
         } catch (error) {
@@ -304,7 +305,7 @@ const Auth = {
     /**
      * Set loading state on button
      * @param {boolean} loading - Loading state
-     * @param {HTMLButtonElement} button - Submit button
+     * @param {phpButtonElement} button - Submit button
      * @param {string} text - Button text
      */
     setLoading(loading, button, text) {
@@ -362,4 +363,42 @@ const Auth = {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     Auth.init();
+
+    const passwordInput = document.getElementById('registerPassword');
+    const reqLength = document.getElementById('reqLength');
+    const reqUpper = document.getElementById('reqUpper');
+    const reqNumber = document.getElementById('reqNumber');
+    
+    passwordInput.addEventListener('input', function() {
+        const value = passwordInput.value;
+    
+        // 1. Check Length (8 characters pataas)
+        if (value.length >= 8) {
+            reqLength.classList.add('valid');
+            reqLength.classList.remove('invalid');
+        } else {
+            reqLength.classList.add('invalid');
+            reqLength.classList.remove('valid');
+        }
+    
+        // 2. Check Uppercase (A-Z)
+        if (/[A-Z]/.test(value)) {
+            reqUpper.classList.add('valid');
+            reqUpper.classList.remove('invalid');
+        } else {
+            reqUpper.classList.add('invalid');
+            reqUpper.classList.remove('valid');
+        }
+    
+        // 3. Check Numbers (0-9)
+        if (/[0-9]/.test(value)) {
+            reqNumber.classList.add('valid');
+            reqNumber.classList.remove('invalid');
+        } else {
+            reqNumber.classList.add('invalid');
+            reqNumber.classList.remove('valid');
+        }
+    });
+
+
 });
