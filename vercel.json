@@ -14,10 +14,8 @@
     { "source": "/terms", "destination": "/pages/terms.html" },
     { "source": "/404", "destination": "/pages/404.html" }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/pages/404.html", "status": 404 }
-  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
