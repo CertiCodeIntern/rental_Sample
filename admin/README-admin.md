@@ -15,7 +15,7 @@ admin/
 | Route | Page | Description |
 |-------|------|-------------|
 | `/admin/login` | `auth/login.html` | Admin login |
-| `/admin/dashboard` | `dashboard/index.html` | Admin dashboard |
+| `/admin/dashboard` | `dashboard.html` | Admin dashboard |
 
 ## 🎯 Purpose
 

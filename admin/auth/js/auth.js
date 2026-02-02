@@ -298,7 +298,7 @@ const LoginUI = {
                 
                 // Redirect to admin dashboard
                 setTimeout(() => {
-                    window.location.href = '/admin/dashboard/';
+                    window.location.href = '/admin/dashboard.html';
                 }, 500);
             } else {
                 this.showError(result.message);

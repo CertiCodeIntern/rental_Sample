@@ -23,7 +23,8 @@ A modern rental management platform built with pure HTML5, CSS3, and Vanilla Jav
 ```
 rental_Sample/
 ├── 📄 index.html           # Landing page (entry point)
-├── 📄 wip.html             # Work in Progress page
+├── pages/
+│   ├── 📄 wip.html             # Work in Progress page
 ├── 📄 vercel.json          # Vercel configuration
 │
 ├── 📁 client/              # Customer-facing app

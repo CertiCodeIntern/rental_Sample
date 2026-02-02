@@ -63,7 +63,7 @@ localStorage.removeItem('token');
 1. User visits `/login`
 2. Fills in credentials
 3. On success, data stored in localStorage
-4. Redirects to `/client/dashboard/`
+4. Redirects to `/client/dashboard.html`
 
 ---
 

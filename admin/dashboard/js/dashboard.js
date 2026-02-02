@@ -148,19 +148,61 @@ const Dashboard = {
             ThemeManager.toggle();
         });
 
+        // Notification dropdown
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const markReadBtn = document.getElementById('markReadBtn');
+
+        notificationBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Close profile dropdown if open
+            const profileDropdown = document.getElementById('profileDropdown');
+            profileDropdown?.classList.remove('open');
+            // Toggle notification dropdown
+            notificationDropdown?.classList.toggle('open');
+        });
+
+        // Mark all as read
+        markReadBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Remove unread class from all items
+            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                item.classList.remove('unread');
+            });
+            // Update badge
+            const badge = document.querySelector('.notification-badge');
+            if (badge) {
+                badge.style.display = 'none';
+            }
+        });
+
         // Profile dropdown
         const profileBtn = document.getElementById('profileBtn');
         const profileDropdown = document.getElementById('profileDropdown');
 
         profileBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
-            profileDropdown?.classList.toggle('show');
+            // Close notification dropdown if open
+            notificationDropdown?.classList.remove('open');
+            // Toggle profile dropdown
+            profileDropdown?.classList.toggle('open');
         });
 
-        // Close dropdown when clicking outside
+        // Close dropdowns when clicking outside
         document.addEventListener('click', (e) => {
+            if (!notificationDropdown?.contains(e.target) && !notificationBtn?.contains(e.target)) {
+                notificationDropdown?.classList.remove('open');
+            }
             if (!profileDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
-                profileDropdown?.classList.remove('show');
+                profileDropdown?.classList.remove('open');
+            }
+        });
+
+        // Close dropdowns on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                notificationDropdown?.classList.remove('open');
+                profileDropdown?.classList.remove('open');
             }
         });
 
