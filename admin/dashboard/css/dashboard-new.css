@@ -296,3 +296,88 @@
         display: block;
     }
 }
+
+/* ============================
+   LOADING STATES
+   ============================ */
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--admin-border-color);
+    border-top-color: var(--admin-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-row td {
+    background: transparent !important;
+}
+
+.empty-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.empty-schedule svg {
+    opacity: 0.4;
+}
+
+/* ============================
+   CUSTOMER CELL
+   ============================ */
+.customer-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--admin-spacing-sm);
+}
+
+.customer-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--admin-accent-subtle);
+    color: var(--admin-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--admin-font-semibold);
+    font-size: var(--admin-font-sm);
+    flex-shrink: 0;
+}
+
+/* ============================
+   TABLE ACTION BUTTONS
+   ============================ */
+.table-action-btns {
+    display: flex;
+    gap: var(--admin-spacing-xs);
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--admin-text-muted);
+    border-radius: var(--admin-radius-md);
+    cursor: pointer;
+    transition: all var(--admin-transition-fast);
+}
+
+.btn-icon:hover {
+    background: var(--admin-bg-input);
+    color: var(--admin-accent);
+}
