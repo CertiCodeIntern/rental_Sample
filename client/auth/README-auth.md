@@ -6,7 +6,7 @@
 
 ```
 auth/
-├── 📄 login.html     # Login & Register page (tabbed)
+├── 📄 login.php     # Login & Register page (tabbed)
 ├── 📁 css/
 │   └── auth.css      # Auth-specific styles
 └── 📁 js/
@@ -63,7 +63,7 @@ localStorage.removeItem('token');
 1. User visits `/login`
 2. Fills in credentials
 3. On success, data stored in localStorage
-4. Redirects to `/client/dashboard.html`
+4. Redirects to `/client/dashboard.php`
 
 ---
 

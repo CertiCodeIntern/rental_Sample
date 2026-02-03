@@ -55,9 +55,9 @@
 
                 <!-- Tabs Navigation -->
                 <div class="rentals-tabs">
-                    <a href="client/myrentals/myrentals.html" class="tab-link">Active Rentals</a>
-                    <a href="client/bookinghistory/bookinghistory.html" class="tab-link">Booking History</a>
-                    <a href="client/returns/returns.html" class="tab-link active">Returns & Extensions</a>
+                    <a href="client/myrentals/myrentals.php" class="tab-link">Active Rentals</a>
+                    <a href="client/bookinghistory/bookinghistory.php" class="tab-link">Booking History</a>
+                    <a href="client/returns/returns.php" class="tab-link active">Returns & Extensions</a>
                 </div>
 
                 <!-- Stats Row -->
@@ -131,7 +131,7 @@
                             <div class="return-body">
                                 <div class="return-item">
                                     <div class="return-item-image">
-                                        <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                        <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     </div>
                                     <div class="return-item-info">
                                         <h3 class="return-item-name">Karaoke Pro System X-100</h3>
@@ -186,7 +186,7 @@
                             <div class="return-body">
                                 <div class="return-item">
                                     <div class="return-item-image">
-                                        <img src="assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                        <img src="assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     </div>
                                     <div class="return-item-info">
                                         <h3 class="return-item-name">Party Box Master V2</h3>
@@ -239,7 +239,7 @@
                             <div class="extension-body">
                                 <div class="extension-item">
                                     <div class="extension-item-image">
-                                        <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                        <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     </div>
                                     <div class="extension-item-info">
                                         <h3 class="extension-item-name">Karaoke Pro System X-100</h3>

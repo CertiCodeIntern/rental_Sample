@@ -245,7 +245,7 @@
         
         <!-- Action Buttons -->
         <div class="error-actions">
-            <a href="index.html" class="btn btn-primary">
+            <a href="index.php" class="btn btn-primary">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                     <polyline points="9 22 9 12 15 12 15 22"/>
@@ -265,7 +265,7 @@
         <div class="helpful-links">
             <h3>Helpful Links</h3>
             <div class="link-grid">
-                <a href="client/catalog/catalog.html" class="link-item">
+                <a href="client/catalog/catalog.php" class="link-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="7" height="7"/>
                         <rect x="14" y="3" width="7" height="7"/>
@@ -274,7 +274,7 @@
                     </svg>
                     Browse Catalog
                 </a>
-                <a href="client/dashboard/dashboard.html" class="link-item">
+                <a href="client/dashboard/dashboard.php" class="link-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                         <line x1="3" y1="9" x2="21" y2="9"/>
@@ -282,7 +282,7 @@
                     </svg>
                     Dashboard
                 </a>
-                <a href="client/cart/cart.html" class="link-item">
+                <a href="client/cart/cart.php" class="link-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="9" cy="21" r="1"/>
                         <circle cx="20" cy="21" r="1"/>
@@ -290,7 +290,7 @@
                     </svg>
                     Cart
                 </a>
-                <a href="pages/contactus.html" class="link-item">
+                <a href="pages/contactus.php" class="link-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                     </svg>

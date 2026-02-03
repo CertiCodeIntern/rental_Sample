@@ -30,7 +30,7 @@ const Auth = {
     init() {
         // Check if already logged in
         if (Components.isAuthenticated()) {
-            window.location.href = 'client/dashboard/dashboard.html';
+            window.location.href = 'client/dashboard/dashboard.php';
             return;
         }
 
@@ -133,7 +133,7 @@ const Auth = {
         // Social login buttons (redirect to WIP)
         document.querySelectorAll('.auth-social-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                window.location.href = 'pages/wip.html';
+                window.location.href = 'pages/wip.php';
             });
         });
     },
@@ -212,7 +212,7 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = 'client/dashboard/dashboard.html';
+                window.location.href = 'client/dashboard/dashboard.php';
             }, 1500);
 
         } catch (error) {
@@ -305,7 +305,7 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = 'client/dashboard/dashboard.html';
+                window.location.href = 'client/dashboard/dashboard.php';
             }, 1500);
 
         } catch (error) {

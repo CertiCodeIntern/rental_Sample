@@ -73,15 +73,15 @@
 ```
 rental_Sample/
 │
-├── 📄 index.html                    # Landing page (entry point)
+├── 📄 index.php                    # Landing page (entry point)
 ├── 📄 vercel.json                   # Deployment config with rewrites
 ├── 📄 README.md                     # Project readme
 │
 ├── 📁 admin/                        # ═══ ADMIN PORTAL ═══
-│   ├── 📄 dashboard.html            # Admin entry point
+│   ├── 📄 dashboard.php            # Admin entry point
 │   │
 │   ├── 📁 auth/                     # Admin authentication
-│   │   ├── 📄 login.html
+│   │   ├── 📄 login.php
 │   │   ├── 📁 css/
 │   │   │   └── auth.css
 │   │   └── 📁 js/
@@ -94,32 +94,32 @@ rental_Sample/
 │   │       └── dashboard.js
 │   │
 │   ├── 📁 calendar/                 # Calendar Master View
-│   │   ├── 📄 calendar.html
+│   │   ├── 📄 calendar.php
 │   │   ├── 📄 calendar.css
 │   │   └── 📄 calendar.js
 │   │
 │   ├── 📁 repairs/                  # Repairs & Maintenance
-│   │   ├── 📄 repairs.html
+│   │   ├── 📄 repairs.php
 │   │   ├── 📄 repairs.css
 │   │   └── 📄 repairs.js
 │   │
 │   ├── 📁 latefees/                 # Late Fees Tracker
-│   │   ├── 📄 latefees.html
+│   │   ├── 📄 latefees.php
 │   │   ├── 📄 latefees.css
 │   │   └── 📄 latefees.js
 │   │
 │   ├── 📁 dispatch/                 # Dispatch Management
-│   │   ├── 📄 dispatch.html
+│   │   ├── 📄 dispatch.php
 │   │   ├── 📄 dispatch.css
 │   │   └── 📄 dispatch.js
 │   │
 │   ├── 📁 customers/                # Customer Management
-│   │   ├── 📄 customers.html
+│   │   ├── 📄 customers.php
 │   │   ├── 📄 customers.css
 │   │   └── 📄 customers.js
 │   │
 │   ├── 📁 settings/                 # Admin Settings
-│   │   ├── 📄 settings.html
+│   │   ├── 📄 settings.php
 │   │   ├── 📄 settings.css
 │   │   └── 📄 settings.js
 │   │
@@ -132,7 +132,7 @@ rental_Sample/
 │           └── admin-components.js  # Admin sidebar, header, utils
 │
 ├── 📁 client/                       # ═══ CLIENT PORTAL ═══
-│   ├── 📄 dashboard.html            # Client entry point
+│   ├── 📄 dashboard.php            # Client entry point
 │   │
 │   ├── 📁 auth/                     # Client authentication
 │   ├── 📁 dashboard/                # Dashboard styles/scripts
@@ -159,11 +159,11 @@ rental_Sample/
 │   └── 📁 icons/                    # SVG icons
 │
 ├── 📁 pages/                        # ═══ STATIC PAGES ═══
-│   ├── 📄 about.html
-│   ├── 📄 contactus.html
-│   ├── 📄 terms.html
-│   ├── 📄 privacy-policy.html
-│   └── 📄 wip.html
+│   ├── 📄 about.php
+│   ├── 📄 contactus.php
+│   ├── 📄 terms.php
+│   ├── 📄 privacy-policy.php
+│   └── 📄 wip.php
 │
 ├── 📁 landingpage/                  # Landing page assets
 │   ├── 📁 css/
@@ -263,27 +263,27 @@ rental_Sample/
 
 | Page | URL | Purpose |
 |------|-----|---------|
-| **Dashboard** | `/admin/dashboard.html` | Overview, KPIs, quick actions |
-| **Calendar** | `/admin/calendar/calendar.html` | Visual booking calendar, availability |
-| **Repairs** | `/admin/repairs/repairs.html` | Manage repairs, cleaning, maintenance |
-| **Late Fees** | `/admin/latefees/latefees.html` | Track overdue, manage penalties |
-| **Dispatch** | `/admin/dispatch/dispatch.html` | Delivery & pickup scheduling |
-| **Customers** | `/admin/customers/customers.html` | Customer database, history |
-| **Settings** | `/admin/settings/settings.html` | System configuration |
+| **Dashboard** | `/admin/dashboard.php` | Overview, KPIs, quick actions |
+| **Calendar** | `/admin/calendar/calendar.php` | Visual booking calendar, availability |
+| **Repairs** | `/admin/repairs/repairs.php` | Manage repairs, cleaning, maintenance |
+| **Late Fees** | `/admin/latefees/latefees.php` | Track overdue, manage penalties |
+| **Dispatch** | `/admin/dispatch/dispatch.php` | Delivery & pickup scheduling |
+| **Customers** | `/admin/customers/customers.php` | Customer database, history |
+| **Settings** | `/admin/settings/settings.php` | System configuration |
 
 ### Client Portal Pages
 
 | Page | URL | Purpose |
 |------|-----|---------|
-| **Dashboard** | `/client/dashboard.html` | Welcome, active rentals summary |
-| **Catalog** | `/client/catalog/catalog.html` | Browse available equipment |
-| **Item Details** | `/client/catalog/itemdescription.html` | Product details, booking |
-| **Cart** | `/client/cart/cart.html` | Review selections |
-| **Checkout** | `/client/checkout/checkout.html` | Complete booking |
-| **My Rentals** | `/client/myrentals/myrentals.html` | Current active rentals |
-| **History** | `/client/bookinghistory/bookinghistory.html` | Past bookings |
-| **Favorites** | `/client/favorites/favorites.html` | Saved items |
-| **Returns** | `/client/returns/returns.html` | Request returns |
+| **Dashboard** | `/client/dashboard.php` | Welcome, active rentals summary |
+| **Catalog** | `/client/catalog/catalog.php` | Browse available equipment |
+| **Item Details** | `/client/catalog/itemdescription.php` | Product details, booking |
+| **Cart** | `/client/cart/cart.php` | Review selections |
+| **Checkout** | `/client/checkout/checkout.php` | Complete booking |
+| **My Rentals** | `/client/myrentals/myrentals.php` | Current active rentals |
+| **History** | `/client/bookinghistory/bookinghistory.php` | Past bookings |
+| **Favorites** | `/client/favorites/favorites.php` | Saved items |
+| **Returns** | `/client/returns/returns.php` | Request returns |
 
 ---
 

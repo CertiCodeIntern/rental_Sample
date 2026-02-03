@@ -68,7 +68,7 @@
                             </label>
                             <div class="cart-item-image">
                                 <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2"
-                                     onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                     onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="cart-item-details">
                                 <div class="cart-item-header">
@@ -121,7 +121,7 @@
                             </label>
                             <div class="cart-item-image">
                                 <img src="assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket"
-                                     onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                     onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="cart-item-details">
                                 <div class="cart-item-header">
@@ -225,7 +225,7 @@
                     <div class="empty-icon">🛒</div>
                     <h2 class="empty-title">Your Cart is Empty</h2>
                     <p class="empty-text">Looks like you haven't added any equipment to rent yet.</p>
-                    <a href="client/catalog/catalog.html" class="btn-browse-catalog">
+                    <a href="client/catalog/catalog.php" class="btn-browse-catalog">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"/>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"/>

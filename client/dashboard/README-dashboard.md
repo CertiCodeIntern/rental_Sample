@@ -6,7 +6,7 @@
 
 ```
 dashboard/
-├── 📄 index.html       # Dashboard page
+├── 📄 index.php       # Dashboard page
 ├── 📄 dashboard.css    # Dashboard styles
 └── 📄 dashboard.js     # Dashboard functionality
 ```
@@ -34,7 +34,7 @@ dashboard/
 ## 🔐 Authentication
 
 This page is protected. Users must be logged in to access.
-Redirects to `/client/auth/login.html` if not authenticated.
+Redirects to `/client/auth/login.php` if not authenticated.
 
 ## 🧩 Components Used
 

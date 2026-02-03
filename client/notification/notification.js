@@ -151,7 +151,7 @@ function handleNotificationAction(button) {
     switch(action) {
         case 'view order':
             // Navigate to order details
-            window.location.href = 'client/bookinghistory/bookinghistory.html';
+            window.location.href = 'client/bookinghistory/bookinghistory.php';
             break;
         case 'track delivery':
             // Navigate to delivery tracking (can be implemented)
@@ -174,7 +174,7 @@ function handleNotificationAction(button) {
             break;
         case 'view receipt':
             // Navigate to payment history
-            window.location.href = 'client/bookinghistory/bookinghistory.html';
+            window.location.href = 'client/bookinghistory/bookinghistory.php';
             break;
         default:
             console.log('Action clicked:', action);

@@ -18,7 +18,7 @@ Migrated the entire project from React/Vite to pure Vanilla HTML, CSS, and JavaS
 ### New Folder Structure
 ```
 rental_Sample/
-├── index.html              # Landing page (root entry)
+├── index.php              # Landing page (root entry)
 ├── client/                 # Client-side app
 │   ├── auth/               # Login/Register
 │   └── dashboard/          # Client dashboard

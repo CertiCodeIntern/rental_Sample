@@ -74,7 +74,7 @@ Info:    #3B82F6
 ```
 admin/
 ├── [page-name]/
-│   ├── [page-name].html    # Page structure
+│   ├── [page-name].php    # Page structure
 │   ├── [page-name].css     # Page-specific styles
 │   └── [page-name].js      # Page-specific logic
 ├── shared/
@@ -91,7 +91,7 @@ admin/
 ```
 client/
 ├── [page-name]/
-│   ├── [page-name].html
+│   ├── [page-name].php
 │   ├── [page-name].css
 │   └── [page-name].js
 ├── shared/ or use root shared/
@@ -306,7 +306,7 @@ When creating a new admin page, ensure:
 | UI Components | `/admin/shared/css/admin-components.css` |
 | JS Components | `/admin/shared/js/admin-components.js` |
 | Architecture | `/docs/PROJECT-ARCHITECTURE.md` |
-| Example Page | `/admin/repairs/repairs.html` |
+| Example Page | `/admin/repairs/repairs.php` |
 
 ---
 

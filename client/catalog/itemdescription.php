@@ -35,7 +35,7 @@
             <div class="content-area fade-in-up" id="contentArea">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="client/catalog/catalog.html">Catalog</a>
+                    <a href="client/catalog/catalog.php">Catalog</a>
                     <span class="separator">/</span>
                     <span class="current" id="breadcrumbItem">Karaoke King Pro v2</span>
                 </nav>
@@ -46,7 +46,7 @@
                     <div class="product-gallery">
                         <div class="main-image-wrap">
                             <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="main-image" id="mainImage"
-                                 onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             <span class="product-status available" id="productStatus">Available</span>
                         </div>
                         <div class="thumbnail-gallery" id="thumbnailGallery">

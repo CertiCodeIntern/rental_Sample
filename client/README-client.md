@@ -14,9 +14,9 @@ client/
 
 | Route | Page | Description |
 |-------|------|-------------|
-| `/login` | `auth/login.html` | Login page |
-| `/signup` | `auth/login.html#register` | Registration |
-| `/dashboard` | `dashboard/index.html` | User dashboard |
+| `/login` | `auth/login.php` | Login page |
+| `/signup` | `auth/login.php#register` | Registration |
+| `/dashboard` | `dashboard/index.php` | User dashboard |
 
 ## 🎯 Purpose
 

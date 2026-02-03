@@ -8,9 +8,9 @@
 
 ```
 rental_Sample/
-├── 📄 index.html           # Landing page (entry point for Vercel)
+├── 📄 index.php           # Landing page (entry point for Vercel)
 ├── pages/
-│   ├── 📄 wip.html             # Work in Progress placeholder page
+│   ├── 📄 wip.php             # Work in Progress placeholder page
 ├── 📄 vercel.json          # Vercel deployment configuration
 ├── 📄 README.md            # Project overview
 │
@@ -31,14 +31,14 @@ rental_Sample/
 ```
 client/
 ├── 📁 auth/                # Authentication pages
-│   ├── 📄 login.html       # Login & Register page
+│   ├── 📄 login.php       # Login & Register page
 │   ├── 📁 css/
 │   │   └── auth.css        # Auth-specific styles
 │   └── 📁 js/
 │       └── auth.js         # Auth functionality
 │
 └── 📁 dashboard/           # Client dashboard
-    ├── 📄 index.html       # Dashboard page
+    ├── 📄 index.php       # Dashboard page
     ├── 📄 dashboard.css    # Dashboard styles
     └── 📄 dashboard.js     # Dashboard functionality
 ```
@@ -51,12 +51,12 @@ client/
 ```
 admin/
 ├── 📁 auth/                # Admin authentication
-│   ├── 📄 login.html       # Admin login page
+│   ├── 📄 login.php       # Admin login page
 │   ├── 📁 css/
 │   └── 📁 js/
 │
 └── 📁 dashboard/           # Admin dashboard
-    ├── 📄 index.html       # Admin dashboard
+    ├── 📄 index.php       # Admin dashboard
     ├── 📁 css/
     └── 📁 js/
 ```
@@ -110,13 +110,13 @@ docs/
 
 | URL | Destination | Description |
 |-----|-------------|-------------|
-| `/` | `index.html` | Landing page |
-| `/login` | `client/auth/login.html` | Client login |
-| `/signup` | `client/auth/login.html#register` | Client signup |
-| `/dashboard` | `client/dashboard.html` | Client dashboard |
-| `/admin/login` | `admin/auth/login.html` | Admin login |
-| `/admin/dashboard` | `admin/dashboard.html` | Admin dashboard |
-| `/wip` | `pages/wip.html` | Work in progress |
+| `/` | `index.php` | Landing page |
+| `/login` | `client/auth/login.php` | Client login |
+| `/signup` | `client/auth/login.php#register` | Client signup |
+| `/dashboard` | `client/dashboard.php` | Client dashboard |
+| `/admin/login` | `admin/auth/login.php` | Admin login |
+| `/admin/dashboard` | `admin/dashboard.php` | Admin dashboard |
+| `/wip` | `pages/wip.php` | Work in progress |
 
 ---
 

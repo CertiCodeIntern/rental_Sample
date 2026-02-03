@@ -4,25 +4,21 @@
     <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RentIt - My Rentals. Manage your active videoke equipment and rental history.">
-    <title>My Rentals - RentIt</title>
+    <meta name="description" content="RentIt Dashboard - Manage your videoke rentals.">
+    <title>RentIt - Dashboard</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="shared/css/theme.css">
     <link rel="stylesheet" href="shared/css/globals.css">
     <link rel="stylesheet" href="client/dashboard/dashboard.css">
-    <link rel="stylesheet" href="client/myrentals/myrentals.css">
     
-    <!-- Theme Script -->
-    <script src="shared/js/theme.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>
 <body>
     <div class="app-container">
@@ -39,28 +35,81 @@
                 <!-- Page Header -->
                 <div class="page-header-dashboard">
                     <div class="page-header-info">
-                        <h1 class="page-title">My Rentals</h1>
-                        <p class="page-subtitle">Manage your active videoke equipment and view your rental history.</p>
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="page-subtitle">Welcome back! Here's an overview of your rental activity.</p>
                     </div>
                     <div class="page-header-actions">
-                        <a href="client/catalog/catalog.html" class="btn-new">
-                            New Rental
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <line x1="12" y1="5" x2="12" y2="19"/>
-                                <line x1="5" y1="12" x2="19" y2="12"/>
+                        <a href="client/catalog/catalog.php" class="btn-new" title="Browse available rental equipment">
+                            Browse Catalog
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </a>
                     </div>
                 </div>
 
-                <!-- Tabs Navigation -->
-                <div class="rentals-tabs">
-                    <a href="client/myrentals/myrentals.html" class="tab-link active">Active Rentals</a>
-                    <a href="client/bookinghistory/bookinghistory.html" class="tab-link">Booking History</a>
-                    <a href="client/returns/returns.html" class="tab-link">Returns & Extensions</a>
-                </div>
+                <!-- KPI Cards -->
+                <section class="kpi-panel">
+                    <div class="kpi-row">
+                        <article class="kpi-card">
+                            <div class="kpi-icon-wrap blue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 8v4l3 3"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Active Rentals</div>
+                                <div class="kpi-value" id="activeRentalsCount">2</div>
+                                <div class="kpi-sub positive">Currently in your possession</div>
+                            </div>
+                        </article>
 
-                <!-- Currently In Possession Section -->
+                        <article class="kpi-card">
+                            <div class="kpi-icon-wrap orange">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Total Spent</div>
+                                <div class="kpi-value" id="totalSpent">₱1,452.80</div>
+                                <div class="kpi-sub">Lifetime transactions</div>
+                            </div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-icon-wrap green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Upcoming Returns</div>
+                                <div class="kpi-value" id="upcomingReturns">1</div>
+                                <div class="kpi-sub warning">Due in 2 days</div>
+                            </div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-icon-wrap gold">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Member Status</div>
+                                <div class="kpi-value" id="memberStatus">Gold</div>
+                                <div class="kpi-sub positive">24 lifetime rentals</div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Currently In Possession -->
                 <section class="active-rentals-section">
                     <div class="section-header">
                         <h2 class="section-title">Currently In Possession</h2>
@@ -85,10 +134,10 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="card-actions">
-                                <button class="btn-extend">
+                                <button class="btn-extend" title="Extend rental period">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                                         <line x1="16" y1="2" x2="16" y2="6"/>
@@ -97,7 +146,7 @@
                                     </svg>
                                     Extend
                                 </button>
-                                <button class="btn-return">
+                                <button class="btn-return" title="Request return pickup">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
                                     </svg>
@@ -123,17 +172,17 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <img src="assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                <img src="assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="card-actions">
-                                <button class="btn-extend btn-urgent">
+                                <button class="btn-extend btn-urgent" title="Extend rental urgently">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                         <polyline points="23 4 23 10 17 10"/>
                                         <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
                                     </svg>
                                     Extend Now
                                 </button>
-                                <button class="btn-return">
+                                <button class="btn-return" title="Request return pickup">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
                                     </svg>
@@ -142,13 +191,18 @@
                             </div>
                         </article>
                     </div>
+
+                    <!-- View All Link -->
+                    <div class="section-header-link">
+                        <a href="client/myrentals/myrentals.php" class="view-all-link">View All</a>
+                    </div>
                 </section>
 
-                <!-- Booking History Section -->
+                <!-- Booking History -->
                 <section class="history-section">
                     <div class="section-header">
                         <h2 class="section-title">Booking History</h2>
-                        <a href="client/bookinghistory/bookinghistory.html" class="view-all-link">View All</a>
+                        <a href="client/bookinghistory/bookinghistory.php" class="view-all-link">View All</a>
                     </div>
 
                     <div class="history-panel">
@@ -157,7 +211,8 @@
                                 <tr>
                                     <th>Item Details</th>
                                     <th>Rental Period</th>
-                                    <th>Total Amount</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -173,17 +228,17 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="period-dates">Oct 13 - Oct 16</div>
-                                        <div class="period-status">Completed</div>
+                                        <div class="period-dates">Jan 20 - Jan 23, 2026</div>
                                     </td>
                                     <td class="amount-cell">₱500.00</td>
+                                    <td><span class="status-pill status-completed">Completed</span></td>
                                     <td>
-                                        <a href="#" class="action-btn" aria-label="Download receipt" title="Download receipt">
-                                            Receipt
+                                        <button class="action-btn" aria-label="Download receipt" title="Download receipt">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 3v12M8 11l4 4 4-4M21 21H3"/>
                                             </svg>
-                                        </a>
+                                            Receipt
+                                        </button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -197,17 +252,17 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="period-dates">Oct 9 - Oct 13</div>
-                                        <div class="period-status">Completed</div>
+                                        <div class="period-dates">Jan 15 - Jan 18, 2026</div>
                                     </td>
-                                    <td class="amount-cell">₱120.00</td>
+                                    <td class="amount-cell">₱320.00</td>
+                                    <td><span class="status-pill status-completed">Completed</span></td>
                                     <td>
-                                        <a href="#" class="action-btn" aria-label="Download receipt" title="Download receipt">
-                                            Receipt
+                                        <button class="action-btn" aria-label="Download receipt" title="Download receipt">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M12 3v12M8 11l4 4 4-4M21 21H3"/>
                                             </svg>
-                                        </a>
+                                            Receipt
+                                        </button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -221,18 +276,71 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="period-dates">Jul 02 - Jul 05</div>
-                                        <div class="period-status" style="color: var(--danger);">Cancelled</div>
+                                        <div class="period-dates">Dec 10 - Dec 12, 2025</div>
                                     </td>
                                     <td class="amount-cell">₱0.00</td>
+                                    <td><span class="status-pill status-cancelled">Cancelled</span></td>
                                     <td>
                                         <button class="action-btn action-muted" aria-label="Refunded" title="This rental was refunded">
-                                            Refunded ø
+                                            Refunded
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                </section>
+
+                <!-- Returns & Extensions Section -->
+                <section class="returns-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Returns & Extensions</h2>
+                        <span class="units-badge" id="returnsBadge">1 Pending</span>
+                    </div>
+
+                    <div class="returns-panel">
+                        <table class="returns-table" role="table" aria-label="Returns and extensions">
+                            <thead>
+                                <tr>
+                                    <th>Item Details</th>
+                                    <th>Request Type</th>
+                                    <th>Request Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="returnsTableBody">
+                                <tr>
+                                    <td>
+                                        <div class="history-item">
+                                            <div class="history-thumb">🎤</div>
+                                            <div class="history-info">
+                                                <div class="history-name">Karaoke Pro System X-100</div>
+                                                <div class="history-id">#VDK-8921</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="request-type type-extension">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="23 4 23 10 17 10"/>
+                                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                            </svg>
+                                            Extension
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="period-dates">Feb 01, 2026</div>
+                                    </td>
+                                    <td><span class="status-pill status-pending">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- View All Link -->
+                    <div class="section-header-link">
+                        <a href="client/returns/returns.php" class="view-all-link">View All</a>
                     </div>
                 </section>
 
@@ -243,11 +351,11 @@
                             <h3>Plan a party next weekend?</h3>
                             <p>Get 20% off on your next rental if you book 3 days in advance. Exclusive for loyal customers.</p>
                         </div>
-                        <a href="client/catalog/catalog.html" class="promo-cta">Claim 20% Discount</a>
+                        <a href="client/catalog/catalog.php" class="promo-cta">Claim 20% Discount</a>
                     </div>
                 </section>
             </div>
-
+            
             <!-- Footer Container (Injected by JS) -->
             <div id="footerContainer"></div>
         </main>
@@ -255,7 +363,7 @@
     
     <!-- Scripts -->
     <script src="shared/js/components.js"></script>
-    <script src="client/myrentals/myrentals.js"></script>
+    <script src="client/dashboard/dashboard.js"></script>
 </body>
 </html>
 

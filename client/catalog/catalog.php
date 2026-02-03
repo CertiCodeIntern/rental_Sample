@@ -236,7 +236,7 @@
                             <article class="product-card" data-id="1" data-category="premium" data-price="120" data-popularity="95">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge available">Available</span>
                                     <button class="btn-availability" data-id="1" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -306,7 +306,7 @@
                             <article class="product-card" data-id="2" data-category="portable" data-price="65" data-popularity="88">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/echostream-portable.jpg" alt="EchoStream Portable" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge booked">Booked Today</span>
                                     <button class="btn-availability" data-id="2" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -366,7 +366,7 @@
                             <article class="product-card" data-id="3" data-category="professional" data-price="250" data-popularity="92">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/vocalstar-5000.jpg" alt="VocalStar 5000 Stage" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge available">Available</span>
                                     <button class="btn-availability" data-id="3" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -434,7 +434,7 @@
                             <article class="product-card" data-id="4" data-category="premium" data-price="120" data-popularity="90" data-promo="true">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/homeparty-ultra.jpg" alt="HomeParty Ultra" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge available">Available</span>
                                     <button class="btn-availability" data-id="4" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -502,7 +502,7 @@
                             <article class="product-card" data-id="5" data-category="portable" data-price="120" data-popularity="85">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge available">Available</span>
                                     <button class="btn-availability" data-id="5" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
@@ -569,7 +569,7 @@
                             <article class="product-card" data-id="6" data-category="professional" data-price="120" data-popularity="78" data-promo="true">
                                 <div class="product-image-wrap">
                                     <img src="assets/images/products/venuemaster-x1.jpg" alt="VenueMaster X-1" class="product-image"
-                                         onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                         onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     <span class="product-badge booked">Booked Today</span>
                                     <button class="btn-availability" data-id="6" title="View future availability">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">

@@ -146,7 +146,7 @@
                             <span class="checkmark"></span>
                             <span>Remember me</span>
                         </label>
-                        <a href="pages/wip.html" class="forgot-link">Forgot password?</a>
+                        <a href="pages/wip.php" class="forgot-link">Forgot password?</a>
                     </div>
 
                     <!-- Error Message -->
@@ -159,7 +159,7 @@
                 </form>
 
                 <div class="form-footer">
-                    <p>Not an admin? <a href="index.html">Return to main site</a></p>
+                    <p>Not an admin? <a href="index.php">Return to main site</a></p>
                 </div>
 
                 <!-- Demo Credentials -->

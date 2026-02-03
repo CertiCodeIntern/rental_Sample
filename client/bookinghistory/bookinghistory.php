@@ -49,7 +49,7 @@
                             </svg>
                             Filter
                         </button>
-                        <a href="client/catalog/catalog.html" class="btn-new">
+                        <a href="client/catalog/catalog.php" class="btn-new">
                             New Rental
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="12" y1="5" x2="12" y2="19"/>
@@ -61,9 +61,9 @@
 
                 <!-- Tabs Navigation -->
                 <div class="rentals-tabs">
-                    <a href="client/myrentals/myrentals.html" class="tab-link">Active Rentals</a>
-                    <a href="client/bookinghistory/bookinghistory.html" class="tab-link active">Booking History</a>
-                    <a href="client/returns/returns.html" class="tab-link">Returns & Extensions</a>
+                    <a href="client/myrentals/myrentals.php" class="tab-link">Active Rentals</a>
+                    <a href="client/bookinghistory/bookinghistory.php" class="tab-link active">Booking History</a>
+                    <a href="client/returns/returns.php" class="tab-link">Returns & Extensions</a>
                 </div>
 
                 <!-- KPI Cards -->
@@ -282,7 +282,7 @@
                             <h3>Plan a party next weekend?</h3>
                             <p>Get 20% off on your next rental if you book 3 days in advance. Exclusive for loyal customers.</p>
                         </div>
-                        <a href="client/catalog/catalog.html" class="promo-cta">Claim 20% Discount</a>
+                        <a href="client/catalog/catalog.php" class="promo-cta">Claim 20% Discount</a>
                     </div>
                 </section>
             </div>

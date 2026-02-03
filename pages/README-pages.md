@@ -6,10 +6,10 @@
 
 ```
 pages/
-├── 📄 about.html       # About Us page
-├── 📄 contact.html     # Contact Us page
-├── 📄 privacy.html     # Privacy Policy
-├── 📄 terms.html       # Terms of Service
+├── 📄 about.php       # About Us page
+├── 📄 contact.php     # Contact Us page
+├── 📄 privacy.php     # Privacy Policy
+├── 📄 terms.php       # Terms of Service
 ├── 📄 pages.css        # Shared styles for all pages
 └── README-pages.md     # This file
 ```
@@ -27,10 +27,10 @@ This folder contains static informational pages that are not part of the core ap
 
 | URL | Page |
 |-----|------|
-| `/about` | `about.html` |
-| `/contact` | `contact.html` |
-| `/privacy` | `privacy.html` |
-| `/terms` | `terms.html` |
+| `/about` | `about.php` |
+| `/contact` | `contact.php` |
+| `/privacy` | `privacy.php` |
+| `/terms` | `terms.php` |
 
 ## 🎨 Styling
 

@@ -30,10 +30,10 @@ The **Client Portal** is the customer-facing interface where users can:
 
 ```
 client/
-├── 📄 dashboard.html              # Main entry point after login
+├── 📄 dashboard.php              # Main entry point after login
 │
 ├── 📁 auth/                       # Authentication
-│   ├── 📄 login.html              # Login & Registration
+│   ├── 📄 login.php              # Login & Registration
 │   ├── 📁 css/
 │   │   └── auth.css
 │   └── 📁 js/
@@ -45,40 +45,40 @@ client/
 │   └── 📄 README-dashboard.md
 │
 ├── 📁 catalog/                    # Equipment Catalog
-│   ├── 📄 catalog.html            # Browse all equipment
+│   ├── 📄 catalog.php            # Browse all equipment
 │   ├── 📄 catalog.css
 │   ├── 📄 catalog.js
-│   ├── 📄 itemdescription.html    # Single item detail
+│   ├── 📄 itemdescription.php    # Single item detail
 │   ├── 📄 itemdescription.css
 │   └── 📄 itemdescription.js
 │
 ├── 📁 cart/                       # Shopping Cart
-│   ├── 📄 cart.html
+│   ├── 📄 cart.php
 │   ├── 📄 cart.css
 │   └── 📄 cart.js
 │
 ├── 📁 checkout/                   # Checkout Process
-│   ├── 📄 checkout.html
+│   ├── 📄 checkout.php
 │   ├── 📄 checkout.css
 │   └── 📄 checkout.js
 │
 ├── 📁 myrentals/                  # Active Rentals
-│   ├── 📄 myrentals.html
+│   ├── 📄 myrentals.php
 │   ├── 📄 myrentals.css
 │   └── 📄 myrentals.js
 │
 ├── 📁 bookinghistory/             # Past Bookings
-│   ├── 📄 bookinghistory.html
+│   ├── 📄 bookinghistory.php
 │   ├── 📄 bookinghistory.css
 │   └── 📄 bookinghistory.js
 │
 ├── 📁 favorites/                  # Saved Items
-│   ├── 📄 favorites.html
+│   ├── 📄 favorites.php
 │   ├── 📄 favorites.css
 │   └── 📄 favorites.js
 │
 └── 📁 returns/                    # Return Requests
-    ├── 📄 returns.html
+    ├── 📄 returns.php
     ├── 📄 returns.css
     └── 📄 returns.js
 ```
@@ -175,7 +175,7 @@ client/
 
 ## 📍 Page Specifications
 
-### 1. Dashboard (`/client/dashboard.html`)
+### 1. Dashboard (`/client/dashboard.php`)
 **Purpose:** Welcome screen with quick overview
 
 **Content:**
@@ -185,7 +185,7 @@ client/
 - Upcoming returns reminder
 - Recommended items
 
-### 2. Catalog (`/client/catalog/catalog.html`)
+### 2. Catalog (`/client/catalog/catalog.php`)
 **Purpose:** Browse all available equipment
 
 **Features:**
@@ -196,7 +196,7 @@ client/
 - Availability filter
 - Sort by (Price, Popularity, Name)
 
-### 3. Item Description (`/client/catalog/itemdescription.html`)
+### 3. Item Description (`/client/catalog/itemdescription.php`)
 **Purpose:** Detailed product view
 
 **Content:**
@@ -209,7 +209,7 @@ client/
 - Add to Cart / Add to Favorites buttons
 - Similar items section
 
-### 4. Cart (`/client/cart/cart.html`)
+### 4. Cart (`/client/cart/cart.php`)
 **Purpose:** Review selections before checkout
 
 **Content:**
@@ -221,7 +221,7 @@ client/
 - Continue Shopping link
 - Proceed to Checkout button
 
-### 5. Checkout (`/client/checkout/checkout.html`)
+### 5. Checkout (`/client/checkout/checkout.php`)
 **Purpose:** Complete the booking
 
 **Steps:**
@@ -239,7 +239,7 @@ client/
    - Order ID
    - Receipt
 
-### 6. My Rentals (`/client/myrentals/myrentals.html`)
+### 6. My Rentals (`/client/myrentals/myrentals.php`)
 **Purpose:** View and manage active rentals
 
 **Content:**
@@ -249,7 +249,7 @@ client/
 - Request return button
 - View order details
 
-### 7. Booking History (`/client/bookinghistory/bookinghistory.html`)
+### 7. Booking History (`/client/bookinghistory/bookinghistory.php`)
 **Purpose:** View past bookings
 
 **Content:**
@@ -259,7 +259,7 @@ client/
 - Rebook same items
 - Leave review
 
-### 8. Favorites (`/client/favorites/favorites.html`)
+### 8. Favorites (`/client/favorites/favorites.php`)
 **Purpose:** Saved items for later
 
 **Content:**
@@ -268,7 +268,7 @@ client/
 - Remove from favorites
 - Availability status
 
-### 9. Returns (`/client/returns/returns.html`)
+### 9. Returns (`/client/returns/returns.php`)
 **Purpose:** Request item returns
 
 **Content:**

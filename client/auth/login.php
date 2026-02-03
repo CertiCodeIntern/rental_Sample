@@ -44,7 +44,7 @@
 
     <div class="auth-section">
         <!-- Back Button -->
-        <a href="index.html" class="back-to-home" title="Back to home">← Home</a>
+        <a href="index.php" class="back-to-home" title="Back to home">← Home</a>
         
         <!-- Left Panel - Branding -->
         <div class="auth-left">
@@ -124,7 +124,7 @@
                                 <input type="checkbox" id="rememberMe">
                                 Remember me
                             </label>
-                            <a href="pages/wip.html">Forgot password?</a>
+                            <a href="pages/wip.php">Forgot password?</a>
                         </div>
                         <button type="submit" class="auth-btn stagger-child">Sign In  →</button>
                         
@@ -238,7 +238,7 @@
                         <span class="auth-footer-label">Secure sign-in • Your data stays private</span>
                         <span class="auth-footer-links">
                             By continuing, you agree to our
-                            <a href="pages/wip.html">Terms</a> and <a href="pages/wip.html">Privacy Policy</a>.
+                            <a href="pages/wip.php">Terms</a> and <a href="pages/wip.php">Privacy Policy</a>.
                         </span>
                     </div>
                 </div>

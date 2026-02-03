@@ -122,11 +122,11 @@ For content headings (not nav/header), always use theme-aware variables:
 // landingpage/js/index.js
 function initActiveNavHighlight() {
     const currentPath = window.location.pathname;
-    const currentFileName = currentPath.split('/').pop().replace('.html', '');
+    const currentFileName = currentPath.split('/').pop().replace('.php', '');
     
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        const linkFileName = href.split('/').pop().replace('.html', '');
+        const linkFileName = href.split('/').pop().replace('.php', '');
         
         if (currentFileName === linkFileName) {
             link.classList.add('active');
@@ -149,12 +149,12 @@ function initActiveNavHighlight() {
 
 The Header and Footer HTML structure **must remain identical** across all pages:
 
-- `index.html`
-- `pages/aboutus.html`
-- `pages/contactus.html`
-- `pages/privacy-policy.html`
-- `pages/terms.html`
-- `pages/cookie-policy.html`
+- `index.php`
+- `pages/aboutus.php`
+- `pages/contactus.php`
+- `pages/privacy-policy.php`
+- `pages/terms.php`
+- `pages/cookie-policy.php`
 
 Use the same navigation links, logo, and button structure.
 

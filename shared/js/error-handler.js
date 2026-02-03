@@ -77,7 +77,7 @@ const ErrorHandler = {
     redirectTo404(originalPath) {
         // Store the original path for the 404 page to display
         sessionStorage.setItem('404_original_path', originalPath || window.location.pathname);
-        window.location.href = 'pages/404.html';
+        window.location.href = 'pages/404.php';
     },
 
     /**

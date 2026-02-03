@@ -25,10 +25,10 @@ The Admin Portal is the back-office management system for RentIt. It provides st
 ```
 admin/
 │
-├── 📄 dashboard.html              # Main entry point
+├── 📄 dashboard.php              # Main entry point
 │
 ├── 📁 auth/                       # Authentication
-│   ├── 📄 login.html
+│   ├── 📄 login.php
 │   ├── 📁 css/
 │   │   └── auth.css
 │   └── 📁 js/
@@ -41,32 +41,32 @@ admin/
 │       └── dashboard.js
 │
 ├── 📁 calendar/                   # Calendar Master View
-│   ├── 📄 calendar.html
+│   ├── 📄 calendar.php
 │   ├── 📄 calendar.css
 │   └── 📄 calendar.js
 │
 ├── 📁 repairs/                    # Repairs & Maintenance
-│   ├── 📄 repairs.html
+│   ├── 📄 repairs.php
 │   ├── 📄 repairs.css
 │   └── 📄 repairs.js
 │
 ├── 📁 latefees/                   # Late Fees Tracker
-│   ├── 📄 latefees.html
+│   ├── 📄 latefees.php
 │   ├── 📄 latefees.css
 │   └── 📄 latefees.js
 │
 ├── 📁 dispatch/                   # Dispatch Management
-│   ├── 📄 dispatch.html
+│   ├── 📄 dispatch.php
 │   ├── 📄 dispatch.css
 │   └── 📄 dispatch.js
 │
 ├── 📁 customers/                  # Customer Management
-│   ├── 📄 customers.html
+│   ├── 📄 customers.php
 │   ├── 📄 customers.css
 │   └── 📄 customers.js
 │
 ├── 📁 settings/                   # System Settings
-│   ├── 📄 settings.html
+│   ├── 📄 settings.php
 │   ├── 📄 settings.css
 │   └── 📄 settings.js
 │
@@ -110,32 +110,32 @@ admin/
 
 ## 📄 Page Specifications
 
-### 1. Dashboard (`dashboard.html`)
+### 1. Dashboard (`dashboard.php`)
 **KPIs:** Revenue, Active Rentals, Pending Deliveries, Available Machines  
 **Widgets:** Recent Bookings Table, Delivery Schedule, Inventory Health
 
-### 2. Calendar (`calendar/calendar.html`)
+### 2. Calendar (`calendar/calendar.php`)
 **View:** Week grid with asset rows and day columns  
 **Filters:** Asset Type, Status (Booked, Repair, Cleaning, Available)  
 **Actions:** New Booking, View booking details
 
-### 3. Repairs (`repairs/repairs.html`)
+### 3. Repairs (`repairs/repairs.php`)
 **KPIs:** In Repair, Cleaning, Completed Today, Overdue  
 **Table:** Item, Status, Start Date, Expected Completion, Actions  
 **Actions:** Add Repair, Mark Repaired/Cleaned, Remove from catalog
 
-### 4. Late Fees (`latefees/latefees.html`)
+### 4. Late Fees (`latefees/latefees.php`)
 **KPIs:** Total Overdue, Fees Due, Avg Days Late, Collected Today  
 **Table:** Customer, Item, Due Date, Days Overdue, Fee, Actions  
 **Actions:** Send Reminder, Apply Fee, Bulk actions
 
-### 5. Dispatch (`dispatch/dispatch.html`)
+### 5. Dispatch (`dispatch/dispatch.php`)
 **Features:** Delivery scheduling, driver assignment, route planning
 
-### 6. Customers (`customers/customers.html`)
+### 6. Customers (`customers/customers.php`)
 **Features:** Customer list, booking history, contact info
 
-### 7. Settings (`settings/settings.html`)
+### 7. Settings (`settings/settings.php`)
 **Features:** System config, fee rates, email templates
 
 ---

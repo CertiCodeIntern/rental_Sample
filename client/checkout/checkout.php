@@ -164,7 +164,7 @@
                                 <div class="order-item">
                                     <div class="order-item-image">
                                         <img src="assets/images/platinumpro.webp" alt="Karaoke King Pro v2"
-                                             onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                             onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     </div>
                                     <div class="order-item-details">
                                         <h4 class="order-item-name">Karaoke King Pro v2</h4>
@@ -198,7 +198,7 @@
                                 <div class="order-item">
                                     <div class="order-item-image">
                                         <img src="assets/images/ministar.jpg" alt="MiniSing Pocket"
-                                             onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                             onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                                     </div>
                                     <div class="order-item-details">
                                         <h4 class="order-item-name">MiniSing Pocket</h4>
@@ -314,13 +314,13 @@
 
                             <p class="terms-note">
                                 By confirming, you agree to our 
-                                <a href="pages/terms.html">Terms of Service</a> and 
-                                <a href="pages/privacy.html">Privacy Policy</a>.
+                                <a href="pages/terms.php">Terms of Service</a> and 
+                                <a href="pages/privacy.php">Privacy Policy</a>.
                             </p>
                         </div>
 
                         <!-- Back to Cart -->
-                        <a href="client/cart/cart.html" class="btn-back-cart" title="Go back to cart">
+                        <a href="client/cart/cart.php" class="btn-back-cart" title="Go back to cart">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="19" y1="12" x2="5" y2="12"/>
                                 <polyline points="12 19 5 12 12 5"/>

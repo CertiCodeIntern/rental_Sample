@@ -33,7 +33,7 @@
             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">☰</button>
             
             <!-- Brand -->
-            <a href="index.html" class="brand">
+            <a href="index.php" class="brand">
                 <div class="logo-drawer">
                     <img src="assets/images/rIT_logo_tp.png" alt="RentIt Logo">
                 </div>
@@ -42,11 +42,11 @@
             
             <!-- Desktop Navigation -->
             <nav class="main-nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="index.html#machines" class="nav-link">Rentals</a>
-                <a href="index.html#pricing" class="nav-link">Pricing</a>
-                <a href="pages/aboutus.html" class="nav-link active">About</a>
-                <a href="pages/contactus.html" class="nav-link">Contact</a>
+                <a href="index.php" class="nav-link">Home</a>
+                <a href="index.php#machines" class="nav-link">Rentals</a>
+                <a href="index.php#pricing" class="nav-link">Pricing</a>
+                <a href="pages/aboutus.php" class="nav-link active">About</a>
+                <a href="pages/contactus.php" class="nav-link">Contact</a>
             </nav>
             
             <!-- Header Actions -->
@@ -69,20 +69,20 @@
                     </svg>
                 </button>
 
-                <a href="client/auth/login.html#login" class="btn btn-outline">Login</a>
-                <a href="client/auth/login.html#register" class="btn btn-primary">Register</a>
+                <a href="client/auth/login.php#login" class="btn btn-outline">Login</a>
+                <a href="client/auth/login.php#register" class="btn btn-primary">Register</a>
             </div>
         </div>
         
         <!-- Mobile Navigation -->
         <nav class="mobile-nav" id="mobileNav">
-            <a href="index.html" class="mobile-link">Home</a>
-            <a href="index.html#machines" class="mobile-link">Rentals</a>
-            <a href="index.html#pricing" class="mobile-link">Pricing</a>
-            <a href="pages/aboutus.html" class="mobile-link active">About</a>
-            <a href="pages/contactus.html" class="mobile-link">Contact</a>
+            <a href="index.php" class="mobile-link">Home</a>
+            <a href="index.php#machines" class="mobile-link">Rentals</a>
+            <a href="index.php#pricing" class="mobile-link">Pricing</a>
+            <a href="pages/aboutus.php" class="mobile-link active">About</a>
+            <a href="pages/contactus.php" class="mobile-link">Contact</a>
             <div class="mobile-actions">
-                <a href="client/auth/login.html#login" class="btn btn-primary" style="width: 100%;">Login</a>
+                <a href="client/auth/login.php#login" class="btn btn-primary" style="width: 100%;">Login</a>
             </div>
         </nav>
     </header>
@@ -404,12 +404,12 @@
                         </p>
                         <p class="powered-by">Powered by <a href="https://certicode.com" target="_blank" rel="noopener">CertiCode</a></p>
                         <div class="social-links">
-                            <a href="pages/wip.html" class="social" aria-label="Facebook">
+                            <a href="pages/wip.php" class="social" aria-label="Facebook">
                                 <svg viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                                 </svg>
                             </a>
-                            <a href="pages/wip.html" class="social" aria-label="Share">
+                            <a href="pages/wip.php" class="social" aria-label="Share">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="18" cy="5" r="3"/>
                                     <circle cx="6" cy="12" r="3"/>
@@ -432,10 +432,10 @@
                 <div class="footer-col">
                     <h5>Company</h5>
                     <nav class="footer-nav">
-                        <a href="pages/aboutus.html" class="footer-link">About Us</a>
-                        <a href="pages/contactus.html" class="footer-link">Contact</a>
-                        <a href="pages/terms.html" class="footer-link">Terms of Service</a>
-                        <a href="admin/auth/login.html" class="footer-link">Admin</a>
+                        <a href="pages/aboutus.php" class="footer-link">About Us</a>
+                        <a href="pages/contactus.php" class="footer-link">Contact</a>
+                        <a href="pages/terms.php" class="footer-link">Terms of Service</a>
+                        <a href="admin/auth/login.php" class="footer-link">Admin</a>
                     </nav>
                 </div>
 
@@ -443,10 +443,10 @@
                 <div class="footer-col">
                     <h5>Support</h5>
                     <nav class="footer-nav">
-                        <a href="pages/wip.html" class="footer-link">How It Works</a>
-                        <a href="index.html#pricing" class="footer-link">Pricing Packages</a>
-                        <a href="pages/wip.html" class="footer-link">Safety Guidelines</a>
-                        <a href="pages/wip.html" class="footer-link">Delivery Areas</a>
+                        <a href="pages/wip.php" class="footer-link">How It Works</a>
+                        <a href="index.php#pricing" class="footer-link">Pricing Packages</a>
+                        <a href="pages/wip.php" class="footer-link">Safety Guidelines</a>
+                        <a href="pages/wip.php" class="footer-link">Delivery Areas</a>
                     </nav>
                 </div>
             </div>
@@ -456,8 +456,8 @@
             <div class="footer-bottom">
                 <p class="copyright">© 2026 RentIt Videoke Rentals • v2.4.0</p>
                 <div class="policy-links">
-                    <a href="pages/privacy-policy.html" class="policy-link">Privacy Policy</a>
-                    <a href="pages/cookie-policy.html" class="policy-link">Cookie Policy</a>
+                    <a href="pages/privacy-policy.php" class="policy-link">Privacy Policy</a>
+                    <a href="pages/cookie-policy.php" class="policy-link">Cookie Policy</a>
                 </div>
             </div>
         </div>

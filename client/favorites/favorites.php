@@ -55,7 +55,7 @@
                     <article class="favorite-card" data-id="1">
                         <div class="favorite-image-wrap">
                             <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="favorite-image"
-                                 onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             <span class="favorite-badge available">Available</span>
                             <button class="btn-remove-favorite" data-id="1" aria-label="Remove from favorites">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -85,7 +85,7 @@
                                     </svg>
                                     Move to Cart
                                 </button>
-                                <a href="client/catalog/itemdescription.html?id=1" class="btn-view-details">View Details</a>
+                                <a href="client/catalog/itemdescription.php?id=1" class="btn-view-details">View Details</a>
                             </div>
                         </div>
                     </article>
@@ -94,7 +94,7 @@
                     <article class="favorite-card" data-id="4">
                         <div class="favorite-image-wrap">
                             <img src="assets/images/products/homeparty-ultra.jpg" alt="HomeParty Ultra" class="favorite-image"
-                                 onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             <span class="favorite-badge available">Available</span>
                             <button class="btn-remove-favorite" data-id="4" aria-label="Remove from favorites">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -124,7 +124,7 @@
                                     </svg>
                                     Move to Cart
                                 </button>
-                                <a href="client/catalog/itemdescription.html?id=4" class="btn-view-details">View Details</a>
+                                <a href="client/catalog/itemdescription.php?id=4" class="btn-view-details">View Details</a>
                             </div>
                         </div>
                     </article>
@@ -133,7 +133,7 @@
                     <article class="favorite-card" data-id="3">
                         <div class="favorite-image-wrap">
                             <img src="assets/images/products/vocalstar-5000.jpg" alt="VocalStar 5000 Stage" class="favorite-image"
-                                 onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             <span class="favorite-badge available">Available</span>
                             <button class="btn-remove-favorite" data-id="3" aria-label="Remove from favorites">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -163,7 +163,7 @@
                                     </svg>
                                     Move to Cart
                                 </button>
-                                <a href="client/catalog/itemdescription.html?id=3" class="btn-view-details">View Details</a>
+                                <a href="client/catalog/itemdescription.php?id=3" class="btn-view-details">View Details</a>
                             </div>
                         </div>
                     </article>
@@ -174,7 +174,7 @@
                     <div class="empty-icon">💔</div>
                     <h2 class="empty-title">No Favorites Yet</h2>
                     <p class="empty-text">Start exploring our catalog and save machines you love!</p>
-                    <a href="client/catalog/catalog.html" class="btn-browse-catalog">Browse Catalog</a>
+                    <a href="client/catalog/catalog.php" class="btn-browse-catalog">Browse Catalog</a>
                 </div>
             </div>
 
