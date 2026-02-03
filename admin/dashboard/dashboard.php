@@ -1,3 +1,19 @@
+<?php
+/**
+ * =====================================================
+ * ADMIN DASHBOARD - Database Driven
+ * Overview of rental business with real data
+ * =====================================================
+ */
+session_start();
+require_once __DIR__ . '/../../backend/helpers/admin_helpers.php';
+
+// Fetch dashboard data from database
+$kpis = getDashboardKPIs();
+$recentBookings = getRecentBookings(5);
+$pendingActions = getPendingActions();
+$equipmentStatus = getEquipmentStatus(5);
+?>
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -75,12 +91,12 @@
                         </div>
                         <div class="kpi-content">
                             <div class="kpi-label">Total Revenue</div>
-                            <div class="kpi-value">₱124,580</div>
-                            <span class="kpi-change positive" title="+12.1% compared to last month">
+                            <div class="kpi-value"><?= formatPeso($kpis['total_revenue']) ?></div>
+                            <span class="kpi-change positive" title="This month's revenue">
                                 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                                 </svg>
-                                +12.1%
+                                This Month
                             </span>
                         </div>
                     </div>
@@ -96,49 +112,57 @@
                         </div>
                         <div class="kpi-content">
                             <div class="kpi-label">Active Rentals</div>
-                            <div class="kpi-value">18</div>
-                            <span class="kpi-change positive" title="+5.2% compared to last week">
+                            <div class="kpi-value"><?= $kpis['active_rentals'] ?></div>
+                            <span class="kpi-change positive" title="Currently rented out">
                                 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                                 </svg>
-                                +5.2%
+                                Currently Out
                             </span>
                         </div>
                     </div>
 
                     <div class="kpi-card animate-fadeInUp stagger-3">
-                        <div class="kpi-icon warning" title="Pending deliveries scheduled">
+                        <div class="kpi-icon warning" title="Total registered customers">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="1" y="3" width="15" height="13"/>
-                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-                                <circle cx="5.5" cy="18.5" r="2.5"/>
-                                <circle cx="18.5" cy="18.5" r="2.5"/>
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
                         </div>
                         <div class="kpi-content">
-                            <div class="kpi-label">Pending Deliveries</div>
-                            <div class="kpi-value">7</div>
-                            <span class="kpi-change neutral" title="Deliveries scheduled for next 2 days">
-                                2 days scheduled
+                            <div class="kpi-label">Total Customers</div>
+                            <div class="kpi-value"><?= $kpis['total_customers'] ?></div>
+                            <span class="kpi-change neutral" title="Active customer accounts">
+                                Active Accounts
                             </span>
                         </div>
                     </div>
 
                     <div class="kpi-card animate-fadeInUp stagger-4">
-                        <div class="kpi-icon success" title="Machines ready for rental">
+                        <div class="kpi-icon success" title="Equipment ready for rental">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                         </div>
                         <div class="kpi-content">
-                            <div class="kpi-label">Machines Available</div>
-                            <div class="kpi-value">24</div>
-                            <span class="kpi-change positive" title="All units ready to rent">
+                            <div class="kpi-label">Available Equipment</div>
+                            <div class="kpi-value"><?= $kpis['available_equipment'] ?></div>
+                            <span class="kpi-change <?= $pendingActions['low_stock_items'] > 0 ? 'negative' : 'positive' ?>" title="Units ready for rent">
+                                <?php if ($pendingActions['low_stock_items'] > 0): ?>
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                                <?= $pendingActions['low_stock_items'] ?> Low Stock
+                                <?php else: ?>
                                 <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
                                     <circle cx="12" cy="12" r="4"/>
                                 </svg>
-                                Ready to rent
+                                All Stocked
+                                <?php endif; ?>
                             </span>
                         </div>
                     </div>
@@ -170,141 +194,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if (empty($recentBookings)): ?>
+                                        <tr>
+                                            <td colspan="5" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                                                No recent bookings found
+                                            </td>
+                                        </tr>
+                                        <?php else: ?>
+                                        <?php foreach ($recentBookings as $booking): ?>
                                         <tr>
                                             <td>
                                                 <div class="customer-cell">
-                                                    <div class="customer-avatar">J</div>
-                                                    <span>John Smith</span>
+                                                    <div class="customer-avatar" style="background: <?= getAvatarColor($booking['customer_name']) ?>">
+                                                        <?= getInitials($booking['customer_name']) ?>
+                                                    </div>
+                                                    <span><?= htmlspecialchars($booking['customer_name']) ?></span>
                                                 </div>
                                             </td>
-                                            <td>KRK-001 Pro System</td>
-                                            <td title="January 15-17, 2026">Jan 15-17 (3 days)</td>
-                                            <td><span class="status-badge status-booked">Booked</span></td>
+                                            <td><?= htmlspecialchars($booking['machine_sku'] . ' ' . $booking['machine_name']) ?></td>
+                                            <td title="<?= formatDate($booking['rental_start'], 'F j') ?> - <?= formatDate($booking['rental_end'], 'F j, Y') ?>">
+                                                <?= formatDate($booking['rental_start'], 'M j') ?>-<?= formatDate($booking['rental_end'], 'j') ?> (<?= $booking['rental_days'] ?> days)
+                                            </td>
+                                            <td><span class="status-badge <?= getStatusBadgeClass($booking['order_status']) ?>"><?= ucfirst($booking['order_status']) ?></span></td>
                                             <td>
                                                 <div class="table-action-btns">
-                                                    <button class="btn-icon" title="View booking details">
+                                                    <a href="admin/orders/orderdetail.php?id=<?= $booking['order_id'] ?>" class="btn-icon" title="View booking details">
                                                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                                                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                                                             <circle cx="12" cy="12" r="3"/>
                                                         </svg>
-                                                    </button>
-                                                    <button class="btn-icon" title="Edit booking">
+                                                    </a>
+                                                    <a href="admin/orders/orderdetail.php?id=<?= $booking['order_id'] ?>&edit=1" class="btn-icon" title="Edit booking">
                                                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                                         </svg>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="customer-cell">
-                                                    <div class="customer-avatar">S</div>
-                                                    <span>Sarah Johnson</span>
-                                                </div>
-                                            </td>
-                                            <td>KRK-002 Premium</td>
-                                            <td title="January 15-19, 2026">Jan 15-19 (5 days)</td>
-                                            <td><span class="status-badge status-transit">In Transit</span></td>
-                                            <td>
-                                                <div class="table-action-btns">
-                                                    <button class="btn-icon" title="View booking details">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                                            <circle cx="12" cy="12" r="3"/>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn-icon" title="Edit booking">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="customer-cell">
-                                                    <div class="customer-avatar">M</div>
-                                                    <span>Mike Davis</span>
-                                                </div>
-                                            </td>
-                                            <td>KRK-004 Deluxe</td>
-                                            <td title="January 17-18, 2026">Jan 17-18 (2 days)</td>
-                                            <td><span class="status-badge status-pending">Pending</span></td>
-                                            <td>
-                                                <div class="table-action-btns">
-                                                    <button class="btn-icon" title="View booking details">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                                            <circle cx="12" cy="12" r="3"/>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn-icon" title="Edit booking">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="customer-cell">
-                                                    <div class="customer-avatar">E</div>
-                                                    <span>Emily White</span>
-                                                </div>
-                                            </td>
-                                            <td>SPK-001 Speaker Set</td>
-                                            <td title="January 16-20, 2026">Jan 16-20 (5 days)</td>
-                                            <td><span class="status-badge status-success">Confirmed</span></td>
-                                            <td>
-                                                <div class="table-action-btns">
-                                                    <button class="btn-icon" title="View booking details">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                                            <circle cx="12" cy="12" r="3"/>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn-icon" title="Edit booking">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="customer-cell">
-                                                    <div class="customer-avatar">T</div>
-                                                    <span>Tom Brown</span>
-                                                </div>
-                                            </td>
-                                            <td>MIC-002 Wired Set</td>
-                                            <td title="January 17-20, 2026">Jan 17-20 (4 days)</td>
-                                            <td><span class="status-badge status-booked">Booked</span></td>
-                                            <td>
-                                                <div class="table-action-btns">
-                                                    <button class="btn-icon" title="View booking details">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                                            <circle cx="12" cy="12" r="3"/>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn-icon" title="Edit booking">
-                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
