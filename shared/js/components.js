@@ -1,12 +1,4 @@
-/**
- * =====================================================
- * REUSABLE COMPONENTS
- * Vanilla JS module for injecting common UI elements
- * =====================================================
- */
 
-// ========== THEME PERSISTENCE (Runs Immediately) ==========
-// Apply saved theme BEFORE DOM loads to prevent flash
 (function() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -31,16 +23,14 @@ const Components = {
      * Navigation tabs for client dashboard
      */
     clientNavTabs: [
-        { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/client/dashboard/dashboard.html' },
-        { id: 'catalog', icon: '📦', label: 'Browse Catalog', href: '/client/catalog/catalog.html' },
-        { id: 'favorites', icon: '❤️', label: 'Favorites', href: '/client/favorites/favorites.html' },
-        { id: 'cart', icon: '🛒', label: 'My Cart', href: '/client/cart/cart.html' },
-        { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/client/myrentals/myrentals.html' },
-        { id: 'returns', icon: '🔄', label: 'Returns', href: '/client/returns/returns.html' },
-        { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/client/bookinghistory/bookinghistory.html' },
-        { id: 'contact', icon: '💬', label: 'Contact Us', href: '/pages/contactus.html' },
+        { id: 'dashboard', icon: '🏠', label: 'Dashboard', href: '/RENTAL_SAMPLE/client/dashboard.php' },
+        { id: 'catalog', icon: '📦', label: 'Browse Catalog', href: '/RENTAL_SAMPLE/client/catalog/catalog.php' },
+        { id: 'favorites', icon: '❤️', label: 'Favorites', href: '/RENTAL_SAMPLE/client/favorites/favorites.php' },
+        { id: 'cart', icon: '🛒', label: 'My Cart', href: '/RENTAL_SAMPLE/client/cart/cart.php' },
+        { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: '/RENTAL_SAMPLE/client/myrentals/myrentals.php' },
+        { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: '/RENTAL_SAMPLE/client/bookinghistory/bookinghistory.html' },
+        { id: 'contact', icon: '💬', label: 'Contact Us', href: '/RENTAL_SAMPLE/pages/contactus.html' },
     ],
-
     /**
      * Get current user from localStorage
      * @returns {Object} User object with name and role
@@ -111,7 +101,7 @@ const Components = {
             <aside class="sidebar${isCollapsed ? ' collapsed' : ''}" id="sidebar">
                 <div class="sidebar-header">
                     <div class="sidebar-logo">
-                        <img src="/assets/images/rIT_logo_tp.png" alt="RentIt Logo" class="sidebar-logo-icon">
+                      <img src="/RENTAL_SAMPLE/assets/images/rIT_logo_tp.png" alt="RentIt Logo" class="sidebar-logo-icon">
                         <span class="sidebar-logo-text">RentIt</span>
                     </div>
                     <!-- Collapse Toggle Button -->
@@ -137,7 +127,7 @@ const Components = {
                     
                     <!-- Mobile-only actions (shown on ultra-small screens) -->
                     <div class="mobile-only-actions">
-                        <a href="client/notification/notification.html" class="mobile-action-item" id="sidebarNotifications">
+                        <a href="#" class="mobile-action-item" id="sidebarNotifications">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
                                 <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -402,7 +392,7 @@ const Components = {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         localStorage.removeItem('activeTab');
-        window.location.href = '/client/auth/login.php';
+        window.location.href = '/RENTAL_SAMPLE/client/auth/login.php';
     },
 
     /**
@@ -499,7 +489,7 @@ const Components = {
                                 </div>
                             </div>
                             <div class="notification-footer">
-                                <a href="client/notification/notification.html">View All Notifications</a>
+                                <a href="#">View All Notifications</a>
                             </div>
                         </div>
                     </div>
@@ -537,7 +527,7 @@ const Components = {
                                 </div>
                             </div>
                             <nav class="profile-menu">
-                                <a href="client/dashboard/dashboard.html" class="profile-menu-item">
+                                <a href="/RENTAL_SAMPLE/client/dashboard.html" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <rect x="3" y="3" width="7" height="9"/>
                                         <rect x="14" y="3" width="7" height="5"/>
@@ -546,14 +536,14 @@ const Components = {
                                     </svg>
                                     Dashboard
                                 </a>
-                                <a href="client/profile/profile.html" class="profile-menu-item">
+                                <a href="#" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                         <circle cx="12" cy="7" r="4"/>
                                     </svg>
                                     My Profile
                                 </a>
-                                <a href="client/profile/profile.html" class="profile-menu-item">
+                                <a href="#" class="profile-menu-item">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="3"/>
                                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -691,6 +681,8 @@ const Components = {
             }
         });
 
+
+       
         // Close on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -857,24 +849,24 @@ const Components = {
                         <div class="footer-col">
                             <h4 class="footer-heading">Quick Links</h4>
                             <nav class="footer-nav">
-                                <a href="client/catalog/catalog.html">Browse Catalog</a>
-                                <a href="client/myrentals/myrentals.html">My Rentals</a>
-                                <a href="client/bookinghistory/bookinghistory.html">Booking History</a>
+                                <a href="/client/catalog/catalog.html">Browse Catalog</a>
+                                <a href="/client/myrentals/myrentals.html">My Rentals</a>
+                                <a href="/client/bookinghistory/bookinghistory.html">Booking History</a>
                             </nav>
                         </div>
                         <div class="footer-col">
                             <h4 class="footer-heading">Support</h4>
                             <nav class="footer-nav">
-                                <a href="pages/contactus.html">Contact Us</a>
-                                <a href="pages/aboutus.html">About</a>
-                                <a href="pages/wip.html">FAQs</a>
+                                <a href="/pages/contactus.html">Contact Us</a>
+                                <a href="/pages/about.html">About</a>
+                                <a href="#">FAQs</a>
                             </nav>
                         </div>
                         <div class="footer-col">
                             <h4 class="footer-heading">Legal</h4>
                             <nav class="footer-nav">
-                                <a href="pages/terms.html">Terms of Service</a>
-                                <a href="pages/privacy.html">Privacy Policy</a>
+                                <a href="/pages/terms.html">Terms of Service</a>
+                                <a href="/pages/privacy.html">Privacy Policy</a>
                             </nav>
                         </div>
                     </div>
@@ -883,19 +875,19 @@ const Components = {
                 <div class="footer-bottom">
                     <p class="footer-copyright">&copy; ${currentYear} RentIt. All rights reserved.</p>
                     <div class="footer-socials">
-                        <a href="https://facebook.com" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                        <a href="#" class="social-link" aria-label="Facebook">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                             </svg>
                         </a>
-                        <a href="https://instagram.com" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                        <a href="#" class="social-link" aria-label="Instagram">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                             </svg>
                         </a>
-                        <a href="https://twitter.com" class="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                        <a href="#" class="social-link" aria-label="Twitter">
                             <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
                             </svg>

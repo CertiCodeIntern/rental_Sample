@@ -1,10 +1,3 @@
-/**
- * =====================================================
- * CATALOG PAGE FUNCTIONALITY
- * Filtering, Search, and Product Interactions
- * =====================================================
- */
-
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize sidebar, topbar, and footer
     if (typeof Components !== 'undefined') {
@@ -13,13 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
         Components.injectFooter();
     }
 
-    // Initialize catalog functionality
+   
     initCatalog();
 });
-
-/**
- * Initialize all catalog features
- */
 function initCatalog() {
     initCatalogTabs();
     initCategoryFilters();
@@ -34,9 +23,7 @@ function initCatalog() {
     initCartFavoriteButtons();
 }
 
-/**
- * Catalog Tabs (Catalog / Top Promos)
- */
+
 function initCatalogTabs() {
     const tabs = document.querySelectorAll('.tab-link');
     
@@ -45,7 +32,7 @@ function initCatalogTabs() {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             
-            // Filter products based on tab
+            
             const tabType = tab.dataset.tab;
             filterByTab(tabType);
         });
@@ -59,7 +46,6 @@ function filterByTab(tabType) {
         if (tabType === 'all') {
             product.style.display = '';
         } else if (tabType === 'promos') {
-            // Show only promo items (you can add a data-promo attribute)
             const isPromo = product.dataset.promo === 'true';
             product.style.display = isPromo ? '' : 'none';
         }
@@ -68,9 +54,7 @@ function filterByTab(tabType) {
     updateProductCount();
 }
 
-/**
- * Category Filters
- */
+
 function initCategoryFilters() {
     const checkboxes = document.querySelectorAll('.category-checkbox');
     
@@ -80,18 +64,15 @@ function initCategoryFilters() {
         });
     });
     
-    // Reset filters button
     const resetBtn = document.querySelector('.reset-filters');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
             checkboxes.forEach(cb => cb.checked = false);
             
-            // Reset status filters - uncheck ALL including Available Now
             document.querySelectorAll('.status-checkbox').forEach(cb => {
                 cb.checked = false;
             });
             
-            // Reset price slider
             const priceSlider = document.getElementById('priceSlider');
             if (priceSlider) {
                 priceSlider.value = priceSlider.max;
@@ -103,9 +84,6 @@ function initCategoryFilters() {
     }
 }
 
-/**
- * Status Filters (Available, Booked, Maintenance)
- */
 function initStatusFilters() {
     const checkboxes = document.querySelectorAll('.status-checkbox');
     
@@ -116,9 +94,7 @@ function initStatusFilters() {
     });
 }
 
-/**
- * Price Range Slider
- */
+
 function initPriceSlider() {
     const slider = document.getElementById('priceSlider');
     const priceValue = document.getElementById('priceValue');
@@ -138,9 +114,6 @@ function updatePriceDisplay(value) {
     }
 }
 
-/**
- * Filter products based on all criteria
- */
 function filterProducts() {
     const products = document.querySelectorAll('.product-card');
     const activeCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
@@ -156,7 +129,7 @@ function filterProducts() {
         const name = product.querySelector('.product-name')?.textContent.toLowerCase() || '';
         const description = product.querySelector('.product-description')?.textContent.toLowerCase() || '';
         
-        // Get product status from badge
+       
         const badge = product.querySelector('.product-badge');
         let status = 'available';
         if (badge) {
@@ -169,12 +142,12 @@ function filterProducts() {
         
         let show = true;
         
-        // Category filter
+
         if (activeCategories.length > 0 && !activeCategories.includes(category)) {
             show = false;
         }
         
-        // Status filter
+   
         if (activeStatuses.length > 0 && !activeStatuses.includes(status)) {
             show = false;
         }
@@ -203,9 +176,7 @@ function updateProductCount() {
     }
 }
 
-/**
- * Calendar Picker with Date Range Selection
- */
+
 function initCalendar() {
     const prevBtn = document.getElementById('calendarPrev');
     const nextBtn = document.getElementById('calendarNext');
@@ -474,10 +445,6 @@ function initSearch() {
         });
     }
 }
-
-/**
- * Sort Select
- */
 function initSortSelect() {
     const sortSelect = document.getElementById('sortSelect');
     
@@ -513,9 +480,6 @@ function sortProducts(sortBy) {
     products.forEach(product => grid.appendChild(product));
 }
 
-/**
- * Product Card Interactions
- */
 function initProductCards() {
     const ctaButtons = document.querySelectorAll('.product-cta');
     
@@ -548,9 +512,6 @@ function initProductCards() {
     }
 }
 
-/**
- * Initialize Availability Popover Buttons on Product Cards
- */
 function initAvailabilityPopovers() {
     const availabilityBtns = document.querySelectorAll('.btn-availability');
     
@@ -576,9 +537,6 @@ function initAvailabilityPopovers() {
     });
 }
 
-/**
- * Get mock booking data for a product
- */
 function getProductBookings(productId) {
     // Mock data - in production, this would come from an API
     const mockBookings = {
@@ -667,9 +625,6 @@ function showAvailabilityPopover(btn) {
     popover.classList.add('visible');
 }
 
-/**
- * Hide availability popover
- */
 function hideAvailabilityPopover(btn) {
     const card = btn.closest('.product-card');
     const popover = card.querySelector('.availability-popover');
@@ -679,9 +634,6 @@ function hideAvailabilityPopover(btn) {
     }
 }
 
-/**
- * Toggle availability popover (click to stay open)
- */
 function toggleAvailabilityPopover(btn) {
     const card = btn.closest('.product-card');
     const popover = card.querySelector('.availability-popover');
@@ -705,9 +657,6 @@ function toggleAvailabilityPopover(btn) {
     }
 }
 
-/**
- * Initialize Review Buttons on Product Cards
- */
 function initReviewButtons() {
     document.querySelectorAll('.btn-write-review').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -735,9 +684,6 @@ function initReviewButtons() {
     });
 }
 
-/**
- * Pagination
- */
 function initPagination() {
     const pageButtons = document.querySelectorAll('.page-btn:not(:disabled)');
     
@@ -778,9 +724,6 @@ function goToPage(pageNum) {
     document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-/**
- * Product Details Modal
- */
 function initProductModal() {
     const modal = document.getElementById('productModal');
     const closeBtn = document.getElementById('closeProductModal');
@@ -847,16 +790,137 @@ function initProductModal() {
     });
 }
 
+
 /**
  * Open Product Modal with product data
+ * Isang version lang dapat ito sa buong file.
  */
 function openProductModal(card) {
     const modal = document.getElementById('productModal');
     if (!modal || !card) return;
     
-    // Get product data from card
-    const productId = card.dataset.id;
+    // 1. KUNIN ANG PRODUCT ID MULA SA CARD
+    const rentBtn = card.querySelector('.product-cta-main');
+    let productId = '';
+    if (rentBtn) {
+        const onclickAttr = rentBtn.getAttribute('onclick');
+        const urlMatch = onclickAttr ? onclickAttr.match(/id=(\d+)/) : null;
+        productId = urlMatch ? urlMatch[1] : '';
+    }
+
+    // 2. I-POPULATE ANG MGA DETALYE NG MODAL
     const productName = card.querySelector('.product-name')?.textContent || 'Product';
+    const productImage = card.querySelector('.product-image img')?.src || card.querySelector('.product-image')?.src || '';
+    const productPrice = card.querySelector('.product-price')?.innerHTML || '₱0';
+    const productDescription = card.querySelector('.product-description')?.textContent || '';
+    
+    document.getElementById('modalProductImage').src = productImage;
+    document.getElementById('modalProductImage').alt = productName;
+    document.getElementById('modalProductName').textContent = productName;
+    document.getElementById('modalProductPrice').innerHTML = productPrice;
+    document.getElementById('modalProductDescription').textContent = productDescription;
+
+    // 3. I-UPDATE ANG BADGE (Available/Booked)
+    const badge = card.querySelector('.product-badge');
+    const modalBadge = document.getElementById('modalProductBadge');
+    if (modalBadge && badge) {
+        modalBadge.textContent = badge.textContent;
+        modalBadge.className = 'modal-product-badge ' + (badge.classList.contains('booked') ? 'booked' : '');
+    }
+
+    // 4. ADD TO CART BUTTON LOGIC
+    const modalCartBtn = document.getElementById('modalCartBtn');
+    if (modalCartBtn) {
+        const newCartBtn = modalCartBtn.cloneNode(true);
+        modalCartBtn.parentNode.replaceChild(newCartBtn, modalCartBtn);
+
+        newCartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (productId) {
+                addToCart(productId);
+                
+                newCartBtn.innerHTML = `Added to Cart`;
+                if (typeof showToast === 'function') {
+                    showToast(`${productName} added to cart`, 'success');
+                }
+                setTimeout(() => {
+                    newCartBtn.innerHTML = `Add to Cart`;
+                }, 2000);
+            }
+        });
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+
+
+    // 5. FAVORITE BUTTON LOGIC
+    const modalFavBtn = document.getElementById('modalFavoriteBtn');
+    if (modalFavBtn) {
+        const newFavBtn = modalFavBtn.cloneNode(true);
+        modalFavBtn.parentNode.replaceChild(newFavBtn, modalFavBtn);
+        newFavBtn.classList.remove('active'); 
+        
+        newFavBtn.addEventListener('click', () => {
+            const isActive = newFavBtn.classList.toggle('active');
+            if (typeof handleFavoriteAction === 'function') {
+                handleFavoriteAction(productId, isActive, newFavBtn);
+            } else {
+                newFavBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="${isActive ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    ${isActive ? 'In Favorites' : 'Add to Favorites'}
+                `;
+            }
+        });
+    }
+
+    // 6. RENDER REVIEWS & STARS
+    if (typeof renderStars === 'function') renderStars(card);
+    if (typeof renderReviewsAndBookings === 'function') renderReviewsAndBookings(productId);
+
+    // Buksan ang modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function renderStars(card) {
+    const filledStars = card.querySelectorAll('.rating-stars .filled').length;
+    const starsContainer = document.getElementById('modalRatingStars');
+    if (starsContainer) {
+        starsContainer.innerHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            starsContainer.innerHTML += `
+                <svg viewBox="0 0 24 24" class="${i <= filledStars ? 'filled' : 'empty'}">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            `;
+        }
+    }
+}
+function renderReviewsAndBookings(productId) {
+    const availabilityList = document.getElementById('modalAvailabilityList');
+    const reviewsList = document.getElementById('modalReviewsList');
+    
+    const bookings = typeof getProductBookings === 'function' ? getProductBookings(productId) : [];
+    const reviews = typeof getProductReviews === 'function' ? getProductReviews(productId) : [];
+
+    if (availabilityList) {
+        availabilityList.innerHTML = bookings.length > 0 
+            ? bookings.map(b => `<div class="availability-item"><span>${b.start} - ${b.end}</span> <span class="status-booked">Booked</span></div>`).join('')
+            : '<p class="availability-empty">Available anytime!</p>';
+    }
+
+    if (reviewsList) {
+        reviewsList.innerHTML = reviews.length > 0
+            ? reviews.map(r => `<div class="review-item"><strong>${r.author}</strong>: ${r.text}</div>`).join('')
+            : '<p>No reviews yet.</p>';
+    }
+}
+    
+    
     const productImage = card.querySelector('.product-image')?.src || '';
     const productPrice = card.querySelector('.product-price')?.textContent || '₱0';
     const productDescription = card.querySelector('.product-description')?.textContent || '';
@@ -865,15 +929,11 @@ function openProductModal(card) {
     const badgeClass = badge?.classList.contains('booked') ? 'booked' : 
                        badge?.classList.contains('maintenance') ? 'maintenance' : '';
     
-    // Get rating data
     const ratingScore = card.querySelector('.rating-score')?.textContent || '0.0';
     const ratingCount = card.querySelector('.rating-count')?.textContent || '(0 reviews)';
     const filledStars = card.querySelectorAll('.rating-stars .filled').length;
-    
-    // Get tags
     const tags = Array.from(card.querySelectorAll('.product-tag')).map(t => t.textContent);
     
-    // Populate modal
     document.getElementById('modalProductImage').src = productImage;
     document.getElementById('modalProductImage').alt = productName;
     document.getElementById('modalProductName').textContent = productName;
@@ -884,7 +944,6 @@ function openProductModal(card) {
     modalBadge.textContent = badgeText;
     modalBadge.className = 'modal-product-badge ' + badgeClass;
     
-    // Populate rating
     document.getElementById('modalRatingScore').textContent = ratingScore;
     document.getElementById('modalRatingCount').textContent = ratingCount;
     
@@ -899,13 +958,11 @@ function openProductModal(card) {
         `;
     }
     
-    // Populate tags
     const tagsContainer = document.getElementById('modalProductTags');
     tagsContainer.innerHTML = tags.map(tag => `<span class="product-tag">${tag}</span>`).join('');
     
-    // Populate availability (mock data)
     const availabilityList = document.getElementById('modalAvailabilityList');
-    const mockBookings = getProductBookings(productId);
+    const mockBookings = typeof getProductBookings === 'function' ? getProductBookings(productId) : [];
     
     if (mockBookings.length > 0) {
         availabilityList.innerHTML = mockBookings.map(booking => `
@@ -926,11 +983,10 @@ function openProductModal(card) {
         availabilityList.innerHTML = '<p class="availability-empty">No upcoming bookings. Available anytime!</p>';
     }
     
-    // Populate reviews (mock data)
     const reviewsList = document.getElementById('modalReviewsList');
-    const mockReviews = getProductReviews(productId);
+    const mockReviews = typeof getProductReviews === 'function' ? getProductReviews(productId) : [];
     const reviewsCount = document.getElementById('modalReviewsCount');
-    reviewsCount.textContent = `(${mockReviews.length})`;
+    if (reviewsCount) reviewsCount.textContent = `(${mockReviews.length})`;
     
     if (mockReviews.length > 0) {
         reviewsList.innerHTML = mockReviews.map(review => `
@@ -963,20 +1019,43 @@ function openProductModal(card) {
         `;
     }
     
-    // Show modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-}
 
-/**
- * Close Product Modal
- */
 function closeProductModal() {
     const modal = document.getElementById('productModal');
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
+}
+
+
+function addToCart(itemId) {
+    const formData = new FormData();
+    formData.append('item_id', itemId);
+
+    // SIGURADUHIN MO NA TAMA ITONG PATH NA ITO:
+    // Kung ang catalog.php ay nasa /client/catalog/
+    // at ang add_to_cart.php ay nasa /api/cart/
+    // gamitin ang: '../../api/cart/add_to_cart.php'
+    
+    fetch('../cart/add_to_cart.php', { // I-verify ang folder nito!
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === "Success") {
+            // Huwag na tayong mag-alert, toast lang sapat na
+            console.log("Success adding to cart");
+        } else {
+            alert("Server Error: " + data);
+        }
+    })
+    .catch(err => {
+        console.error("Fetch Error:", err);
+    });
 }
 
 /**
@@ -1002,9 +1081,6 @@ function getProductBookings(productId) {
     return bookings[productId] || [];
 }
 
-/**
- * Get mock reviews for a product
- */
 function getProductReviews(productId) {
     // Mock review data - in real app, this would come from an API
     const reviews = {
@@ -1030,69 +1106,49 @@ function getProductReviews(productId) {
     };
     return reviews[productId] || [];
 }
-
-/**
- * Initialize Cart and Favorite Buttons with Toast Notifications
- */
 function initCartFavoriteButtons() {
-    // Favorite buttons on product cards
+    // 1. Para sa buttons na nasa mismong Catalog Cards
     document.querySelectorAll('.product-card .btn-favorite').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
-            const card = btn.closest('.product-card');
-            const productName = card?.querySelector('.product-name')?.textContent || 'Item';
-            const isActive = btn.classList.toggle('active');
-            
-            // Update button appearance
-            const svg = btn.querySelector('svg');
-            if (svg) {
-                svg.setAttribute('fill', isActive ? 'currentColor' : 'none');
-            }
-            
-            // Show toast notification
-            if (typeof showToast === 'function') {
-                if (isActive) {
-                    showToast(`${productName} added to favorites`, 'success');
-                } else {
-                    showToast(`${productName} removed from favorites`, 'info');
-                }
-            }
+            // ... (keep your existing toast logic here)
         });
     });
-    
-    // Cart buttons on product cards
-    document.querySelectorAll('.product-card .btn-cart').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const card = btn.closest('.product-card');
-            const productName = card?.querySelector('.product-name')?.textContent || 'Item';
-            const isInCart = btn.classList.toggle('active');
-            
-            // Show toast notification
-            if (typeof showToast === 'function') {
-                if (isInCart) {
-                    showToast(`${productName} added to cart`, 'success');
-                } else {
-                    showToast(`${productName} removed from cart`, 'info');
-                }
-            }
-        });
-    });
-    
-    // Modal favorite button
+
+    // 2. PARA SA MODAL FAVORITE BUTTON (Dito tayo focus)
     const modalFavoriteBtn = document.getElementById('modalFavoriteBtn');
     if (modalFavoriteBtn) {
-        // Remove old listener by cloning
+        // Clone para i-reset ang listeners at iwas double-click bug
         const newBtn = modalFavoriteBtn.cloneNode(true);
         modalFavoriteBtn.parentNode.replaceChild(newBtn, modalFavoriteBtn);
         
         newBtn.addEventListener('click', () => {
+            const itemId = newBtn.getAttribute('data-item-id'); 
             const isActive = newBtn.classList.toggle('active');
             const productName = document.getElementById('modalProductName')?.textContent || 'Item';
+            
+            if (!itemId) {
+                console.error("Missing Item ID!");
+                return;
+            }
+            fetch('add_favorite.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `item_id=${itemId}&action=${isActive ? 'add' : 'remove'}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    if (typeof showToast === 'function') {
+                        showToast(isActive ? `${productName} added to favorites` : `${productName} removed`, 'success');
+                    }
+                } else {
+                    alert("Error: " + data.message);
+                    newBtn.classList.toggle('active'); // Bawiin ang kulay pag fail
+                }
+            })
+            .catch(err => console.error('Fetch error:', err));
             
             newBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" fill="${isActive ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
@@ -1100,47 +1156,44 @@ function initCartFavoriteButtons() {
                 </svg>
                 ${isActive ? 'In Favorites' : 'Add to Favorites'}
             `;
-            
-            if (typeof showToast === 'function') {
-                if (isActive) {
-                    showToast(`${productName} added to favorites`, 'success');
-                } else {
-                    showToast(`${productName} removed from favorites`, 'info');
-                }
-            }
         });
     }
-    
-    // Modal cart button
-    const modalCartBtn = document.getElementById('modalCartBtn');
-    if (modalCartBtn) {
-        // Remove old listener by cloning
-        const newBtn = modalCartBtn.cloneNode(true);
-        modalCartBtn.parentNode.replaceChild(newBtn, modalCartBtn);
-        
-        newBtn.addEventListener('click', () => {
-            const productName = document.getElementById('modalProductName')?.textContent || 'Item';
-            
-            newBtn.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                Added to Cart
-            `;
-            
-            if (typeof showToast === 'function') {
-                showToast(`${productName} added to cart`, 'success');
-            }
-            
-            setTimeout(() => {
-                newBtn.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                    </svg>
-                    Add to Cart
-                `;
-            }, 2000);
-        });
-    }
+ const modalCartBtn = document.getElementById('modalCartBtn');
+ if (modalCartBtn) {
+     const newBtn = modalCartBtn.cloneNode(true);
+     modalCartBtn.parentNode.replaceChild(newBtn, modalCartBtn);
+     
+     newBtn.addEventListener('click', (e) => {
+         e.preventDefault();
+         
+         if (productId) {
+             addToCart(productId);
+
+             const pName = document.getElementById('modalProductName')?.textContent || 'Item';
+             
+             newBtn.innerHTML = `
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                     <polyline points="20 6 9 17 4 12"/>
+                 </svg>
+                 Added to Cart
+             `;
+             
+             if (typeof showToast === 'function') {
+                 showToast(`${pName} added to cart`, 'success');
+             }
+             
+             setTimeout(() => {
+                 newBtn.innerHTML = `
+                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                     </svg>
+                     Add to Cart
+                 `;
+             }, 2000);
+         } else {
+             console.error("Product ID not found!");
+         }
+     });
+ }
 }

@@ -81,6 +81,8 @@ function initPaymentOptions() {
     });
 }
 
+
+
 /**
  * Initialize promo code functionality
  */
@@ -118,9 +120,7 @@ function initPromoCode() {
     });
 }
 
-/**
- * Apply discount to order
- */
+
 function applyDiscount(percentage) {
     const subtotalEl = document.getElementById('summarySubtotal');
     const discountRow = document.getElementById('discountRow');
@@ -134,54 +134,40 @@ function applyDiscount(percentage) {
     discountEl.textContent = `-₱${discountAmount.toLocaleString()}`;
     discountRow.style.display = 'flex';
     
-    // Store discount for total calculation
     discountRow.dataset.discount = discountAmount;
     
     updateOrderSummary();
 }
 
-/**
- * Update order summary totals
- */
 function updateOrderSummary() {
     const subtotalEl = document.getElementById('summarySubtotal');
     const deliveryEl = document.getElementById('summaryDelivery');
     const totalEl = document.getElementById('summaryTotal');
     const discountRow = document.getElementById('discountRow');
-    
+
     if (!subtotalEl || !deliveryEl || !totalEl) return;
+
+    const subtotal = subtotalEl.dataset.value 
+        ? parseFloat(subtotalEl.dataset.value) 
+        : parseFloat(subtotalEl.textContent.replace(/[₱,]/g, ''));
     
-    // Get subtotal
-    const subtotal = parseFloat(subtotalEl.textContent.replace(/[₱,]/g, ''));
-    
-    // Get selected delivery option
-    const selectedDelivery = document.querySelector('.delivery-option.selected input');
+    const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
     const deliveryType = selectedDelivery ? selectedDelivery.value : 'standard';
     const deliveryFee = DELIVERY_FEES[deliveryType];
-    
-    // Update delivery display
-    if (deliveryFee === 0) {
-        deliveryEl.textContent = 'Free';
-    } else {
-        deliveryEl.textContent = `₱${deliveryFee.toLocaleString()}`;
-    }
-    
-    // Calculate total
+
+    deliveryEl.textContent = deliveryFee === 0 ? 'Free' : `₱${deliveryFee.toLocaleString()}`;
+
     let total = subtotal + deliveryFee + SERVICE_FEE;
-    
-    // Subtract discount if applied
-    if (discountRow && discountRow.style.display !== 'none') {
-        const discount = parseInt(discountRow.dataset.discount) || 0;
-        total -= discount;
+
+    const discountAmount = parseFloat(discountRow.dataset.discount) || 0;
+    if (discountRow.style.display !== 'none') {
+        total -= discountAmount;
     }
-    
-    // Update total
-    totalEl.textContent = `₱${total.toLocaleString()}`;
+
+    totalEl.textContent = `₱${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
 }
 
-/**
- * Initialize confirm order button
- */
+
 function initConfirmOrder() {
     const confirmBtn = document.getElementById('btnConfirmOrder');
     
@@ -233,7 +219,7 @@ function initConfirmOrder() {
             
             // Redirect to rentals page after delay
             setTimeout(() => {
-                window.location.href = 'client/myrentals/myrentals.html';
+                window.location.href = '/client/myrentals/myrentals.html';
             }, 3000);
         }, 2000);
     });

@@ -1,528 +1,199 @@
 /**
  * RentIt - Cart Page JavaScript
- * Manages shopping cart functionality with localStorage persistence
+ * Inayos para sa MySQL Database at UI Synchronization
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject shared components
+    // 1. Inject components (Siguraduhing tama ang path ng components.js sa HTML)
     if (typeof Components !== 'undefined') {
         Components.injectSidebar('sidebarContainer', 'cart', 'client');
         Components.injectTopbar('topbarContainer', 'My Cart');
-        Components.injectFooter('footerContainer');
     }
 
-    // Initialize cart functionality
-    initCart();
-    initDatePickers();
-    initRemoveButtons();
-    initCheckout();
-    initSelection();
+    // 2. Initialize functionalities
+    initCartLogic();
 });
 
-/**
- * Cart data management
- */
-const CART_STORAGE_KEY = 'rentit_cart';
-const DELIVERY_FEE = 150;
-const SERVICE_FEE = 50;
-
-// Sample product database (in real app, would fetch from API)
-const productDatabase = {
-    1: { name: 'Karaoke King Pro v2', category: 'Premium', price: 120 },
-    2: { name: 'Karaoke King Pro', category: 'Premium', price: 100 },
-    3: { name: 'Karaoke Standard', category: 'Standard', price: 80 },
-    4: { name: 'Karaoke Starter', category: 'Basic', price: 50 },
-    5: { name: 'MiniSing Pocket', category: 'Portable', price: 120 },
-    6: { name: 'Party Box Deluxe', category: 'Premium', price: 150 }
+const CONSTANTS = {
+    DELIVERY_FEE: 150,
+    SERVICE_FEE: 50,
+    STORAGE_KEY: 'rentit_cart'
 };
 
-function getCart() {
-    const cart = localStorage.getItem(CART_STORAGE_KEY);
-    return cart ? JSON.parse(cart) : [];
-}
+function initCartLogic() {
+    const selectAll = document.getElementById('selectAll');
+    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+    const checkoutBtn = document.getElementById('btnCheckout');
+    const removeSelectedBtn = document.getElementById('btnRemoveSelected');
 
-function saveCart(cart) {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-}
+    // --- Calculation Logic ---
+    function calculateTotal() {
+        let subtotal = 0;
+        let selectedCount = 0;
 
-/**
- * Initialize cart display
- */
-function initCart() {
-    const cartItems = document.querySelectorAll('.cart-item, .cart-item-card');
-    
-    if (cartItems.length === 0) {
-        showEmptyCart();
-        return;
-    }
-
-    updateAllSubtotals();
-    updateOrderSummary();
-}
-
-/**
- * Initialize date pickers with change handlers
- */
-function initDatePickers() {
-    const dateInputs = document.querySelectorAll('.cart-date-input');
-    
-    // Set minimum date to today
-    const today = new Date().toISOString().split('T')[0];
-    dateInputs.forEach(input => {
-        input.setAttribute('min', today);
-    });
-
-    // Add change listeners
-    dateInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            const cartItem = input.closest('.cart-item, .cart-item-card');
-            const itemId = cartItem?.dataset.id;
-            if (itemId) {
-                updateItemDays(itemId);
-                updateOrderSummary();
+        document.querySelectorAll('.item-checkbox:checked').forEach(cb => {
+            const card = cb.closest('.cart-item-card');
+            if (card) {
+                // Kunin ang subtotal text ng bawat card
+                const itemSubtotalText = card.querySelector('.cart-item-subtotal').textContent;
+                const itemSubtotal = parseFloat(itemSubtotalText.replace(/[₱,]/g, ''));
+                subtotal += itemSubtotal;
+                selectedCount++;
             }
         });
-    });
-}
 
-/**
- * Calculate and update days count for an item
- */
-function updateItemDays(itemId) {
-    const cartItem = document.querySelector(`.cart-item[data-id="${itemId}"], .cart-item-card[data-id="${itemId}"]`);
-    if (!cartItem) return;
-    
-    const startInput = cartItem.querySelector('.cart-date-input[id^="startDate"]');
-    const endInput = cartItem.querySelector('.cart-date-input[id^="endDate"]');
-    const daysCountEl = cartItem.querySelector('.days-count');
-    const subtotalEl = cartItem.querySelector('.cart-item-subtotal');
-    
-    if (!startInput || !endInput || !daysCountEl || !subtotalEl) return;
-    
-    const startDate = new Date(startInput.value);
-    const endDate = new Date(endInput.value);
-    
-    // Validate end date is after start date
-    if (endDate < startDate) {
-        endInput.value = startInput.value;
-        endDate.setTime(startDate.getTime());
-    }
-    
-    // Calculate days difference (inclusive)
-    const diffTime = Math.abs(endDate - startDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    
-    // Update days display
-    daysCountEl.textContent = `${diffDays} day${diffDays > 1 ? 's' : ''}`;
-    
-    // Get price from the item
-    const priceEl = cartItem.querySelector('.cart-item-price');
-    if (priceEl) {
-        const priceMatch = priceEl.textContent.match(/₱(\d+)/);
-        if (priceMatch) {
-            const dailyPrice = parseInt(priceMatch[1]);
-            const subtotal = dailyPrice * diffDays;
-            subtotalEl.textContent = `₱${subtotal.toLocaleString()}`;
-        }
-    }
-}
-
-/**
- * Update all item subtotals
- */
-function updateAllSubtotals() {
-    const cartItems = document.querySelectorAll('.cart-item, .cart-item-card');
-    cartItems.forEach(item => {
-        updateItemDays(item.dataset.id);
-    });
-}
-
-/**
- * Update order summary totals
- */
-function updateOrderSummary() {
-    const subtotalEls = document.querySelectorAll('.cart-item-subtotal');
-    let cartSubtotal = 0;
-    
-    subtotalEls.forEach(el => {
-        const match = el.textContent.match(/₱([\d,]+)/);
-        if (match) {
-            cartSubtotal += parseInt(match[1].replace(',', ''));
-        }
-    });
-    
-    const itemCount = document.querySelectorAll('.cart-item:not(.removing), .cart-item-card:not(.removing)').length;
-    
-    // Update summary
-    const summaryRows = document.querySelector('.summary-rows');
-    if (summaryRows) {
-        const subtotalRow = summaryRows.querySelector('.summary-row:first-child span:first-child');
-        if (subtotalRow) {
-            subtotalRow.textContent = `Subtotal (${itemCount} item${itemCount !== 1 ? 's' : ''})`;
-        }
-    }
-    
-    const cartSubtotalEl = document.getElementById('cartSubtotal');
-    const cartTotalEl = document.getElementById('cartTotal');
-    
-    if (cartSubtotalEl) {
-        cartSubtotalEl.textContent = `₱${cartSubtotal.toLocaleString()}`;
-    }
-    
-    if (cartTotalEl) {
-        const total = cartSubtotal + DELIVERY_FEE + SERVICE_FEE;
-        cartTotalEl.textContent = `₱${total.toLocaleString()}`;
-    }
-}
-
-/**
- * Initialize remove buttons
- */
-function initRemoveButtons() {
-    document.querySelectorAll('.btn-remove-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const itemId = btn.dataset.id;
-            const cartItem = document.querySelector(`.cart-item[data-id="${itemId}"], .cart-item-card[data-id="${itemId}"]`);
-            const itemName = cartItem?.querySelector('.cart-item-name')?.textContent || 'this item';
-            
-            showConfirmDialog(
-                'Remove Item',
-                `Are you sure you want to remove "${itemName}" from your cart?`,
-                () => removeFromCart(itemId)
-            );
-        });
-    });
-}
-
-/**
- * Remove item from cart with animation
- */
-function removeFromCart(itemId) {
-    const item = document.querySelector(`.cart-item[data-id="${itemId}"], .cart-item-card[data-id="${itemId}"]`);
-    if (!item) return;
-    
-    item.classList.add('removing');
-    
-    setTimeout(() => {
-        item.remove();
+        // Update Summary Display
+        document.getElementById('cartSubtotal').textContent = `₱${subtotal.toLocaleString()}`;
         
-        // Update localStorage
-        let cart = getCart();
-        cart = cart.filter(item => item.id !== itemId);
-        saveCart(cart);
-        
-        // Check if cart is empty
-        const remainingItems = document.querySelectorAll('.cart-item, .cart-item-card');
-        if (remainingItems.length === 0) {
-            showEmptyCart();
+        if (selectedCount > 0) {
+            const total = subtotal + CONSTANTS.DELIVERY_FEE + CONSTANTS.SERVICE_FEE;
+            document.getElementById('cartTotal').textContent = `₱${total.toLocaleString()}`;
+            if (checkoutBtn) checkoutBtn.disabled = false;
+            if (removeSelectedBtn) {
+                removeSelectedBtn.disabled = false;
+                removeSelectedBtn.classList.add('active');
+                removeSelectedBtn.querySelector('span').textContent = `Remove Selected (${selectedCount})`;
+            }
         } else {
-            updateOrderSummary();
-            updateSelectAllState();
+            document.getElementById('cartTotal').textContent = `₱0`;
+            if (checkoutBtn) checkoutBtn.disabled = true;
+            if (removeSelectedBtn) {
+                removeSelectedBtn.disabled = true;
+                removeSelectedBtn.classList.remove('active');
+                removeSelectedBtn.querySelector('span').textContent = `Remove Selected`;
+            }
         }
-        
-        showToast('Item removed from cart', 'success');
-    }, 400);
-}
-
-/**
- * Show empty cart state
- */
-function showEmptyCart() {
-    const cartSection = document.querySelector('.cart-layout');
-    const emptyCart = document.getElementById('emptyCart');
-    
-    if (cartSection) cartSection.style.display = 'none';
-    if (emptyCart) emptyCart.style.display = 'block';
-}
-
-/**
- * Initialize checkout button
- */
-function initCheckout() {
-    const btnCheckout = document.getElementById('btnCheckout');
-    
-    if (btnCheckout) {
-        btnCheckout.addEventListener('click', () => {
-            const cartItems = document.querySelectorAll('.cart-item:not(.removing), .cart-item-card:not(.removing)');
-            
-            if (cartItems.length === 0) {
-                showToast('Your cart is empty', 'error');
-                return;
-            }
-            
-            // Show processing state
-            btnCheckout.disabled = true;
-            btnCheckout.innerHTML = `
-                <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" stroke-dasharray="31.4" stroke-dashoffset="10"/>
-                </svg>
-                Redirecting...
-            `;
-            
-            // Add spinner animation
-            const spinner = btnCheckout.querySelector('.spinner');
-            if (spinner) {
-                spinner.style.animation = 'spin 1s linear infinite';
-            }
-            
-            // Redirect to checkout page
-            setTimeout(() => {
-                window.location.href = 'client/checkout/checkout.html';
-            }, 500);
-        });
     }
-}
 
-/**
- * Toast notification helper
- */
-function showToast(message, type = 'success') {
-    // Remove existing toasts
-    document.querySelectorAll('.toast').forEach(t => t.remove());
-    
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    
-    const iconSvg = type === 'success' 
-        ? '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'
-        : '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
-    
-    toast.innerHTML = `
-        ${iconSvg}
-        <span class="toast-message">${message}</span>
-    `;
-    
-    document.body.appendChild(toast);
-    
-    // Trigger animation
-    requestAnimationFrame(() => {
-        toast.classList.add('show');
-    });
-    
-    // Auto-remove after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
+    // --- Date & Subtotal Logic ---
+    window.updateItemTotal = function(id) {
+        const startInput = document.getElementById(`start-${id}`);
+        const endInput = document.getElementById(`end-${id}`);
+        const daysDisplay = document.getElementById(`days-${id}`);
+        const subtotalDisplay = document.getElementById(`subtotal-${id}`);
+        const card = document.getElementById(`card-${id}`);
 
-// Add spinner keyframes
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
+        if (!startInput || !endInput) return;
 
-/**
- * Initialize selection functionality
- */
-function initSelection() {
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const removeSelectedBtn = document.getElementById('btnRemoveSelected');
-    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
-    
-    if (!selectAllCheckbox || !removeSelectedBtn) return;
-    
-    // Select all functionality
-    selectAllCheckbox.addEventListener('change', () => {
-        const isChecked = selectAllCheckbox.checked;
-        itemCheckboxes.forEach(checkbox => {
-            checkbox.checked = isChecked;
-            toggleItemSelected(checkbox);
-        });
-        updateRemoveSelectedButton();
-    });
-    
-    // Individual checkbox handlers
-    itemCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            toggleItemSelected(checkbox);
-            updateSelectAllState();
-            updateRemoveSelectedButton();
-        });
-    });
-    
-    // Remove selected button handler
-    removeSelectedBtn.addEventListener('click', () => {
-        const selectedCount = document.querySelectorAll('.item-checkbox:checked').length;
-        if (selectedCount === 0) return;
-        
-        showConfirmDialog(
-            'Remove Selected Items',
-            `Are you sure you want to remove ${selectedCount} item${selectedCount > 1 ? 's' : ''} from your cart?`,
-            removeSelectedItems
-        );
-    });
-}
+        const start = new Date(startInput.value);
+        const end = new Date(endInput.value);
+        const pricePerDay = parseFloat(card.dataset.price);
 
-/**
- * Toggle selected state on cart item card
- */
-function toggleItemSelected(checkbox) {
-    const cartItem = checkbox.closest('.cart-item-card');
-    if (cartItem) {
-        cartItem.classList.toggle('selected', checkbox.checked);
-    }
-}
+        if (end < start) {
+            endInput.value = startInput.value;
+            alert("End date cannot be earlier than start date.");
+            return;
+        }
 
-/**
- * Update select all checkbox state based on individual checkboxes
- */
-function updateSelectAllState() {
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
-    const checkedCount = document.querySelectorAll('.item-checkbox:checked').length;
-    
-    if (!selectAllCheckbox) return;
-    
-    if (itemCheckboxes.length === 0) {
-        selectAllCheckbox.checked = false;
-        selectAllCheckbox.indeterminate = false;
-    } else if (checkedCount === 0) {
-        selectAllCheckbox.checked = false;
-        selectAllCheckbox.indeterminate = false;
-    } else if (checkedCount === itemCheckboxes.length) {
-        selectAllCheckbox.checked = true;
-        selectAllCheckbox.indeterminate = false;
-    } else {
-        selectAllCheckbox.checked = false;
-        selectAllCheckbox.indeterminate = true;
-    }
-}
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
 
-/**
- * Update remove selected button state
- */
-function updateRemoveSelectedButton() {
-    const removeSelectedBtn = document.getElementById('btnRemoveSelected');
-    const checkedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-    const checkedCount = checkedCheckboxes.length;
-    
-    if (!removeSelectedBtn) return;
-    
-    if (checkedCount > 0) {
-        // Calculate total of selected items
-        let selectedTotal = 0;
-        checkedCheckboxes.forEach(checkbox => {
-            const cartItem = checkbox.closest('.cart-item-card');
-            if (cartItem) {
-                const subtotalEl = cartItem.querySelector('.cart-item-subtotal');
-                if (subtotalEl) {
-                    const match = subtotalEl.textContent.match(/₱([\d,]+)/);
-                    if (match) {
-                        selectedTotal += parseInt(match[1].replace(',', ''));
-                    }
+        daysDisplay.textContent = `${diffDays} day${diffDays > 1 ? 's' : ''}`;
+        const total = pricePerDay * diffDays;
+        subtotalDisplay.textContent = `₱${total.toLocaleString()}`;
+
+        calculateTotal();
+    };
+
+    // --- Delete Logic (PHP Integration) ---
+    async function deleteItems(ids) {
+        try {
+            const formData = new FormData();
+            formData.append('delete_ids', JSON.stringify(ids));
+
+            // Siguraduhing may delete_cart_items.php ka sa folder
+            const response = await fetch('delete_to_cart.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                ids.forEach(id => {
+                    const el = document.getElementById(`card-${id}`);
+                    if (el) el.remove();
+                });
+                calculateTotal();
+                showToast('Items removed successfully', 'success');
+                
+                // Kung wala ng item, reload para ipakita ang "Empty Cart" div
+                if (document.querySelectorAll('.cart-item-card').length === 0) {
+                    location.reload();
                 }
             }
-        });
-        
-        removeSelectedBtn.classList.add('active');
-        removeSelectedBtn.disabled = false;
-        removeSelectedBtn.querySelector('span').textContent = `Remove Selected (${checkedCount}) - ₱${selectedTotal.toLocaleString()}`;
-    } else {
-        removeSelectedBtn.classList.remove('active');
-        removeSelectedBtn.disabled = true;
-        removeSelectedBtn.querySelector('span').textContent = 'Remove Selected';
+        } catch (error) {
+            console.error("Error deleting items:", error);
+            showToast('Failed to delete items from database', 'error');
+        }
     }
-}
 
-/**
- * Remove all selected items
- */
-function removeSelectedItems() {
-    const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-    const itemIds = Array.from(selectedCheckboxes).map(cb => cb.dataset.id);
-    
-    if (itemIds.length === 0) return;
-    
-    // Animate all selected items
-    itemIds.forEach(id => {
-        const item = document.querySelector(`.cart-item-card[data-id="${id}"]`);
-        if (item) {
-            item.classList.add('removing');
-        }
-    });
-    
-    setTimeout(() => {
-        // Remove all selected items from DOM
-        itemIds.forEach(id => {
-            const item = document.querySelector(`.cart-item-card[data-id="${id}"]`);
-            if (item) item.remove();
+    // --- Event Listeners ---
+    if (selectAll) {
+        selectAll.addEventListener('change', function() {
+            itemCheckboxes.forEach(cb => {
+                cb.checked = this.checked;
+                cb.closest('.cart-item-card').classList.toggle('selected', this.checked);
+            });
+            calculateTotal();
         });
-        
-        // Update localStorage
-        let cart = getCart();
-        cart = cart.filter(item => !itemIds.includes(item.id));
-        saveCart(cart);
-        
-        // Check if cart is empty
-        const remainingItems = document.querySelectorAll('.cart-item, .cart-item-card');
-        if (remainingItems.length === 0) {
-            showEmptyCart();
-        } else {
-            updateOrderSummary();
-            updateSelectAllState();
-            updateRemoveSelectedButton();
-        }
-        
-        showToast(`${itemIds.length} item${itemIds.length > 1 ? 's' : ''} removed from cart`, 'success');
-    }, 400);
+    }
+
+    itemCheckboxes.forEach(cb => {
+        cb.addEventListener('change', function() {
+            this.closest('.cart-item-card').classList.toggle('selected', this.checked);
+            calculateTotal();
+        });
+    });
+
+    if (removeSelectedBtn) {
+        removeSelectedBtn.addEventListener('click', () => {
+            const selected = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+                                 .map(cb => cb.dataset.id);
+            if (selected.length > 0 && confirm(`Remove ${selected.length} item(s)?`)) {
+                deleteItems(selected);
+            }
+        });
+    }
+
+    // --- Proceed to Checkout ---
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            const selectedData = [];
+            document.querySelectorAll('.item-checkbox:checked').forEach(cb => {
+                const id = cb.dataset.id;
+                const card = document.getElementById(`card-${id}`);
+                selectedData.push({
+                    id: id,
+                    name: card.querySelector('.cart-item-name').textContent,
+                    price: parseFloat(card.dataset.price),
+                    days: parseInt(document.getElementById(`days-${id}`).textContent),
+                    startDate: document.getElementById(`start-${id}`).value,
+                    endDate: document.getElementById(`end-${id}`).value
+                });
+            });
+
+            // I-save sa localStorage para sa checkout.php
+            localStorage.setItem(CONSTANTS.STORAGE_KEY, JSON.stringify(selectedData));
+            window.location.href = '../checkout/checkout.php';
+        });
+    }
+
+    calculateTotal(); // Run once on load
 }
 
-/**
- * Show confirmation dialog
- */
-function showConfirmDialog(title, message, onConfirm) {
-    // Remove existing dialogs
-    document.querySelectorAll('.confirm-dialog-overlay').forEach(d => d.remove());
-    
-    const overlay = document.createElement('div');
-    overlay.className = 'confirm-dialog-overlay';
-    
-    overlay.innerHTML = `
-        <div class="confirm-dialog">
-            <div class="confirm-dialog-header">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="8" x2="12" y2="12"/>
-                    <line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-                <h3>${title}</h3>
-            </div>
-            <p class="confirm-dialog-message">${message}</p>
-            <div class="confirm-dialog-actions">
-                <button class="btn-cancel">Cancel</button>
-                <button class="btn-confirm">Remove</button>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(overlay);
-    
-    // Animate in
-    requestAnimationFrame(() => {
-        overlay.classList.add('show');
-    });
-    
-    // Event handlers
-    const closeDialog = () => {
-        overlay.classList.remove('show');
-        setTimeout(() => overlay.remove(), 200);
-    };
-    
-    overlay.querySelector('.btn-cancel').addEventListener('click', closeDialog);
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeDialog();
-    });
-    
-    overlay.querySelector('.btn-confirm').addEventListener('click', () => {
-        closeDialog();
-        if (onConfirm) onConfirm();
-    });
-    
-    // Focus trap
-    overlay.querySelector('.btn-cancel').focus();
+// Toast Helper (Para sa visual feedback)
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type} show`;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '15px';
+    toast.style.background = type === 'success' ? '#22C55E' : '#EF4444';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '9999';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
 }

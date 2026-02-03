@@ -1,4 +1,7 @@
-<?php include '../../config.php'; ?>
+<?php 
+session_start();
+
+include '../../shared/php/db_connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,8 +178,15 @@
             </div>
         </div>
     </div>
+    <script>
     
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof Auth !== 'undefined') {
+            Auth.init();
+        }
+    });
+</script>
     <script src="../../shared/js/components.js"></script>
-    <script src="./js/auth.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

@@ -17,10 +17,27 @@ document.addEventListener('DOMContentLoaded', function() {
  * Initialize shared components (sidebar, topbar, footer)
  */
 function initComponents() {
-    if (typeof Components !== 'undefined') {
-        Components.injectSidebar('sidebarContainer', 'catalog', 'client');
-        Components.injectTopbar('topbarContainer', 'Product Details');
-        Components.injectFooter('footerContainer');
+    if (typeof createSidebar === 'function') {
+        const sidebarContainer = document.getElementById('sidebarContainer');
+        if (sidebarContainer) {
+            sidebarContainer.innerHTML = createSidebar('client');
+            initSidebar();
+        }
+    }
+
+    if (typeof createTopbar === 'function') {
+        const topbarContainer = document.getElementById('topbarContainer');
+        if (topbarContainer) {
+            topbarContainer.innerHTML = createTopbar();
+            initTopbar();
+        }
+    }
+
+    if (typeof createFooter === 'function') {
+        const footerContainer = document.getElementById('footerContainer');
+        if (footerContainer) {
+            footerContainer.innerHTML = createFooter();
+        }
     }
 }
 

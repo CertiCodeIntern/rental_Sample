@@ -13,11 +13,19 @@ document.addEventListener("DOMContentLoaded", function() {
  * Initialize shared components (sidebar, topbar, footer)
  */
 function initComponents() {
-    // Load components using the Components object
-    if (typeof Components !== 'undefined') {
-        Components.injectSidebar('sidebarContainer', 'returns', 'client');
-        Components.injectTopbar('topbarContainer', 'Returns & Extensions');
-        Components.injectFooter('footerContainer');
+    // Load sidebar
+    if (typeof loadSidebar === 'function') {
+        loadSidebar('sidebarContainer');
+    }
+    
+    // Load topbar
+    if (typeof loadTopbar === 'function') {
+        loadTopbar('topbarContainer', 'Returns & Extensions');
+    }
+    
+    // Load footer
+    if (typeof loadFooter === 'function') {
+        loadFooter('footerContainer');
     }
 }
 

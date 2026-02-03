@@ -2,18 +2,15 @@
  * =====================================================
  * AUTH PAGE JAVASCRIPT
  * Handles Login and Registration functionality
- * Connected to PHP Backend API
  * =====================================================
  */
 
 const Auth = {
-    // State
+    
     activeTab: 'login',
     isTransitioning: false,
     loading: false,
     
-    // API Endpoints (adjust URL based on your XAMPP setup)
-    // If your project is in htdocs/RENTAL_SAMPLE, use:
     API_BASE_URL: '/RENTAL_SAMPLE/api/auth/',
     LOGIN_URL: 'login.php',
     REGISTER_URL: 'register.php',
@@ -22,13 +19,11 @@ const Auth = {
      * Initialize the auth page
      */
     init() {
-        // Check if already logged in
         if (Components.isAuthenticated()) {
-            window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
+            window.location.href = '../dashboard.php';
             return;
         }
 
-        // Handle URL hash for deep linking
         this.handleUrlHash();
 
         // Setup event listeners
@@ -67,9 +62,8 @@ const Auth = {
     },
 
     /**
-     * Switch between login and register tabs
-     * @param {string} tab - 'login' or 'register'
-     * @param {boolean} updateHash - Whether to update URL hash
+     * @param {string} tab 
+     * @param {boolean} updateHash 
      */
     switchTab(tab, updateHash = true) {
         if (tab === this.activeTab || this.isTransitioning) return;
@@ -161,7 +155,7 @@ const Auth = {
         // Clear previous errors
         this.hideError();
 
-        // Validate required fields
+        // Validate
         if (!email || !password) {
             this.showError('Please fill in all fields');
             return;
@@ -207,16 +201,11 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
+                window.location.href = '../dashboard.php';
             }, 1500);
 
         } catch (error) {
-            // Check if it's a network error (no backend available)
-            if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                this.showError('Server not available. Please ensure XAMPP is running.');
-            } else {
-                this.showError(error.message || 'Login failed. Please try again.');
-            }
+            this.showError(error.message || 'Login failed. Please try again.');
         } finally {
             this.setLoading(false, submitBtn, 'Sign In  →');
         }
@@ -239,7 +228,7 @@ const Auth = {
         // Clear previous errors
         this.hideError();
 
-        // Validate required fields
+        // Validate
         if (!email || !password || !confirmPassword) {
             this.showError('Please fill in all required fields');
             return;
@@ -257,7 +246,6 @@ const Auth = {
             return;
         }
 
-        // Validate password length
         if (password.length < 6) {
             this.showError('Password must be at least 6 characters');
             return;
@@ -299,16 +287,11 @@ const Auth = {
 
             // Redirect to dashboard after delay
             setTimeout(() => {
-                window.location.href = '/RENTAL_SAMPLE/client/dashboard/loggedin.php';
+                window.location.href = '../dashboard.php';
             }, 1500);
 
         } catch (error) {
-            // Check if it's a network error (no backend available)
-            if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                this.showError('Server not available. Please ensure XAMPP is running.');
-            } else {
-                this.showError(error.message || 'Registration failed. Please try again.');
-            }
+            this.showError(error.message || 'Registration failed. Please try again.');
         } finally {
             this.setLoading(false, submitBtn, 'Get Started  →');
         }
@@ -361,9 +344,7 @@ const Auth = {
         }
     },
 
-    /**
-     * Hide error message
-     */
+    
     hideError() {
         const errorEl = document.getElementById('authError');
         if (errorEl) {
@@ -381,36 +362,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const reqUpper = document.getElementById('reqUpper');
     const reqNumber = document.getElementById('reqNumber');
     
-    passwordInput.addEventListener('input', function() {
-        const value = passwordInput.value;
-    
-        // 1. Check Length (8 characters pataas)
-        if (value.length >= 8) {
-            reqLength.classList.add('valid');
-            reqLength.classList.remove('invalid');
-        } else {
-            reqLength.classList.add('invalid');
-            reqLength.classList.remove('valid');
-        }
-    
-        // 2. Check Uppercase (A-Z)
-        if (/[A-Z]/.test(value)) {
-            reqUpper.classList.add('valid');
-            reqUpper.classList.remove('invalid');
-        } else {
-            reqUpper.classList.add('invalid');
-            reqUpper.classList.remove('valid');
-        }
-    
-        // 3. Check Numbers (0-9)
-        if (/[0-9]/.test(value)) {
-            reqNumber.classList.add('valid');
-            reqNumber.classList.remove('invalid');
-        } else {
-            reqNumber.classList.add('invalid');
-            reqNumber.classList.remove('valid');
-        }
-    });
-
-
+    // DAPAT MAY 'IF' CHECK DITO PARA HINDI MAG-CRASH ANG SCRIPT
+    if (passwordInput && reqLength && reqUpper && reqNumber) {
+        passwordInput.addEventListener('input', function() {
+            const value = passwordInput.value;
+        
+            // 1. Check Length
+            if (value.length >= 8) {
+                reqLength.classList.add('valid');
+                reqLength.classList.remove('invalid');
+            } else {
+                reqLength.classList.add('invalid');
+                reqLength.classList.remove('valid');
+            }
+        
+            // 2. Check Uppercase
+            if (/[A-Z]/.test(value)) {
+                reqUpper.classList.add('valid');
+                reqUpper.classList.remove('invalid');
+            } else {
+                reqUpper.classList.add('invalid');
+                reqUpper.classList.remove('valid');
+            }
+        
+            // 3. Check Numbers
+            if (/[0-9]/.test(value)) {
+                reqNumber.classList.add('valid');
+                reqNumber.classList.remove('invalid');
+            } else {
+                reqNumber.classList.add('invalid');
+                reqNumber.classList.remove('valid');
+            }
+        });
+    }
 });
