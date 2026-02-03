@@ -447,3 +447,12 @@
         padding: var(--spacing-lg);
     }
 }
+
+/* =====================================================
+   FOOTER POWERED BY STYLE
+   ===================================================== */
+.footer-powered {
+    font-size: var(--font-size-xs);
+    color: var(--gray-400);
+    margin-top: var(--spacing-xs);
+}

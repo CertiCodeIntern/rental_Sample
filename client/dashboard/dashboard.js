@@ -1,13 +1,11 @@
 /**
  * =====================================================
  * DASHBOARD PAGE JAVASCRIPT
- * Handles Dashboard functionality
+ * Handles Client Dashboard functionality
  * =====================================================
  */
 
 const Dashboard = {
-    activeTab: 'users',
-
     /**
      * Initialize the dashboard
      */
@@ -17,19 +15,83 @@ const Dashboard = {
             return;
         }
 
-        // Get saved active tab or default to 'users'
-        this.activeTab = localStorage.getItem('activeTab') || 'users';
+        // Inject reusable components (sidebar, topbar, and footer)
+        Components.injectSidebar('sidebarContainer', 'dashboard');
+        Components.injectTopbar('topbarContainer', 'Dashboard');
+        Components.injectFooter();
 
-        // Find the tab label for the topbar title
-        const tab = Components.navTabs.find(t => t.id === this.activeTab);
-        const title = tab?.label || 'Users';
+        // Initialize dashboard interactions
+        this.initCardActions();
+        this.initTableActions();
+    },
 
-        // Inject reusable components
-        Components.injectSidebar('sidebarContainer', this.activeTab);
-        Components.injectTopbar('topbarContainer', title);
+    /**
+     * Initialize rental card button actions
+     */
+    initCardActions() {
+        // Extend buttons
+        document.querySelectorAll('.btn-extend').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = e.target.closest('.rental-card');
+                const itemName = card?.querySelector('.card-title')?.textContent || 'item';
+                this.showExtendModal(itemName);
+            });
+        });
 
-        // Load initial content
-        Components.loadTabContent(this.activeTab);
+        // Return buttons
+        document.querySelectorAll('.btn-return').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = e.target.closest('.rental-card');
+                const itemName = card?.querySelector('.card-title')?.textContent || 'item';
+                this.showReturnConfirmation(itemName);
+            });
+        });
+    },
+
+    /**
+     * Initialize table action buttons
+     */
+    initTableActions() {
+        document.querySelectorAll('.history-table .action-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const row = e.target.closest('tr');
+                const itemName = row?.querySelector('.history-name')?.textContent || 'item';
+                const isRefunded = btn.classList.contains('action-muted');
+                
+                if (!isRefunded) {
+                    this.downloadReceipt(itemName);
+                }
+            });
+        });
+    },
+
+    /**
+     * Show extend rental modal (placeholder)
+     * @param {string} itemName - Name of the rental item
+     */
+    showExtendModal(itemName) {
+        // In a real app, this would open a modal with date selection
+        alert(`Extend rental for: ${itemName}\n\nThis feature will open a date selection modal.`);
+    },
+
+    /**
+     * Show return confirmation dialog (placeholder)
+     * @param {string} itemName - Name of the rental item
+     */
+    showReturnConfirmation(itemName) {
+        const confirmed = confirm(`Schedule return for: ${itemName}?\n\nWe'll arrange a pickup time.`);
+        if (confirmed) {
+            alert('Return scheduled! You will receive a confirmation email shortly.');
+        }
+    },
+
+    /**
+     * Download receipt (placeholder)
+     * @param {string} itemName - Name of the rental item
+     */
+    downloadReceipt(itemName) {
+        // In a real app, this would trigger a file download
+        alert(`Downloading receipt for: ${itemName}`);
     }
 };
 
