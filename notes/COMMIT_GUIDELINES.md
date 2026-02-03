@@ -73,7 +73,7 @@ feat(client-dashboard): add user settings page
 
 - What: Created new settings page accessible from dashboard sidebar
 - Why: Users need ability to manage preferences and account settings
-- Impact: Added /client/dashboard/settings.html, updated components.js
+- Impact: Added /client/dashboard/settings.php, updated components.js
 - Tests: Verified page loads for authenticated users, redirect works for non-auth
 ```
 
@@ -146,7 +146,7 @@ git commit -m "feat(client): add user profile page
 
 - What: Created new settings page in dashboard
 - Why: Users need to manage their profile
-- Impact: Added settings.html and updated sidebar
+- Impact: Added settings.php and updated sidebar
 - Tests: Tested on all major browsers"
 ```
 
@@ -298,7 +298,7 @@ Body:
 
     - What: Replace single-line footer with structured markup (`.auth-footer-icon`, `.auth-footer-text`, `.auth-footer-label`, `.auth-footer-links`) and added layout + micro-typography styles.
     - Why: Improve trust, spacing and readability on the auth screen.
-    - Impact: `index.html` updated (auth footer markup), `css/styles.css` updated (footer styles).
+    - Impact: `index.php` updated (auth footer markup), `css/styles.css` updated (footer styles).
     - Tests: Visual verification of footer spacing and link styles on auth page.
 
 3) Motion & loader helpers

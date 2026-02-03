@@ -531,7 +531,7 @@ function initProductCards() {
             } else {
                 // Handle rent now - redirect to booking
                 const productId = card.dataset.id;
-                window.location.href = `/client/booking/new.html?product=${productId}`;
+                window.location.href = `client/booking/new.php?product=${productId}`;
             }
         });
     });

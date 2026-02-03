@@ -28,7 +28,7 @@ Alias /rentit "C:/Users/Mac/Desktop/Coding Projects/2026/Projects Intern/rental_
 
 ### Step 2: Access Your Project
 
-- Frontend: `http://localhost/rentit/client/auth/login.html`
+- Frontend: `http://localhost/rentit/client/auth/login.php`
 - Backend API: `http://localhost/rentit/backend/client/auth/login.php`
 
 ### Step 3: Update Frontend Config
@@ -85,7 +85,7 @@ API_BASE_URL: 'http://localhost/backend/client/auth/',
 
 ### Step 4: Run Frontend
 
-Right-click `index.html` → "Open with Live Server"
+Right-click `index.php` → "Open with Live Server"
 
 - Frontend: `http://127.0.0.1:5500`
 - Backend: `http://localhost/backend/`

@@ -1,51 +1,7 @@
-<?php
-session_start();
-include_once($_SERVER['DOCUMENT_ROOT'] . '/RENTAL_SAMPLE/shared/php/db_connection.php');
-
-// 1. Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit();
-}
-
-$user_id = $_SESSION['user_id'];
-
-// 2. Kunin ang Customer Information mula sa database
-$user_query = "SELECT full_name, email, phone, address FROM users WHERE id = ?";
-$stmt = $conn->prepare($user_query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$user_data = $stmt->get_result()->fetch_assoc();
-
-// Get Cart Items
-$cart_query = "SELECT c.id as cart_row_id, i.item_name, i.category, i.price_per_day, i.image
-               FROM cart c 
-               JOIN item i ON c.item_id = i.item_id 
-               WHERE c.user_id = ?";
-$stmt = $conn->prepare($cart_query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$cart_items = $stmt->get_result();
-
-// Calculate Subtotal muna bago ang Grand Total
-$total_subtotal = 0;
-$items_list = []; // I-store muna natin para hindi na tayo mag-data_seek mamaya
-while($row = $cart_items->fetch_assoc()){
-    $total_subtotal += $row['price_per_day'];
-    $items_list[] = $row;
-}
-
-// 4. Generate Order Reference (Random ID)
-$order_ref = "RIT-" . date('Ymd') . "-" . strtoupper(substr(uniqid(), -6));
-
-$delivery_fee = 150;
-$service_fee = 50;
-$grand_total = $total_subtotal + $delivery_fee + $service_fee;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RentIt - Checkout">
@@ -55,16 +11,18 @@ $grand_total = $total_subtotal + $delivery_fee + $service_fee;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../shared/css/theme.css">
-    <link rel="stylesheet" href="../../shared/css/globals.css">
-    <link rel="stylesheet" href="../../client/dashboard/dashboard.css">
-    <link rel="stylesheet" href="../checkout/checkout.css">
+    <link rel="stylesheet" href="shared/css/theme.css">
+    <link rel="stylesheet" href="shared/css/globals.css">
+    <link rel="stylesheet" href="client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="client/checkout/checkout.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/rIT_logo_tp.png">
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>
 <body>
     <div class="app-container">
@@ -86,248 +44,308 @@ $grand_total = $total_subtotal + $delivery_fee + $service_fee;
                     </div>
                 </div>
 
-               
+                <!-- Checkout Layout -->
                 <div class="checkout-layout">
-    
-    <div class="checkout-main">
-        
-        <div class="checkout-card receipt-card">
-            <div class="receipt-header">
-                <div class="receipt-info">
-                    <span class="receipt-label">Order Reference</span>
-                    <span class="receipt-id"><?php echo $order_ref; ?></span>
-                </div>
-            </div>
-            <div class="receipt-status">
-                <span class="status-badge pending">Pending Confirmation</span>
-            </div>
-        </div>
+                    <!-- Left Column - Customer Info & Order Details -->
+                    <div class="checkout-main">
+                        <!-- Receipt ID Card -->
+                        <div class="checkout-card receipt-card">
+                            <div class="receipt-header">
+                                <div class="receipt-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14 2 14 8 20 8"/>
+                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                        <polyline points="10 9 9 9 8 9"/>
+                                    </svg>
+                                </div>
+                                <div class="receipt-info">
+                                    <span class="receipt-label">Order Reference</span>
+                                    <span class="receipt-id" id="receiptId">RIT-2026-XXXXXX</span>
+                                </div>
+                            </div>
+                            <div class="receipt-status">
+                                <span class="status-badge pending">Pending Confirmation</span>
+                            </div>
+                        </div>
 
-        <div class="checkout-card">
-            <div class="card-header">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <h2>Customer Information</h2>
-                <button class="btn-edit-info">Edit</button>
-            </div>
-            <div class="customer-details">
-                <div class="detail-row">
-                    <span class="detail-label">Full Name</span>
-                    <span class="detail-value"><?php echo htmlspecialchars($user_data['full_name']); ?></span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Email</span>
-                    <span class="detail-value"><?php echo htmlspecialchars($user_data['email']); ?></span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Phone</span>
-                    <span class="detail-value"><?php echo htmlspecialchars($user_data['phone'] ?? 'Not set'); ?></span>
-                </div>
-            </div>
-        </div>
+                        <!-- Customer Information -->
+                        <div class="checkout-card">
+                            <div class="card-header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                <h2>Customer Information</h2>
+                                <button class="btn-edit-info" id="btnEditInfo" title="Edit information">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="customer-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Full Name</span>
+                                    <span class="detail-value" id="customerName">John Doe</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value" id="customerEmail">john.doe@email.com</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Phone</span>
+                                    <span class="detail-value" id="customerPhone">+63 912 345 6789</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Address</span>
+                                    <span class="detail-value" id="customerAddress">123 Main Street, Barangay Sample, Makati City, Metro Manila</span>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="checkout-card">
-            <div class="card-header">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                <h2>Delivery Options</h2>
-            </div>
-            <div class="delivery-options">
-    <label class="delivery-option selected">
-        <input type="radio" name="delivery" value="standard" data-price="150" checked>
-        <div class="option-content">
-            <div class="option-info">
-                <span class="option-name">Standard Delivery</span>
-            </div>
-            <span class="option-price">₱150</span>
-        </div>
-    </label>
+                        <!-- Delivery Options -->
+                        <div class="checkout-card">
+                            <div class="card-header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="15" height="13"/>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                                </svg>
+                                <h2>Delivery Options</h2>
+                            </div>
+                            <div class="delivery-options">
+                                <label class="delivery-option selected">
+                                    <input type="radio" name="delivery" value="standard" checked>
+                                    <div class="option-content">
+                                        <div class="option-info">
+                                            <span class="option-name">Standard Delivery</span>
+                                            <span class="option-desc">Delivered on rental start date</span>
+                                        </div>
+                                        <span class="option-price">₱150</span>
+                                    </div>
+                                </label>
+                                <label class="delivery-option">
+                                    <input type="radio" name="delivery" value="express">
+                                    <div class="option-content">
+                                        <div class="option-info">
+                                            <span class="option-name">Express Delivery</span>
+                                            <span class="option-desc">Delivered 1 day before rental</span>
+                                        </div>
+                                        <span class="option-price">₱300</span>
+                                    </div>
+                                </label>
+                                <label class="delivery-option">
+                                    <input type="radio" name="delivery" value="pickup">
+                                    <div class="option-content">
+                                        <div class="option-info">
+                                            <span class="option-name">Store Pickup</span>
+                                            <span class="option-desc">Pick up at RentIt Store</span>
+                                        </div>
+                                        <span class="option-price">Free</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
 
-    <label class="delivery-option">
-        <input type="radio" name="delivery" value="express" data-price="300">
-        <div class="option-content">
-            <div class="option-info">
-                <span class="option-name">Express Delivery</span>
-            </div>
-            <span class="option-price">₱300</span>
-        </div>
-    </label>
+                        <!-- Order Items -->
+                        <div class="checkout-card">
+                            <div class="card-header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="9" cy="21" r="1"/>
+                                    <circle cx="20" cy="21" r="1"/>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                </svg>
+                                <h2>Order Items</h2>
+                                <span class="item-count" id="itemCount">2 items</span>
+                            </div>
+                            <div class="order-items" id="orderItems">
+                                <!-- Order Item 1 -->
+                                <div class="order-item">
+                                    <div class="order-item-image">
+                                        <img src="assets/images/platinumpro.webp" alt="Karaoke King Pro v2"
+                                             onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                                    </div>
+                                    <div class="order-item-details">
+                                        <h4 class="order-item-name">Karaoke King Pro v2</h4>
+                                        <span class="order-item-category">Premium</span>
+                                        <div class="order-item-rental">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            <span>Feb 5 - Feb 9, 2026</span>
+                                            <span class="days-badge">5 days</span>
+                                        </div>
+                                        <!-- Future Rentals Warning -->
+                                        <div class="future-rentals-notice" id="futureRentals1" style="display: none;">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="10"/>
+                                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                            </svg>
+                                            <span>This item has future bookings: Mar 10-15, Apr 1-5</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-item-pricing">
+                                        <span class="item-rate">₱120/day</span>
+                                        <span class="item-subtotal">₱600</span>
+                                    </div>
+                                </div>
 
-    <label class="delivery-option">
-        <input type="radio" name="delivery" value="pickup" data-price="0">
-        <div class="option-content">
-            <div class="option-info">
-                <span class="option-name">Store Pickup</span>
-            </div>
-            <span class="option-price">Free</span>
-        </div>
-    </label>
-</div>
-        </div>
-    </div>
-
-    <div class="checkout-sidebar">
-        
-        <div class="checkout-card">
-            <div class="card-header">
-                <h2>Order Items</h2>
-                <span class="item-count"><?php echo $cart_items->num_rows; ?> items</span>
-            </div>
-            <div class="order-items">
-                <?php 
-                $total_subtotal = 0;
-                $cart_items->data_seek(0);
-                while($item = $cart_items->fetch_assoc()): 
-                    $subtotal = $item['price_per_day'] * 1; 
-                    $total_subtotal += $subtotal;
-                ?>
-                <div class="order-item">
-                    <img src="../../assets/images/products/<?php echo $item['image']; ?>" onerror="this.src='https://via.placeholder.com/50'">
-                    <div class="order-item-details">
-                        <h4 class="order-item-name"><?php echo htmlspecialchars($item['item_name']); ?></h4>
-                        <span class="item-subtotal">₱<?php echo number_format($subtotal, 2); ?></span>
+                                <!-- Order Item 2 -->
+                                <div class="order-item">
+                                    <div class="order-item-image">
+                                        <img src="assets/images/ministar.jpg" alt="MiniSing Pocket"
+                                             onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                                    </div>
+                                    <div class="order-item-details">
+                                        <h4 class="order-item-name">MiniSing Pocket</h4>
+                                        <span class="order-item-category">Portable</span>
+                                        <div class="order-item-rental">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                                                <line x1="3" y1="10" x2="21" y2="10"/>
+                                            </svg>
+                                            <span>Feb 10 - Feb 12, 2026</span>
+                                            <span class="days-badge">3 days</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-item-pricing">
+                                        <span class="item-rate">₱120/day</span>
+                                        <span class="item-subtotal">₱360</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <?php endwhile; ?>
-            </div>
-        </div>
 
-        <div class="checkout-card order-summary-card">
-        <div class="summary-breakdown">
-    <div class="summary-row">
-        <span>Subtotal</span>
-        <span id="summarySubtotal">₱<?php echo number_format($total_subtotal, 2); ?></span>
-    </div>
-    <div class="summary-row">
-        <span>Delivery Fee</span>
-        <span id="summaryDelivery">₱150.00</span>
-    </div>
-    <div class="summary-row">
-        <span>Service Fee</span>
-        <span id="summaryService">₱50.00</span>
-    </div>
-    <div class="summary-total">
-        <span>Total</span>
-        <span id="summaryTotal">₱<?php echo number_format($total_subtotal + 200, 2); ?></span>
-    </div>
-</div>
+                    <!-- Right Column - Order Summary -->
+                    <div class="checkout-sidebar">
+                        <div class="checkout-card order-summary-card">
+                            <div class="card-header">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                                <h2>Order Summary</h2>
+                            </div>
+                            
+                            <div class="summary-breakdown">
+                                <div class="summary-row">
+                                    <span>Subtotal (2 items)</span>
+                                    <span id="summarySubtotal">₱960</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Delivery Fee</span>
+                                    <span id="summaryDelivery">₱150</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Service Fee</span>
+                                    <span id="summaryService">₱50</span>
+                                </div>
+                                <div class="summary-row discount" style="display: none;" id="discountRow">
+                                    <span>Discount</span>
+                                    <span class="discount-amount" id="summaryDiscount">-₱0</span>
+                                </div>
+                            </div>
 
-            <div class="payment-section">
-                <h3>Payment Method</h3>
-                <div class="payment-options">
-                    <label class="payment-option selected"><input type="radio" name="payment" value="cod" checked> Cash on Delivery</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="gcash"> GCash</label>
-                    <label class="payment-option"><input type="radio" name="payment" value="bt"> Bank Transfer</label>
-                </div>
-            </div>
+                            <div class="promo-section">
+                                <div class="promo-input-wrap">
+                                    <input type="text" class="promo-input" id="promoCode" placeholder="Enter promo code" title="Enter promotional code">
+                                    <button class="btn-apply-promo" id="btnApplyPromo" title="Apply promotional code">Apply</button>
+                                </div>
+                            </div>
 
-            <form id="checkoutForm">
-    <input type="hidden" name="order_ref" value="<?php echo $order_ref; ?>">
-    <input type="hidden" name="grand_total" id="hiddenGrandTotal" value="<?php echo $total_subtotal + 200; ?>">
-    
-    <button type="submit" class="btn-confirm-order">Confirm Order</button>
-</form>
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span class="total-amount" id="summaryTotal">₱1,160</span>
+                            </div>
 
+                            <div class="payment-section">
+                                <h3>Payment Method</h3>
+                                <div class="payment-options">
+                                    <label class="payment-option selected">
+                                        <input type="radio" name="payment" value="cod" checked>
+                                        <div class="payment-content">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                                <line x1="1" y1="10" x2="23" y2="10"/>
+                                            </svg>
+                                            <span>Cash on Delivery</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment" value="gcash">
+                                        <div class="payment-content">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
+                                                <path d="M12 6v6l4 2"/>
+                                            </svg>
+                                            <span>GCash</span>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="payment" value="bank">
+                                        <div class="payment-content">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M3 21h18"/>
+                                                <path d="M3 10h18"/>
+                                                <path d="M12 3L3 10h18L12 3z"/>
+                                                <path d="M5 10v11"/>
+                                                <path d="M19 10v11"/>
+                                                <path d="M9 10v11"/>
+                                                <path d="M15 10v11"/>
+                                            </svg>
+                                            <span>Bank Transfer</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
 
-            <p class="terms-note">
+                            <button class="btn-confirm-order" id="btnConfirmOrder" title="Confirm and place order">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Confirm Order
+                            </button>
+
+                            <p class="terms-note">
                                 By confirming, you agree to our 
-                                <a href="/pages/terms.html">Terms of Service</a> and 
-                                <a href="/pages/privacy.html">Privacy Policy</a>.
+                                <a href="pages/terms.php">Terms of Service</a> and 
+                                <a href="pages/privacy.php">Privacy Policy</a>.
                             </p>
                         </div>
-            
-            <a href="../../client/cart/cart.php" class="btn-back-cart" style="display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #666;">
-                ← Back to Cart
-            </a>
-        </div>
-    </div>
-</div>
+
+                        <!-- Back to Cart -->
+                        <a href="client/cart/cart.php" class="btn-back-cart" title="Go back to cart">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"/>
+                                <polyline points="12 19 5 12 12 5"/>
+                            </svg>
+                            Back to Cart
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Container (Injected by JS) -->
+            <div id="footerContainer"></div>
         </main>
     </div>
-    <script> 
-  document.querySelectorAll('input[name="delivery"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-        const deliveryFee = parseFloat(this.getAttribute('data-price')) || 0;
-        
-        const subtotalText = document.getElementById('summarySubtotal').innerText;
-        const subtotal = parseFloat(subtotalText.replace(/[^\d.]/g, ''));
-        
-        const serviceFeeText = document.getElementById('summaryService').innerText;
-        const serviceFee = parseFloat(serviceFeeText.replace(/[^\d.]/g, ''));
-        
-        document.getElementById('summaryDelivery').innerText = '₱' + deliveryFee.toLocaleString(undefined, {minimumFractionDigits: 2});
-        
-        const newTotal = subtotal + deliveryFee + serviceFee;
-        
-        document.getElementById('summaryTotal').innerText = '₱' + newTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
-
-        console.log("Delivery updated to: " + deliveryFee); 
-    });
-});
-</script>
-<script>
-document.getElementById('checkoutForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const totalElement = document.getElementById('summaryTotal');
-    const grandTotal = totalElement ? parseFloat(totalElement.innerText.replace(/[^\d.]/g, '')) : 0;
-
-    const formData = new FormData(this);
-    formData.append('grand_total', grandTotal);
     
-    const delivery = document.querySelector('input[name="delivery"]:checked');
-    const payment = document.querySelector('input[name="payment"]:checked');
-    
-    formData.append('delivery_type', delivery ? delivery.value : 'standard');
-    formData.append('payment_method', payment ? payment.value : 'cod');
-    formData.append('venue', "Home Delivery"); 
-
-    Swal.fire({
-        title: 'Processing Order...',
-        text: 'Please wait while we secure your booking.',
-        allowOutsideClick: false,
-        didOpen: () => { Swal.showLoading(); }
-    });
-
-fetch('place_order.php', {
-    method: 'POST',
-    body: formData
-})
-.then(response => response.text()) 
-.then(text => {
-    Swal.close(); 
-
-    try {
-        const data = JSON.parse(text); 
-        if (data.status === 'success') {
-            Swal.fire({
-                title: 'Order Confirmed!',
-                text: 'Your Order ID is: ' + data.order_id,
-                icon: 'success',
-                confirmButtonText: 'View My Rentals',
-                confirmButtonColor: '#4f46e5'
-            }).then(() => {
-                window.location.href = '../myrentals/myrentals.php';
-            });
-        } else {
-            Swal.fire('Error', data.message, 'error');
-        }
-    } catch (err) {
-        console.error("Server Error Response:", text);
-        Swal.fire({
-            title: 'System Error',
-            text: 'May error sa server side. Tingnan ang "Response" sa Network Tab.',
-            icon: 'error'
-        });
-    }
-})
-.catch(error => {
-    Swal.close(); 
-    console.error('Fetch Error:', error);
-    Swal.fire('Error', 'Hindi makakonekta sa server.', 'error');
-});
-});
-</script>
     <!-- Scripts -->
-    <script src="../../shared/js/components.js"></script>
-    <script src="checkout.js"></script>
+    <script src="shared/js/components.js"></script>
+    <script src="client/checkout/checkout.js"></script>
 </body>
 </html>
+
+
+
+
+

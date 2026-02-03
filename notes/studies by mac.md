@@ -26,7 +26,7 @@
 Here's the flow of a React app:
 
 ```
-index.html          ← Browser loads this first
+index.php          ← Browser loads this first
     ↓
 main.jsx            ← Entry point, mounts React to the page
     ↓
@@ -82,7 +82,7 @@ function Button() {
 
 ## 🔗 How Files Connect (Step by Step)
 
-### Step 1: **index.html** → The Container
+### Step 1: **index.php** → The Container
 ```html
 <!DOCTYPE html>
 <html>
@@ -294,7 +294,7 @@ npm run preview
 
 ```
 rental-react/
-├── index.html              # Entry HTML file
+├── index.php              # Entry HTML file
 ├── package.json            # Dependencies & scripts
 ├── vite.config.js          # Vite configuration
 ├── src/

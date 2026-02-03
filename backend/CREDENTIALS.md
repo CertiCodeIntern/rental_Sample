@@ -25,13 +25,13 @@ The project is already copied to: `C:\xampp\htdocs\rental_Sample`
 
 ### Step 4: Access the Application
 - **Landing Page:** `http://localhost/rental_Sample/`
-- **Client Login:** `http://localhost/rental_Sample/client/auth/login.html`
-- **Admin Login:** `http://localhost/rental_Sample/admin/auth/login.html`
+- **Client Login:** `http://localhost/rental_Sample/client/auth/login.php`
+- **Admin Login:** `http://localhost/rental_Sample/admin/auth/login.php`
 
 ---
 
 ## 🔐 Admin Portal
-Access: `http://localhost/rental_Sample/admin/auth/login.html`
+Access: `http://localhost/rental_Sample/admin/auth/login.php`
 
 | Field | Value |
 |-------|-------|
@@ -42,7 +42,7 @@ Access: `http://localhost/rental_Sample/admin/auth/login.html`
 ---
 
 ## 👤 Client Portal
-Access: `http://localhost/rental_Sample/client/auth/login.html`
+Access: `http://localhost/rental_Sample/client/auth/login.php`
 
 ### Test Account 1
 | Field | Value |

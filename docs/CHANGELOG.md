@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.php).
 
 ---
 
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Marc | Frontend** - Project restructure and folder organization
 
 ### ➕ Added
-- Landing page (`index.html`) in root directory
+- Landing page (`index.php`) in root directory
 - Client-side folder structure (`/client`)
 - Admin-side folder structure (`/admin`)
 - Documentation system (`/docs`)
@@ -43,8 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Old flat file structure
 
 ### 📝 Notes
-- Entry point is now `index.html` (landing page) in root
-- Client login at `/client/auth/login.html`
+- Entry point is now `index.php` (landing page) in root
+- Client login at `/client/auth/login.php`
 - All shared styles/scripts in `/shared/`
 
 ---

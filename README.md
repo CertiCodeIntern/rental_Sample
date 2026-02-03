@@ -22,9 +22,9 @@ A modern rental management platform built with pure HTML5, CSS3, and Vanilla Jav
 
 ```
 rental_Sample/
-├── 📄 index.html           # Landing page (entry point)
+├── 📄 index.php           # Landing page (entry point)
 ├── pages/
-│   ├── 📄 wip.html             # Work in Progress page
+│   ├── 📄 wip.php             # Work in Progress page
 ├── 📄 vercel.json          # Vercel configuration
 │
 ├── 📁 client/              # Customer-facing app
@@ -77,7 +77,7 @@ Visit `http://localhost:3000`
 
 1. Push to GitHub
 2. Import in Vercel Dashboard
-3. Deploy (auto-detects `index.html`)
+3. Deploy (auto-detects `index.php`)
 
 ---
 

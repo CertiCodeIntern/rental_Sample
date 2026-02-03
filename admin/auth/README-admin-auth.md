@@ -6,7 +6,7 @@
 
 ```
 auth/
-├── 📄 login.html     # Admin login page (TODO)
+├── 📄 login.php     # Admin login page (TODO)
 ├── 📁 css/           # Admin auth styles
 └── 📁 js/            # Admin auth functionality
 ```

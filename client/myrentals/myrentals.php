@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RentIt - My Rentals. Manage your active videoke equipment and rental history.">
@@ -12,16 +13,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/rIT_logo_tp.png">
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../shared/css/theme.css">
-    <link rel="stylesheet" href="../../shared/css/globals.css">
-    <link rel="stylesheet" href="../../client/dashboard/dashboard.css">
-    <link rel="stylesheet" href="myrentals.css">
+    <link rel="stylesheet" href="shared/css/theme.css">
+    <link rel="stylesheet" href="shared/css/globals.css">
+    <link rel="stylesheet" href="client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="client/myrentals/myrentals.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
     
     <!-- Theme Script -->
-    <script src="../../shared/js/theme.js"></script>
+    <script src="shared/js/theme.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -42,7 +46,7 @@
                         <p class="page-subtitle">Manage your active videoke equipment and view your rental history.</p>
                     </div>
                     <div class="page-header-actions">
-                        <a href="/client/dashboard.html" class="btn-new">
+                        <a href="client/catalog/catalog.php" class="btn-new">
                             New Rental
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <line x1="12" y1="5" x2="12" y2="19"/>
@@ -54,9 +58,9 @@
 
                 <!-- Tabs Navigation -->
                 <div class="rentals-tabs">
-                    <a href="/client/myrentals/myrentals.html" class="tab-link active">Active Rentals</a>
-                    <a href="/client/bookinghistory/bookinghistory.html" class="tab-link">Booking History</a>
-                    <a href="/client/returns/returns.html" class="tab-link">Returns & Extensions</a>
+                    <a href="client/myrentals/myrentals.php" class="tab-link active">Active Rentals</a>
+                    <a href="client/bookinghistory/bookinghistory.php" class="tab-link">Booking History</a>
+                    <a href="client/returns/returns.php" class="tab-link">Returns & Extensions</a>
                 </div>
 
                 <!-- Currently In Possession Section -->
@@ -84,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <img src="/assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%231E293B%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2216%22>Karaoke Pro System X-100</text></svg>'">
+                                <img src="assets/images/ministar.jpg" alt="Karaoke Pro System" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="card-actions">
                                 <button class="btn-extend">
@@ -122,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <img src="/assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 180%22><rect fill=%22%230b1220%22 width=%22400%22 height=%22180%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2216%22>Party Box Master V2</text></svg>'">
+                                <img src="assets/images/partyboxx.webp" alt="Party Box Master" onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
                             </div>
                             <div class="card-actions">
                                 <button class="btn-extend btn-urgent">
@@ -147,7 +151,7 @@
                 <section class="history-section">
                     <div class="section-header">
                         <h2 class="section-title">Booking History</h2>
-                        <a href="/client/bookinghistory/bookinghistory.html" class="view-all-link">View All</a>
+                        <a href="client/bookinghistory/bookinghistory.php" class="view-all-link">View All</a>
                     </div>
 
                     <div class="history-panel">
@@ -242,7 +246,7 @@
                             <h3>Plan a party next weekend?</h3>
                             <p>Get 20% off on your next rental if you book 3 days in advance. Exclusive for loyal customers.</p>
                         </div>
-                        <a href="/client/dashboard.html" class="promo-cta">Claim 20% Discount</a>
+                        <a href="client/catalog/catalog.php" class="promo-cta">Claim 20% Discount</a>
                     </div>
                 </section>
             </div>
@@ -253,7 +257,12 @@
     </div>
     
     <!-- Scripts -->
-    <script src="../../shared/js/components.js"></script>
-    <script src="myrentals.js"></script>
+    <script src="shared/js/components.js"></script>
+    <script src="client/myrentals/myrentals.js"></script>
 </body>
 </html>
+
+
+
+
+

@@ -43,52 +43,52 @@ admin/
 ├── 📄 README-admin.md             # Admin documentation
 │
 ├── 📁 auth/                       # Admin Authentication
-│   ├── 📄 login.html              # Admin login page
+│   ├── 📄 login.php              # Admin login page
 │   ├── 📁 css/
 │   │   └── auth.css
 │   └── 📁 js/
 │       └── auth.js
 │
 ├── 📁 dashboard/                  # Main Dashboard
-│   ├── 📄 dashboard.html          # KPIs, recent activity
+│   ├── 📄 dashboard.php          # KPIs, recent activity
 │   ├── 📁 css/
 │   │   └── dashboard-new.css
 │   └── 📁 js/
 │       └── dashboard.js
 │
 ├── 📁 orders/                     # Order Management
-│   ├── 📄 orders.html             # All orders list
-│   ├── 📄 orderdetail.html        # Single order detail
+│   ├── 📄 orders.php             # All orders list
+│   ├── 📄 orderdetail.php        # Single order detail
 │   ├── 📄 orders.css
 │   └── 📄 orders.js
 │
 ├── 📁 dispatch/                   # Dispatch Management
-│   ├── 📄 dispatch.html           # Delivery/pickup scheduling
+│   ├── 📄 dispatch.php           # Delivery/pickup scheduling
 │   ├── 📄 dispatch.css
 │   └── 📄 dispatch.js
 │
 ├── 📁 customers/                  # Customer Management
-│   ├── 📄 customers.html          # Customer database
+│   ├── 📄 customers.php          # Customer database
 │   ├── 📄 customers.css
 │   └── 📄 customers.js
 │
 ├── 📁 calendar/                   # Calendar Master View
-│   ├── 📄 calendar.html           # Visual availability grid
+│   ├── 📄 calendar.php           # Visual availability grid
 │   ├── 📄 calendar.css
 │   └── 📄 calendar.js
 │
 ├── 📁 repairs/                    # Repairs & Maintenance
-│   ├── 📄 repairs.html
+│   ├── 📄 repairs.php
 │   ├── 📄 repairs.css
 │   └── 📄 repairs.js
 │
 ├── 📁 latefees/                   # Late Fees Tracker
-│   ├── 📄 latefees.html
+│   ├── 📄 latefees.php
 │   ├── 📄 latefees.css
 │   └── 📄 latefees.js
 │
 ├── 📁 settings/                   # System Settings
-│   ├── 📄 settings.html
+│   ├── 📄 settings.php
 │   ├── 📄 settings.css
 │   └── 📄 settings.js
 │
@@ -228,7 +228,7 @@ admin/
 
 ## 📍 Page Specifications
 
-### 1. Dashboard (`/admin/dashboard/dashboard.html`)
+### 1. Dashboard (`/admin/dashboard/dashboard.php`)
 **Purpose:** Overview of business operations
 
 **KPI Cards:**
@@ -243,7 +243,7 @@ admin/
 - Inventory Health (progress bars)
 - Quick Actions (navigation shortcuts)
 
-### 2. Orders (`/admin/orders/orders.html`)
+### 2. Orders (`/admin/orders/orders.php`)
 **Purpose:** List and manage all orders
 
 **Features:**
@@ -265,7 +265,7 @@ admin/
 | Payment | Paid/Pending |
 | Actions | View, Dispatch |
 
-### 3. Order Detail (`/admin/orders/orderdetail.html`)
+### 3. Order Detail (`/admin/orders/orderdetail.php`)
 **Purpose:** Full order information
 
 **Sections:**
@@ -277,7 +277,7 @@ admin/
 - **Timeline:** Order history (created, confirmed, dispatched, etc.)
 - **Actions:** Update status, print receipt, contact customer
 
-### 4. Dispatch (`/admin/dispatch/dispatch.html`)
+### 4. Dispatch (`/admin/dispatch/dispatch.php`)
 **Purpose:** Manage deliveries and pickups
 
 **View Options:**
@@ -298,7 +298,7 @@ admin/
 - Type: Deliveries, Pickups, Both
 - Status: Pending, In Transit, Completed
 
-### 5. Customers (`/admin/customers/customers.html`)
+### 5. Customers (`/admin/customers/customers.php`)
 **Purpose:** Customer database and history
 
 **KPI Cards:**
@@ -325,7 +325,7 @@ admin/
 - Total spend
 - Notes
 
-### 6. Calendar (`/admin/calendar/calendar.html`)
+### 6. Calendar (`/admin/calendar/calendar.php`)
 **Purpose:** Visual availability and booking overview
 
 **Features:**
@@ -335,7 +335,7 @@ admin/
 - Click to view booking detail
 - Drag to reschedule (optional)
 
-### 7. Repairs (`/admin/repairs/repairs.html`)
+### 7. Repairs (`/admin/repairs/repairs.php`)
 **Purpose:** Manage equipment maintenance
 
 **Status Workflow:**
@@ -352,7 +352,7 @@ Reported → In Repair → Testing → Available
 - Status
 - Actions
 
-### 8. Late Fees (`/admin/latefees/latefees.html`)
+### 8. Late Fees (`/admin/latefees/latefees.php`)
 **Purpose:** Track and manage overdue rentals
 
 **Filters:**
@@ -369,7 +369,7 @@ Reported → In Repair → Testing → Available
 - Status
 - Actions (Remind, Waive, Mark Paid)
 
-### 9. Settings (`/admin/settings/settings.html`)
+### 9. Settings (`/admin/settings/settings.php`)
 **Purpose:** System configuration
 
 **Sections:**

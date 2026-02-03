@@ -1,39 +1,42 @@
-<?php
-include '../../shared/php/db_connection.php';
-session_start();
-
-$user_id = $_SESSION['id'] ?? 1; 
-
-$query = "SELECT f.favorite_id, i.* FROM favorites f 
-          JOIN item i ON f.item_id = i.item_id 
-          WHERE f.id = ?"; 
-          
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$favoritesCount = $result->num_rows;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RentIt - Your Favorite Videoke Machines">
     <title>RentIt - My Favorites</title>
     
-    <link rel="stylesheet" href="/RENTAL_SAMPLE/shared/css/theme.css">
-<link rel="stylesheet" href="/RENTAL_SAMPLE/shared/css/globals.css">
-<link rel="stylesheet" href="/RENTAL_SAMPLE/client/dashboard/dashboard.css">
-<link rel="stylesheet" href="favorites.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="shared/css/theme.css">
+    <link rel="stylesheet" href="shared/css/globals.css">
+    <link rel="stylesheet" href="client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="client/favorites/favorites.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>
 <body>
     <div class="app-container">
+        <!-- Sidebar Container (Injected by JS) -->
         <div id="sidebarContainer"></div>
+        
+        <!-- Main Content -->
         <main class="main-content">
+            <!-- Topbar Container (Injected by JS) -->
             <div id="topbarContainer"></div>
             
+            <!-- Content Area -->
             <div class="content-area fade-in-up" id="contentArea">
+                <!-- Page Header -->
                 <div class="page-header-dashboard">
                     <div class="page-header-info">
                         <h1 class="page-title">My Favorites</h1>
@@ -44,95 +47,152 @@ $favoritesCount = $result->num_rows;
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                             </svg>
-                            <span id="favoritesCount"><?php echo $favoritesCount; ?></span> items saved
+                            <span id="favoritesCount">3</span> items saved
                         </span>
                     </div>
                 </div>
 
-                <div class="favorites-grid" id="favoritesGrid" style="<?php echo ($favoritesCount == 0) ? 'display: none;' : 'display: grid;'; ?>">
-                    <?php while($row = $result->fetch_assoc()): ?>
-                    <article class="favorite-card" data-id="<?php echo $row['item_id']; ?>">
+                <!-- Favorites Grid -->
+                <div class="favorites-grid" id="favoritesGrid">
+                    <!-- Favorite Item 1 -->
+                    <article class="favorite-card" data-id="1">
                         <div class="favorite-image-wrap">
-                            <img src="../../assets/images/placeholder.jpg" alt="<?php echo $row['item_name']; ?>" class="favorite-image">
-                            
-                            <span class="favorite-badge <?php echo strtolower($row['status']); ?>">
-                                <?php echo $row['status']; ?>
-                            </span>
-                            
-                            <button class="btn-remove-favorite" onclick="removeFavorite(<?php echo $row['item_id']; ?>)">
+                            <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="favorite-image"
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                            <span class="favorite-badge available">Available</span>
+                            <button class="btn-remove-favorite" data-id="1" aria-label="Remove from favorites">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
                                 </svg>
                             </button>
                         </div>
-                        
                         <div class="favorite-content">
-                            <h3 class="favorite-name"><?php echo $row['item_name']; ?></h3>
-                            <div class="favorite-price">₱<?php echo number_format($row['price_per_day'], 2); ?> <span>/ day</span></div>
-                            
+                            <h3 class="favorite-name">Karaoke King Pro v2</h3>
+                            <div class="favorite-rating">
+                                <div class="rating-stars">
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <span class="rating-score">4.5</span>
+                            </div>
+                            <div class="favorite-price">₱120 <span>/ day</span></div>
                             <div class="favorite-actions">
-    <button class="btn-move-to-cart" onclick="moveToCart(<?php echo $row['item_id']; ?>, <?php echo $row['favorite_id']; ?>)">
-        Move to Cart
-    </button>
-    <a href="details.php?id=<?php echo $row['item_id']; ?>" class="btn-view-details">View Details</a>
-</div>
+                                <button class="btn-move-to-cart" data-id="1">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                    </svg>
+                                    Move to Cart
+                                </button>
+                                <a href="client/catalog/itemdescription.php?id=1" class="btn-view-details">View Details</a>
+                            </div>
                         </div>
                     </article>
-                    <?php endwhile; ?>
+
+                    <!-- Favorite Item 2 -->
+                    <article class="favorite-card" data-id="4">
+                        <div class="favorite-image-wrap">
+                            <img src="assets/images/products/homeparty-ultra.jpg" alt="HomeParty Ultra" class="favorite-image"
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                            <span class="favorite-badge available">Available</span>
+                            <button class="btn-remove-favorite" data-id="4" aria-label="Remove from favorites">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="favorite-content">
+                            <h3 class="favorite-name">HomeParty Ultra</h3>
+                            <div class="favorite-rating">
+                                <div class="rating-stars">
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <span class="rating-score">4.8</span>
+                            </div>
+                            <div class="favorite-price">₱120 <span>/ day</span></div>
+                            <div class="favorite-actions">
+                                <button class="btn-move-to-cart" data-id="4">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                    </svg>
+                                    Move to Cart
+                                </button>
+                                <a href="client/catalog/itemdescription.php?id=4" class="btn-view-details">View Details</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Favorite Item 3 -->
+                    <article class="favorite-card" data-id="3">
+                        <div class="favorite-image-wrap">
+                            <img src="assets/images/products/vocalstar-5000.jpg" alt="VocalStar 5000 Stage" class="favorite-image"
+                                 onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                            <span class="favorite-badge available">Available</span>
+                            <button class="btn-remove-favorite" data-id="3" aria-label="Remove from favorites">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="favorite-content">
+                            <h3 class="favorite-name">VocalStar 5000 Stage</h3>
+                            <div class="favorite-rating">
+                                <div class="rating-stars">
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="filled"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                    <svg viewBox="0 0 24 24" class="empty"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </div>
+                                <span class="rating-score">4.2</span>
+                            </div>
+                            <div class="favorite-price">₱250 <span>/ day</span></div>
+                            <div class="favorite-actions">
+                                <button class="btn-move-to-cart" data-id="3">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                    </svg>
+                                    Move to Cart
+                                </button>
+                                <a href="client/catalog/itemdescription.php?id=3" class="btn-view-details">View Details</a>
+                            </div>
+                        </div>
+                    </article>
                 </div>
 
-                <div class="empty-favorites" id="emptyFavorites" style="<?php echo ($favoritesCount > 0) ? 'display: none;' : 'display: flex;'; ?>">
+                <!-- Empty State (Hidden by default) -->
+                <div class="empty-favorites" id="emptyFavorites" style="display: none;">
                     <div class="empty-icon">💔</div>
                     <h2 class="empty-title">No Favorites Yet</h2>
                     <p class="empty-text">Start exploring our catalog and save machines you love!</p>
-                    <a href="../catalog/catalog.php" class="btn-browse-catalog">Browse Catalog</a>
+                    <a href="client/catalog/catalog.php" class="btn-browse-catalog">Browse Catalog</a>
                 </div>
             </div>
 
+            <!-- Footer (Injected by JS) -->
             <div id="footerContainer"></div>
         </main>
     </div>
     
-    <script src="../../shared/js/components.js"></script>
-    <script src="favorites.js"></script>    
-    <script>
-function removeFavorite(itemId) {
-    if(confirm('Remove this from favorites?')) {
-        fetch('remove_favorite.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'item_id=' + itemId
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.success) {
-                location.reload(); 
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(err => console.error(err));
-    }
-}
-
-function moveToCart(itemId) {
-    let cart = JSON.parse(localStorage.getItem('rentit_cart')) || [];
-    
-    if (!cart.find(item => item.id === itemId)) {
-        cart.push({ id: itemId, quantity: 1 });
-        localStorage.setItem('rentit_cart', JSON.stringify(cart));
-    }
-    
-    fetch('remove_favorite.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'item_id=' + itemId
-    })
-    .then(() => {
-        alert('Item moved to cart!');
-        location.reload(); 
-    });
-}
-</script>
+    <!-- Scripts -->
+    <script src="shared/js/components.js"></script>
+    <script src="client/favorites/favorites.js"></script>
 </body>
 </html>
+
+
+
+
+

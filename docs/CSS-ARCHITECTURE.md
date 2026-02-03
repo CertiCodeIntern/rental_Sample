@@ -9,7 +9,7 @@
 
 ### Issues Identified
 
-1. **Inline Style Bloat**: Each page (aboutus.html, contactus.html, etc.) has 100+ lines of inline `<style>` blocks
+1. **Inline Style Bloat**: Each page (aboutus.php, contactus.php, etc.) has 100+ lines of inline `<style>` blocks
 2. **Duplicate CSS**: Same styles repeated across multiple files
 3. **Unused External CSS**: `pages-layout.css` exists but isn't linked in most pages
 4. **Hardcoded Colors**: Hex values scattered in inline styles break theming

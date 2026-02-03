@@ -18,27 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
  * Initialize rental card actions
  */
 function initRentalActions() {
-    // Extend buttons
+    // Extend buttons - Navigate to extend form
     document.querySelectorAll('.btn-extend').forEach(btn => {
         btn.addEventListener('click', function() {
             const card = this.closest('.rental-card');
-            const title = card.querySelector('.card-title')?.textContent || 'Rental';
+            const rentalId = card?.dataset?.rentalId || getRentalIdFromCard(card);
             
-            // Show extension modal (placeholder)
-            alert(`Extend rental: ${title}\n\nThis would open an extension form.`);
+            // Navigate to extend form
+            window.location.href = `client/returns/extendform.php?id=${encodeURIComponent(rentalId)}`;
         });
     });
 
-    // Return buttons
+    // Return buttons - Navigate to return form
     document.querySelectorAll('.btn-return').forEach(btn => {
         btn.addEventListener('click', function() {
             const card = this.closest('.rental-card');
-            const title = card.querySelector('.card-title')?.textContent || 'Rental';
+            const rentalId = card?.dataset?.rentalId || getRentalIdFromCard(card);
             
-            // Show return confirmation (placeholder)
-            if (confirm(`Request return for: ${title}?\n\nOur team will contact you to schedule pickup.`)) {
-                alert('Return request submitted! We\'ll contact you within 24 hours.');
-            }
+            // Navigate to return form
+            window.location.href = `client/returns/returnform.php?id=${encodeURIComponent(rentalId)}`;
         });
     });
 
@@ -51,6 +49,19 @@ function initRentalActions() {
             }
         });
     });
+}
+
+/**
+ * Extract rental ID from card element
+ */
+function getRentalIdFromCard(card) {
+    // Try to get from badge or other element
+    const badge = card?.querySelector('.rental-id-badge, .card-badge');
+    if (badge) {
+        return badge.textContent.trim();
+    }
+    // Fallback to generated ID
+    return 'VDK-' + Math.floor(Math.random() * 10000);
 }
 
 /**

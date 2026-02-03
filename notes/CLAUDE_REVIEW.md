@@ -7,7 +7,7 @@ This file documents the recent typographic system and `auth-footer` improvements
 
 ## Files changed
 - `css/styles.css` — added a full typography token system (CSS variables), responsive adjustments, and updated component typography to use variables. Also added new footer styles.
-- `index.html` — replaced the simple auth footer copy with structured markup (`.auth-footer-icon`, `.auth-footer-text`, `.auth-footer-label`, `.auth-footer-links`).
+- `index.php` — replaced the simple auth footer copy with structured markup (`.auth-footer-icon`, `.auth-footer-text`, `.auth-footer-label`, `.auth-footer-links`).
 
 ---
 
@@ -122,7 +122,7 @@ This document captures the complete set of frontend changes applied to the proje
 
 ## Files changed (summary)
 - `css/styles.css` — added a comprehensive typographic token system (CSS variables), responsive rules, animation tokens, skeleton/shimmer styles, and refactored component typography to consume variables.
-- `index.html` — replaced the simple auth footer with structured markup and inserted skeleton placeholder rows in key tables (`#users-list`, `#rentals-list`, `#items-list`).
+- `index.php` — replaced the simple auth footer with structured markup and inserted skeleton placeholder rows in key tables (`#users-list`, `#rentals-list`, `#items-list`).
 - `js/app.js` — new UX helpers and wiring: `loadWithLoader`, `staggerEntrance`, `safeFetchJSON` (network with simulated-data fallback), renderers for table rows, and exports on `window.AppUtils`.
 - `COMMIT_GUIDELINES.md` — corporate-style commit templates and examples (created for team handoff).
 - `CLAUDE_REVIEW.md` — (this file) updated to include full details for review.
@@ -174,7 +174,7 @@ This document captures the complete set of frontend changes applied to the proje
   - `.is-loading`, `.is-loaded`, `.is-failed` — applied to container elements to reflect fetching state.
 
 - Table wiring specifics
-  - `index.html` includes a `.skeleton-row` in each of the main tables' `tbody` containers: `#users-list`, `#rentals-list`, `#items-list`.
+  - `index.php` includes a `.skeleton-row` in each of the main tables' `tbody` containers: `#users-list`, `#rentals-list`, `#items-list`.
   - CSS hides real rows when `.table-container.is-loading` is present and shows `.skeleton-row` until loading completes.
 
 - JS behavior to validate
@@ -223,7 +223,7 @@ Note: `window.AppUtils = { loadWithLoader, staggerEntrance, safeFetchJSON }` is 
 
 ## Files & snippets for review
 - Inspect `css/styles.css` for the `:root` tokens, `@keyframes fadeUp` and `@keyframes shimmer`, and `.table-container.is-loading` rules.
-- Inspect `index.html` to confirm new `auth` footer markup and presence of `.skeleton-row` entries in the three main tables (`#users-list`, `#rentals-list`, `#items-list`).
+- Inspect `index.php` to confirm new `auth` footer markup and presence of `.skeleton-row` entries in the three main tables (`#users-list`, `#rentals-list`, `#items-list`).
 - Inspect `js/app.js` for implementations of `loadWithLoader`, `staggerEntrance`, `safeFetchJSON`, the renderers, and the `window.AppUtils` export.
 
 ---
@@ -299,7 +299,7 @@ Slowed animations for better appreciation:
 
 ```
 rental-react/
-├── index.html
+├── index.php
 ├── package.json
 ├── vite.config.js
 ├── src/

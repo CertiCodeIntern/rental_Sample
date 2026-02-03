@@ -6,7 +6,7 @@
 
 ```
 dashboard/
-├── 📄 index.html     # Admin dashboard (TODO)
+├── 📄 index.php     # Admin dashboard (TODO)
 ├── 📁 css/           # Admin dashboard styles
 └── 📁 js/            # Admin dashboard functionality
 ```

@@ -1,46 +1,42 @@
-<?php
-session_start();
-include('../../shared/php/db_connection.php');
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit();
-}
-
-$u_id = $_SESSION['user_id'];
-
-$cart_query = "SELECT c.id AS cart_row_id, i.item_name, i.price_per_day, i.category, i.image 
-               FROM cart c 
-               JOIN item i ON c.item_id = i.item_id 
-               WHERE c.user_id = '$u_id'";
-$result = mysqli_query($conn, $cart_query);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RentIt - Your Shopping Cart">
     <title>RentIt - My Cart</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../../shared/css/theme.css">
-    <link rel="stylesheet" href="../../shared/css/globals.css">
-    <link rel="stylesheet" href="../../client/dashboard/dashboard.css">
-    <link rel="stylesheet" href="cart.css">
-    <link rel="icon" type="image/png" href="../../assets/images/rIT_logo_tp.png">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="shared/css/theme.css">
+    <link rel="stylesheet" href="shared/css/globals.css">
+    <link rel="stylesheet" href="client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="client/cart/cart.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>
 <body>
     <div class="app-container">
+        <!-- Sidebar Container (Injected by JS) -->
         <div id="sidebarContainer"></div>
         
+        <!-- Main Content -->
         <main class="main-content">
+            <!-- Topbar Container (Injected by JS) -->
             <div id="topbarContainer"></div>
             
+            <!-- Content Area -->
             <div class="content-area fade-in-up" id="contentArea">
+                <!-- Page Header -->
                 <div class="page-header-dashboard">
                     <div class="page-header-info">
                         <h1 class="page-title">My Cart</h1>
@@ -48,97 +44,147 @@ $result = mysqli_query($conn, $cart_query);
                     </div>
                 </div>
 
-                <div class="cart-layout-vertical">
-                    
+                <!-- Cart Layout -->
+                <div class="cart-layout">
+                    <!-- Cart Items -->
                     <div class="cart-items-section">
+                        <!-- Cart Actions Bar -->
                         <div class="cart-actions-bar">
                             <label class="select-all-wrapper">
-                                <input type="checkbox" id="selectAll" class="cart-checkbox" onchange="toggleSelectAll()">
+                                <input type="checkbox" id="selectAll" class="cart-checkbox" title="Select all items">
                                 <span class="select-all-label">Select All</span>
                             </label>
-                            <button class="btn-remove-selected" id="btnRemoveSelected" disabled>
+                            <button class="btn-remove-selected" id="btnRemoveSelected" disabled title="Remove selected items">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
                                 <span>Remove Selected</span>
                             </button>
                         </div>
 
-                        <div id="cartItemsList">
-                            <?php if (mysqli_num_rows($result) > 0): ?>
-                                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                                    <div class="cart-item-card" id="card-<?php echo $row['cart_row_id']; ?>" 
-                                         data-id="<?php echo $row['cart_row_id']; ?>" 
-                                         data-price="<?php echo $row['price_per_day']; ?>">
-                                        
-                                        <label class="cart-item-select">
-                                            <input type="checkbox" class="cart-checkbox item-checkbox" 
-                                                   data-id="<?php echo $row['cart_row_id']; ?>" 
-                                                   onchange="calculateTotal()">
-                                        </label>
-                                        
-                                        <div class="cart-item-image">
-                                        <img src="https://via.placeholder.com/150?text=RentIt+Product" 
-     alt="<?php echo $row['item_name']; ?>"
-     class="cart-item-image">
-                               
-    
-    </div>
-
-                                        <div class="cart-item-details">
-                                            <div class="cart-item-header">
-                                                <div class="cart-item-info">
-                                                    <h3 class="cart-item-name"><?php echo $row['item_name']; ?></h3>
-                                                    <span class="cart-item-category"><?php echo $row['category']; ?></span>
-                                                </div>
-                                                <div class="cart-item-price-wrap">
-                                                    <span class="cart-item-price">₱<?php echo number_format($row['price_per_day']); ?><span>/day</span></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="cart-item-rental-period">
-                                                <div class="rental-dates-row">
-                                                    <div class="date-picker-group">
-                                                        <label>Start Date</label>
-                                                        <input type="date" class="cart-date-input start-date" 
-                                                               id="start-<?php echo $row['cart_row_id']; ?>"
-                                                               value="<?php echo date('Y-m-d'); ?>" 
-                                                               onchange="updateItemTotal(<?php echo $row['cart_row_id']; ?>)">
-                                                    </div>
-                                                    <span class="date-arrow">→</span>
-                                                    <div class="date-picker-group">
-                                                        <label>End Date</label>
-                                                        <input type="date" class="cart-date-input end-date" 
-                                                               id="end-<?php echo $row['cart_row_id']; ?>"
-                                                               value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" 
-                                                               onchange="updateItemTotal(<?php echo $row['cart_row_id']; ?>)">
-                                                    </div>
-                                                </div>
-                                                <div class="rental-summary">
-                                                    <span class="days-count" id="days-<?php echo $row['cart_row_id']; ?>">1 day</span>
-                                                    <span class="cart-item-subtotal" id="subtotal-<?php echo $row['cart_row_id']; ?>">
-                                                        ₱<?php echo number_format($row['price_per_day']); ?>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                      
+                        <!-- Cart Item 1 - Card Format -->
+                        <div class="cart-item-card" data-id="1">
+                            <label class="cart-item-select">
+                                <input type="checkbox" class="cart-checkbox item-checkbox" data-id="1" title="Select this item">
+                            </label>
+                            <div class="cart-item-image">
+                                <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2"
+                                     onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-header">
+                                    <div class="cart-item-info">
+                                        <h3 class="cart-item-name">Karaoke King Pro v2</h3>
+                                        <span class="cart-item-category">Premium</span>
                                     </div>
-                                <?php endwhile; ?>
-                            <?php else: ?>
-                                <div class="empty-cart">
-                                    <p>Your cart is empty.</p>
+                                    <div class="cart-item-price-wrap">
+                                        <span class="cart-item-price">₱120<span>/day</span></span>
+                                    </div>
                                 </div>
-                            <?php endif; ?>
+                                <div class="cart-item-rental-period">
+                                    <div class="rental-period-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        Rental Period
+                                    </div>
+                                    <div class="rental-dates-row">
+                                        <div class="date-picker-group">
+                                            <label>Start Date</label>
+                                            <input type="date" class="cart-date-input" id="startDate1" value="2026-02-05" title="Select rental start date">
+                                        </div>
+                                        <span class="date-arrow">→</span>
+                                        <div class="date-picker-group">
+                                            <label>End Date</label>
+                                            <input type="date" class="cart-date-input" id="endDate1" value="2026-02-07" title="Select rental end date">
+                                        </div>
+                                    </div>
+                                    <div class="rental-summary">
+                                        <span class="days-count" id="daysCount1">3 days</span>
+                                        <span class="cart-item-subtotal" id="subtotal1">₱360</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-remove-cart" data-id="1" aria-label="Remove item" title="Remove from cart">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Cart Item 2 - Card Format -->
+                        <div class="cart-item-card" data-id="5">
+                            <label class="cart-item-select">
+                                <input type="checkbox" class="cart-checkbox item-checkbox" data-id="5" title="Select this item">
+                            </label>
+                            <div class="cart-item-image">
+                                <img src="assets/images/products/minising-pocket.jpg" alt="MiniSing Pocket"
+                                     onerror="this.onerror=null; this.src='assets/images/brokenimg.svg'">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-header">
+                                    <div class="cart-item-info">
+                                        <h3 class="cart-item-name">MiniSing Pocket</h3>
+                                        <span class="cart-item-category">Portable</span>
+                                    </div>
+                                    <div class="cart-item-price-wrap">
+                                        <span class="cart-item-price">₱120<span>/day</span></span>
+                                    </div>
+                                </div>
+                                <div class="cart-item-rental-period">
+                                    <div class="rental-period-label">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        Rental Period
+                                    </div>
+                                    <div class="rental-dates-row">
+                                        <div class="date-picker-group">
+                                            <label>Start Date</label>
+                                            <input type="date" class="cart-date-input" id="startDate2" value="2026-02-10" title="Select rental start date">
+                                        </div>
+                                        <span class="date-arrow">→</span>
+                                        <div class="date-picker-group">
+                                            <label>End Date</label>
+                                            <input type="date" class="cart-date-input" id="endDate2" value="2026-02-12" title="Select rental end date">
+                                        </div>
+                                    </div>
+                                    <div class="rental-summary">
+                                        <span class="days-count" id="daysCount2">3 days</span>
+                                        <span class="cart-item-subtotal" id="subtotal2">₱360</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-remove-cart" data-id="5" aria-label="Remove item" title="Remove from cart">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </div>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <aside class="cart-summary-bottom">
+                    <!-- Order Summary -->
+                    <aside class="cart-summary">
                         <h2 class="summary-title">Order Summary</h2>
+                        
                         <div class="summary-rows">
                             <div class="summary-row">
-                                <span>Subtotal</span>
-                                <span id="cartSubtotal">₱0</span>
+                                <span>Subtotal (2 items)</span>
+                                <span id="cartSubtotal">₱720</span>
                             </div>
-                            <div class="summary-row">   
+                            <div class="summary-row">
                                 <span>Delivery Fee</span>
                                 <span>₱150</span>
                             </div>
@@ -147,18 +193,63 @@ $result = mysqli_query($conn, $cart_query);
                                 <span>₱50</span>
                             </div>
                         </div>
+
                         <div class="summary-divider"></div>
+
                         <div class="summary-row summary-total">
-                            <strong>Total</strong>
-                            <strong id="cartTotal">₱0</strong>
+                            <span>Total</span>
+                            <span id="cartTotal">₱920</span>
                         </div>
-                        <button class="btn-checkout-full" id="btnCheckout" disabled>Proceed to Checkout</button>
+
+                        <div class="promo-code">
+                            <input type="text" placeholder="Enter promo code" class="promo-input">
+                            <button class="btn-apply-promo">Apply</button>
+                        </div>
+
+                        <button class="btn-checkout" id="btnCheckout">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            Proceed to Checkout
+                        </button>
+
+                        <p class="checkout-note">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Secure checkout with SSL encryption
+                        </p>
                     </aside>
-                </div> </div>
+                </div>
+
+                <!-- Empty Cart State (Hidden by default) -->
+                <div class="empty-cart" id="emptyCart" style="display: none;">
+                    <div class="empty-icon">🛒</div>
+                    <h2 class="empty-title">Your Cart is Empty</h2>
+                    <p class="empty-text">Looks like you haven't added any equipment to rent yet.</p>
+                    <a href="client/catalog/catalog.php" class="btn-browse-catalog">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        Browse Catalog
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer (Injected by JS) -->
+            <div id="footerContainer"></div>
         </main>
     </div>
-
-    <script src="../../shared/js/components.js"></script>
-    <script src="cart.js"></script>
+    
+    <!-- Scripts -->
+    <script src="shared/js/components.js"></script>
+    <script src="client/cart/cart.js"></script>
 </body>
 </html>
+
+
+
+
+

@@ -280,7 +280,7 @@
         
         // Get current page path
         const currentPath = window.location.pathname;
-        const isHomePage = currentPath === '/' || currentPath === '/index.html' || currentPath === '';
+        const isHomePage = currentPath === '/' || currentPath === '/index.php' || currentPath === '';
         
         // Helper: Remove active class from all nav links
         function removeAllActive() {
@@ -371,15 +371,15 @@
             setActiveByHref('/');
         } else {
             // For inner pages, match by pathname more precisely
-            // Extract the filename from the current path (e.g., "aboutus" from "/pages/aboutus.html")
-            const currentFileName = currentPath.split('/').pop().replace('.html', '');
+            // Extract the filename from the current path (e.g., "aboutus" from "/pages/aboutus.php")
+            const currentFileName = currentPath.split('/').pop().replace('.php', '');
             
             removeAllActive();
             
             navLinks.forEach(link => {
                 const href = link.getAttribute('href');
                 // Extract filename from link href
-                const linkFileName = href.split('/').pop().replace('.html', '');
+                const linkFileName = href.split('/').pop().replace('.php', '');
                 
                 // Match if filenames match (e.g., "aboutus" === "aboutus")
                 if (currentFileName === linkFileName) {
@@ -389,7 +389,7 @@
             
             mobileLinks.forEach(link => {
                 const href = link.getAttribute('href');
-                const linkFileName = href.split('/').pop().replace('.html', '');
+                const linkFileName = href.split('/').pop().replace('.php', '');
                 
                 if (currentFileName === linkFileName) {
                     link.classList.add('active');

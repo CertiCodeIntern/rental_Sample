@@ -78,9 +78,9 @@ $allowedOrigins = [
 
 | Frontend Path | Backend Endpoint |
 |---------------|------------------|
-| `/client/auth/login.html` | `/backend/client/auth/login.php` |
-| `/client/auth/login.html#register` | `/backend/client/auth/register.php` |
-| `/admin/auth/login.html` | `/backend/admin/auth/login.php` |
+| `/client/auth/login.php` | `/backend/client/auth/login.php` |
+| `/client/auth/login.php#register` | `/backend/client/auth/register.php` |
+| `/admin/auth/login.php` | `/backend/admin/auth/login.php` |
 
 ---
 

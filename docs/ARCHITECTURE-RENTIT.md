@@ -84,46 +84,46 @@ RENTIT is a comprehensive equipment rental management platform consisting of two
 ```
 rental_Sample/
 │
-├── index.html                    # Landing page entry point
+├── index.php                    # Landing page entry point
 ├── vercel.json                   # Deployment configuration
 │
 ├── admin/                        # ADMIN PORTAL
-│   ├── dashboard.html            # Main admin entry (redirects)
+│   ├── dashboard.php            # Main admin entry (redirects)
 │   ├── auth/                     # Admin authentication
-│   │   ├── login.html
+│   │   ├── login.php
 │   │   ├── css/auth.css
 │   │   └── js/auth.js
 │   ├── dashboard/                # Admin dashboard
-│   │   ├── dashboard.html
+│   │   ├── dashboard.php
 │   │   ├── css/dashboard-new.css
 │   │   └── js/dashboard.js
 │   ├── orders/                   # Order management
-│   │   ├── orders.html           # Order list
-│   │   ├── orderdetail.html      # Single order view
+│   │   ├── orders.php           # Order list
+│   │   ├── orderdetail.php      # Single order view
 │   │   ├── css/orders.css
 │   │   └── js/orders.js
 │   ├── dispatch/                 # Dispatch management
-│   │   ├── dispatch.html
+│   │   ├── dispatch.php
 │   │   ├── css/dispatch.css
 │   │   └── js/dispatch.js
 │   ├── customers/                # Customer management
-│   │   ├── customers.html
+│   │   ├── customers.php
 │   │   ├── css/customers.css
 │   │   └── js/customers.js
 │   ├── calendar/                 # Booking calendar
-│   │   ├── calendar.html
+│   │   ├── calendar.php
 │   │   ├── css/calendar.css
 │   │   └── js/calendar.js
 │   ├── repairs/                  # Equipment repairs
-│   │   ├── repairs.html
+│   │   ├── repairs.php
 │   │   ├── css/repairs.css
 │   │   └── js/repairs.js
 │   ├── latefees/                 # Late fee management
-│   │   ├── latefees.html
+│   │   ├── latefees.php
 │   │   ├── css/latefees.css
 │   │   └── js/latefees.js
 │   ├── settings/                 # Admin settings
-│   │   ├── settings.html
+│   │   ├── settings.php
 │   │   ├── css/settings.css
 │   │   └── js/settings.js
 │   └── shared/                   # Admin shared resources
@@ -136,43 +136,43 @@ rental_Sample/
 │           └── admin-notifications.js
 │
 ├── client/                       # CLIENT PORTAL
-│   ├── dashboard.html            # Client entry point
+│   ├── dashboard.php            # Client entry point
 │   ├── auth/                     # Client authentication
-│   │   ├── login.html
+│   │   ├── login.php
 │   │   ├── css/auth.css
 │   │   └── js/auth.js
 │   ├── dashboard/                # Client dashboard
 │   │   ├── dashboard.css
 │   │   └── dashboard.js
 │   ├── catalog/                  # Equipment browsing
-│   │   ├── catalog.html
+│   │   ├── catalog.php
 │   │   ├── catalog.css
 │   │   ├── catalog.js
-│   │   ├── itemdescription.html
+│   │   ├── itemdescription.php
 │   │   ├── itemdescription.css
 │   │   └── itemdescription.js
 │   ├── cart/                     # Shopping cart
-│   │   ├── cart.html
+│   │   ├── cart.php
 │   │   ├── cart.css
 │   │   └── cart.js
 │   ├── checkout/                 # Checkout process
-│   │   ├── checkout.html
+│   │   ├── checkout.php
 │   │   ├── checkout.css
 │   │   └── checkout.js
 │   ├── myrentals/                # Active rentals
-│   │   ├── myrentals.html
+│   │   ├── myrentals.php
 │   │   ├── myrentals.css
 │   │   └── myrentals.js
 │   ├── bookinghistory/           # Past bookings
-│   │   ├── bookinghistory.html
+│   │   ├── bookinghistory.php
 │   │   ├── bookinghistory.css
 │   │   └── bookinghistory.js
 │   ├── returns/                  # Return process
-│   │   ├── returns.html
+│   │   ├── returns.php
 │   │   ├── returns.css
 │   │   └── returns.js
 │   └── favorites/                # Saved items
-│       ├── favorites.html
+│       ├── favorites.php
 │       ├── favorites.css
 │       └── favorites.js
 │
@@ -195,12 +195,12 @@ rental_Sample/
 │   └── js/index.js
 │
 ├── pages/                        # STATIC PAGES
-│   ├── about.html
-│   ├── aboutus.html
-│   ├── contactus.html
-│   ├── terms.html
-│   ├── privacy-policy.html
-│   └── cookie-policy.html
+│   ├── about.php
+│   ├── aboutus.php
+│   ├── contactus.php
+│   ├── terms.php
+│   ├── privacy-policy.php
+│   └── cookie-policy.php
 │
 ├── docs/                         # DOCUMENTATION
 │   ├── ARCHITECTURE.md           # Legacy (deprecated)
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
   CLIENT LOGIN                              ADMIN LOGIN
   ────────────                              ───────────
        │                                         │
-  /client/auth/login.html              /admin/auth/login.html
+  /client/auth/login.php              /admin/auth/login.php
        │                                         │
        ▼                                         ▼
   [Enter Credentials]                    [Enter Credentials]
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
   - user-data                            - admin-data
        │                                         │
        ▼                                         ▼
-  /client/dashboard.html                 /admin/dashboard/dashboard.html
+  /client/dashboard.php                 /admin/dashboard/dashboard.php
 ```
 
 ### Session Data Structure
@@ -659,10 +659,10 @@ This project intentionally uses **vanilla technologies** without frameworks:
 ```
 Production URL Structure:
 ─────────────────────────
-https://rentit.vercel.app/                    → index.html (landing)
-https://rentit.vercel.app/client/dashboard    → /client/dashboard.html
-https://rentit.vercel.app/admin/dashboard     → /admin/dashboard/dashboard.html
-https://rentit.vercel.app/pages/about         → /pages/about.html
+https://rentit.vercel.app/                    → index.php (landing)
+https://rentit.vercel.app/client/dashboard    → /client/dashboard.php
+https://rentit.vercel.app/admin/dashboard     → /admin/dashboard/dashboard.php
+https://rentit.vercel.app/pages/about         → /pages/about.php
 ```
 
 ### Environment Checklist

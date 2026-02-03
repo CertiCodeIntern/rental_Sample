@@ -15,7 +15,7 @@ This is a **Vanilla HTML/CSS/JavaScript** project for managing videoke equipment
 ```
 rental_Sample/
 │
-├── 📄 index.html          ← Landing page (what visitors see first)
+├── 📄 index.php          ← Landing page (what visitors see first)
 ├── 📄 vercel.json         ← Deployment configuration
 │
 ├── 📁 client/             ← Customer-facing app
@@ -55,7 +55,7 @@ python -m http.server 3000
 ### Option B: VS Code Live Server
 
 1. Install "Live Server" extension in VS Code
-2. Right-click on `index.html`
+2. Right-click on `index.php`
 3. Select "Open with Live Server"
 4. Browser opens automatically
 
@@ -77,19 +77,19 @@ serve -s . -l 3000
 
 ```
 ┌─────────────────┐
-│  Landing Page   │  ← index.html
+│  Landing Page   │  ← index.php
 │  (/)            │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  Login Page     │  ← /client/auth/login.html
+│  Login Page     │  ← /client/auth/login.php
 │  (/login)       │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│  Dashboard      │  ← /client/dashboard/index.html
+│  Dashboard      │  ← /client/dashboard/index.php
 │  (/dashboard)   │
 └─────────────────┘
 ```
@@ -187,12 +187,12 @@ localStorage.removeItem('token');
 
 | Priority | File | What It Does |
 |----------|------|--------------|
-| 1️⃣ | `/index.html` | Landing page - start here |
+| 1️⃣ | `/index.php` | Landing page - start here |
 | 2️⃣ | `/shared/css/globals.css` | All design tokens |
 | 3️⃣ | `/shared/js/components.js` | Reusable UI logic |
-| 4️⃣ | `/client/auth/login.html` | Login/Register page |
+| 4️⃣ | `/client/auth/login.php` | Login/Register page |
 | 5️⃣ | `/client/auth/js/auth.js` | Auth functionality |
-| 6️⃣ | `/client/dashboard/index.html` | Dashboard page |
+| 6️⃣ | `/client/dashboard/index.php` | Dashboard page |
 | 7️⃣ | `/vercel.json` | URL routing config |
 
 ---
@@ -203,12 +203,12 @@ The `vercel.json` maps clean URLs to actual files:
 
 | You Type | Actually Loads |
 |----------|----------------|
-| `/` | `/index.html` |
-| `/login` | `/client/auth/login.html` |
-| `/signup` | `/client/auth/login.html` |
-| `/dashboard` | `/client/dashboard/index.html` |
-| `/admin/login` | `/admin/auth/login.html` |
-| `/admin/dashboard` | `/admin/dashboard/index.html` |
+| `/` | `/index.php` |
+| `/login` | `/client/auth/login.php` |
+| `/signup` | `/client/auth/login.php` |
+| `/dashboard` | `/client/dashboard/index.php` |
+| `/admin/login` | `/admin/auth/login.php` |
+| `/admin/dashboard` | `/admin/dashboard/index.php` |
 
 ---
 
