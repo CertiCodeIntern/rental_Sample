@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="client/myrentals/myrentals.css">
     <link rel="stylesheet" href="client/returns/returns.css">
     
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
     <!-- Theme Script -->
     <script src="shared/js/theme.js"></script>
 </head>

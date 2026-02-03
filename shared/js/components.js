@@ -37,7 +37,7 @@ const Components = {
         { id: 'myrentals', icon: '🎤', label: 'My Rentals', href: 'client/myrentals/myrentals.php' },
         { id: 'returns', icon: '🔄', label: 'Returns', href: 'client/returns/returns.php' },
         { id: 'bookinghistory', icon: '📅', label: 'Booking History', href: 'client/bookinghistory/bookinghistory.php' },
-        { id: 'contact', icon: '💬', label: 'Contact Us', href: 'pages/contactus.php' },
+        { id: 'contact', icon: '💬', label: 'Contact Us', href: 'client/contactus/contactuslogin.php' },
     ],
 
     /**
@@ -187,11 +187,13 @@ const Components = {
      * Attach event listeners to sidebar elements
      */
     attachSidebarEvents() {
-        // Nav item clicks
-        document.querySelectorAll('.nav-item').forEach(item => {
+        // Nav item clicks - only for button nav items (admin SPA style), not links
+        document.querySelectorAll('.nav-item[data-tab]').forEach(item => {
             item.addEventListener('click', (e) => {
                 const tabId = e.currentTarget.dataset.tab;
-                this.handleTabChange(tabId);
+                if (tabId) {
+                    this.handleTabChange(tabId);
+                }
             });
         });
 

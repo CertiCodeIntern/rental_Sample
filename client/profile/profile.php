@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="client/dashboard/dashboard.css">
     <link rel="stylesheet" href="client/profile/profile.css">
     
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>

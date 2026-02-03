@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="shared/css/globals.css">
     <link rel="stylesheet" href="admin/auth/css/auth.css">
     
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
     <!-- Theme Script -->
     <script src="shared/js/theme.js"></script>
     

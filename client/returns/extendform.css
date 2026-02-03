@@ -1,0 +1,730 @@
+/* ===============================================
+   EXTEND FORM STYLES
+   Client-side extension request form styling
+   =============================================== */
+
+/* ===== FORM LAYOUT ===== */
+.form-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.form-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-sidebar {
+    position: sticky;
+    top: 1.5rem;
+}
+
+/* ===== FORM CARD ===== */
+.form-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.form-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--card-background);
+}
+
+.form-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-light);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.form-card-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--primary-color);
+}
+
+.form-card-icon.blue {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.form-card-icon.blue svg {
+    stroke: #3b82f6;
+}
+
+.form-card-icon.green {
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.form-card-icon.green svg {
+    stroke: #22c55e;
+}
+
+.form-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.form-card-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0.125rem 0 0;
+}
+
+.form-card-body {
+    padding: 1.5rem;
+}
+
+/* ===== RENTAL PREVIEW ===== */
+.rental-preview {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1rem;
+    background: var(--content-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.rental-preview-image {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-background);
+}
+
+.rental-preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rental-preview-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.rental-preview-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.rental-preview-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rental-id-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--card-background);
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.rental-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+}
+
+.rental-status.status-rented {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.rental-dates {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.date-item.highlight {
+    background: var(--primary-light);
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin: -0.5rem;
+}
+
+.date-item.highlight .date-value {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.date-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.date-value {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* ===== DURATION OPTIONS ===== */
+.duration-options {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.75rem;
+}
+
+.duration-option {
+    cursor: pointer;
+}
+
+.duration-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.duration-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 1rem 0.5rem;
+    background: var(--content-background);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    transition: var(--transition-normal);
+    text-align: center;
+}
+
+.duration-content:hover {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.duration-option input:checked + .duration-content {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.duration-option input:checked + .duration-content .duration-number {
+    color: var(--primary-color);
+}
+
+.duration-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.duration-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.duration-price {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Custom Duration Option */
+.duration-content.custom {
+    background: transparent;
+}
+
+.duration-option input:checked + .duration-content.custom {
+    background: var(--primary-light);
+}
+
+.duration-content.custom svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-muted);
+}
+
+.duration-option input:checked + .duration-content.custom svg {
+    stroke: var(--primary-color);
+}
+
+/* ===== CUSTOM DAYS INPUT ===== */
+.custom-days-input {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--content-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.custom-days-input.active {
+    display: block;
+}
+
+.custom-days-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.custom-days-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.days-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.days-btn:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+.days-btn:hover svg {
+    stroke: var(--primary-color);
+}
+
+.days-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-primary);
+}
+
+.days-display {
+    min-width: 80px;
+    text-align: center;
+}
+
+.days-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.days-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* ===== AVAILABILITY CHECK ===== */
+.availability-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.availability-check.unavailable {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.availability-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(34, 197, 94, 0.2);
+    border-radius: 10px;
+}
+
+.availability-check.unavailable .availability-icon {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.availability-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #22c55e;
+}
+
+.availability-check.unavailable .availability-icon svg {
+    stroke: #ef4444;
+}
+
+.availability-info {
+    flex: 1;
+}
+
+.availability-status {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #22c55e;
+}
+
+.availability-check.unavailable .availability-status {
+    color: #ef4444;
+}
+
+.availability-dates {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ===== SUMMARY CARD ===== */
+.summary-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.summary-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 1.25rem;
+}
+
+.summary-item-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.summary-item-preview img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.summary-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-item-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.summary-item-id {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Summary Rows */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.summary-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.summary-value {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.summary-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 0.75rem 0;
+}
+
+/* Summary Total */
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 0.5rem;
+}
+
+.summary-total-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.summary-total-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Summary Actions */
+.summary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.btn-cancel {
+    text-align: center;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* Summary Note */
+.summary-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.875rem;
+    background: var(--primary-light);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.summary-note svg {
+    flex-shrink: 0;
+    stroke: var(--primary-color);
+    margin-top: 0.125rem;
+}
+
+.summary-note span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ===== MODAL STYLES ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-background);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    transition: var(--transition-normal);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-icon.success {
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.modal-icon.success svg {
+    width: 32px;
+    height: 32px;
+    stroke: #22c55e;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+}
+
+.modal-message {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0 0 1.25rem;
+    line-height: 1.5;
+}
+
+.modal-details {
+    background: var(--content-background);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+}
+
+.modal-detail-row:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-detail-row span:first-child {
+    color: var(--text-muted);
+}
+
+.modal-detail-row span:last-child {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-secondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-sidebar {
+        position: static;
+        order: -1;
+    }
+
+    .duration-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .form-card-header {
+        padding: 1rem 1.25rem;
+    }
+
+    .form-card-body {
+        padding: 1.25rem;
+    }
+
+    .rental-preview {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .rental-preview-image {
+        width: 100%;
+        height: 160px;
+    }
+
+    .rental-dates {
+        grid-template-columns: 1fr;
+    }
+
+    .date-item.highlight {
+        margin: 0;
+    }
+
+    .duration-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .summary-card {
+        padding: 1.25rem;
+    }
+
+    .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}

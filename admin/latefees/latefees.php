@@ -18,6 +18,9 @@
     
     <!-- Page Specific Styles -->
     <link rel="stylesheet" href="admin/latefees/latefees.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
 </head>
 <body>
     <div class="admin-wrapper">

@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="admin/shared/css/admin-topbar.css">
     <!-- Page Styles -->
     <link rel="stylesheet" href="admin/notification/css/notification.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
 </head>
 <body>
     <!-- Sidebar Component -->

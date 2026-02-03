@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="client/dashboard/dashboard.css">
     <link rel="stylesheet" href="client/bookinghistory/bookinghistory.css">
     
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
+    
     <!-- Theme Script -->
     <script src="shared/js/theme.js"></script>
 </head>

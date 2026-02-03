@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="admin/shared/css/admin-components.css">
     <link rel="stylesheet" href="admin/orders/css/orders.css">
     <link rel="stylesheet" href="admin/orders/css/orderdetail.css">
+    
+    <!-- Page Loader (prevents flash of unstyled content) -->
+    <script src="shared/js/page-loader.js"></script>
 </head>
 <body>
     <div class="admin-wrapper">

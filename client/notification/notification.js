@@ -145,19 +145,23 @@ function dismissNotification(notification) {
  * Handle notification action button clicks
  */
 function handleNotificationAction(button) {
-    const action = button.textContent.trim().toLowerCase();
+    const action = button.dataset.action || button.textContent.trim().toLowerCase();
     const notification = button.closest('.notification-item');
+    const rentalId = button.dataset.rentalId || '';
     
     switch(action) {
         case 'view order':
+        case 'view-order':
             // Navigate to order details
             window.location.href = 'client/bookinghistory/bookinghistory.php';
             break;
         case 'track delivery':
-            // Navigate to delivery tracking (can be implemented)
+        case 'track-delivery':
+            // Navigate to delivery tracking
             showToast('Opening delivery tracking...', 'info');
             break;
         case 'view details':
+        case 'view-details':
             // Navigate to relevant details page
             showToast('Opening details...', 'info');
             break;
@@ -165,6 +169,7 @@ function handleNotificationAction(button) {
             dismissNotification(notification);
             break;
         case 'view code':
+        case 'view-code':
             // Show promo code modal or copy to clipboard
             const code = notification.querySelector('code')?.textContent;
             if (code) {
@@ -173,8 +178,25 @@ function handleNotificationAction(button) {
             }
             break;
         case 'view receipt':
+        case 'view-receipt':
             // Navigate to payment history
             window.location.href = 'client/bookinghistory/bookinghistory.php';
+            break;
+        case 'schedule-return':
+        case 'schedule return':
+            // Navigate to return form
+            window.location.href = `client/returns/returnform.php?id=${encodeURIComponent(rentalId)}`;
+            break;
+        case 'extend':
+        case 'extend rental':
+        case 'extend-rental':
+            // Navigate to extend form
+            window.location.href = `client/returns/extendform.php?id=${encodeURIComponent(rentalId)}`;
+            break;
+        case 'browse-catalog':
+        case 'browse catalog':
+            // Navigate to catalog
+            window.location.href = 'client/catalog/catalog.php';
             break;
         default:
             console.log('Action clicked:', action);
