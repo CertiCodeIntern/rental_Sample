@@ -2,6 +2,7 @@
  * =====================================================
  * AUTH PAGE JAVASCRIPT
  * Handles Login and Registration functionality
+ * Connected to PHP Backend API
  * =====================================================
  */
 
@@ -160,7 +161,7 @@ const Auth = {
         // Clear previous errors
         this.hideError();
 
-        // Validate
+        // Validate required fields
         if (!email || !password) {
             this.showError('Please fill in all fields');
             return;
@@ -210,7 +211,12 @@ const Auth = {
             }, 1500);
 
         } catch (error) {
-            this.showError(error.message || 'Login failed. Please try again.');
+            // Check if it's a network error (no backend available)
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                this.showError('Server not available. Please ensure XAMPP is running.');
+            } else {
+                this.showError(error.message || 'Login failed. Please try again.');
+            }
         } finally {
             this.setLoading(false, submitBtn, 'Sign In  →');
         }
@@ -233,7 +239,7 @@ const Auth = {
         // Clear previous errors
         this.hideError();
 
-        // Validate
+        // Validate required fields
         if (!email || !password || !confirmPassword) {
             this.showError('Please fill in all required fields');
             return;
@@ -251,6 +257,7 @@ const Auth = {
             return;
         }
 
+        // Validate password length
         if (password.length < 6) {
             this.showError('Password must be at least 6 characters');
             return;
@@ -296,7 +303,12 @@ const Auth = {
             }, 1500);
 
         } catch (error) {
-            this.showError(error.message || 'Registration failed. Please try again.');
+            // Check if it's a network error (no backend available)
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                this.showError('Server not available. Please ensure XAMPP is running.');
+            } else {
+                this.showError(error.message || 'Registration failed. Please try again.');
+            }
         } finally {
             this.setLoading(false, submitBtn, 'Get Started  →');
         }

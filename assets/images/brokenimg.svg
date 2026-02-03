@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect fill="#1E293B" width="200" height="200"/>
+  <g fill="#475569">
+    <rect x="70" y="60" width="60" height="50" rx="4"/>
+    <circle cx="85" cy="75" r="6"/>
+    <polygon points="70,110 90,85 105,100 115,90 130,110"/>
+  </g>
+  <line x1="50" y1="140" x2="150" y2="140" stroke="#EF4444" stroke-width="2"/>
+  <text x="100" y="165" fill="#94A3B8" text-anchor="middle" font-family="Inter, sans-serif" font-size="12">Image not found</text>
+</svg>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/rental_Sample/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RentIt - Product Details">
@@ -12,13 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/shared/css/theme.css">
-    <link rel="stylesheet" href="/shared/css/globals.css">
-    <link rel="stylesheet" href="/client/dashboard/dashboard.css">
-    <link rel="stylesheet" href="itemdescription.css">
+    <link rel="stylesheet" href="shared/css/theme.css">
+    <link rel="stylesheet" href="shared/css/globals.css">
+    <link rel="stylesheet" href="client/dashboard/dashboard.css">
+    <link rel="stylesheet" href="client/catalog/itemdescription.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/images/rIT_logo_tp.png">
+    <link rel="icon" type="image/png" href="assets/images/rIT_logo_tp.png">
 </head>
 <body>
     <div class="app-container">
@@ -34,7 +35,7 @@
             <div class="content-area fade-in-up" id="contentArea">
                 <!-- Breadcrumb -->
                 <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="/client/catalog/catalog.html">Catalog</a>
+                    <a href="client/catalog/catalog.html">Catalog</a>
                     <span class="separator">/</span>
                     <span class="current" id="breadcrumbItem">Karaoke King Pro v2</span>
                 </nav>
@@ -44,21 +45,21 @@
                     <!-- Left Column - Images & Gallery -->
                     <div class="product-gallery">
                         <div class="main-image-wrap">
-                            <img src="/assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="main-image" id="mainImage"
-                                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22><rect fill=%22%231E293B%22 width=%22600%22 height=%22400%22/><text x=%2250%%22 y=%2250%%22 fill=%22%2394A3B8%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Inter, sans-serif%22 font-size=%2220%22>Karaoke King Pro v2</text></svg>'">
+                            <img src="assets/images/products/karaoke-king-v2.jpg" alt="Karaoke King Pro v2" class="main-image" id="mainImage"
+                                 onerror="this.onerror=null; this.src='/assets/images/brokenimg.svg'">
                             <span class="product-status available" id="productStatus">Available</span>
                         </div>
                         <div class="thumbnail-gallery" id="thumbnailGallery">
                             <button class="thumbnail active" data-img="/assets/images/products/karaoke-king-v2.jpg">
-                                <img src="/assets/images/products/karaoke-king-v2.jpg" alt="Main view"
+                                <img src="assets/images/products/karaoke-king-v2.jpg" alt="Main view"
                                      onerror="this.parentElement.style.display='none'">
                             </button>
                             <button class="thumbnail" data-img="/assets/images/products/karaoke-king-v2-side.jpg">
-                                <img src="/assets/images/products/karaoke-king-v2-side.jpg" alt="Side view"
+                                <img src="assets/images/products/karaoke-king-v2-side.jpg" alt="Side view"
                                      onerror="this.parentElement.style.display='none'">
                             </button>
                             <button class="thumbnail" data-img="/assets/images/products/karaoke-king-v2-back.jpg">
-                                <img src="/assets/images/products/karaoke-king-v2-back.jpg" alt="Back view"
+                                <img src="assets/images/products/karaoke-king-v2-back.jpg" alt="Back view"
                                      onerror="this.parentElement.style.display='none'">
                             </button>
                         </div>
@@ -356,7 +357,12 @@
     </div>
     
     <!-- Scripts -->
-    <script src="/shared/js/components.js"></script>
-    <script src="itemdescription.js"></script>
+    <script src="shared/js/components.js"></script>
+    <script src="client/catalog/itemdescription.js"></script>
 </body>
 </html>
+
+
+
+
+

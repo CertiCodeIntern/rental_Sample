@@ -189,7 +189,7 @@ function renderOrderRow(order) {
     return `
         <tr data-order-id="${order.id}">
             <td>
-                <a href="/admin/orders/orderdetail.html?id=${order.id}" class="order-id">${order.id}</a>
+                <a href="admin/orders/orderdetail.html?id=${order.id}" class="order-id">${order.id}</a>
             </td>
             <td>
                 <div class="customer-cell">
